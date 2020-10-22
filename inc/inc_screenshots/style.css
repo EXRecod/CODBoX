@@ -1,0 +1,171 @@
+
+.gallery-icon {
+    height: 20vw;
+    width: 100%;
+    display: block;
+    background-size: cover;
+
+}
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-item {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    padding: 0;
+    margin: 0 3px;
+    transition: all 0.3s ease-in-out;
+    background-color: #2b2b2b;
+    width: 32.5%;
+}
+
+
+.gallery-item.banned a {
+   opacity: .8;
+}
+
+
+.gallery-item:hover {
+    opacity: .8;
+}
+
+.caption .date {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.guid {
+    font-size: 12px;
+    color: #a9a9a9;
+    margin: 0;
+    padding: 0;
+}
+
+.caption {
+    border-bottom: 5px solid #1ef;
+    text-align: center;
+    color: white;
+    max-width: 100%;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Roboto;
+}
+
+.action-icon {
+    width: 32px;
+    opacity: .2;
+    margin: 0 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.action-icon:hover {
+    opacity: 1;
+}
+
+.action-icon.search {
+    float: right;
+}
+
+.action-icon.ban {
+    float: left;
+}
+ 
+
+ 
+ 
+.top {
+    margin-right: 10px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    text-align: center;
+    padding: 8px 10px;
+    background: #2b2b2b;
+    font-family: monospace;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border-right: 1px solid #0da15e;
+    border-left: 1px solid #0da15e;
+}
+
+.button:hover,
+.button:focus {
+    background: #152b18;
+    border-color: #152b18;
+}
+
+.button.active:hover {
+    border-color: #0da15e;
+}
+
+.button.active {
+    background-color: #0da15e;
+    color: #151515;
+    font-weight: bold;
+}
+
+.button:active {
+    background: #0da15e;
+    color: #151515;
+}
+
+ 
+.ss-count {
+    color: white;
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.ss-count > b {
+    color: #0da15e;
+}
+
+@media only screen and (max-width: 980px) {
+ 
+
+    .gallery-item {
+        width: 49.5%;
+        margin: 0 1px;
+    }
+
+    .gallery-icon {
+
+        height: 30vw;
+    }
+
+    .pagination {
+        margin-left: 5px;
+    }
+
+    .ss-count {
+        margin-right: 5px;
+    }
+ 
+}
+
+@media only screen and (max-width: 640px) {
+    body {
+        padding-top: 40px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        margin: 0;
+    }
+
+    .gallery-icon {
+
+        height: 60vw;
+    }
+
+}
