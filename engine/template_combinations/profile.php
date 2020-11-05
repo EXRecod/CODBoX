@@ -1,5 +1,5 @@
 <?php
-
+sleep(1);
 /*
 select s_kills,s_deaths,s_pg, ROUND(s_kills/s_deaths, 2) AS kdratio
 FROM db_stats_1 where s_kills > 1000
@@ -65,24 +65,7 @@ if (empty($skilllevels)) {
        t2.n_deaths, 
        t2.n_heads, 
        t2.n_kills_min, 
-       t2.n_deaths_min,
-	   ht.head,
-	   ht.torso_lower,
-	   ht.torso_upper,
-	   ht.right_arm_lower,
-	   ht.left_leg_upper,
-	   ht.neck,
-	   ht.right_arm_upper,
-	   ht.left_hand,
-	   ht.left_arm_lower,
-	   ht.none,
-	   ht.right_leg_upper,
-	   ht.left_arm_upper,
-	   ht.right_leg_lower,
-	   ht.left_foot,
-	   ht.right_foot,
-	   ht.right_hand,
-	   ht.left_leg_lower
+       t2.n_deaths_min
 FROM   db_stats_0 t0 
        JOIN (SELECT s_pg, 
                     s_kills, 
@@ -143,18 +126,7 @@ WHERE p.s_kills > s.s_kills or
  )
     tve ON 
  t0.s_pg = t1.s_pg
- 
- 
- join
- (
- SELECT s_pg,head,torso_lower,torso_upper,right_arm_lower,
-	left_leg_upper,neck,right_arm_upper,left_hand,
-left_arm_lower,none,right_leg_upper,left_arm_upper,right_leg_lower,left_foot,right_foot,
-right_hand,left_leg_lower FROM db_stats_hits where s_pg = "' . $guidn . '" limit 1
- )
-    ht ON 
- t0.s_pg = t1.s_pg
- 
+  
  
    join   
  (   
@@ -247,24 +219,6 @@ join
 	else if ($keym == 'totalHeaders') $totalHeaders = $value;
 	else if ($keym == 'KillsSeriesRank') $KillsSeriesRank = $value;
 	else if ($keym == 'totalactiveplayers') $totalactiveplayers = $value;
-	//hit zones +css styles
-    else if ($keym == 'head') {$head = $value; if((($value/$kills)*100)>$maxforanimate) $zanim1 = "hint-dot"; else $zanim1 = "nothings"; }
-	else if ($keym == 'torso_lower') {$torso_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim2 = "hint-dot"; else $zanim2 = "nothings"; }
-	else if ($keym == 'torso_upper') {$torso_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim3 = "hint-dot"; else $zanim3 = "nothings"; }
-	else if ($keym == 'right_arm_lower') {$right_arm_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim4 = "hint-dot"; else $zanim4 = "nothings"; }
-	else if ($keym == 'left_leg_upper') {$left_leg_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim5 = "hint-dot"; else $zanim5 = "nothings"; }
-	else if ($keym == 'neck') {$neck = $value; if((($value/$kills)*100)>$maxforanimate) $zanim6 = "hint-dot"; else $zanim6 = "nothings"; }
-	else if ($keym == 'right_arm_upper') {$right_arm_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim7 = "hint-dot"; else $zanim7 = "nothings"; }
-	else if ($keym == 'left_hand') {$left_hand = $value; if((($value/$kills)*100)>$maxforanimate) $zanim8 = "hint-dot"; else $zanim8 = "nothings"; }
-	else if ($keym == 'left_arm_lower') {$left_arm_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim9 = "hint-dot"; else $zanim9 = "nothings"; }
-	else if ($keym == 'none') {$none = $value; if((($value/$kills)*100)>$maxforanimate) $zanim10 = "hint-dot"; else $zanim10 = "nothings"; }
-	else if ($keym == 'right_leg_upper') {$right_leg_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim11 = "hint-dot"; else $zanim11 = "nothings"; }
-	else if ($keym == 'left_arm_upper') {$left_arm_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim12 = "hint-dot"; else $zanim12 = "nothings"; }
-	else if ($keym == 'right_leg_lower') {$right_leg_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim13 = "hint-dot"; else $zanim13 = "nothings"; }
-	else if ($keym == 'left_foot') {$left_foot = $value; if((($value/$kills)*100)>$maxforanimate) $zanim14 = "hint-dot"; else $zanim14 = "nothings"; }
-	else if ($keym == 'right_foot') {$right_foot = $value; if((($value/$kills)*100)>$maxforanimate) $zanim15 = "hint-dot"; else $zanim15 = "nothings"; }
-	else if ($keym == 'right_hand') {$right_hand = $value; if((($value/$kills)*100)>$maxforanimate) $zanim16 = "hint-dot"; else $zanim16 = "nothings"; }
-	else if ($keym == 'left_leg_lower') {$left_leg_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim17 = "hint-dot"; else $zanim17 = "nothings"; }
 	 
   }
 }
@@ -335,7 +289,61 @@ if(!empty($kills)){
 include $cpath . "/engine/template/stats_level.php";
 
 include $cpath . "/engine/template/stats_profile.php";
+
+sleep(2);
 include $cpath . "/engine/template/stats_weapon.php";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+sleep(2);
+  $reponse = 'SELECT s_pg,head,torso_lower,torso_upper,right_arm_lower,
+	left_leg_upper,neck,right_arm_upper,left_hand,
+left_arm_lower,none,right_leg_upper,left_arm_upper,right_leg_lower,left_foot,right_foot,
+right_hand,left_leg_lower FROM db_stats_hits where s_pg = "' . $guidn . '" limit 1';
+  //ZAPROS NR - 2
+  $xz = dbSelect('', $reponse);
+  $maxforanimate = 35;
+  if(!is_array($xz))
+  foreach ($xz as $keym => $value) {
+	//hit zones +css styles
+     if ($keym == 'head') {$head = $value; if((($value/$kills)*100)>$maxforanimate) $zanim1 = "hint-dot"; else $zanim1 = "nothings"; }
+	else if ($keym == 'torso_lower') {$torso_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim2 = "hint-dot"; else $zanim2 = "nothings"; }
+	else if ($keym == 'torso_upper') {$torso_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim3 = "hint-dot"; else $zanim3 = "nothings"; }
+	else if ($keym == 'right_arm_lower') {$right_arm_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim4 = "hint-dot"; else $zanim4 = "nothings"; }
+	else if ($keym == 'left_leg_upper') {$left_leg_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim5 = "hint-dot"; else $zanim5 = "nothings"; }
+	else if ($keym == 'neck') {$neck = $value; if((($value/$kills)*100)>$maxforanimate) $zanim6 = "hint-dot"; else $zanim6 = "nothings"; }
+	else if ($keym == 'right_arm_upper') {$right_arm_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim7 = "hint-dot"; else $zanim7 = "nothings"; }
+	else if ($keym == 'left_hand') {$left_hand = $value; if((($value/$kills)*100)>$maxforanimate) $zanim8 = "hint-dot"; else $zanim8 = "nothings"; }
+	else if ($keym == 'left_arm_lower') {$left_arm_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim9 = "hint-dot"; else $zanim9 = "nothings"; }
+	else if ($keym == 'none') {$none = $value; if((($value/$kills)*100)>$maxforanimate) $zanim10 = "hint-dot"; else $zanim10 = "nothings"; }
+	else if ($keym == 'right_leg_upper') {$right_leg_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim11 = "hint-dot"; else $zanim11 = "nothings"; }
+	else if ($keym == 'left_arm_upper') {$left_arm_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim12 = "hint-dot"; else $zanim12 = "nothings"; }
+	else if ($keym == 'right_leg_lower') {$right_leg_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim13 = "hint-dot"; else $zanim13 = "nothings"; }
+	else if ($keym == 'left_foot') {$left_foot = $value; if((($value/$kills)*100)>$maxforanimate) $zanim14 = "hint-dot"; else $zanim14 = "nothings"; }
+	else if ($keym == 'right_foot') {$right_foot = $value; if((($value/$kills)*100)>$maxforanimate) $zanim15 = "hint-dot"; else $zanim15 = "nothings"; }
+	else if ($keym == 'right_hand') {$right_hand = $value; if((($value/$kills)*100)>$maxforanimate) $zanim16 = "hint-dot"; else $zanim16 = "nothings"; }
+	else if ($keym == 'left_leg_lower') {$left_leg_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim17 = "hint-dot"; else $zanim17 = "nothings"; }
+	 
+  }
+
+ 
 //include $cpath ."/engine/template/stats_records.php";
 //include $cpath ."/engine/template/stats_leaderboards.php";
 include $cpath ."/engine/template/stats_hit_zones.php";

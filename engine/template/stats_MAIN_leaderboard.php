@@ -29,12 +29,35 @@ else if(!empty($globaleloratings))
 $infr = $Global_Elo_rating;
 else if(!empty($eloratings))
 $infr = $Elo_rating;
+/////////////////////////////////////
+//else if(!empty($totaltotalknife))
+//$infr = $Elo_rating;
+/////////////////////////////////////
 else
 $infr = '';
 
 
 
 echo ' 
+<div class="content_block"> 
+<div style="overflow:auto;width:100%;padding:5 10px;">
+
+<a href="'.$domain.'/stats_maps.php" target="_blank"> &nbsp;&nbsp;&nbsp;&nbsp;
+<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
+0 0 5px #08e5c8;"> > '.$x_top_maps.'</b></a> 
+
+<a href="'.$domain.'/stats_day.php" target="_blank"> &nbsp;&nbsp;&nbsp;&nbsp; 
+<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
+0 0 5px #08e5c8;"> > '.$x_top_day.'</b></a> 
+
+<a href="'.$domain.'/stats_week.php" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;
+<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
+0 0 5px #08e5c8;"> > '.$x_top_week.'</b></a> 
+ 
+ </div></div>  
+
+
+<div class="content_block"> 
 <div style="line-height:40px;">
 <h1 class="rainbow-text">  '.$infr.' '.$t_top.'</h1>
 
@@ -255,12 +278,14 @@ foreach ($prestige_images as $numimgjj => $preimagej){
 	
 	<div style="float:left;min-width:30px;text-align:center;font-weight:bold;font-size:16px;max-width:100px;width:calc(20%);">'.($premierMessageAafficher+$i).'</div>
 	
-	<div style="width:10%;float:left;max-width:40px;min-width:25px;">
-	<img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png" alt="'.$geo.'" title="'.$geo.'" style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;">
+	<div style="width:10%;float:left;max-width:40px;min-width:25px;" class="tags" glose="' .  geosorting($geo) . '">
+	<img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png"  style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;">
 	</div>
 	
+	
+	
 	<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(65%);overflow:hidden;">
-	<div style="max-width:1500px;font-size:15px;letter-spacing:.1em"> '.$nickname.' 
+	<div style="max-width:1500px;font-size:15px;letter-spacing:.1em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$nickname.' 
 	';
 	
 	if(!empty($brofile))
@@ -307,7 +332,7 @@ echo '
    
    
    
-   echo '</br></br>';
+   echo '</div></br></br>';
    
    
    

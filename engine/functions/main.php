@@ -3,7 +3,8 @@ ini_set('memory_limit', '256M');
 //settings
 include $cpath .'/data/settings.php';
 include($cpath ."/admin/core/class.simpleSQLinjectionDetect.php");
-include($cpath ."/admin/core/functions.php");  
+include($cpath ."/admin/core/functions.php");
+$url = $_SERVER["SCRIPT_NAME"];
 $test_HTTP_proxy_headers = array(
 	'HTTP_VIA',
 	'VIA',
@@ -41,10 +42,7 @@ $domainname = str_replace("http://", "", $bodytag);
 $domainname = dirname($domainname);
 
 
-include ($cpath . "/engine/geoip_bases/MaxMD/geoipcity.inc");
-include ($cpath . "/engine/geoip_bases/MaxMD/timezone/timezone.php");
-
-
+require_once $cpath . '/engine/arrays/gametypes_maps.php';
 require_once $cpath . '/engine/arrays/weapons_cod.php';
 require_once $cpath . '/engine/arrays/ranks.php';
 require_once $cpath . '/engine/arrays/geo.php';
@@ -55,21 +53,75 @@ function errorspdo($s) {
   fwrite($fp, $s . "\n");
   fclose($fp);
 }
- 
+ /*
 function getDirContents($dir, &$results = array()){
     $files = scandir($dir);
 
     foreach($files as $kei => $value){
         $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
         if(!is_dir($path)) {
+if((strpos($path, ".jpg") !== false)||(strpos($path, ".jpeg") !== false)||(strpos($path, ".gif") !== false))  			
             $results[] = $path;
         } else if($value != "." && $value != "..") {
             getDirContents($path, $results);
-            $results[] = $path;
+			if((strpos($path, ".jpg") !== false)||(strpos($path, ".jpeg") !== false)||(strpos($path, ".gif") !== false))
+               $results[] = $path;
         }
     }
     return $results;
 } 
+*/
+function getDirContents($dir){
+	@$files = scandir($dir);
+	unset($files[0], $files[1]);
+	return $files;
+} 
+ 
+ 
+function IsSteamCast($guidq) {
+	$steamerid = '';
+$reponse = "SELECT CONCAT(\"STEAM_\", ((CAST('".$guidq."' AS UNSIGNED) >> CAST('56' AS UNSIGNED)) - CAST('1' AS UNSIGNED)),
+	\":\", (CAST('".$guidq."' AS UNSIGNED) &	CAST('1' AS UNSIGNED)), \":\", (CAST('".$guidq."' AS UNSIGNED) 
+	&	CAST('4294967295' AS UNSIGNED)) >> CAST('1' AS UNSIGNED)) AS steam_id;";
+$steamid = dbSelectALLSourceBans('', $reponse);
+
+foreach ($steamid as $keym => $value) { 
+$steamerid = $value['steam_id'];
+ }
+ return $steamerid;
+ }
+ 
+ 
+function geosorting($geoloc){
+	global $geo_array,$languagefor; $k = '';
+	if(!empty($geoloc))
+	{
+foreach ($geo_array as $k) {
+foreach ($k as $va) { 	
+	 if($va==$geoloc)
+	 {
+	
+    if($languagefor != 'ru') 	
+	   next($k);
+return next($k);
+	}}}}else return $k;
+	}
+ 
+ 
+ 
+function geosortingw($geoloc){
+	global $geo_array,$languagefor; $k = '';
+	if(!empty($geoloc))
+	{
+foreach ($geo_array as $k) {
+foreach ($k as $va) { 	
+	 if($va==$geoloc)
+	 {	
+	   next($k);
+return next($k);
+	}}}}else return $k;
+	}
+ 
  
  
  
@@ -265,7 +317,61 @@ else
  
 */
  
+$n = $cpath."/data/cache/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$n = $cpath."/data/errors/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$n = $cpath. "/data/db/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+
+$n = $cpath. "/data/db/caches/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+
+$n = $cpath. "/data/db/chat/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
  
+
+$n = $cpath. "/data/db/chat/cached_chat_ban/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$n = $cpath. "/data/db/chat/chatbans/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+
+$i = $cpath . '/data/db/screenshots/';
+if(!file_exists($i))
+	mkdir($i, 0777, true);
+
+$i = $cpath . '/data/db/screenshots/cache_im/';
+if(!file_exists($i))
+	mkdir($i, 0777, true);
+
+ 
+$i = $cpath . '/data/db_protect/';
+if(!file_exists($i))
+	mkdir($i, 0777, true);
+
+$i = $cpath . '/data/db_protect/banned_players/';
+if(!file_exists($i))
+	mkdir($i, 0777, true);
+ 
+$i = $cpath . '/data/db_protect/banned_db/';
+if(!file_exists($i))
+	mkdir($i, 0777, true); 
+ 
+///////////////////////////////////////////////////////////////////////////////
+  
  
 function antimat($mat) {
   global $cpath;
@@ -286,6 +392,133 @@ else
 	  return $mat;  
 } 
  
+ 
+ 
+ 
+ 
+function createscreenDB() { 
+global $cpath;
+$gh = $cpath . '/data/db/screenshots/screenshots.rcm';
+ if(file_exists($gh)){
+if((filesize($gh))< 2)
+unlink($gh);
+ }
+ if(!file_exists($gh)){
+try
+  {
+    $screens = new PDO('sqlite:'. $gh);
+    $screens->exec("CREATE TABLE screens (
+			id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,			
+			guid bigint(24) NOT NULL,	
+			player varchar(70) NOT NULL,
+			image TEXT NOT NULL,
+			reason tinyint(2) NOT NULL,
+			size bigint(22) NOT NULL,
+            time timestamp NOT NULL,
+			dater timestamp NOT NULL,
+			server varchar(32) NOT NULL,
+			nameserver varchar(80) NOT NULL)"); 
+    $screens = NULL;
+  }
+  catch(PDOException $e)
+  {
+    errorspdo('FILE:  ' . __FILE__ . '  Exception : ' . $e->getMessage());
+  } 
+  
+  
+ if(!file_exists($gh)){
+echo "</br></br></br></br></br></br></br><h1> Can't write database in folder $cpath/data/db/screenshots/</h1>";
+}   
+  
+  
+} 
+
+$src = '/data/db_protect/banned_db/screenshots_banned.rcm'; 
+if(!file_exists($cpath . $src)){
+try
+  {
+    $screens_banned = new PDO('sqlite:'. $cpath . $src);
+    $screens_banned->query("CREATE TABLE screens (
+			id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,			
+			guid bigint(24) NOT NULL,	
+			player varchar(70) NOT NULL,
+			image TEXT NOT NULL,
+			reason tinyint(2) NOT NULL,
+			size bigint(22) NOT NULL,
+            time timestamp NOT NULL,
+			dater timestamp NOT NULL,
+			server varchar(32) NOT NULL,
+			nameserver varchar(200) NOT NULL)"); 
+    $screens_banned = NULL;
+  }
+  catch(PDOException $e)
+  {
+    errorspdo('FILE:  ' . __FILE__ . '  Exception : ' . $e->getMessage());
+  } 
+}
+} 
+ 
+ 
+function createscreeninsertprotect($SqlDataBase,$query) {
+  $result = ''; $rt = '';
+  global $cpath, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;
+  try { 
+$db = new PDO('sqlite:'. $cpath . '/data/db_protect/banned_db/'.$SqlDataBase);
+ $rt = $db->query($query);
+ if ($rt) {
+     $result=$rt->fetchAll();
+ }
+ else {
+      // Handle errors
+	  errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "
+       \n # SqlDataBase : $SqlDataBase, msqlconnect: $msqlconnect, host_adress: $host_adress, db_name: $db_name
+	   \n # $query \n\n");
+        }	
+    $db = null;
+  }
+  catch(PDOException $e) 
+  {
+    errorspdo("[" .date("Y.m.d H:i:s")."] 496 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+  }
+  if(empty($result))
+  return $rt;
+   else
+	 return $result;  
+} 
+ 
+  
+function createscreeninsert($SqlDataBase,$query) {
+  $result = '';
+  $rt = '';
+  if($SqlDataBase == "screenshots.rcm")
+  {
+  global $cpath, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;
+  try { 
+$db = new PDO('sqlite:'. $cpath . '/data/db/screenshots/'.$SqlDataBase);
+ $rt = $db->query($query);
+ if ($rt) {
+     $result=$rt->fetchAll();
+ }
+ else {
+      // Handle errors
+	  errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "
+       \n # SqlDataBase : $SqlDataBase, msqlconnect: $msqlconnect, host_adress: $host_adress, db_name: $db_name
+	   \n # $query \n\n");
+        }	
+    $db = null;
+  }
+  catch(PDOException $e) 
+  {
+    errorspdo("[" .date("Y.m.d H:i:s")."] 496 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+  }
+  if(empty($result))
+  return $rt;
+   else
+	 return $result;
+} 
+ else {return createscreeninsertprotect($SqlDataBase,$query);}
+} 
+
 function badwordslisting($player_msg) {
 	  global $cpath;
 	  $stolwlp = 0;
@@ -490,6 +723,41 @@ function dbSelectALL($SQLiteDatabase, $query) {
   return $result;
 }
 
+  
+function dbcheck() {
+  global $cpath, $SqlDataBase, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;	
+  $result = '';
+  $query = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$db_name'";
+  try {
+     
+      $dsn = "mysql:host=" . $host_adress . ";dbname=" . $db_name . ";charset=utf8";
+      if (empty($msqlconnect)) 
+		  $db = new PDO($dsn, $db_user, $db_pass);
+      
+ $rt = $db->query($query);
+ if ($rt) {
+     $result=$rt->fetchColumn();
+ }
+ else {
+      // Handle errors
+	  errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "
+       \n # SqlDataBase : $SqlDataBase, msqlconnect: $msqlconnect, host_adress: $host_adress, db_name: $db_name
+	   \n # $query \n\n");
+ }	
+	 
+    $db = null;
+  }
+  catch(PDOException $e) 
+  {
+    errorspdo("[" .date("Y.m.d H:i:s")."] 522 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+	if(!empty($e->getMessage()))
+	echo $e->getMessage();
+  }
+  return $result;
+} 
+  
+ 
+ 
  
 function dbSelectALLSourceBans($SQLiteDatabase, $query) {
   $result = '';
@@ -516,7 +784,7 @@ function dbSelectALLSourceBans($SQLiteDatabase, $query) {
   }
   catch(PDOException $e) 
   {
-    errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+    errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . " 555 Exception / function db Select / : \n = $query \n = ". $e->getMessage());
   }
   return $result;
 }
@@ -544,7 +812,7 @@ function dbSelectALLbyKey($SQLiteDatabase, $query, $keyword) {
   }
   catch(PDOException $e) 
   {
-    errorspdo("[" .date("Y.m.d H:i:s")."]  556 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+    errorspdo("[" .date("Y.m.d H:i:s")."]  583 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
   }
   return $result;
 }
@@ -638,6 +906,14 @@ include($cpath ."/engine/functions/langctrl.php");
 				 return '0;0';
 				 }	
 }
+
+
+function Persentages($var, $basa = 100, $persent = true) {
+  $d = $var/$basa;
+  if($persent) return round($d*100);
+  return $d;
+}
+
 
 
 function get_percentage($percentage, $of)
@@ -757,9 +1033,29 @@ $data=explode("\0",$meta);
 	 return array('0','0','0','0','0'); 
       }
 
-  return false;  
-  }  
-   
+  return false;   
+}  
+
+
+
+function check_foreach($folder,$images){
+$allowed_types=array("jpg", "jpeg");
+$file_parts = array();	
+foreach($images as $image)
+{     $file_parts = explode(".",$image);
+      $ext = strtolower(array_pop($file_parts));
+      if(in_array($ext,$allowed_types))
+      {
+		  $a = check_meta($folder.$image);
+		  $z = trim($a[3]);
+if($z!=false)		  
+return $z;
+break;
+	  }
+}  
+return false;
+}
+
   
 function percent2Color($value,$brightness = 255, $max = 100,$min = 0, $thirdColorHex = '00')
 {       
@@ -1004,65 +1300,7 @@ class COD4xServerStatus{
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-
-$cron_cached_chat_ban = $cpath."/data/db/chat/cached_chat_ban/";	
-if(!file_exists($cron_cached_chat_ban))
-	mkdir($cron_cached_chat_ban, 0777, true);
-///////////////////////////////////////////////////////////////////////////////
- 
- 
- 
  /*
- 
-$srcl = '/data/db/screenshots/screenshots.rcm'; 
-if(!file_exists($cpath . $srcl)){
-try
-  {
-    $screens = new PDO('sqlite:'. $cpath . $srcl);
-    $screens->query("CREATE TABLE screens (
-			id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,			
-			guid bigint(24) NOT NULL,	
-			player varchar(70) NOT NULL,
-			image TEXT NOT NULL,
-			reason tinyint(2) NOT NULL,
-			size bigint(22) NOT NULL,
-            time timestamp NOT NULL,
-			dater timestamp NOT NULL,
-			server varchar(32) NOT NULL,
-			nameserver varchar(200) NOT NULL)"); 
-    $screens = NULL;
-  }
-  catch(PDOException $e)
-  {
-    errorspdo('FILE:  ' . __FILE__ . '  Exception : ' . $e->getMessage());
-  } 
-}  
- 
-$src = '/data/db/screenshots/screenshots_banned.rcm'; 
-if(!file_exists($cpath . $src)){
-try
-  {
-    $screens_banned = new PDO('sqlite:'. $cpath . $src);
-    $screens_banned->query("CREATE TABLE screens (
-			id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,			
-			guid bigint(24) NOT NULL,	
-			player varchar(70) NOT NULL,
-			image TEXT NOT NULL,
-			reason tinyint(2) NOT NULL,
-			size bigint(22) NOT NULL,
-            time timestamp NOT NULL,
-			dater timestamp NOT NULL,
-			server varchar(32) NOT NULL,
-			nameserver varchar(200) NOT NULL)"); 
-    $screens_banned = NULL;
-  }
-  catch(PDOException $e)
-  {
-    errorspdo('FILE:  ' . __FILE__ . '  Exception : ' . $e->getMessage());
-  } 
-}
-
-
 ////////////////////////////////////////////
  if(!empty($keyxxx))
  { 
@@ -1230,6 +1468,28 @@ $timeq = trim($_GET['timeq']);
 
 // MAIN SORT RANKING
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (empty($_GET['totalknife']))
+ $totaltotalknife = 0; 
+else
+{
+$totaltotalknife = $_GET['totalknife'];
+}
+
+
+if (empty($_GET['totalknife']))
+ $totaltotalknife = 0; 
+else
+{
+$totaltotalknife = $_GET['totalknife'];
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 if (empty($_GET['totalkills']))
  $totalkills = 0; 
 else
@@ -1264,6 +1524,21 @@ else
 {
 $totalsuicides = $_GET['totalsuicides'];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if (empty($_GET['nicknameSearch']))
  $nicknameSearch = 0; 
@@ -1322,9 +1597,11 @@ $nkills = 1;
 ///////////////////////////////////////////////////////////////
  
 	 
+ if(strpos($_SERVER["SCRIPT_NAME"], "img.php") === false)
+ {
  
- 
- 
+if(empty(dbcheck()))
+	die('<H1> Possible CODBX not instaled or..! </br>Database ['.$db_name.'] does not exist or you do not have access to it! </br>( look in </br> //DATABASE SETTINGS </br> data/settings.php </br> file)</H1>');
  
  
 $r = 'SELECT id FROM db_stats_day GROUP BY servername ORDER BY id DESC limit 2';
@@ -1356,7 +1633,7 @@ sudo systemctl restart mysql
 exit;	
 }}
 
- 
+ }
 
 
 
@@ -1384,9 +1661,40 @@ exit;
              $total_players_ondatabase = '';	
 			 $headpercents = 0;
 
-
-
-
+$zanim1 = "nothings"; 
+$zanim2 = "nothings";
+$zanim3 = "nothings";
+$zanim4 = "nothings";
+$zanim5 = "nothings";
+$zanim6 = "nothings";
+$zanim7 = "nothings";
+$zanim8 = "nothings";
+$zanim9 = "nothings";
+$zanim10 = "nothings";
+$zanim11 = "nothings";
+$zanim12 = "nothings";
+$zanim13 = "nothings";
+$zanim14 = "nothings";
+$zanim15 = "nothings";
+$zanim16 = "nothings";
+$zanim17 = "nothings";
+$head = '0';
+$torso_lower = '0';
+$torso_upper = '0';
+$right_arm_lower = '0';
+$left_leg_upper = '0';
+$neck = '0';
+$right_arm_upper = '0';
+$left_hand = '0';
+$left_arm_lower = '0';
+$none = '0';
+$right_leg_upper = '0';
+$left_arm_upper = '0';
+$right_leg_lower = '0';
+$left_foot = '0';
+$right_foot = '0';
+$right_hand = '0';
+$left_leg_lower = '0';
 
  //$servlisting = my_array_unique($servlisting);
 ///////////////////////////////////////////////////////////////

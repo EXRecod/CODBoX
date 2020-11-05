@@ -1,4 +1,6 @@
 <?php
+
+//echo '-------------------------------------';
 /*
 select s_kills,s_deaths,s_pg, ROUND(s_kills/s_deaths, 2) AS kdratio
 FROM db_stats_1 where s_kills > 1000
@@ -221,7 +223,7 @@ JOIN
                      n_deaths_min 
               FROM   db_stats_2) t2 
 ON     t1.s_pg = t2.s_pg 
-WHERE ' . $serverssqLdata . ' DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
+WHERE ' . $serverssqLdata . ' DESC LIMIT 15';
 
   //ZAPROS NR - 2
   if (!empty($nicknameSearch)) 

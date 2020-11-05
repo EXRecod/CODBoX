@@ -7,10 +7,10 @@ echo '<div style="height:auto;overflow:auto;text-align:center;padding:0px;backgr
 	{
 //#########   MENU 1 admin  #########//   
  $cMenu_Main = array( 
- "http://localhost/codbx/admin/index.php" => " ✔ CP ✔ ",
- "http://localhost/codbx/list.php" => " ✔ List ✔ ",
- //"http://localhost/codbx/admin/mamba.php" => " | MBM| ",
- //"http://localhost/codbx/admin/settings.php" => " | SET | ",
+ "$domain/admin/index.php" => " ✔ CP ✔ ",
+ "$domain/list.php" => " ✔ List ✔ ",
+ //"$domain/admin/mamba.php" => " | MBM| ",
+ //"$domain/admin/settings.php" => " | SET | ",
  );    
     
 $Menu_Main = array_merge($Menu_Main,$cMenu_Main,$Menu_Main_admin);

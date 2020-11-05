@@ -59,25 +59,6 @@ display: -webkit-flex;  /* &#1076;&#1083;&#1103; &#1087;&#1086;&#1076;&#1076;&#1
 
 
 
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div style="padding:15px;margin:5px;min-width:245px;display:inline-block;flex-grow: 1;border:1px solid #111;
 background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -89,11 +70,15 @@ background-color:#000000aa;
 <div style="overflow:auto;">
 
 <div style="color:#fff;font-size:18px;float:left;">'.$t_kd.'</div>
+';
 
-<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.round($kills/$deaths,2).'</div>
+if((empty($deaths))||(empty($kills)))
+echo '<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">0</div>';
+else
+echo '<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.round($kills/$deaths,2).'</div>';
 
 		
-<div style="width:100%;line-height:20px;overflow:auto;">
+echo '<div style="width:100%;line-height:20px;overflow:auto;">
 		
 <div style="width:calc(100% - 55px);background:#242424;float:left;margin:10 0px;">
 		
@@ -186,14 +171,14 @@ background-color:#000000aa;
 
 <div>'.$t_lasttime.'</div>
 
-<div style="color:#aaa;">'.$lasttimeseen.'</div>
+<div style="color:#aaa;">'.$lasttime.'</div>
 </div>
 
 <div style="width:50%;overflow:auto;text-align:left;font-size:10px;color:#fff;line-height:16px;float:left;text-align:right;">
  
 <div>'.$t_timee.'</div>
 
-<div style="color:#aaa;">'.$lasttime.'</div>
+<div style="color:#aaa;">'.$lasttimeseen.'</div>
 </div>
 
 

@@ -1,5 +1,5 @@
 <?php
-
+$urlmd = $_SERVER["REQUEST_URI"];
 echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "https://www.w3.org/TR/REC-html40/loose.dtd">
 <html>
@@ -7,14 +7,33 @@ echo '
 <link rel="shortcut icon" href="'.$domain.'/favicon.ico" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'.$nickname.' '.$domainname.' | COD Stats </title>
 <meta name="description" content="'.$nickname.' Profile Call of Duty: Modern Warfare stats. Learn Profile stats for this COD player.">
-';
-?>
 
-<style>
+<style>';
+echo '
+.watermarked {
+  background-image: url("'.$domain.'/inc/images/banned-stamp.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+  position: relative;
+  opacity: 0.5;
+}
+
+.watermark {
+  background-image: url("'.$domain.'/inc/images/banned-stamp.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: static;
+  opacity: 0.5;
+}
+
 .rainbowQ {
   
    /* Font options */
-  font-family: 'Pacifico', cursive;
+  font-family: \'Pacifico\', cursive;
   text-shadow: 2px 2px 4px #000000;
   font-size:30px;
   
@@ -81,6 +100,11 @@ position: absolute;
     margin-left: auto;
     margin-right: auto;
 }
+';
+ 
+
+if(strpos($urlmd, "stats.php?") !== false)
+echo '
 .headshot {
   position: absolute;
   top: 8px;
@@ -226,6 +250,12 @@ position: absolute;
   text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 20px #000, 0 0 20px #000, 0 0 10px #000, 0 0 20px #000, 0 0 3px #000;
 
 }
+ 
+ 
+';
+?>
+ 
+ 
  
 .item-hints{
   height: 10px;
@@ -450,20 +480,9 @@ position: absolute;
   left: 50%;
   margin-left: 56px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
 
 #console {display: none;}
 #dialog {
@@ -679,9 +698,15 @@ echo "
 	.search_block_button{flex-grow: 1;margin-top:4px;width:150px;
 background:#52bafe;height:30px;line-height:30px;text-align:center;color:#0a2739;font-size:12px;
 display:inline-block;font-weight:bold;cursor:pointer;cursor:hand;   border-radius: 5px 5px 5px 5px;}
+";
 
-	
-.main_content{max-width:1180px;margin:auto;background:#0000008f;color:#fff;padding: 5 10 10 10px;margin-top:50px;}
+if(strpos($url, "img.php") === false)
+ $w = 1180;
+else
+ $w = 2400; 
+
+echo "	
+.main_content{max-width:".$w."px;margin:auto;background:#0000008f;color:#fff;padding: 5 10 10 10px;margin-top:50px;}
 .menu_container{height:auto;overflow:auto;text-align:center;padding:0px;background:#0000008f;z-index:5;
 min-width:320px;margin:auto;height:50px;max-width:995px;width:calc(100% - 215px);	font-size:12px;lex-grow: 1; display: flex;flex-wrap: wrap;min-width:150px;
 width: calc(100% - 365px);}
@@ -892,7 +917,7 @@ background-size: cover;min-width:320px; overflow-y: scroll;  height: 100%;}
 a{text-decoration:none;color:#222;}
 .white{color:#fff;}
 
-.title_block{margin:5 5 5 5px;colo2r:#00dcff;;font-size:17px;width:100%;z-index:1;text-align:left;}
+.title_block{margin:5 5 5 5px;colo2r:#00dcff;font-size:17px;width:100%;z-index:1;text-align:left;}
 .title_block .title2{background2:#ffffff22;float:left;padding:2 2 2 5px;margin:3 3 3 0px;border-left:10px solid #00dcff2e;}
 
 .card{padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
@@ -1037,9 +1062,9 @@ a.paginator:active { color: #FFF; text-decoration:none; font-weight:normal; }
 }
 
 .tags:hover:after {
-  background: #333;
-  background: rgba(0, 0, 0, .8);
+  background: rgba(44, 62, 80, .9);
   border-radius: 5px;
+  border: 2px solid green;
   bottom: -34px;
   color: #fff;
   content: attr(glose);
@@ -1047,7 +1072,8 @@ a.paginator:active { color: #FFF; text-decoration:none; font-weight:normal; }
   padding: 5px 15px;
   position: absolute;
   z-index: 98;
-  width: 350px;
+  min-width: 30px;
+  max-width: 250px;
 }
 
 .tags:hover:before {
@@ -1077,330 +1103,47 @@ a.paginator:active { color: #FFF; text-decoration:none; font-weight:normal; }
     background: linear-gradient(left, #3e3e3e, #111, #000);
     box-shadow: inset 0 0 1px 1px #646464;
   }
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
 
-</style> 
- 
-
-
-
-
-";
+</style> ";
 
 if($baseurlz=='img.php')
 {
-echo "<style> 	
-  
-html.swipebox-html.swipebox-touch {
-	overflow: hidden!important
-}
-
-#swipebox-overlay img {
-	border: none!important
-}
-
-#swipebox-overlay {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 99999!important;
-	overflow: hidden;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none
-}
-
-#swipebox-container {
-	position: relative;
-	width: 100%;
-	height: 100%
-}
-
-#swipebox-slider {
-	-webkit-transition: -webkit-transform .4s ease;
-	transition: transform .4s ease;
-	height: 100%;
-	left: 0;
-	top: 0;
-	width: 100%;
-	white-space: nowrap;
-	position: absolute;
-	display: none;
-	cursor: pointer
-}
-
-#swipebox-slider .slide {
-	height: 100%;
-	width: 100%;
-	line-height: 1px;
-	text-align: center;
-	display: inline-block
-}
-
-#swipebox-slider .slide:before {
-	content: \"\";
-	display: inline-block;
-	height: 50%;
-	width: 1px;
-	margin-right: -1px
-}
-
-#swipebox-slider .slide .swipebox-inline-container,
-#swipebox-slider .slide .swipebox-video-container,
-#swipebox-slider .slide img {
-	display: inline-block;
-	max-height: 100%;
-	max-width: 100%;
-	margin: 0;
-	padding: 0;
-	width: auto;
-	height: auto;
-	vertical-align: middle
-}
-
-#swipebox-slider .slide .swipebox-video-container {
-	background: 0 0;
-	max-width: 1140px;
-	max-height: 100%;
-	width: 100%;
-	padding: 5%;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box
-}
-
-#swipebox-slider .slide .swipebox-video-container .swipebox-video {
-	width: 100%;
-	height: 0;
-	padding-bottom: 56.25%;
-	overflow: hidden;
-	position: relative
-}
-
-#swipebox-slider .slide .swipebox-video-container .swipebox-video iframe {
-	width: 100%!important;
-	height: 100%!important;
-	position: absolute;
-	top: 0;
-	left: 0
-}
-
-#swipebox-slider .slide-loading {
-	background: url($domain/inc/inc_screenshots/img/loader.gif) center center no-repeat
-}
-
-#swipebox-bottom-bar,
-#swipebox-top-bar {
-	-webkit-transition: .5s;
-	transition: .5s;
-	position: absolute;
-	left: 0;
-	z-index: 999;
-	height: 50px;
-	width: 100%
-}
-
-#swipebox-bottom-bar {
-	bottom: -50px
-}
-
-#swipebox-bottom-bar.visible-bars {
-	-webkit-transform: translate3d(0, -50px, 0);
-	transform: translate3d(0, -50px, 0)
-}
-
-#swipebox-top-bar {
-	top: -50px
-}
-
-#swipebox-top-bar.visible-bars {
-	-webkit-transform: translate3d(0, 50px, 0);
-	transform: translate3d(0, 50px, 0)
-}
-
-#swipebox-title {
-	display: block;
-	width: 100%;
-	text-align: center
-}
-
-#swipebox-close,
-#swipebox-next,
-#swipebox-prev {
-	background-image: url($domain/inc/inc_screenshots/img/icons.png);
-	background-repeat: no-repeat;
-	border: none!important;
-	text-decoration: none!important;
-	cursor: pointer;
-	width: 50px;
-	height: 50px;
-	top: 0
-}
-
-#swipebox-arrows {
-	display: block;
-	margin: 0 auto;
-	width: 100%;
-	height: 50px
-}
-
-#swipebox-prev {
-	background-position: -32px 13px;
-	float: left
-}
-
-#swipebox-next {
-	background-position: -78px 13px;
-	float: right
-}
-
-#swipebox-close {
-	top: 0;
-	right: 0;
-	position: absolute;
-	z-index: 9999;
-	background-position: 15px 12px
-}
-
-.swipebox-no-close-button #swipebox-close {
-	display: none
-}
-
-#swipebox-next.disabled,
-#swipebox-prev.disabled {
-	opacity: .3
-}
-
-.swipebox-no-touch #swipebox-overlay.rightSpring #swipebox-slider {
-	-webkit-animation: rightSpring .3s;
-	animation: rightSpring .3s
-}
-
-.swipebox-no-touch #swipebox-overlay.leftSpring #swipebox-slider {
-	-webkit-animation: leftSpring .3s;
-	animation: leftSpring .3s
-}
-
-.swipebox-touch #swipebox-container:after,
-.swipebox-touch #swipebox-container:before {
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	-webkit-transition: all .3s ease;
-	transition: all .3s ease;
-	content: ' ';
-	position: absolute;
-	z-index: 999;
-	top: 0;
-	height: 100%;
-	width: 20px;
-	opacity: 0
-}
-
-.swipebox-touch #swipebox-container:before {
-	left: 0;
-	-webkit-box-shadow: inset 10px 0 10px -8px #656565;
-	box-shadow: inset 10px 0 10px -8px #656565
-}
-
-.swipebox-touch #swipebox-container:after {
-	right: 0;
-	-webkit-box-shadow: inset -10px 0 10px -8px #656565;
-	box-shadow: inset -10px 0 10px -8px #656565
-}
-
-.swipebox-touch #swipebox-overlay.leftSpringTouch #swipebox-container:before,
-.swipebox-touch #swipebox-overlay.rightSpringTouch #swipebox-container:after {
-	opacity: 1
-}
-
-@-webkit-keyframes rightSpring {
-	0% {
-		left: 0
-	}
-	50% {
-		left: -30px
-	}
-	100% {
-		left: 0
-	}
-}
-
-@keyframes rightSpring {
-	0% {
-		left: 0
-	}
-	50% {
-		left: -30px
-	}
-	100% {
-		left: 0
-	}
-}
-
-@-webkit-keyframes leftSpring {
-	0% {
-		left: 0
-	}
-	50% {
-		left: 30px
-	}
-	100% {
-		left: 0
-	}
-}
-
-@keyframes leftSpring {
-	0% {
-		left: 0
-	}
-	50% {
-		left: 30px
-	}
-	100% {
-		left: 0
-	}
-}
-
-@media screen and (min-width:800px) {
-	#swipebox-close {
-		right: 10px
-	}
-	#swipebox-arrows {
-		width: 92%;
-		max-width: 800px
-	}
-}
-
-#swipebox-overlay {
-	background: #0d0d0d
-}
-
-#swipebox-bottom-bar,
-#swipebox-top-bar {
-	text-shadow: 1px 1px 1px #000;
-	background: #000;
-	opacity: .95
-}
-
-#swipebox-top-bar {
-	color: #fff!important;
-	font-size: 15px;
-	line-height: 43px;
-	font-family: Helvetica, Arial, sans-serif
-}
-</style>";
 echo '<link rel="stylesheet" href="'.$domain.'/inc/inc_screenshots/style.css">';
-}
-
-
-
-
+echo '	 
+<script type="text/javascript" src="'.$domain.'/inc/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="'.$domain.'/inc/fresco.js"></script>
  
+<script type="text/javascript" src="'.$domain.'/inc/inc_screenshots/html2canvas.min.js"></script>
+<script type="text/javascript" src="'.$domain.'/inc/inc_screenshots/canvas2image.js"></script>
+
+<link rel="stylesheet" type="text/css" href="'.$domain.'/inc/fresco/fresco.css" />	 
+'; 
+}
+ 
+ 
+
+ if($baseurlz=='geo.php')
+ echo '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>'; 
+
+
+
+
+
+
+echo '<script type="text/javascript" src="'.$domain.'/inc/strange.js"></script>';  
 echo ' 
 </head>
 <body>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans%7CRoboto:400,600,700,900&amp;display=swap" rel="stylesheet">
-<script src="'.$domain.'/inc/script2.js"></script>
-
-';
+<script src="'.$domain.'/inc/script2.js"></script>';
+  if($baseurlz=='index.php')
+ echo '<canvas id="q"></canvas>'; 

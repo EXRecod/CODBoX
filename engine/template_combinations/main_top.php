@@ -39,6 +39,22 @@ else if ((!empty($server)) && (!empty($totalkills))) {
  ORDER BY (t1.s_kills+0)';
   $serverFiltr = 'SELECT count(*) as totalpl FROM db_stats_0 where s_port=' . $server;
 }
+
+/*
+else if ((empty($server)) && (!empty($totaltotalknife))) {
+  $serverssqLdata = 't1.s_kills >= 0
+ ORDER BY (t1.s_kills+0)';
+  $serverFiltr = 'SELECT count(*) as totalpl FROM db_stats_1 where s_kills >= 100';
+}
+else if ((!empty($server)) && (!empty($totaltotalknife))) {
+  $serverssqLdata = 't0.s_port="' . $server . '" and t1.s_kills >= 0
+ ORDER BY (t1.s_kills+0)';
+  $serverFiltr = 'SELECT count(*) as totalpl FROM db_stats_0 where s_port=' . $server;
+}
+*/
+
+
+
 ////////////////////
 else if (!empty($nicknameSearch)) {
   $serverssqLdata = 't0.s_guid LIKE :keyword ORDER BY t0.s_guid';

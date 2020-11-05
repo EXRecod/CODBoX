@@ -70,7 +70,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.25</div>
@@ -100,7 +100,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 2</div>
@@ -126,7 +126,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 271</div>
@@ -228,7 +228,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.2</div>
@@ -258,7 +258,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:23.165370381417%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:23.165370381417%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 1.71</div>
@@ -284,7 +284,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 194</div>
@@ -412,7 +412,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.23</div>
@@ -442,7 +442,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 1.68</div>
@@ -468,7 +468,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 209</div>
@@ -584,7 +584,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.32</div>
@@ -614,7 +614,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 0.71</div>
@@ -640,7 +640,7 @@ background-color:#000000aa;
 
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
 	
-<div style="width:50%;margin-left:50%;;border-left:1px solid #fff;;height:4px;background:#54FF00"></div>
+<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
 	</div>
 	
 <div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 67</div>

@@ -32,8 +32,8 @@
  $i_server = 'Server';
  $i_ban    = 'Ban';
  $i_unban  = 'UnBan';
-
- 
+ $i_searchdd = 'Search in DB-2';
+ $i_searchddf = 'Search in DB-2'; 
 
   $take_screen = "Take Screenshot! Wait 5 sec.";
   $t_players = "Players";
@@ -147,6 +147,7 @@ $hit_right_foot = "Right Foot";
 $hit_right_hand = "Right Hand";									
 $hit_left_leg_lower = "Left Leg Lower"; 
 
+$playeed = "Played";
 $playeed_date = "Date";
 $t_lasttime = "Last Hunt";
 $t_timee = "First Hunt";
@@ -191,4 +192,10 @@ $bonus_slot_vb  = "VIP bonus!";
 $bonus_slot_vbtxt  = "Your ip address is not in the server database, you need your real ip address!";
  
 
-
+//top
+ $x_top_maps = 'TOP 20 MAPS';
+ $x_top_medals = 'TOP 20 MEDALS';
+ $x_top_day = 'TOP 20 OF DAY';
+ $x_top_week = 'TOP 20 OF WEEK';
+ $x_soon = 'Technical work before 7.11.2020...';
+?>

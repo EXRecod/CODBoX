@@ -13,7 +13,7 @@ else {
     if (time() - $cron_time >= 120) $gtimes = 0;
     else $gtimes = 1;
 }
-if (empty($gtimes)) {
+if ((empty($gtimes))||(!file_exists($gtplayer_list))) {
     foreach ($multi_servers_array as $arx => $f) {
         $zx = explode("port:", $arx);
         $fld = $zx[1];
@@ -21,7 +21,7 @@ if (empty($gtimes)) {
         $zxu = explode("ip:", $arx);
         $fldb = $zxu[1];
         $servex3x = strtok($fldb, " ");
-        usleep(40000);
+        usleep(80000);
         $status = new COD4xServerStatus(trim($servex3x) , trim($p));
         if ($status->getServerStatus()) {
 			
@@ -135,14 +135,17 @@ margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match' . md5($i) . '
 	</div>
 	
 	
-<div style="overflow:auto;width:auto;display:inline-block;flex-grow: 1; display: flex; min-width:50%;" class="wrapper">
+<div style="overflow:auto;width:auto;display:inline-block;flex-grow: 1; display: flex; min-width:50%;" class="wrapper">';
 	
- 
+ if(!empty($mapsall[$serverxmap]))
+	 $mapnm = $mapsall[$serverxmap];
+ else
+	 $mapnm = $serverxmap;
 
 	
-<div style="color:#fff;padding:5 3px;line-height:24px;text-align:center;min-width:30%;overflow:auto;display:inline-block;flex-grow: 1;">
+echo '<div style="color:#fff;padding:5 3px;line-height:24px;text-align:center;min-width:30%;overflow:auto;display:inline-block;flex-grow: 1;">
 	
-<div style="color:#d5dee7;font-size:15px;display:inline-block;float:right;TEXT-ALIGN:right;">' . $serverxmap . ' 
+<div style="color:#d5dee7;font-size:15px;display:inline-block;float:right;TEXT-ALIGN:right;">'.$mapnm.' 
  </div>
  
  
@@ -155,24 +158,42 @@ margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match' . md5($i) . '
 	</div>
 	</div></div>
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <div style="line-height:30px;display:inline-block;width:20px;float:right;text-align:right;">&#9660;</div>
 	
 	
 <div id="match_sub' . md5($i) . '" style="display:none;width:calc(100% - 10px);
 font-size:14px;border-top: 1px solid #222;overflow:auto;margin-top:5px;padding:5px;background:#222;">
-	
+';	
   
  
  
- 
+ echo '<div class="match_stats_adv" style="min-width:280px;">';
+
+
+ if(file_exists($cpath .'/inc/images/maps/'.$serverxmap.'.jpg'))
+echo '<img src="' . $domain . '/inc/images/maps/' . $serverxmap . '.jpg" width="280px" >';
+    else
+echo '<img src="' . $domain . '/inc/images/maps/no-pic.png" width="280px">';	
+	 
+	echo '</div>';
  
 
 
-<div class="match_stats_adv" style="min-width:140px;">Players
+echo '<div class="match_stats_adv" style="min-width:180px;">Players
  ';
             foreach ($players as $pl => $e) {
                 foreach ($e as $r => $j) {
-                    echo '<div style="color:#fff;width:200px;">' . $j . '</div>';
+                    echo '<div style="color:#fff;width:290px;">' . $j . '</div>';
                 }
             }
             echo '
@@ -205,13 +226,13 @@ font-size:14px;border-top: 1px solid #222;overflow:auto;margin-top:5px;padding:5
                 }
             }
             echo '
-</div>
+</div> ';
 
 
- 
+           echo '</div></div>';
+	
+	 
 
-	</div></div>
- ';
         }
     }
 }

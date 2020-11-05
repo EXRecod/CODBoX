@@ -51,11 +51,9 @@ if(empty($kills))
 			 $damages = $value;		 
             }	 
 }	   
-
- 
-
+  
+  
 foreach ($dbrm as $d) {	
-
 if (is_array($d) || is_object($d))
 { 
 	foreach ($d as $key => $value) {
@@ -63,16 +61,29 @@ if (is_array($d) || is_object($d))
 	   {  
          if ((strpos($join_weapons, $key) !== false)&&(strlen($key)>2))
 		 {
-			
+		 $weapon = $key; 
+		 $pkli[''.$weapon.''] = $value; 
+}}}}}
+ 
+arsort($pkli);
+  
+$r = 0;  
+if (is_array($pkli)){  
+foreach ($pkli as $key => $value) {	
 			
 		 $weapon = $key; 
-
-
+		 ++$r;
+		  
 ///NETU KARTINOK NA NIH, ZABIL RISOVAT'		
 $key = str_replace("_acog_", "_", $key);
 $key = str_replace("_grip_", "_", $key);
 $key = str_replace("_silencer_", "_", $key);	
 $key = str_replace("_reflex_", "_", $key); 
+
+if($r == 1)
+	$no = '<div style="position: absolute;top: 20%;left: 87%;transform: translate(-50%, -50%);"><b style="font-size: 22px;color: #cfc547;text-shadow: 3px 0px 7px rgba(81,67,21,0.8), -3px 0px 7px rgba(81,67,21,0.8), 0px 4px 7px rgba(81,67,21,0.8);"> TOP </b></div>';
+else
+	$no = '';
 			 
 			  
 echo ' 
@@ -82,8 +93,7 @@ echo '
     background-color: #000000aa;border: 1px solid #222;border-top: 1px solid #333;padding:10 5px;position:relative;">
 	
 <div style="font-weight:bold;color:#fff;width:calc(100% - 20px);padding:10px;padding-top:5px;text-align:left;">'.$wp[''.trim($weapon).''].'</div>	
-<div style="width:100%;max-width:200px;margin:auto;overflow:hidden;position:relative;">
-	<img style="width:200px;height:100px;" src="'.$domain.'/inc/images/weapons/'.$key.'.png">
+<div style="width:100%;max-width:200px;margin:auto;overflow:hidden;position:relative;">'.$no .'<img style="width:200px;height:100px;" src="'.$domain.'/inc/images/weapons/'.$key.'.png"> 
 <div style="position:absolute;left:0px;top:0px;width:100%;height:100px;background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%);border:1px solid #000;"></div>
 </div>
 <div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">';
@@ -99,7 +109,7 @@ echo '
 	
 echo '<div style="overflow:hidden;background:#222;position:relative;">
 <div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-<div style="width:'.round($headshots*1/$value).'%;margin-left:0%;;border-right:1px solid #fff;;height:4px;background:#'.percent2Color(round($headshots*100/($value*$total))).'"></div>
+<div style="width:'.round($headshots*1/$value).'%;margin-left:0%;border-right:1px solid #fff;height:4px;background:#'.percent2Color(round($headshots*100/($value*$total))).'"></div>
 </div><div style="font-size:10px;margin-top:3px;color: #aaa;">'.$averarg.' '.$t_heads.': '.round($headshots*100/($value*$total)).'</div>';
 */
 
@@ -107,7 +117,7 @@ echo '
 
 </div>
 	
-<div style="font-size: 11px;    border-top: 1px solid #222;margin-top:5px;padding-top:5px;color: #fff;margin:10px;line-height: 16px;">
+<div style="font-size: 11px; border-top: 1px solid #222;margin-top:5px;padding-top:5px;color: #fff;margin:10px;line-height: 16px;">
 	
 <div class="weap_stats" style="text-align:left;">'.$t_kills.'
 <div>'.$value.'</div></div>
@@ -122,7 +132,7 @@ echo '
 	
 	
 	
-}}}}}
+}}
 	
 	
 	

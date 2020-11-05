@@ -1,9 +1,15 @@
 <?php
  
+ 
+if(strpos($url, "img.php") === false)
+ $w = 1200;
+else
+ $w = 2400;  
+ 
 echo '<div style="width:100%;overflow:auto;">
 <div style="min-height:20px;background2:red;display:inline-block;
     position:fixed;
-width:calc((100% - 1200px)/2);z-index:1;
+width:calc((100% - '.$w.'px)/2);z-index:1;
     display: flex;
     flex-direction: column;
     justify-content: center;
