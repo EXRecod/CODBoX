@@ -12,7 +12,8 @@ $game_server_list_parser = 'https://zona-ato-game.ru/sourcebans/index.php?p=serv
  "http://localhost/codbx/index.php" => "$menu_main",
  "http://localhost/codbx/stats.php" => "$menu_stats",
  "http://localhost/codbx/chat.php" => "$menu_chats",
- "http://localhost/codbx/img.php" => "$menu_screens"
+ "http://localhost/codbx/img.php" => "$menu_screens",
+ "http://localhost/codbx/geo.php" => "$menu_geo",
  );    
 
 
@@ -20,12 +21,12 @@ $game_server_list_parser = 'https://zona-ato-game.ru/sourcebans/index.php?p=serv
 $host_adress = 'localhost:3306'; 
 $db_name     = 'recodmod';
 $db_user     = 'root';  
-$db_pass     = 'rootpassword';
+$db_pass     = '260386'; //rootpassword
 
 $sourcebans_host_adress  =  'localhost:3306'; 
 $sourcebans_db_name      =  'recodmod'; 
 $sourcebans_db_user      =  'root';
-$sourcebans_db_pass      =  'rootpassword';
+$sourcebans_db_pass      =  '260386';
 $sourcebans_charset_db   =  'utf8';
 
 //DATABASE PLAYER STATS DAYS LIMIT
@@ -35,28 +36,18 @@ $StatsDaysLimit = 90;
 
 
 /*#########   SERVER MENU   #########*/
+/// НАЗВАНИЕ СЕРВЕРА ТАКОЙ ЖЕ КАК НА ИГРОВОМ СЕРВЕРЕ 1 В 1 ДОЛЖЕН БЫТЬ
 $multi_servers_array = array(
- "ip:46.174.54.24 port:28968 rcon:123 server_md5:28961" => "^3|^1EUR^3|^5KILLHOUSE",
- "ip:91.240.86.167 port:28962 rcon:123 server_md5:28962" => "War HighXP",
- "ip:91.240.86.167 port:28963 rcon:123 server_md5:28963" => "Sab Privat",
- "ip:91.240.86.167 port:28964 rcon:123 server_md5:28964" => "HardCore",
+ "ip:46.174.54.24 port:28968 rcon:123 server_md5:28961" => "^3|^1ZONA ATO^3|^5TDM ^2SOFT",
+ "ip:91.240.86.167 port:28962 rcon:123 server_md5:28962" => "^3|^1ZA^3|^5SAB-MIX ^1PRIVAT",
+ "ip:91.240.86.167 port:28963 rcon:123 server_md5:28963" => "^3|^1ZA^3|^5KILLHOUSE ^2SOFT",
+ "ip:91.240.86.167 port:28964 rcon:123 server_md5:28964" => "^3|^1ZA^3|^5CRASH + SHOWDOWN",
  "ip:91.240.86.167 port:28965 rcon:123 server_md5:28965" => "New Weapon",
  "ip:91.240.86.167 port:28966 rcon:123 server_md5:28966" => "Crossfire",
  "ip:91.240.86.167 port:28967 rcon:123 server_md5:28967" => "Gun Games",
  "ip:91.240.86.167 port:28968 rcon:123 server_md5:28968" => "Killhouse",
  "ip:91.240.86.167 port:28969 rcon:123 server_md5:28969" => "Nuketown",
- "ip:91.240.86.167 port:28960 rcon:123 server_md5:28960" => "CTF HighXP",
- 
- "ip:91.240.86.167 port:28971 rcon:123 server_md5:28971" => "2 Dom HighXP",
- "ip:91.240.86.167 port:28972 rcon:123 server_md5:28972" => "2 War HighXP",
- "ip:91.240.86.167 port:28973 rcon:123 server_md5:28973" => "2 Sab Privat",
- "ip:91.240.86.167 port:28974 rcon:123 server_md5:28974" => "2 HardCore",
- "ip:91.240.86.167 port:28975 rcon:123 server_md5:28975" => "2 New Weapon",
- "ip:91.240.86.167 port:28976 rcon:123 server_md5:28976" => "2 Crossfire",
- "ip:91.240.86.167 port:28977 rcon:123 server_md5:28977" => "2 Gun Games",
- "ip:91.240.86.167 port:28978 rcon:123 server_md5:28978" => "2 Killhouse",
- "ip:91.240.86.167 port:28979 rcon:123 server_md5:28979" => "2 Nuketown",
- "ip:91.240.86.167 port:28970 rcon:123 server_md5:28970" => "2 CTF HighXP"
+ "ip:91.240.86.167 port:28960 rcon:123 server_md5:28960" => "CTF HighXP"
  );
   
  
@@ -66,13 +57,44 @@ $multi_servers_array = array(
 //#####  SCREENSHOTS  #####//
 $screenshotsZ_page = 60; //количество картинок на страницу
 //сервер 1 
-$screenshots[1]['web_url'] = "/a/"; 
-$screenshots[1]['folder'] = "C:\\wamp64\\www\\a\\"; 
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/1/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\1\\"; 
 //сервер 2   
-$screenshots[2]['web_url'] = "/b/"; 
-$screenshots[2]['folder'] = "C:\\wamp64\\www\\b\\";
-
-
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/2/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\2\\"; 
+//сервер 3   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/3/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\3\\"; 
+//сервер 4   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/4/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\4\\"; 
+//сервер 5   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/5/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\5\\"; 
+//сервер 6   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/6/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\6\\"; 
+//сервер 7   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/7/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\7\\"; 
+//сервер 8   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/8/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\8\\";
+//сервер 9   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/9/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\9\\";
+//сервер 10  
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/10/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\10\\";
+//сервер 11   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/11/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\11\\";
+//сервер 12   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/12/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\12\\";
+//сервер 13   
+$screenshots[]['web_url'] = "/codbx/screenshots/galleries/13/"; 
+$screenshots[]['folder'] = "C:\\wamp\\www\\codbx\\screenshots\\galleries\\13\\";
 
 
 
@@ -84,16 +106,13 @@ $screenshots[2]['folder'] = "C:\\wamp64\\www\\b\\";
    
    
    
+
+//ИД Яндекс метрики
+//полный доступ к Яндекс метрике, нужно просто создать код, 
+//уникальный ид можно найти в самом коде 
+//Образец от куда ИД .......https://mc.yandex.ru/watch/67922815" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+$metrikaID = 67922815;   
    
-   
-   
-   
-   
-   
-   
-   
-   
-// то что ниже в конец файла добавить нужно
  
 
 /*#########   STEAM   #########*/
