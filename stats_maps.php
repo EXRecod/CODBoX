@@ -17,16 +17,8 @@ $baseurlz = basename(__FILE__);
 include($cpath ."/engine/functions/main.php");
 
 include('cache-top.php');
-
- if(!empty($profile))
-include($cpath ."/engine/template_combinations/profile.php");
- else if(empty($brofile))
- {
-include($cpath ."/engine/template_combinations/main_top.php");
-//include($cpath ."/engine/template_combinations/main_medals.php");
- }
-else
-include($cpath ."/engine/template_combinations/main_top_brofile.php");
-
+ 
+include($cpath ."/engine/template_combinations/stats_maps.php");
+ 
 include('cache-bottom.php'); 	
 ?>

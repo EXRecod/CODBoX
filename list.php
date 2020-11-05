@@ -11,7 +11,9 @@ include($cpath ."/engine/functions/main.php");
 
 if(isLoginUser())
 {
+include('cache-top.php');	
 include($cpath ."/engine/template_combinations/index_list.php");
+include('cache-bottom.php');
 }
 else
    echo '<script type="text/javascript"> window.open("admin/login.php","_self");</script>';

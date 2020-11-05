@@ -1,7 +1,7 @@
 <?php session_start(); 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-
+$url = $_SERVER["SCRIPT_NAME"];
 error_reporting(E_ALL);
 
 if (empty($cpath)) { 
@@ -12,13 +12,10 @@ include($cpath ."/engine/functions/langctrl.php");
  
 $baseurlz = basename(__FILE__); 
 
-
-
 include($cpath ."/engine/functions/main.php");
 
-
-include('cache-top.php');
+ include('cache-top.php');
 include($cpath ."/engine/template_combinations/images.php");
-include('cache-bottom.php');	
+ include('cache-bottom.php');	
 ?>
 

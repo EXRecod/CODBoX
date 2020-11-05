@@ -13,5 +13,8 @@ include($cpath ."/engine/functions/langctrl.php");
 $baseurlz = basename(__FILE__); 
 
 include($cpath ."/engine/functions/main.php");
-include($cpath ."/engine/template_combinations/index_page.php");	
+
+include('cache-top.php');
+include($cpath ."/engine/template_combinations/index_page.php");
+include('cache-bottom.php');	
 ?>

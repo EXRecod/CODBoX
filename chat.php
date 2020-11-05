@@ -16,7 +16,6 @@ include($cpath ."/engine/functions/main.php");
 
 include('cache-top.php');
 
-
 include($cpath ."/engine/template_combinations/chat_page.php");	
 
 include('cache-bottom.php');
