@@ -1136,22 +1136,45 @@ $dbupw = $_SESSION['codbxpass'];
 else
 $dbupw  = '';
 
-if (isset($_COOKIE['user_online_login']))
+if (!empty($_COOKIE['user_online_login']))
 $dbupwopen = $_COOKIE['user_online_login'];
+else if (!empty($_COOKIE['user_online_key']))
+$dbupwopen = $_COOKIE['user_online_key'];
+else if(!empty($_SESSION['codbxpasssteam']))
+$dbupwopen = $_SESSION['codbxpasssteam'];
 else
 $dbupwopen  = '';
+ 
 
+
+if(!empty($steam_users_id))
+{
+if(is_array($steam_users_id))
+{
+foreach ($steam_users_id as $passw => $xy)
+{
+	$md5passw = md5(sha1($passw));
+    if((trim($md5passw)) == (trim($dbupwopen)))
+	{
+		$openiduser = $md5passw;
+    }
+}
+}
+}
+
+if(empty($openiduser))
+	$openiduser = '';
 
 
 function isLoginUser()
 { 
-global $dbupw,$dbusss,$codbx_users,$dbupwopen;
+global $dbupw,$dbusss,$codbx_users,$openiduser;
  if((!empty($dbusss))&&(!empty($dbupw)))
  {
 if((isset($dbusss))&&(passwordfindcodxUser($dbupw,$codbx_users)))
  return true;
  }
-else if(!empty($dbupwopen))
+else if(!empty($openiduser))
  {
  return true;
  } 
@@ -1160,69 +1183,60 @@ else if(!empty($dbupwopen))
 }
 
 
-
-function isLoginUserSteamOpenId()
+function isLoginUserWHO($SessionUser)
 { 
-global $steamkey,$steam_users_id,$domain;
-if(strlen($steamkey) < 30)
-    die ("</BR></BR></BR></BR></BR></BR>NO PERMISSIONS! FALSE STEAM API KEY</BR></BR></BR>"); 
-if(isLoginUser()==false)
- {
-	 
-$script = $ssylka_na_codbox;
-try {
- $openid = new LightOpenID($script);
- if(!$openid->mode) {
- $openid->identity = 'http://steamcommunity.com/openid/?l=russian';
- header('location: '.$openid->authUrl());
- } elseif ($openid->mode == 'cancel') {
- echo 'User has canceled authentication';
- } else 
- 
- {
-	 
- if($openid->validate()) {
- $id = $openid->identity;
- $ptn = "/^https:\/\/steamcommunity\.com\/openid\/id\/(7[0-9]{15,25}+)$/";
- preg_match($ptn, $id, $matches);
-
- $url = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$steamkey&steamids=$matches[1]";
- $json_object = file_get_contents($url);
- $json_decoded = json_decode($json_object);
-
- foreach ($json_decoded->response->players as $player) {
- //echo '<img src="'.$player->avatarmedium.'"> <a href="'.$player->profileurl.'">'.htmlspecialchars($player->personaname).'</a><hr>';
- //echo "<br/>Player ID: $player->steamid <br/>Player Name: $player->personaname<br/>Profile URL: $player->profileurl<br/>SmallAvatar: <img src='$player->avatar'/> ";
-					foreach ($steam_users_id as $passw => $xy)
+global $steam_users_id;
+ 					foreach ($steam_users_id as $passw => $xy)
 					{
-						 $md5plpsw = md5(sha1($player->steamid));
-	                     $md5passw = md5(sha1($passw));
-                        if((trim($md5passw)) == (trim($md5plpsw)))
+	                    $md5passw = md5(sha1($passw));
+                        if((trim($md5passw)) == (trim($SessionUser)))
 						{
-if (!isset($_COOKIE['user_online_login']))
-{
-$parsehost = parse_url($domain);
-$gamehost = $parsehost['host'];
-setcookie("user_online_login", trim(md5($md5plpsw)), time() + (60*60*24*30), "/~cookie_".$md5plpsw."/", $gamehost, 1);
-setcookie('user_online_key', $md5passw, time()+60*60*24*30); //случайная строка
-}	
-						}
-					}					
- }
-   
- } else {
- echo 'User is not logged in.';
- }
- }
-} catch(ErrorException $e) {
- echo $e->getMessage();
-}
-}
+                        return $xy;
+                        }
+					}
+		if(empty($xy))
+  return false;			
 }
 
 
 
+function dbSelectALLADMIN($SQLiteDatabase, $query) {
+  $result = '';
+  global $cpath, $SqlDataBase, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;
+  try {
+     
+      $dsn = "mysql:host=" . $host_adress . ";dbname=" . $db_name . ";charset=utf8";
+      if (empty($msqlconnect)) 
+		  $db = new PDO($dsn, $db_user, $db_pass);
+     
+    //$result = $db->query($query)->fetchAll(); //;
+	 
+ $rt = $db->query($query);
+ if ($rt) {
+     $result=$rt->fetchAll();
+ }
+ else {
+      // Handle errors
+	  errorspd("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "
+       \n # SqlDataBase : $SqlDataBase, msqlconnect: $msqlconnect, host_adress: $host_adress, db_name: $db_name
+	   \n # $query \n\n");
+ }	
+	 
+    $db = null;
+  }
+  catch(PDOException $e) 
+  {
+    errorspd("[" .date("Y.m.d H:i:s")."] 496 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+  }
+  return $result;
+}
 
+function errorspd($s) {
+  global $cpath;
+  $fp = fopen($cpath.'/data/errors/sql_pdo_errors.log', 'a');
+  fwrite($fp, $s . "\n");
+  fclose($fp);
+}
  /*
 if((!empty($_COOKIE["codbx_u"]))&&(empty($_SESSION['codbxuser'])))
 	$_SESSION['codbxuser'] = $_COOKIE["codbx_u"];

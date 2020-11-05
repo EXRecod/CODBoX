@@ -11,14 +11,109 @@ if (empty($cpath)) {
 include($cpath ."/inc/data.php");
 include($xcpath ."/core/functions.php");
 include($xcpath ."/core/class.simpleSQLinjectionDetect.php");
+
+
+$c = '';
+
+if(((strpos($_SERVER['REQUEST_URI'], 'openid.signed')) !== false)&&((strpos($_SERVER['REQUEST_URI'], 'openid.op_endpoint')) !== false))
+$_POST['loginsteam']='OK';
+
+
 if(isLoginUser())
  {
     header("Location:index.php"); 
  }
-$c = '';
-if(isset($_POST['loginsteam']))
-   isLoginUserSteamOpenId();
-if(isset($_POST['login']))
+else if((isLoginUser() == false)&&(isset($_POST['loginsteam'])))
+ {
+	if((strpos($steamkey, 'Steam Key')) !== false)	
+	{
+if(strlen($steamkey) < 30)
+    die ("</BR></BR></BR></BR></BR></BR><H1>NO PERMISSIONS! FALSE STEAM API KEY</H1></BR></BR></BR>");
+	}
+ 
+try {
+ $openid = new LightOpenID($domain);
+ if(!$openid->mode) {
+ $openid->identity = 'https://steamcommunity.com/openid/?l=russian';
+ header('location: '.$openid->authUrl());
+ } elseif ($openid->mode == 'cancel') {
+  $c = "</br><center><p><h1 style=\"color:red;\"></br>User has canceled authentication.</h1></p></center>"; 
+ } 
+ else 
+ {
+	 
+ if($openid->validate()) {
+ $id = $openid->identity;
+ $ptn = "/^https:\/\/steamcommunity\.com\/openid\/id\/(7[0-9]{15,25}+)$/";
+ preg_match($ptn, $id, $matches);
+
+ $url = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=$steamkey&steamids=$matches[1]";
+ $json_object = file_get_contents($url);
+ $json_decoded = json_decode($json_object);
+
+ foreach ($json_decoded->response->players as $player) {
+ //echo '<img src="'.$player->avatarmedium.'"> <a href="'.$player->profileurl.'">'.htmlspecialchars($player->personaname).'</a><hr>';
+ //echo "<br/>Player ID: $player->steamid <br/>Player Name: $player->personaname<br/>Profile URL: $player->profileurl<br/>SmallAvatar: <img src='$player->avatar'/> ";
+					foreach ($steam_users_id as $passw => $xy)
+					{
+						 $md5plpsw = md5(sha1($player->steamid));
+	                     $md5passw = md5(sha1($passw));
+                        if((trim($md5passw)) == (trim($md5plpsw)))
+						{
+if (!isset($_COOKIE['user_online_login']))
+{
+$parsehost = parse_url($domain);
+$gamehost = $parsehost['host'];
+setcookie("user_online_login", trim($md5plpsw), time()+459200, "/~cookie_".$md5plpsw."/", $gamehost, 1);
+setcookie('user_online_key', $md5passw, time()+459200);
+$_SESSION['codbxpasssteam'] = $md5passw;
+$c = "<script language = 'javascript'>
+  var delay = 5000;
+  setTimeout(\"document.location.href='".$domain."/admin/index.php'\", delay);</script>
+</br><center><p><h1 style=\"color:green;\"></br>Через 5 секунд Вы будете перенаправлены. </br> Если этого не происходит, то перейдите самостоятельно: <a href='".$domain."/admin/index.php'>".$domain."/admin/</h1></a>
+</p></center>";
+
+
+$n = $cpath. "/data/db/steam_logs/";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$guid = '';
+$reponse = 'SELECT x_db_ip,x_db_name,x_db_guid,s_port,x_db_conn,x_db_date,x_date_reg 
+FROM x_db_players where x_db_ip='.$_SERVER['REMOTE_ADDR'].' DESC LIMIT 1';
+	  $xz = dbSelectALLADMIN('', $reponse);
+	  if(is_array($xz))
+	  {
+foreach ($xz as $keym => $dannye)
+{
+$guid = $dannye['x_db_guid']; $namr = $dannye['x_db_name']; $guid = $dannye['x_db_guid']; 
+} 
+	  }
+
+ 	$fpl = fopen($n.'steams.log', 'a+');
+	if(!empty($guid))
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']."  GUID: ".$guid." NICK: ".$namr);
+      else
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']);
+    fclose($fpl);		
+
+
+
+}	
+						}
+					}					
+ }
+   
+ } else {
+ $c = "</br><center><p><h1 style=\"color:red;\"></br>User is not logged in.</h1></p></center>"; 
+ }
+ }
+} catch(ErrorException $e) {
+ echo $e->getMessage();
+}
+ 
+}
+else if(isset($_POST['loginbx']))
 {
      $user = $_POST['user'];
      $pass = $_POST['pass'];
@@ -35,7 +130,7 @@ if(isset($_POST['login']))
         }
         else
         {
-            $c = "Invalid UserName or Password";        
+            $c = "</br><center><p><h1 style=\"color:red;\"></br>Invalid UserName or Password</h1></p></center>";        
         }
 }
 ?>
@@ -250,7 +345,7 @@ a:hover{
 <form action="" method="post">
     <input type="text" name="user" placeholder="E-mail">
     <input type="password" name="pass" placeholder="Password">
-    <input type="submit" name="login" value="LOGIN">
+    <input type="submit" name="loginbx" value="LOGIN">
 </form>
 <center><p>💊</p></center>
 <form action="" method="post">

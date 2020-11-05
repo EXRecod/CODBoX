@@ -11,8 +11,10 @@ include($xcpath ."/core/class.simpleSQLinjectionDetect.php");
   session_destroy();
   setcookie("codbx_u", "", time() - 3600);
   setcookie("codbx_p", "", time() - 3600);
+  setcookie("user_online_key", "", time() - 3600);
   $_SESSION['codbxuser'] = '';
   $_SESSION['codbxpass'] = '';
+  $_SESSION['codbxpasssteam'] = '';
   $baseurlz = basename(__FILE__); 
   header("Location: $domain/chat.php");
 ?>

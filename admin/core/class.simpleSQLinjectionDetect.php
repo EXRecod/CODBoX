@@ -96,7 +96,7 @@ class simpleSQLinjectionDetect
 		$data .= $_SERVER['REMOTE_ADDR'] . ' - ';
 		$data .= 'Suspect: ['.$this->_suspect.'] ';
 		$data .= json_encode($_SERVER);
-		@file_put_contents('./logs/sql.injection.txt', $data . PHP_EOL, FILE_APPEND);
+		@file_put_contents('sql.injection.txt', $data . PHP_EOL, FILE_APPEND);
 	}
 }
 
