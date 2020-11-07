@@ -202,33 +202,37 @@ echo '<span style="padding: 0px 15px;">&nbsp;</span><a href="' . $domain . '/sta
 	  <b class="tags" glose="'.$i_stats.'"><img style="width:40px;height:40px;margin-top:-25px;" src="' . $domain . '/inc/images/statics.png"></b></a>	  
 <span style="padding: 0px 15px;">&nbsp;</span><div style="position:relative;left:14px;top:-15px;height:2px;text-align:right;color:orange;">' . $u . '</div> </div>';
 		echo '<p class="date">' . $etime . '</p>';      
-
  
+////////////////////////////////////////////////////////  
+ $x = 0; $ht = '';
+ foreach ($screenshots as $w => $r) {
+  if (($x % 2) == 0) $weburl = $screenshots[$x]['web_url']; else  $folder = $screenshots[$x]['folder'];    
+     if(strpos($image, $weburl) !== false){ if(!empty($folder))$ht = $folder.basename($image);} ++$x;}
+////////////////////////////////////////////////////////
 
-if (empty($_GET['datesearch']))
-   echo '<a href="' . $domain . '/img.php?datesearch=' . urlencode($etime) . '&gdsearch='.$eguid.'" target="_blank" style="float:right;margin-top:-45px;">';
-else
-   echo '<a href="' . $domain . '/img.php?datesearch=' . urlencode($etime) . '&gdsearch='.$eguid.'" target="_blank" style="float:right;margin-top:-45px;" onclick=\'screenshot();\'>';
-
-if (empty($_GET['datesearch'])) 
+ 	
+echo '<a href="' . $domain . '/download.php?f=' .base64_encode($ht).'" target="_blank" style="float:right;margin-top:-45px;">';
+//if (empty($_GET['datesearch'])) 
 echo '<button style="background:#2b2b2b;" id="button1"><span style="font-size: 
 .875em; margin-right: .125em; position: relative; top: -.25em; left: -.125em">📄<span style="background:#2b2b2b;position: absolute; top: .25em; left: .25em">📄</span></span></button>';
-else   
-echo '<button style="background:green;" id="button1"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/camera.png"></button>';	
-
+//else   
+//echo '<button style="background:green;" id="button1"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/camera.png"></button>';	
 echo '&emsp;</a>';
+ 
 
 echo '</div>';
 echo '</div>';
 }
 	
-
+if(!empty($eguid))
+{
 echo '<script type=\'text/javascript\'>
  function screenshot(){
    html2canvas(document.getElementById(\'screeen\')).then(function(canvas) {
               return Canvas2Image.saveAsJPEG(canvas, 900, 640, '.$eguid.');
    });}
 </script>';		
+}
 
 if(!empty($bannedscrx)) $jkl = '&bannedscr='.md5($sbff); else $jkl = '';
 echo '</div></div> 

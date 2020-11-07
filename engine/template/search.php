@@ -45,7 +45,8 @@ echo '
   
  ';
  
-//if($baseurlz=='img.php') 
+ if(empty($_GET['brofile'])) 
+ {
 ?> 
  
 
@@ -103,6 +104,8 @@ echo '
 
 
 <?php
+}
+
 echo ' 
 </div> 
 </div>

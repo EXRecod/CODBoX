@@ -1,5 +1,12 @@
 <?php
   
+echo '<script type=\'text/javascript\'>
+ function screenshot(){
+   html2canvas(document.getElementById(\'screeen\')).then(function(canvas) {
+              return Canvas2Image.saveAsJPEG(canvas);
+   });}
+</script>';
+  
 echo ' 
 <div style="height:auto;overflow:auto;justify-content: center; position:relative;
     align-items: center;" class="content_block wrapper">
@@ -119,23 +126,7 @@ echo '<div style="width:100%;line-height:20px;overflow:auto;">
 
 	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 <div style="padding:15px;margin:5px;min-width:245px;display:inline-block;flex-grow: 1;border:1px solid #111;
@@ -150,7 +141,7 @@ background-color:#000000aa;
 
 <div style="color:#fff;font-size:18px;float:left;">'.$playeed.'</div>
 
-<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.$timegistered.'</div>
+<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.$lasttimeseen.'</div>
 
 		
 <div style="width:100%;line-height:20px;overflow:auto;">
@@ -178,7 +169,7 @@ background-color:#000000aa;
  
 <div>'.$t_timee.'</div>
 
-<div style="color:#aaa;">'.$lasttimeseen.'</div>
+<div style="color:#aaa;">'.$timeregistered.'</div>
 </div>
 
 
@@ -232,7 +223,7 @@ background-color:#000000aa;
 <div style="width:99%;background:#'.percent2Color(abs(($percent_of_skillPositions))).';height:4px;opacity:1;"></div>
 		</div>
 		
-<div style="width:55px;float:left;text-align:right;font-size:10px;color:#888;tex-transform:uppercase;">top '.abs(round($percent_of_skillPositions,2)).'%</div>
+<div style="width:55px;float:left;text-align:right;font-size:10px;color:#888;tex-transform:uppercase;">top '.number_format($percent_of_skillPositions,2).'%</div>
 		</div>
 		
 </div>
@@ -582,3 +573,7 @@ echo '
 </div>
 </div>
 ';
+
+
+
+echo '</div>';

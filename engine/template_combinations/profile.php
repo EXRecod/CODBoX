@@ -1,61 +1,44 @@
 <?php
-sleep(1);
-/*
-select s_kills,s_deaths,s_pg, ROUND(s_kills/s_deaths, 2) AS kdratio
-FROM db_stats_1 where s_kills > 1000
-ORDER BY kdratio DESC
-*/
 
-/*
-$curl_handle = curl_init();
-curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($curl_handle, CURLOPT_URL,trim($game_server_list_parser));
-curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
-//curl_setopt($curl_handle, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.A.B.C Safari/525.13");
-curl_setopt($curl_handle, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-$query = curl_exec($curl_handle);
-curl_close($curl_handle);   
-preg_match_all('/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{3,5}/',$query,$a);
-var_dump($a);
-*/
 
+//if(!isLoginUser())
+//die('</br></br></br><h1><center>ТУТ РЕМОНТ!</center><h1>');
  
+
+$maxforanimate = 35;
  
 $guidn = $profile;
 if (empty($skilllevels)) {
-  $reponse = 'SELECT t0.s_pg, 
-       t0.s_guid, 
-       tpl.totalpl, 
-	   tplh.totalHeaders,
-	   tfkk.KillsSeriesRank,
-	   tve.totalactiveplayers,
-       tjx.daterank, 
-       t5.kdratio, 
+
+
+
+
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+$reponse[] = 'SELECT s_pg, 
+                    s_kills, 
+                    s_deaths, 
+                    s_heads, 
+                    Round(( s_heads ) * 100.0 / s_kills, 2) AS headPercent, 
+                    s_suicids, 
+                    s_fall, 
+                    s_melle, 
+                    s_dmg 
+             FROM   db_stats_1 WHERE  db_stats_1.s_kills >= 1 and db_stats_1.s_deaths >= 1 and db_stats_1.s_pg = "' . $guidn . '" LIMIT 1';
+ 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+$reponse[] = 'SELECT t0.s_pg, 
+       t0.s_guid, 	    
        t5.kdratiosort, 
-       tj.skillrank, 
-       tk.killsrank, 
-       th.headshotsrank, 
-       tf.headshotsseriesrank, 
-       t0.s_port, 
-       t1.headpercent, 
-       t1.kdratio, 
+       t0.s_port,  
        t0.servername, 
        t0.s_player, 
        t0.s_time, 
        t0.s_lasttime, 
-       t1.s_pg, 
-       t1.s_kills, 
-       t1.s_deaths, 
-       t1.s_heads, 
-       t1.s_suicids, 
-       t1.s_fall, 
-       t1.s_melle, 
-       t1.s_dmg, 
        t2.s_pg, 
        t2.w_place, 
        t2.w_skill, 
-       t2.w_ratio, 
+       t2.kdratio,
        t2.w_geo, 
        t2.w_prestige, 
        t2.w_fps, 
@@ -67,51 +50,119 @@ if (empty($skilllevels)) {
        t2.n_kills_min, 
        t2.n_deaths_min
 FROM   db_stats_0 t0 
-       JOIN (SELECT s_pg, 
-                    s_kills, 
-                    s_deaths, 
-                    s_heads, 
-                    Round(s_kills / s_deaths, 2)            AS kdratio, 
-                    Round(( s_heads ) * 100.0 / s_kills, 2) AS headPercent, 
-                    s_suicids, 
-                    s_fall, 
-                    s_melle, 
-                    s_dmg 
-             FROM   db_stats_1) t1 
-         ON t0.s_pg = t1.s_pg 
-       JOIN (SELECT kdratiosort, 
-                    kdratio, 
-                    s_pg 
-             FROM   (SELECT @kdratiosort := @kdratiosort + 1 AS kdratiosort, 
-                            kdratio, 
-                            s_pg 
-                     FROM   (SELECT db_stats_1.s_pg, 
-                                    Round(s_kills / s_deaths, 2) AS kdratio 
-                             FROM   db_stats_1 
-                             WHERE  db_stats_1.s_kills >= 1 
-                             ORDER  BY kdratio DESC) sub0 
-                            CROSS JOIN (SELECT @kdratiosort := 0) sub2) sub1 
-             WHERE  sub1.s_pg) t5 
-         ON t5.s_pg = t1.s_pg 
+      
+ join   
+ (   
+ SELECT count(*) AS kdratiosort 
+FROM db_stats_2 k CROSS JOIN
+     (SELECT w_ratio FROM db_stats_2 WHERE s_pg = "' . $guidn . '" LIMIT 1) g
+WHERE k.w_ratio > g.w_ratio or
+      (k.w_ratio = g.w_ratio and k. s_pg <= "' . $guidn . '"))    
+   t5 ON 
+ t0.s_pg = "' . $guidn . '"
+
+		 
+join     
+ (select s_pg,w_place,w_skill,w_ratio as kdratio,w_geo,w_prestige,w_fps,w_ip,w_ping,n_kills,n_deaths,n_heads,n_kills_min,n_deaths_min from db_stats_2 WHERE s_pg = "' . $guidn . '" limit 1) 
+ t2 ON 
+ t0.s_pg = t2.s_pg
+ where t0.s_pg = "' . $guidn . '" LIMIT 1';
+ 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  $reponse[] = 'SELECT t0.s_pg, 
+       t0.s_guid,
+       tj.skillrank,  
+       tf.headshotsseriesrank
+FROM   db_stats_0 t0 
+  
+ join   
+ (   
+ SELECT count(*) AS HeadshotsSeriesRank 
+FROM db_stats_2 k CROSS JOIN
+     (SELECT n_heads FROM db_stats_2 WHERE s_pg = "' . $guidn . '" LIMIT 1) g
+WHERE k.n_heads > g.n_heads or
+      (k.n_heads = g.n_heads and k. s_pg <= "' . $guidn . '"))    
+   tf ON 
+ t0.s_pg = "' . $guidn . '"
+
+  join   
+ (   
+ SELECT count(*) AS SkillRank 
+FROM db_stats_2 q CROSS JOIN
+     (SELECT w_skill FROM db_stats_2 WHERE s_pg = "' . $guidn . '" LIMIT 1) b
+WHERE q.w_skill > b.w_skill or
+      (q.w_skill = b.w_skill and q.s_pg <= "' . $guidn . '")) 
+   tj ON 
+ t0.s_pg = "' . $guidn . '"  
+ where t0.s_pg = "' . $guidn . '" LIMIT 1';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$reponse[] = 'SELECT t0.s_pg, 
+       t0.s_guid,
+	   tfkk.KillsSeriesRank,
+       tjx.daterank
+FROM   db_stats_0 t0 
+ 
+  join   
+ (   
+ SELECT count(*) AS KillsSeriesRank 
+FROM db_stats_2 u CROSS JOIN
+     (SELECT n_kills FROM db_stats_2 WHERE s_pg = "' . $guidn . '" LIMIT 1) y
+WHERE u.n_kills > y.n_kills or
+      (u.n_kills = y.n_kills and u. s_pg <= "' . $guidn . '"))    
+   tfkk ON 
+ t0.s_pg = "' . $guidn . '" 
+ 
+  join   
+ (   
+ SELECT count(*) AS DateRank 
+FROM db_stats_0 m CROSS JOIN
+     (SELECT s_time FROM db_stats_0 WHERE s_pg = "' . $guidn . '"  LIMIT 1) v
+WHERE m.s_time > v.s_time or
+      (m.s_time = v.s_time and m.s_pg <= "' . $guidn . '")) 
+   tjx ON 
+ t0.s_pg = "' . $guidn . '" 
+ where t0.s_pg = "' . $guidn . '" LIMIT 1';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  $reponse[] = 'SELECT t0.s_pg, 
+       t0.s_guid,
+       tk.killsrank, 
+       th.headshotsrank
+FROM   db_stats_0 t0 
    join   
  (   
  SELECT count(*) AS KillsRank 
 FROM db_stats_1 p CROSS JOIN
-     (SELECT s_kills FROM db_stats_1 WHERE s_pg = "' . $guidn . '") s
+     (SELECT s_kills FROM db_stats_1 WHERE s_pg = "' . $guidn . '" LIMIT 1) s
 WHERE p.s_kills > s.s_kills or
-      (p.s_kills = s.s_kills and p. s_pg <= "' . $guidn . '"))    
+      (p.s_kills = s.s_kills and p.s_pg <= "' . $guidn . '"))    
    tk ON 
- t0.s_pg = t1.s_pg 
+ t0.s_pg = "' . $guidn . '" 
  
  
- join
- (
- SELECT count(*) as totalPl FROM db_stats_0
- )
-    tpl ON 
- t0.s_pg = t1.s_pg
+   join   
+ (   
+ SELECT count(*) AS HeadshotsRank 
+FROM db_stats_1 c CROSS JOIN
+     (SELECT s_heads FROM db_stats_1 WHERE s_pg = "' . $guidn . '" LIMIT 1) x
+WHERE c.s_heads > x.s_heads or
+      (c.s_heads = x.s_heads and c. s_pg <= "' . $guidn . '"))    
+   th ON 
+ t0.s_pg = "' . $guidn . '"
+
+ where t0.s_pg = "' . $guidn . '" LIMIT 1';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
  
- 
+ $reponse[] = 'SELECT t0.s_pg, 
+	   tplh.totalHeaders,
+	   tve.totalactiveplayers
+FROM   db_stats_0 t0 
+       JOIN (SELECT s_pg, 
+                    s_dmg 
+             FROM   db_stats_1) t1 
+         ON t0.s_pg = t1.s_pg 
   join
  (
  SELECT count(*) as totalHeaders FROM db_stats_hits where head > 0
@@ -125,73 +176,40 @@ WHERE p.s_kills > s.s_kills or
  SELECT count(*) as totalactiveplayers FROM db_stats_1 where s_kills > 1000
  )
     tve ON 
- t0.s_pg = t1.s_pg
+ t0.s_pg = t1.s_pg LIMIT 1';  
+ 
+ 
+ 
+ 
+$reponse[] = 'SELECT t0.s_pg, 
+       tpl.totalpl
+FROM   db_stats_0 t0 
+       JOIN (SELECT s_pg, 
+                    s_dmg 
+             FROM db_stats_1 WHERE s_pg = "' . $guidn . '" LIMIT 1) t1 
+         ON t0.s_pg = t1.s_pg 
+       
+	    join
+ (
+ SELECT count(*) as totalPl FROM db_stats_0
+ )
+    tpl ON 
+ t0.s_pg = t1.s_pg LIMIT 1'; 
+ 
+ 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+foreach ($reponse as $nr => $rp)
+{
   
- 
-   join   
- (   
- SELECT count(*) AS HeadshotsRank 
-FROM db_stats_1 p CROSS JOIN
-     (SELECT s_heads FROM db_stats_1 WHERE s_pg = "' . $guidn . '") s
-WHERE p.s_heads > s.s_heads or
-      (p.s_heads = s.s_heads and p. s_pg <= "' . $guidn . '"))    
-   th ON 
- t0.s_pg = t1.s_pg
- 
-  
- join   
- (   
- SELECT count(*) AS HeadshotsSeriesRank 
-FROM db_stats_2 p CROSS JOIN
-     (SELECT n_heads FROM db_stats_2 WHERE s_pg = "' . $guidn . '") s
-WHERE p.n_heads > s.n_heads or
-      (p.n_heads = s.n_heads and p. s_pg <= "' . $guidn . '"))    
-   tf ON 
- t0.s_pg = t1.s_pg
- 
- 
- join   
- (   
- SELECT count(*) AS KillsSeriesRank 
-FROM db_stats_2 p CROSS JOIN
-     (SELECT n_kills FROM db_stats_2 WHERE s_pg = "' . $guidn . '") s
-WHERE p.n_kills > s.n_kills or
-      (p.n_kills = s.n_kills and p. s_pg <= "' . $guidn . '"))    
-   tfkk ON 
- t0.s_pg = t1.s_pg 
- 
+  usleep(1100000);
+
+//echo '</br>'.$rp.'</br>';
+  $xz = dbSelect('', $rp);
  
   
-  join   
- (   
- SELECT count(*) AS SkillRank 
-FROM db_stats_2 p CROSS JOIN
-     (SELECT w_skill FROM db_stats_2 WHERE s_pg = "' . $guidn . '" LIMIT 1) s
-WHERE p.w_skill > s.w_skill or
-      (p.w_skill = s.w_skill and p.s_pg <= "' . $guidn . '")) 
-   tj ON 
- t0.s_pg = t1.s_pg  
- 
-  join   
- (   
- SELECT count(*) AS DateRank 
-FROM db_stats_0 p CROSS JOIN
-     (SELECT s_time FROM db_stats_0 WHERE s_pg = "' . $guidn . '"  LIMIT 1) s
-WHERE p.s_time > s.s_time or
-      (p.s_time = s.s_time and p.s_pg <= "' . $guidn . '")) 
-   tjx ON 
- t0.s_pg = t1.s_pg 
-join     
- (select s_pg,w_place,w_skill,w_ratio,w_geo,w_prestige,w_fps,w_ip,w_ping,n_kills,n_deaths,n_heads,n_kills_min,n_deaths_min from db_stats_2) 
- t2 ON 
- t1.s_pg = t2.s_pg
- where t0.s_pg = "' . $guidn . '" LIMIT 1';
- 
- 
-  //ZAPROS NR - 2
-  $xz = dbSelect('', $reponse);
-  $maxforanimate = 35;
-  if(!is_array($xz))
+  if(is_object($xz))
   foreach ($xz as $keym => $value) {
     if ($keym == 'n_kills') $nkills = $value;
     else if ($keym == 'n_deaths') $ndeaths = $value;
@@ -220,7 +238,19 @@ join
 	else if ($keym == 'KillsSeriesRank') $KillsSeriesRank = $value;
 	else if ($keym == 'totalactiveplayers') $totalactiveplayers = $value;
 	 
-  }
+  } 
+  
+} 
+  
+
+
+////
+//var_dump($xz);
+//die('TEST');
+
+
+
+  
 }
 
  if(empty($KillsSeriesRank))
@@ -259,7 +289,8 @@ $nextprolvl = get_percentage($sefes, $sefesf);
  
  
 //$percent_of_skillPositions_circle = abs(get_percentage_circle($total_players_ondatabase - $skillPlace, $total_players_ondatabase));
-$percent_of_skillPositions = abs(($total_players_ondatabase-$skillPlace)/$total_players_ondatabase)*100;
+//$percent_of_skillPositions = abs(($total_players_ondatabase-$skillPlace-$skillPlace)/$total_players_ondatabase)*100;
+$percent_of_skillPositions = (($totalactiveplayers-$skillPlace+1)/$totalactiveplayers) * 100;
 //abs(get_percentage($total_players_ondatabase - $skillPlace, $total_players_ondatabase));
 $percent_of_HeadshotsRankPositions = abs(($total_players_ondatabase-$HeadshotsRank)/$total_players_ondatabase)*100;
 $percent_of_HeadshotsSeriesRankPositions = abs(($totalHeaders-$HeadshotsSeriesRank)/$totalHeaders)*100;
@@ -289,7 +320,7 @@ if(!empty($kills)){
 include $cpath . "/engine/template/stats_level.php";
 
 include $cpath . "/engine/template/stats_profile.php";
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 sleep(2);
 include $cpath . "/engine/template/stats_weapon.php";
 
@@ -312,12 +343,14 @@ include $cpath . "/engine/template/stats_weapon.php";
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 sleep(2);
   $reponse = 'SELECT s_pg,head,torso_lower,torso_upper,right_arm_lower,
 	left_leg_upper,neck,right_arm_upper,left_hand,
 left_arm_lower,none,right_leg_upper,left_arm_upper,right_leg_lower,left_foot,right_foot,
 right_hand,left_leg_lower FROM db_stats_hits where s_pg = "' . $guidn . '" limit 1';
-  //ZAPROS NR - 2
+  //ZAPROS NR - 4
   $xz = dbSelect('', $reponse);
   $maxforanimate = 35;
   if(!is_array($xz))

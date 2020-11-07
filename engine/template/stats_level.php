@@ -10,7 +10,7 @@ else
  
  
 
-
+echo '<div id="screeen">';
 
 echo '<div style="height:auto;overflow:auto;-webkit-justify-content: space-between;
     justify-content: space-between;" class="content_block">
@@ -54,10 +54,20 @@ echo '<div style="height:auto;overflow:auto;-webkit-justify-content: space-betwe
 <div style="text-align:left;">
 
 <div style="display:inline-block;"> '.$nickname.'  <img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png" alt="'.$geo.'" title="'.$geo.'" style="height:18px;"></div>
-<div style="font-size:12px;color:#aaa;">'.$guid.'</div> 
+<div style="font-size:12px;color:#aaa;">'.$guid.'</div>'; 
 
  
-
+ 
+ 
+   echo '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="' . $domain . '/stats.php?profile='.$guidn.'" target="_blank" style="float:right;margin-top:-35px;" onclick=\'screenshot();\'>';
+    echo '<img style="width:40px;height:40px;" src="' . $domain . '/inc/images/camera.png">';	
+echo '&emsp;</a>'; 
+ 
+ 
+ 
+ 
+ 
+echo '
 <div style="font-size:12px;margin-left:4px;color:#aaa;margin-top:4px;"></div>
 </div> 
 </div>  

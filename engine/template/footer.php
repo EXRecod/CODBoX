@@ -67,6 +67,7 @@ echo '
 <noscript><div><img src="https://mc.yandex.ru/watch/'.$metrikaID.'" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter --> 
  ';
+ 
  echo '
 </body></html>
 ';

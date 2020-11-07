@@ -1121,14 +1121,19 @@ echo '<link rel="stylesheet" href="'.$domain.'/inc/inc_screenshots/style.css">';
 echo '	 
 <script type="text/javascript" src="'.$domain.'/inc/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="'.$domain.'/inc/fresco.js"></script>
- 
-<script type="text/javascript" src="'.$domain.'/inc/inc_screenshots/html2canvas.min.js"></script>
-<script type="text/javascript" src="'.$domain.'/inc/inc_screenshots/canvas2image.js"></script>
 
 <link rel="stylesheet" type="text/css" href="'.$domain.'/inc/fresco/fresco.css" />	 
 '; 
 }
  
+ 
+if(($baseurlz=='img.php')||($baseurlz=='stats.php'))
+{
+echo '	 
+<script type="text/javascript" src="'.$domain.'/inc/inc_screenshots/html2canvas.min.js"></script>
+<script type="text/javascript" src="'.$domain.'/inc/inc_screenshots/canvas2image.js"></script>
+';  
+}
  
 
  if($baseurlz=='geo.php')
