@@ -16,17 +16,22 @@ $baseurlz = basename(__FILE__);
 
 include($cpath ."/engine/functions/main.php");
 
-include('cache-top.php');
+ include('cache-top.php');
 
  if(!empty($profile))
 include($cpath ."/engine/template_combinations/profile.php");
- else if(empty($brofile))
- {
-include($cpath ."/engine/template_combinations/main_top.php");
-//include($cpath ."/engine/template_combinations/main_medals.php");
- }
-else
+ else if(!empty($brofile))
 include($cpath ."/engine/template_combinations/main_top_brofile.php");
+ else if(!empty($_GET['n']))
+ {
+include($cpath ."/engine/template_combinations/main_top_brofile.php");
+ } 
+else
+include($cpath ."/engine/template_combinations/main_top.php");
 
-include('cache-bottom.php'); 	
+//include($cpath ."/engine/template_combinations/main_medals.php");
+
+
+
+ include('cache-bottom.php'); 	
 ?>
