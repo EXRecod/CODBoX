@@ -6,7 +6,7 @@ echo '<div class="content_block">
 <img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;float:left;margin:1 3 0 3px;"></div></a>
 
 <div style="overflow:auto;" class="wrapper">';
-
+      	$pkli = '';
      $total = 0;	
 	 $wps = array_chunk($wp, 23, true);
 	 $wpnames = array();
@@ -64,8 +64,11 @@ if (is_array($d) || is_object($d))
 		 $weapon = $key; 
 		 $pkli[''.$weapon.''] = $value; 
 }}}}}
- 
+
+if(is_array($pkli))
 arsort($pkli);
+else
+	$pkli  = '';
   
 $r = 0;  
 if (is_array($pkli)){  

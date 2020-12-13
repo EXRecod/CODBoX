@@ -59,7 +59,7 @@ echo '<div style="height:auto;overflow:auto;-webkit-justify-content: space-betwe
  
  
  
-   echo '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="' . $domain . '/stats.php?profile='.$guidn.'" target="_blank" style="float:right;margin-top:-35px;" onclick=\'screenshot();\'>';
+   echo '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="' . $domain . '/stats.php" target="_blank" style="float:right;margin-top:-35px;" onclick=\'screenshot();\'>';
     echo '<img style="width:40px;height:40px;" src="' . $domain . '/inc/images/camera.png">';	
 echo '&emsp;</a>'; 
  

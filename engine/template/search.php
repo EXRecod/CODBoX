@@ -45,8 +45,22 @@ echo '
   
  ';
  
+ 
+ if(strpos($url, "stats.php") !== false)
+	$searchzguid = 'brofile';	 
+ else
+    $searchzguid = 'nicknameSearch';
+
+ if(strpos($url, "stats.php") !== false)
+	$searchznick = 'n';	 
+ else
+    $searchznick = 'nicknameSearchguid';
+
+ 
  if(empty($_GET['brofile'])) 
  {
+	 if(strpos($url, "stats_medals.php") === false)
+	 {
 ?> 
  
 
@@ -72,7 +86,7 @@ echo '
 	<form autocomplete="off" action="<?php echo $domain;?>/<?php echo $baseurlz;?>" style="margin:0px;display: inline-block;">
 <div style="display:inline-block;position: relative;top:8px;"> 
   <div class="autocomplete">
-    <input id="myInput" type="text" name="nicknameSearch" placeholder="<?php echo $i_searchG;?>" 
+    <input id="myInput" type="text" name="<?php echo $searchzguid; ?>" placeholder="<?php echo $i_searchG;?>" 
 	style="height:24px;background:#fff;border:0px;float:left;">
   </div>
 </div>  
@@ -84,7 +98,7 @@ echo '
 	<form autocomplete="off" action="<?php echo $domain;?>/<?php echo $baseurlz;?>" style="margin:0px;display: inline-block;">
 <div style="display:inline-block;position: relative;top:8px;"> 
   <div class="autocomplete">
-    <input id="myInput" type="text" name="nicknameSearchguid" placeholder="<?php echo $i_searchn;?>" 
+    <input id="myInput" type="text" name="<?php echo $searchznick; ?>" placeholder="<?php echo $i_searchn;?>" 
 	style="height:24px;background:#fff;border:0px;float:left;">
   </div>
 </div>  
@@ -104,7 +118,7 @@ echo '
 
 
 <?php
-}
+}}
 
 echo ' 
 </div> 

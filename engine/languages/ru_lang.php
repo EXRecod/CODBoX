@@ -5,7 +5,7 @@
  $i_chat_exp   = '[Ч.Б. срок истек]';
  $i_chat_censored = '[Цензура]';
 
-
+ $i_lefttime = 'До конца бана';
  $i_search = 'Поиск';
  $i_searchG = 'Поиск по гуйду';
  $i_searchn = 'Поиск по никнейму';
@@ -15,6 +15,7 @@
  $i_server = 'Сервер';
  $i_ban    = 'Бан';
  $i_unban  = 'РазБан';
+ $i_iprange  = 'Подсеть'; 
  $i_searchdd = 'Поиск в базе данных н.2';
  $i_searchddf  = 'Не нашло в базе номер 1, жми для поиска в базе номер 2.';
 
@@ -91,6 +92,11 @@
   $t_gen = 'Время генерации:';
   $t_top = 'Лидеры';
   $t_total_players = 'Общее количество игроков'; //Total players on all servers
+  $t_total_players_t = 'Сегодня играло игроков';
+  $t_total_players_w = 'За неделю играло игроков';   
+  $t_total_players_y = 'Вчера играло игроков';
+  $t_total_players_m = 'За месяц играло игроков'; 
+  $t_total_players_v = 'Посетило за месяц игроков';   
   $t_killx2 = ' количество фрагов в таблице лидеров'; //kills on top
   $t_tsek = 'сек.';
   $t_cachedw = 'Сохранено в '; //Cached with
@@ -128,6 +134,14 @@
   $medals_cobra = 'Кобра';
   $medals_deaths = 'Потери';  
   $medals_series = 'Серия'; 
+  
+ $x_medals['skill'] = 'Навык';
+ $x_medals['medal_pro_killer'] = 'Киллер';
+ $x_medals['medal_pro_headshot'] = 'Хедшотер';
+ $x_medals['medal_or_ak'] = 'АК-47 Мастер';
+ $x_medals[''] = '';
+ $x_medals[''] = '';  
+  
   
 $shotz = '[Выстрелы]';   
 $hit_zones = "Зоны попадания";  
@@ -203,6 +217,6 @@ $bonus_slot_vbtxt  = "Ваш ип адрес отсутствует в базе 
  $x_top_day = 'ТОП 20 ДНЯ';
  $x_top_week = 'ТОП 20 НЕДЕЛИ';
  $x_soon = 'Технические работы до 7.11.2020...';
-
+ 
 
 ?>

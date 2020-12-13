@@ -53,6 +53,11 @@ echo '
 <a href="'.$domain.'/stats_week.php" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
 0 0 5px #08e5c8;"> > '.$x_top_week.'</b></a> 
+
+<a href="'.$domain.'/stats_medals.php" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;
+<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
+0 0 5px #08e5c8;"> > '.mb_strtoupper($menu_medals).'</b></a> 
+
  
  </div></div>  
 
@@ -70,11 +75,11 @@ echo '
 
 if(empty($server))
 echo  '<select style="overflow:auto;text-transform:none;background:#fff;color:#222;text-decoration:none;padding:5px;margin:2px;
-margin-top:10px;width:calc(100% - 4px);" onchange="document.location=&#39;/'.$z.'stats.php?&#39;+this.value+&#39;=t&#39;;">
+margin-top:10px;width:calc(100% - 4px);" onchange="document.location=&#39;/'.$z.'stats.php?&#39;+this.value+&#39;=t&#39;">
    ';	
 else
    echo  '<select style="overflow:auto;text-transform:none;background:#fff;color:#222;text-decoration:none;padding:5px;margin:2px;
-margin-top:10px;width:calc(100% - 4px);" onchange="document.location=&#39;/'.$z.'stats.php?server='.$server.'&&#39;+this.value+&#39;=t&#39;;">
+margin-top:10px;width:calc(100% - 4px);" onchange="document.location=&#39;/'.$z.'stats.php?server='.$server.'&&#39;+this.value+&#39;=t&#39;">
   ';
    
    
@@ -120,8 +125,12 @@ else
 	<div style="width:10%;float:left;max-width:40px;min-width:25px;height:5px;">
 	 </div>
 	
-	<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(65%);overflow:hidden;">
+	<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(75%);overflow:hidden;">
 	'.$t_nickname.'</div></div>
+	
+	<div style="color:#52bafe;display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap; min-width:50px;max-width:100px;text-align:center;">
+	'.$i_server.'
+	</div>	
 	
 	<div style="color:#52bafe;display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap; min-width:50px;max-width:100px;text-align:center;">
 	'.$stats_info_value.'
@@ -271,7 +280,7 @@ foreach ($prestige_images as $numimgjj => $preimagej){
 	
 	
 	ECHO '<div style="width:auto;overflow:auto;padding:5px;background: #121212cc;margin:0px;font-size:13px;
-	cursor:pointer;cursor:hand;line-height:30px;border-top: 1px solid #252525;;">
+	cursor:pointer;cursor:hand;line-height:30px;border-top: 1px solid #252525;">
 	<div style="width:calc(100% - 14px);" class="wrapper">
 	
 	<div style="    display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap;max-width:65%;">
@@ -280,22 +289,43 @@ foreach ($prestige_images as $numimgjj => $preimagej){
 	
 	<div style="width:10%;float:left;max-width:40px;min-width:25px;" class="tags" glose="' .  geosorting($geo) . '">
 	<img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png"  style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;">
-	</div>
+	</div>';
 	
-	
-	
-	<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(65%);overflow:hidden;">
+		
+echo '<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(65%);overflow:hidden;">
 	<div style="max-width:1500px;font-size:15px;letter-spacing:.1em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$nickname.' 
 	';
 	
+
+	
+echo '</div></div></div>';
+
+echo '<div style="min-width:50px;max-width:190px;">
+	 <div style="display:inline-block;text-align:left;float:left;">';
+
+if(empty($_GET['server']))
+	echo colorize($servername);
+
+
+echo '</div></div>';
+
+echo '<div style="color:#52bafe;display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap; min-width:50px;max-width:170px;text-align:center;">'; 
 	if(!empty($brofile))
-		echo ' &nbsp; &nbsp;',colorize($servername);
+		echo ' &nbsp; ',colorize($servername);
 	else if(!empty($nicknameSearch))
-		echo ' &nbsp; &nbsp;',$guid,' &nbsp; &nbsp;',colorize($servername);
-	
+		echo ' &nbsp; ',$guid,' &nbsp; &nbsp;',colorize($servername);
+	else if ((empty($server)) && (!empty($totallastvisit)))
+		echo ' &nbsp; ',$guid,' &nbsp;',colorize($servername);
+	else if ((!empty($server)) && (!empty($totallastvisit)))
+		echo ' &nbsp; ',$guid;	
+echo '</div>';
+
+
+
+
+
+
 echo '
-	</div></div></div>
-	
 	<div style="color:#52bafe;display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap; min-width:50px;max-width:100px;text-align:center;">
 	';
 	

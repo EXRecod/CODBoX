@@ -21,10 +21,15 @@ preg_match_all('/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{3,5}/',$query,$a);
 var_dump($a);
 */ 
 
-if((empty($server)) && (!empty($brofile))) {
-  $serverssqLdata = 't0.s_guid="' . $brofile . '" and t2.w_skill != 1000 ORDER BY (t2.w_skill+0)';
-}
+if(!empty($_GET['n']))
+	 $ns = $_GET['n'];
 
+if((empty($server)) && (!empty($brofile))) {
+  $serverssqLdata = 't0.s_guid="' . $brofile . '" and t2.w_skill != 1000 ORDER BY (t2.w_skill+0) DESC limit 15';
+}
+else if(!empty($ns)) {
+  $serverssqLdata = 't0.s_player LIKE :keyword ORDER BY t0.s_player DESC limit 700';
+}
   //echo $serverssqLdata ;
   
   
@@ -35,17 +40,19 @@ if (empty($skilllevels)) {
 JOIN ( SELECT s_pg, w_place, w_skill, w_ratio, w_geo, w_prestige, w_fps, w_ip, w_ping, n_kills, n_deaths, 
 n_heads, n_kills_min, n_deaths_min FROM db_stats_2) t2 ON t0.s_pg = t2.s_pg 
 
-WHERE ' . $serverssqLdata . ' DESC limit 15';
+WHERE ' . $serverssqLdata;
 
  
-
+  if (!empty($ns)) 
+	  $xz = dbSelectALLbyKey('', $reponse, trim($ns));
+  else
 	  $xz = dbSelectALL('', $reponse);
 
 }
 
  
 $nickname = '';
-
+$ids = 1;
 if(!empty($xz))
 foreach ($xz as $keym => $value) {
   $ids =  30; //$value['totalpl'];

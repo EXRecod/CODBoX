@@ -157,6 +157,13 @@ foreach ($xz as $key => $val) {
 	    $srvxx = $val['nameserver'];
 		$esserver = $val['server'];
 		++$u;
+		
+		if((!empty($bannedscrx))&&($ereason == 1))
+		{
+			if(strpos($image, '/data/db_protect/banned_players/') === false)
+			 $image = $domain.'/data/db_protect/banned_players/'.basename($image);
+		}
+		
 		if($ereason == 1) $fv = 'watermarked banned'; else $fv = 'gallery-item';
 		if($ereason == 1) $hv = ' watermark'; else $hv = '';
 		if($ereason == 1){ if(!empty($esserver))$nv = 'by '.$esserver.''; else $nv = 'by Unknown'; }else $nv = '';
@@ -190,6 +197,7 @@ $byWho = "&byadmin=".$byWhois;
 else
 	$byWho = '';
 
+if (isLoginUser()){
 if($ereason == 1)
 echo '<a href="' . $domain . '/redirect.php?unban=' . $eguid . '&guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($srvxx) .$byWho. '" class="name" target="_blank"> 
 	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
@@ -198,6 +206,20 @@ else
 echo '<a href="' . $domain . '/redirect.php?guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($srvxx) .$byWho. '" class="name" target="_blank"> 
 	  &emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	  
+}
+else
+{
+if($ereason == 1)
+echo '<a href="' . $domain . '/admin/login.php" class="name" target="_blank"> 
+	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+else	  
+echo '<a href="' . $domain . '/admin/login.php" class="name" target="_blank"> 
+	  &emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	  	
+	
+}
+
 echo '<span style="padding: 0px 15px;">&nbsp;</span><a href="' . $domain . '/stats.php?brofile=' . $eguid . '&s=' . urlencode($srvxx) . '" class="name" target="_blank"> 
 	  <b class="tags" glose="'.$i_stats.'"><img style="width:40px;height:40px;margin-top:-25px;" src="' . $domain . '/inc/images/statics.png"></b></a>	  
 <span style="padding: 0px 15px;">&nbsp;</span><div style="position:relative;left:14px;top:-15px;height:2px;text-align:right;color:orange;">' . $u . '</div> </div>';
@@ -213,8 +235,7 @@ echo '<span style="padding: 0px 15px;">&nbsp;</span><a href="' . $domain . '/sta
  	
 echo '<a href="' . $domain . '/download.php?f=' .base64_encode($ht).'" target="_blank" style="float:right;margin-top:-45px;">';
 //if (empty($_GET['datesearch'])) 
-echo '<button style="background:#2b2b2b;" id="button1"><span style="font-size: 
-.875em; margin-right: .125em; position: relative; top: -.25em; left: -.125em">📄<span style="background:#2b2b2b;position: absolute; top: .25em; left: .25em">📄</span></span></button>';
+echo '<button id="button1"><img style="width:15px;height:15px;margin-top:-19px;" src="' . $domain . '/inc/images/downl.png"></button>';
 //else   
 //echo '<button style="background:green;" id="button1"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/camera.png"></button>';	
 echo '&emsp;</a>';

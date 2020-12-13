@@ -1,27 +1,34 @@
 <?php
-
-echo '<div class="content_block">
-	<a href="https://localhost/profile/ps4/drnachoo/modes">
-
-<div style="overflow:auto;width:100%;padding:5 10px;"><h1>Modes Stats</h1><img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;float:left;margin:1 3 0 3px;"></div></a>
-
+echo '<div class="content_block"> 
+<div style="overflow:auto;width:100%;padding:5 10px;">
+<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 30px #fff, 0 0 4px #FFF, 0 0 7px #08e5c8, 0 0 18px #08e5c8, 0 0 40px #08e5c8, 0 0 65px #08e5c8;">
+&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&nbsp;&nbsp;&nbsp;'.$menu_medals.'&nbsp;&nbsp;&nbsp;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;</b></div> 
 
 <div style="    display: -webkit-flex;
     display: flex;
     -webkit-justify-content: space-between;
     justify-content: space-between;
-    flex-flow: row wrap;">
+    flex-flow: row wrap;">';
+//echo $cnts =  count($xz);
+ 
 
+foreach ($chk as $keym => $v) {
+foreach ($v as $ke => $uid) {	
+	
+  
+  
+$r = "SELECT s_pg,s_guid,s_player,servername FROM db_stats_0 where s_pg='$uid' LIMIT 1";
+$vi = dbSelectALL('', $r);
+ foreach ($vi as $k => $via) {
+$guid =  $via['s_guid'];
+$player =  $via['s_player'];
+$server =  $via['servername'];
+ } 
+  
+  if(empty($player))
+	  $player = '?';
 
-
-
-
-
-
-
-
-
-<div style="padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
+echo '<div style="padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
 flex-grow: 1;
 background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -29,659 +36,57 @@ background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba
 background-color:#000000aa;
     border: 1px solid #222;
     border-top: 1px solid #333;"> 
-	
-<div style="padding:10px;background:#00000022;border:1px solid #090909;text-align:center;">King of the Hill</div>
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Time Played</div>
-	
-<div style="float:right;">2.8%</div>
-	</div>
-	
-<div style="overflow:auto;background:#111;">
-	
-<div style="width:8.1157349255681%;height:4px;background:#00dcffbb"></div>
-	</div> 
-	</div>
-	
-</div>
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">KD Ratio</div>
-	
-<div style="float:right;">3.83</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.25</div>
-	</div>
-	
-</div>
-
-
-
-
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Kills per Minute</div>
-	
-<div style="float:right;">9.29</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 2</div>
-	</div>
-	
-</div>
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Score per Minute</div>
-	
-<div style="float:right;">1296</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 271</div>
-	</div>
-	
-</div>
-
-
-
-	
-<div style="font-size: 11px;    border-top: 1px solid #222;margin-top:5px;padding-top:5px;
-    color: #fff;margin:10px;
-    line-height: 16px;">
-	
-<div class="weap_stats" style="text-align:left;">Kills 
-<div>48168</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Deaths 
-<div>12582</div></div>
-	
-<div class="weap_stats" style="text-align:left;">Score 
-<div>6722690</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Time Played 
-<div>86h</div></div>
-	</div>
-	
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div style="padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
-flex-grow: 1;
-background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
-background-color:#000000aa;
-    border: 1px solid #222;
-    border-top: 1px solid #333;">  
-	
-<div style="padding:10px;background:#00000022;border:1px solid #090909;text-align:center;">Domination HC</div>
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Time Played</div>
-	
-<div style="float:right;">10.5%</div>
-	</div>
-	
-<div style="overflow:auto;background:#111;">
-	
-<div style="width:30.144730139602%;height:4px;background:#00dcffff"></div>
-	</div> 
-	</div>
-	
-</div>
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">KD Ratio</div>
-	
-<div style="float:right;">2.73</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.2</div>
-	</div>
-	
-</div>
-
-
-
-
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Kills per Minute</div>
-	
-<div style="float:right;">2.23</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:23.165370381417%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 1.71</div>
-	</div>
-	
-</div>
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Score per Minute</div>
-	
-<div style="float:right;">1519</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 194</div>
-	</div>
-	
-</div>
-
-
-
-	
-<div style="font-size: 11px;    border-top: 1px solid #222;margin-top:5px;padding-top:5px;
-    color: #fff;margin:10px;
-    line-height: 16px;">
-	
-<div class="weap_stats" style="text-align:left;">Kills 
-<div>42864</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Deaths 
-<div>15705</div></div>
-	
-<div class="weap_stats" style="text-align:left;">Score 
-<div>29188100</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Time Played 
-<div>320h</div></div>
-	
-<div class="weap_stats" style="text-align:left;">Captures 
-<div>1864</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Defends 
-<div>9980</div></div>
-	</div>
-	
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div style="padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
-flex-grow: 1;
-background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
-background-color:#000000aa;
-    border: 1px solid #222;
-    border-top: 1px solid #333;">
 	 
-<div style="padding:10px;background:#00000022;border:1px solid #090909;text-align:center;">Domination</div>
+<div style="font-size:16px;padding:10px;background:#00000022;border:1px solid #090909;text-align:center;">
+<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 10px #fff, 0 0 4px #FFF, 0 0 3px #08e5c8, 0 0 6px #08e5c8, 0 0 4px #08e5c8, 0 0 3px #08e5c8;">
+'.$x_medals[$keym].'</b></div>
+
 
 <div style="overflow:auto;">
-
-
-	
 <div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Time Played</div>
-	
-<div style="float:right;">4.4%</div>
-	</div>
-	
-<div style="overflow:auto;background:#111;">
-	
-<div style="width:12.468287383997%;height:4px;background:#00dcffcc"></div>
-	</div> 
-	</div>
-	
-</div>
+<div style="overflow:auto;font-size:16px;margin:5 0 4 0px;">
+';
 
+ 
+
+if(file_exists($cpath .'/inc/images/medals/'.$keym.'.png'))
+echo '<img src="' . $domain . '/inc/images/medals/' . $keym . '.png" style="width:100%;max-width:150px;display: block;margin-left: auto;margin-right: auto;" >';
+    
+	
+	
+ echo '
+	</div></div></div>
+
+  
 <div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">KD Ratio</div>
-	
-<div style="float:right;">3.1</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.23</div>
-	</div>
+ 
+<div style="font-size:14px;width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
+<center><a href="' . $domain . '/stats.php?brofile=' . $guid . '&s=' . urlencode($server) . '" style="color:#fff; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;" target="_blank">'.$player.'</a></center>
+</div>
 	
 </div>
-
-
-
-
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Kills per Minute</div>
-	
-<div style="float:right;">5.39</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 1.68</div>
-	</div>
-	
-</div>
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Score per Minute</div>
-	
-<div style="float:right;">997</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 209</div>
-	</div>
-	
-</div>
-
-
-
+ 
+ 
 	
 <div style="font-size: 11px;    border-top: 1px solid #222;margin-top:5px;padding-top:5px;
     color: #fff;margin:10px;
     line-height: 16px;">
 	
-<div class="weap_stats" style="text-align:left;">Kills 
-<div>42861</div></div>
+<div class="weap_stats" style="text-align:left;">'.$stats_info_value.' </br> '.$ke.'
+ </div>
 	
-<div class="weap_stats" style="text-align:right;">Deaths 
-<div>13806</div></div>
+ <div class="weap_stats" style="text-align:right;">Guid </br> '.$guid.'
+ </div>
 	
-<div class="weap_stats" style="text-align:left;">Score 
-<div>7938870</div></div>
+
 	
-<div class="weap_stats" style="text-align:right;">Time Played 
-<div>132h</div></div>
-	
-<div class="weap_stats" style="text-align:left;">Captures 
-<div>3635</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Defends 
-<div>7366</div></div>
 	</div>
 	
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div style="padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
-flex-grow: 1;
-background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
-background-color:#000000aa;
-    border: 1px solid #222;
-    border-top: 1px solid #333;">
-	
-<div style="padding:10px;background:#00000022;border:1px solid #090909;text-align:center;">Search and Destroy HC</div>
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Time Played</div>
-	
-<div style="float:right;">0.2%</div>
-	</div>
-	
-<div style="overflow:auto;background:#111;">
-	
-<div style="width:0%;height:4px;background:#00dcffaa"></div>
-	</div> 
-	</div>
-	
-</div>
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">KD Ratio</div>
-	
-<div style="float:right;">119.32</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg kd: 1.32</div>
-	</div>
-	
-</div>
-
-
-
-
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Kills per Minute</div>
-	
-<div style="float:right;">78.3</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Kills per Minute: 0.71</div>
-	</div>
-	
-</div>
-
-
-<div style="overflow:auto;">
-
-
-	
-<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-	
-<div style="overflow:auto;font-size:12px;margin:5 0 4 0px;">
-	
-<div style="float:left;text-transform:uppercase;">Score per Minute</div>
-	
-<div style="float:right;">949</div>
-	</div>
-	
-<div style="overflow:hidden;background:#222;position:relative;">
-
-<div style="position:absolute;left:50%;border-right:1px solid #fff;height:10px;top:-4px;width:1px;"></div>
-	
-<div style="width:50%;margin-left:50%;border-left:1px solid #fff;height:4px;background:#54FF00"></div>
-	</div>
-	
-<div style="font-size:10px;margin-top:3px;color: #888;text-align:center;">avg Score per Minute: 67</div>
-	</div>
-	
-</div>
-
-
-
-	
-<div style="font-size: 11px;    border-top: 1px solid #222;margin-top:5px;padding-top:5px;
-    color: #fff;margin:10px;
-    line-height: 16px;">
-	
-<div class="weap_stats" style="text-align:left;">Kills 
-<div>35079</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Deaths 
-<div>294</div></div>
-	
-<div class="weap_stats" style="text-align:left;">Score 
-<div>425008</div></div>
-	
-<div class="weap_stats" style="text-align:right;">Time Played 
-<div>7h</div></div>
-<div class="weap_stats" style="text-align:left;">Plants 
-<div>1</div></div>
-<div class="weap_stats" style="text-align:right;">Defuses 
-<div>118</div></div>
-	</div>
-	
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
 
 ';
+
+
+}}
+ echo '</div></div></div>';
+?>

@@ -1,4 +1,6 @@
 <?php
+if (isLoginUser()) {
+
  $top_main_total = 50;
  
 //dbSelectALL('', "delete from x_up_players where ip = 'bot<=>(null)'");
@@ -25,7 +27,7 @@ JOIN
        ( 
               SELECT ip,guid,name FROM x_up_players
        ) t1 ON  t0.x_db_guid = t1.guid where t0.x_db_name LIKE :keyword GROUP BY t0.guid ORDER BY (x_db_date+0) desc, t0.x_db_name DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
- 
+    
 else if (!empty($nicknameSearchguid))
 $reponse = 'SELECT 
        t0.x_db_ip,t0.x_db_name,t0.x_db_guid,t0.s_port,t0.x_db_conn,t0.x_db_date,t0.x_date_reg, 
@@ -100,4 +102,6 @@ include $cpath . "/engine/template/menu.php";
 include $cpath . "/engine/template/index_list.php";
 
 include $cpath . "/engine/template/footer.php";
+
+}
 ?>

@@ -1,6 +1,6 @@
 <?php
 ////////// MENU
-
+  $i_lefttime = 'Ban left';
  $menu_enter      = 'Admin';
  $menu_out      = 'Exit';
  $menu_main       = 'Main';
@@ -32,6 +32,7 @@
  $i_server = 'Server';
  $i_ban    = 'Ban';
  $i_unban  = 'UnBan';
+ $i_iprange  = 'Range'; 
  $i_searchdd = 'Search in DB-2';
  $i_searchddf = 'Search in DB-2'; 
 
@@ -90,6 +91,11 @@
   $t_gen = 'Generation time:';
   $t_top = 'Top';
   $t_total_players = 'Total players on all servers'; //Total players on all servers
+  $t_total_players_t = 'Today players played';
+  $t_total_players_y = 'Yesterday players played';
+  $t_total_players_w = 'Week players played';  
+  $t_total_players_m = 'Month players played'; 
+  $t_total_players_v = 'Visited players total';  
   $t_killx2 = ' kills on top'; //kills on top
   $t_tsek = ' sec.';
   $t_cachedw = 'Cached with '; //Cached with
@@ -125,7 +131,15 @@
   $medals_grenade = 'Grenade';   
   $medals_cobra = 'Cobra'; 
   $medals_deaths = 'Most Target';
-  $medals_series = 'Series';  
+  $medals_series = 'Series'; 
+
+ $x_medals['skill'] = 'Skill';
+ $x_medals['medal_pro_killer'] = 'Killer';
+ $x_medals['medal_pro_headshot'] = 'HeadShot master';
+ $x_medals['medal_or_ak'] = 'АК-47 Pro';
+ $x_medals[''] = '';
+ $x_medals[''] = '';
+  
 
 $shotz = 'Shots'; 
 $hit_zones = "Hit zones";

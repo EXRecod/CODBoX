@@ -1,7 +1,170 @@
 <?php
 echo ' 
-<script src="' . $domain . '/data/graph/dynamics2.js"></script>
-<div class="content_block">
+<script src="' . $domain . '/data/graph/dynamics2.js"></script>';
+
+
+
+echo '<div style="height:auto;overflow:auto;padding:5 10px;" class="content_block">';
+
+echo '<h1>' . $i_stats . '</h1>';
+
+
+echo '<div style="overflow:auto;width:95%;padding:5 1px;">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
+margin:1px;font-size:13px;cursor:pointer;cursor:hand;">
+'.$t_total_players.' : '.$allplayers.'
+</div></div>';
+
+
+echo '<div style="overflow:auto;width:85%;padding:5 1px;">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
+margin:1px;font-size:13px;cursor:pointer;cursor:hand;">
+'.$t_total_players_v.' : '.array_sum($msum).'
+</div></div>';
+
+
+
+  if(!empty($xz_yesterday))
+  {
+//////////////////////////////////////////////////////////////////////////////////////////////////
+echo '<div style="padding:10px;margin:5px;width:257px;display:inline-block;min-width:20%;
+flex-grow: 1;
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
+background-color:#000000aa;
+    border: 1px solid #222;
+    border-top: 1px solid #333;"> 
+
+	
+<div style="overflow:auto;">
+<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
+<div style="overflow:auto;font-size:16px;margin:5 0 4 0px;">
+';
+
+echo '<div style="overflow:auto;width:99%;padding:5 1px;">';
+echo '<div style="font-size:12px;cursor:pointer;cursor:hand;padding:5 1px;">'.$t_total_players_y.' : '.array_sum($ysum).'</div>';
+arsort($xz_yesterday);
+foreach ($xz_yesterday as $keym => $value) {
+echo '
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
+margin:1px;font-size:13px;cursor:pointer;cursor:hand;">
+'.colorize($value['servername']).' : '.$value['todayplayedyesterday'].'
+</div>';
+}
+echo '</div>';
+echo ' </div></div></div></div>';
+  }
+
+
+  if((!empty($xz_day))&&(!empty($xzf)))
+  {
+//////////////////////////////////////////////////////////////////////////////////////////////////
+echo '<div style="padding:10px;margin:5px;width:257px;display:inline-block;min-width:20%;
+flex-grow: 1;
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
+background-color:#000000aa;
+    border: 1px solid #222;
+    border-top: 1px solid #333;"> 
+<div style="overflow:auto;">
+<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
+<div style="overflow:auto;font-size:16px;margin:5 0 4 0px;">
+';
+
+echo '<div style="overflow:auto;width:99%;padding:5 1px;">';
+echo '<div style="font-size:12px;cursor:pointer;cursor:hand;padding:5 1px;">'.$t_total_players_t.' : '.array_sum($tsum).'</div>';
+
+arsort ($xz_day);
+foreach ($xz_day as $keym => $value) {
+echo '
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
+margin:1px;font-size:13px;cursor:pointer;cursor:hand;">
+'.colorize($value['servername']).' : '.$value['todayplayed'].'
+</div>';
+}
+echo '</div>';
+echo ' </div></div></div></div>';
+  }
+
+
+
+  if(!empty($xz_week))
+  {
+//////////////////////////////////////////////////////////////////////////////
+echo '<div style="padding:10px;margin:5px;width:257px;display:inline-block;min-width:20%;
+flex-grow: 1;
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
+background-color:#000000aa;
+    border: 1px solid #222;
+    border-top: 1px solid #333;"> 
+<div style="overflow:auto;">
+<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
+<div style="overflow:auto;font-size:16px;margin:5 0 4 0px;">
+';
+
+echo '<div style="overflow:auto;width:99%;padding:5 1px;">';
+echo '<div style="font-size:12px;cursor:pointer;cursor:hand;padding:5 1px;">'.$t_total_players_w.' </div>';
+arsort ($xz_week);
+foreach ($xz_week as $keym => $value) {
+echo '
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
+margin:1px;font-size:13px;cursor:pointer;cursor:hand;">
+'.colorize($value['servername']).' : '.$value['weekplayed'].'
+</div>';
+}
+echo '</div>';
+echo ' </div></div></div></div>';
+  }
+
+
+
+
+
+
+  if(!empty($x_monthh))
+  {
+//////////////////////////////////////////////////////////////////////////////
+echo '<div style="padding:10px;margin:5px;width:257px;display:inline-block;min-width:20%;
+flex-grow: 1;
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%,rgba(255,255,255,0) 99%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(77,88,99,0.1) 0%,rgba(0,0,0,0) 99%,rgba(0,0,0,0) 100%); 
+background-color:#000000aa;
+    border: 1px solid #222;
+    border-top: 1px solid #333;"> 
+<div style="overflow:auto;">
+<div style="width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;margin-bottom:10px;">
+<div style="overflow:auto;font-size:16px;margin:5 0 4 0px;">
+';
+
+echo '<div style="overflow:auto;width:99%;padding:5 1px;">';
+echo '<div style="font-size:12px;cursor:pointer;cursor:hand;padding:5 1px;">'.$t_total_players_m.' </div>';
+arsort ($x_monthh);
+foreach ($x_monthh as $keym => $value) {
+echo '
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
+margin:1px;font-size:13px;cursor:pointer;cursor:hand;">
+'.colorize($value['servername']).' : '.$value['monthplayed'].'
+</div>';
+}
+echo '</div>';
+echo ' </div></div></div></div>';
+  }
+
+
+echo '</div>';
+
+
+
+
+
+
+
+echo '<div class="content_block">
 <div style="overflow:auto;width:100%;padding:5 10px;">
 <h1>' . $index_server . '</h1> </div>
 ';
@@ -193,7 +356,7 @@ echo '<div class="match_stats_adv" style="min-width:180px;">Players
  ';
             foreach ($players as $pl => $e) {
                 foreach ($e as $r => $j) {
-                    echo '<div style="color:#fff;width:290px;">' . $j . '</div>';
+                    echo '<div style="color:#fff;width:257px;">' . $j . '</div>';
                 }
             }
             echo '

@@ -1,7 +1,8 @@
 <?php
 
 
-foreach ($xz as $keym => $value) {   
+foreach ($xz as $keym => $value) {
+             if(!empty($value['servername']))	
 			 $servername = $value['servername'];
 }
 
@@ -110,13 +111,22 @@ $i = 0;
 foreach ($xz as $keym => $value) { 
 
 ++$i;
+
+if(!empty($value['s_pg']))
              $plservguid = $value['s_pg'];
-			 $guid = $value['s_guid'];			 
-			 $nickname = $value['s_player'];  
+if(!empty($value['s_guid']))		 
+			 $guid = $value['s_guid'];	
+if(!empty($value['s_player']))			 
+			 $nickname = $value['s_player'];
+if(!empty($value['servername']))			 
 			 $servername = $value['servername'];
+if(!empty($value['s_port']))			 
 			 $serverport = $value['s_port'];
-			 $timeregistered = $value['s_time']; 
-			 $lasttime = $value['s_lasttime']; 
+if(!empty($value['s_time']))			 
+			 $timeregistered = $value['s_time'];
+if(!empty($value['s_lasttime']))			 
+			 $lasttime = $value['s_lasttime'];
+			 
 			// $kills = $value['s_kills'];
 			// $deaths = $value['s_deaths']; 
 			// $headshots = $value['s_heads']; 
@@ -257,6 +267,8 @@ foreach ($prestige_images as $numimgjj => $preimagej){
 	if(!empty($brofile))
 		echo ' &nbsp; &nbsp;',colorize($servername);
 	else if(!empty($nicknameSearch))
+		echo ' &nbsp; &nbsp;',$guid,' &nbsp; &nbsp;',colorize($servername);
+	else if(!empty($ns))
 		echo ' &nbsp; &nbsp;',$guid,' &nbsp; &nbsp;',colorize($servername);
 	
 echo '

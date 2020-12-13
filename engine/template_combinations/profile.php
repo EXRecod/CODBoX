@@ -228,7 +228,7 @@ foreach ($reponse as $nr => $rp)
     else if ($keym == 'headshotsrank') $HeadshotsRank = $value;
     else if ($keym == 'killsrank') $sKillsRank = $value;
     else if ($keym == 'headshotsseriesrank') $HeadshotsSeriesRank = $value;
-    else if ($keym == 'w_prestige') $prestige = $value;
+    else if ($keym == 'w_prestige') $prestige = $value;  //w_prestige
     else if ($keym == 'w_geo') $geo = $value;
     else if ($keym == 'kdratio') $kdratio = $value;
     else if ($keym == 'kdratiosort') $kdratiosort = $value;
@@ -237,6 +237,10 @@ foreach ($reponse as $nr => $rp)
 	else if ($keym == 'totalHeaders') $totalHeaders = $value;
 	else if ($keym == 'KillsSeriesRank') $KillsSeriesRank = $value;
 	else if ($keym == 'totalactiveplayers') $totalactiveplayers = $value;
+	
+	if(!empty($skillPlace))
+	$prestige = $skillPlace;
+	
 	 
   } 
   
@@ -376,9 +380,55 @@ right_hand,left_leg_lower FROM db_stats_hits where s_pg = "' . $guidn . '" limit
 	 
   }
 
+////////////////////////////////////////////////////////////////////////////// 
+// SPECIALS.PHP
+
+ usleep(1100000);
+
+//echo '</br>'.$rp.'</br>';
+  $xz = dbSelect('', $rp);
+ 
+  if(is_object($xz))
+  foreach ($xz as $keym => $value) {
+    if ($keym == 'n_kills') $nkills = $value;
+    else if ($keym == 'n_deaths') $ndeaths = $value;
+    else if ($keym == 'n_heads') $nheadshots = $value;
+    else if ($keym == 's_player') $nickname = $value;
+    else if ($keym == 'servername') $servername = $value;
+    else if ($keym == 's_time') $timeregistered = $value;
+    else if ($keym == 's_lasttime') $lasttime = $value;
+    else if ($keym == 'w_skill') $skill = $value;
+    else if ($keym == 's_kills') $kills = $value;
+    else if ($keym == 's_deaths') $deaths = $value;
+    else if ($keym == 's_heads') $headshots = $value;
+    else if ($keym == 's_dmg') $damages = $value;
+    else if ($keym == 's_guid') $guid = $value;
+    else if ($keym == 'skillrank') $skillPlace = $value;
+    else if ($keym == 'headshotsrank') $HeadshotsRank = $value;
+    else if ($keym == 'killsrank') $sKillsRank = $value;
+    else if ($keym == 'headshotsseriesrank') $HeadshotsSeriesRank = $value;
+    else if ($keym == 'w_prestige') $prestige = $value;
+    else if ($keym == 'w_geo') $geo = $value;
+    else if ($keym == 'kdratio') $kdratio = $value;
+    else if ($keym == 'kdratiosort') $kdratiosort = $value;
+    else if ($keym == 'daterank') $DateRank = $value;
+    else if ($keym == 'totalpl') $total_players_ondatabase = $value;
+	else if ($keym == 'totalHeaders') $totalHeaders = $value;
+	else if ($keym == 'KillsSeriesRank') $KillsSeriesRank = $value;
+	else if ($keym == 'totalactiveplayers') $totalactiveplayers = $value;
+	 
+  } 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 //include $cpath ."/engine/template/stats_records.php";
 //include $cpath ."/engine/template/stats_leaderboards.php";
+//include $cpath ."/engine/template/stats_specials.php";
 include $cpath ."/engine/template/stats_hit_zones.php";
 //include $cpath ."/engine/template/stats_dynamics.php";
 //include $cpath ."/engine/template/stats_matches.php";
