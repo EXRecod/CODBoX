@@ -3,6 +3,9 @@ if (empty($cpath)) {
   $cpath = dirname(__FILE__);
   $xcpath = $cpath;
 }
+$templ = 1;
+if((empty($_COOKIE["codbx_uexec"]))&&(!empty($_SESSION['codbxuserexec'])))
+    setcookie("codbx_uexec", $_SESSION['codbxuserexec'], time()+259200);
 
 include($cpath ."/admin/inc/data.php"); 
 include($cpath ."/engine/functions/langctrl.php");

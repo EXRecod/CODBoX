@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('log_errors', 'On');
 ini_set('error_log', 'php_errors.log');
-
+$templ = 1;
 if (empty($cpath)) { 
   $cpath = dirname(__FILE__);
 }

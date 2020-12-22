@@ -26,7 +26,7 @@ else if (!empty($_GET['unban'])) {
 		
 $guid = '';
 $reponse = 'SELECT x_db_ip,x_db_name,x_db_guid,s_port,x_db_conn,x_db_date,x_date_reg 
-FROM x_db_players where x_db_ip='.$_SERVER['REMOTE_ADDR'].' DESC LIMIT 1';
+FROM x_db_players where x_db_ip='.getUserIP().' DESC LIMIT 1';
 	  $xz = dbSelectALL('', $reponse);
 	  if(is_array($xz))
 	  {
@@ -40,9 +40,9 @@ if(!file_exists($n))
 	mkdir($n, 0777, true);
  	$fpl = fopen($n.'_admin_bans.log', 'w+');
 	if(!empty($guid))
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']."  GUID: ".$guid." NICK: ".$namr);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP()."  GUID: ".$guid." NICK: ".$namr);
       else
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP());
     fclose($fpl);		
  	$guid = $_GET['guid'];
 				if (!empty($_GET['url']))
@@ -82,7 +82,7 @@ if(!file_exists($n))
 
 $guid = '';
 $reponse = 'SELECT x_db_ip,x_db_name,x_db_guid,s_port,x_db_conn,x_db_date,x_date_reg 
-FROM x_db_players where x_db_ip='.$_SERVER['REMOTE_ADDR'].' DESC LIMIT 1';
+FROM x_db_players where x_db_ip='.getUserIP().' DESC LIMIT 1';
 	  $xz = dbSelectALL('', $reponse);
 	  if(is_array($xz))
 	  {
@@ -94,9 +94,9 @@ $namr = $dannye['x_db_name']; $guid = $dannye['x_db_guid'];
 
  	$fpl = fopen($n.'_admin_bans.log', 'w+');
 	if(!empty($guid))
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']."  GUID: ".$guid." NICK: ".$namr);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP()."  GUID: ".$guid." NICK: ".$namr);
       else
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP());
     fclose($fpl);		
 			
 if(isset($_GET['byadmin']))
@@ -167,9 +167,11 @@ GROUP BY t1.guid,t0.x_db_ip,t1.ip ORDER BY (x_db_date)  DESC LIMIT 1";
 				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +1 day'));
 				$tmk = str_replace("-", ".", $tmk);
 				 
-				 
+if(empty($ip)) $ip = '111.111.111.111';
+	
 $re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
-VALUES ('".$nick."','".$ip."','".$ip."','".$guid."','IP BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','cod4 1.8')";
+VALUES ('".$nick."','".$ip."','".$ip."','".$guid."','IP BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','1') 
+ON DUPLICATE KEY UPDATE ip='" . $ip . "', playername='".$nick."', reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
 $r = dbSelectALL('', $re);
 				header("Location: " . $ssylka_sourcebans . "?p=admin&c=bans&xnickname=" . $nick . "&xguid=" . $guid . "&xurl=" . $url . "&xip=" . $ip . "");
 				die();

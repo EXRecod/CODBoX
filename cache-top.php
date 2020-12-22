@@ -1,6 +1,6 @@
 <?php
 $urlmd = $_SERVER["REQUEST_URI"];
-
+$templ = 1;
 if(isLoginUser())
 {	
 if(!empty($_SESSION['codbxpasssteam']))
