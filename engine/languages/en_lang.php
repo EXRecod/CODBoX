@@ -1,6 +1,29 @@
 <?php
 ////////// MENU
-  $i_lefttime = 'Ban left';
+  $i_lefttime = 'Ban&nbsp;left';
+  $llefttime = 'Left';
+  $iparddrrean = 'IP&nbsp;adress&nbsp;reason.';  
+  
+ $listtipproxy = 'Proxy List.';  
+ $ilisttipproxy = 'New&nbsp;player&nbsp;list&nbsp;with&nbsp;proxy&nbsp;ip.';
+  
+ $listtipbanned = 'Ban List.';    
+ $ilisttipbanned = 'Players&nbsp;list&nbsp;of&nbsp;banned&nbsp;players&nbsp;.';
+
+ $listtipunbanned = 'Left bans.';    
+ $ilisttipunbanned = 'End&nbsp;time&nbsp;of&nbsp;player&nbsp;ban&nbsp;.';  
+ 
+ $i_online = 'Who is online';
+ 
+ $chatrcon = 'Chat with player';
+ $chatrconwithall = 'Chat with all players';
+ 
+ $itwentyhours = 'In 24 hours.';
+ 
+  $ispeed = 'Your connection speed is:';
+ $ispeedslow = 'JavaScript is turned off, or your browser is realllllly slow'; 
+ $ispeederr = 'Invalid image, or error downloading';
+  
  $menu_enter      = 'Admin';
  $menu_out      = 'Exit';
  $menu_main       = 'Main';
@@ -16,6 +39,8 @@
  $menu_screens    = 'Screenshots';
  $menu_mamba      = 'Mamba';
  $menu_detected   = 'Detected';
+ 
+   $tvisited = 'Visited';  
 
    $t_currentt = 'Current';
  $i_chatn_forver = 'For ever!';
@@ -139,6 +164,9 @@
  $x_medals['medal_or_ak'] = 'АК-47 Pro';
  $x_medals[''] = '';
  $x_medals[''] = '';
+ 
+ 
+ $x_specialz[''] = '';
   
 
 $shotz = 'Shots'; 

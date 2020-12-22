@@ -5,6 +5,7 @@ include $cpath .'/data/settings.php';
 include($cpath ."/admin/core/class.simpleSQLinjectionDetect.php");
 include($cpath ."/admin/core/functions.php");
 $url = $_SERVER["SCRIPT_NAME"];
+/*
 $test_HTTP_proxy_headers = array(
 	'HTTP_VIA',
 	'VIA',
@@ -34,7 +35,7 @@ $test_HTTP_proxy_headers = array(
 			exit("Please disable your proxy connection!");
 		}
 	}
-
+*/
 
 
 $bodytag = str_replace("https://", "", $domain);
@@ -46,6 +47,21 @@ require_once $cpath . '/engine/arrays/gametypes_maps.php';
 require_once $cpath . '/engine/arrays/weapons_cod.php';
 require_once $cpath . '/engine/arrays/ranks.php';
 require_once $cpath . '/engine/arrays/geo.php';
+
+function newdigistHash($s) {
+$digistHash = strtr(md5($s), [
+    'a' => 0,
+    'b' => 1,
+    'c' => 2,
+    'd' => 3,
+    'e' => 4,
+    'f' => 5,
+    'g' => 6,
+    'h' => 7,
+	'i' => 8,
+]);
+return $digistHash;
+}
 
 function errorspdo($s) {
   global $cpath;
@@ -71,6 +87,19 @@ if((strpos($path, ".jpg") !== false)||(strpos($path, ".jpeg") !== false)||(strpo
     return $results;
 } 
 */
+
+function rcon($sz, $zreplace = '', $connect, $server_rconpass)
+{
+	global $connect, $server_rconpass;
+	fwrite($connect, "\xff\xff\xff\xff" . 'rcon "' . $server_rconpass . '" ' . strtr($sz, array(
+		'%s' => $zreplace
+	)));
+	$output = fread($connect, 1); //512
+	usleep(200);
+	return $output;
+}
+
+
 function getDirContents($dir){
 	@$files = scandir($dir);
 	unset($files[0], $files[1]);
@@ -135,6 +164,7 @@ $reponse = "SELECT CONCAT(\"STEAM_\", ((CAST('".$guidxx."' AS UNSIGNED) >> CAST(
 
 $steamid = dbSelectALLSourceBans('', $reponse);
 
+if(is_array($steamid)){ 
 foreach ($steamid as $keym => $value) { 
 
 $steamerid = $value['steam_id'];
@@ -169,7 +199,7 @@ foreach ($steamid as $keym => $dv)
 $arraybanstwo[$lenght.'%'.$guidxx][] = $lenght.'%'.$guidxx;
  }
 }
-//}
+}
 }
  
  foreach($arraybanstwo as $fuck => $nothing)
@@ -353,6 +383,12 @@ $i = $cpath . '/data/db/screenshots/';
 if(!file_exists($i))
 	mkdir($i, 0777, true);
 
+
+$i = $cpath . '/data/db/users/';
+if(!file_exists($i))
+	mkdir($i, 0777, true);
+
+
 $i = $cpath . '/data/db/screenshots/cache_im/';
 if(!file_exists($i))
 	mkdir($i, 0777, true);
@@ -457,6 +493,39 @@ try
   } 
 }
 } 
+
+
+
+function createAdminsDB() { 
+global $cpath;
+$gh = $cpath . '/data/db/users/online.rcm';
+ if(file_exists($gh)){
+if((filesize($gh))< 2)
+unlink($gh);
+ }
+ if(!file_exists($gh)){
+try
+  {
+    $admins = new PDO('sqlite:'. $gh);
+    $admins->exec("CREATE TABLE users (
+			id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,			
+			ip varchar(20) NOT NULL,	
+			user varchar(200) NOT NULL,
+			time timestamp NOT NULL)"); 
+    $admins = NULL;
+  }
+  catch(PDOException $e)
+  {
+    errorspdo('FILE:  ' . __FILE__ . '  Exception : ' . $e->getMessage());
+  } 
+  
+ if(!file_exists($gh)){
+echo "</br></br></br></br></br></br></br><h1> Can't write database in folder $gh</h1>";
+}   
+   
+} 
+} 
+
  
  
 function createscreeninsertprotect($SqlDataBase,$query) {
@@ -518,6 +587,37 @@ $db = new PDO('sqlite:'. $cpath . '/data/db/screenshots/'.$SqlDataBase);
 } 
  else {return createscreeninsertprotect($SqlDataBase,$query);}
 } 
+
+
+function createscreeninsertadmins($SqlDataBase,$query) {
+  $result = '';
+  $rt = '';
+  global $cpath, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;
+  try { 
+$db = new PDO('sqlite:'. $cpath . '/data/db/users/'.$SqlDataBase);
+ $rt = $db->query($query);
+ if ($rt) {
+     $result=$rt->fetchAll();
+ }
+ else {
+      // Handle errors
+	  errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "
+       \n # SqlDataBase : $SqlDataBase, msqlconnect: $msqlconnect, host_adress: $host_adress, db_name: $db_name
+	   \n # $query \n\n");
+        }	
+    $db = null;
+  }
+  catch(PDOException $e) 
+  {
+    errorspdo("[" .date("Y.m.d H:i:s")."] 496 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+  }
+  if(empty($result))
+  return $rt;
+   else
+	 return $result; 
+}
+
+
 
 function badwordslisting($player_msg) {
 	  global $cpath;
@@ -792,7 +892,6 @@ function dbSelectALLSourceBans($SQLiteDatabase, $query) {
 
  
 function dbSelectALLbyKey($SQLiteDatabase, $query, $keyword) {
-  $result = '';
   global $cpath, $SqlDataBase, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;
   try {
     
@@ -814,7 +913,9 @@ function dbSelectALLbyKey($SQLiteDatabase, $query, $keyword) {
   {
     errorspdo("[" .date("Y.m.d H:i:s")."]  583 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
   }
+  if(!empty($result))
   return $result;
+  else return false;
 }
 
  
@@ -1702,4 +1803,90 @@ $left_leg_lower = '0';
 ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////// 
+$urlmdf = $_SERVER["REQUEST_URI"];
+if (strpos($urlmdf,'chat.php') === false)
+{
+if (strpos($urlmdf,'logins.php') === false)
+{
+if (strpos($urlmdf,'admin/sent.php') === false)
+{
+if (strpos($urlmdf,'admin/index.php') === false)
+{
+if (isLoginUser()){
+createAdminsDB();	
+if(!empty($_SESSION['codbxpasssteam']))
+$byWhois = isLoginUserWHO($_SESSION['codbxpasssteam']);
+else if(!empty($_COOKIE['user_online_login']))
+$byWhois = isLoginUserWHO($_COOKIE['user_online_login']);
+else if(!empty($_COOKIE['user_online_key']))
+$byWhois = isLoginUserWHO($_COOKIE['user_online_key']);
+else
+$byWhois = '';
+ 
+
+$uuser = '';
+ 
+if(!empty($_SESSION['codbxuser']))
+ $codbxuser = $_SESSION['codbxuser'];
+
+if(!empty($byWhois))
+$ouser = $byWhois;
+else if(!empty($codbxuser))
+$ouser = $codbxuser;
+
+
+if(!empty($ouser))
+{
+$ddater = strtotime(date("Y-m-d H:i:s"));
+
+$yy = "SELECT * FROM users WHERE user = '".$ouser."' ORDER BY time desc LIMIT 1";
+$uxz = createscreeninsertadmins('online.rcm', $yy);
+if(is_array($uxz))
+{
+foreach ($uxz as $p => $sd) {
+	    $uip = $sd['ip'];
+	    $uuser = $sd['user'];
+	    $utime = $sd['time'];		
+}
+}
+if(empty($uuser))
+{
+$sql = "INSERT INTO users (ip,user,time) VALUES ('" .getUserIP(). "','" . $ouser . "','" . $ddater . "')";
+createscreeninsertadmins('online.rcm', $sql);
+}
+else if((!empty($uuser))&&($ddater-$utime>=60))
+{
+$sql = "UPDATE users SET time='" . $ddater . "', ip='" .getUserIP(). "' WHERE user = '".$ouser."'";
+createscreeninsertadmins('online.rcm', $sql);	
+}
+
+
+
+$yy = "SELECT * FROM users ORDER BY time desc LIMIT 20";
+$uxz = createscreeninsertadmins('online.rcm', $yy);
+echo '<b style="position:absolute;color:lime;padding: 20 18px;font-size:18px;"> &emsp;'.$i_online.'.</b>';
+if(is_array($uxz))
+{
+$h = 0;
+echo '<div style="position:absolute;color:white;padding:20 40px;font-size:15px;">';	 
+foreach ($uxz as $p => $sd) {
+	    ++$h;	
+	    $uip = $sd['ip'];
+	    $uuser = $sd['user'];
+	    $utime = $sd['time'];
+		$secondx = $ddater-$utime;
+
+if((!empty($uuser))&&($secondx<300)){
+echo '<b style="color:white;font-size:17px;"></br>['.$h.']</b> <b style="color:orange;font-size:17px;">'.$uuser.'</b> 
+	: <b style="color:yellow;font-size:17px;">'.$secondx.'(sec.)</b>';
+}		
+}
+echo '</div>';
+}
+}
+}
+}
+}
+}
+}
 ?>

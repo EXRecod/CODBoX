@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo '
 
 <script src="https://code.highcharts.com/highcharts.js"></script>

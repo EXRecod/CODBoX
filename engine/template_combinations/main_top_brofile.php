@@ -1,5 +1,8 @@
 <?php
 
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
+
 //echo '-------------------------------------';
 /*
 select s_kills,s_deaths,s_pg, ROUND(s_kills/s_deaths, 2) AS kdratio

@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 if(strpos($url, "img.php") === false)
  $w = 1200;
 else

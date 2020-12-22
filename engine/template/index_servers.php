@@ -1,4 +1,6 @@
 <?php
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo ' 
 <script src="' . $domain . '/data/graph/dynamics2.js"></script>';
 

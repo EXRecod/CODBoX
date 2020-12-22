@@ -1,4 +1,6 @@
 <?php
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 $urlmd = $_SERVER["REQUEST_URI"];
 echo '
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "https://www.w3.org/TR/REC-html40/loose.dtd">
@@ -1073,7 +1075,7 @@ a.paginator:active { color: #FFF; text-decoration:none; font-weight:normal; }
   position: absolute;
   z-index: 98;
   min-width: 30px;
-  max-width: 250px;
+  max-width: 380px;
 }
 
 .tags:hover:before {
@@ -1113,7 +1115,14 @@ canvas {
   z-index: -9999;
 }
 
-</style> ";
+  #topcodbx{
+	position: fixed;
+	right: 45px;
+	bottom: 45px;
+	height: 30px;
+   }
+  </style>
+";
 
 if($baseurlz=='img.php')
 {
@@ -1125,7 +1134,8 @@ echo '
 <link rel="stylesheet" type="text/css" href="'.$domain.'/inc/fresco/fresco.css" />	 
 '; 
 }
- 
+else
+ echo '<script type="text/javascript" src="'.$domain.'/inc/jquery.js"></script>';
  
 if(($baseurlz=='img.php')||($baseurlz=='stats.php'))
 {
@@ -1140,11 +1150,9 @@ echo '
  echo '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>'; 
 
 
+echo '<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>';
 
-
-
-
-echo '<script type="text/javascript" src="'.$domain.'/inc/strange.js"></script>';  
+ 
 echo ' 
 </head>
 <body>

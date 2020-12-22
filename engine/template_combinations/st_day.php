@@ -1,4 +1,7 @@
 <?php
+
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
  
 include $cpath . "/engine/template/header.php";
 include $cpath . "/engine/template/servermenu.php";

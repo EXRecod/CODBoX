@@ -1,4 +1,6 @@
 <?php
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo '<div class="content_block"> 
 <div style="overflow:auto;width:100%;padding:5 10px;">
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 30px #fff, 0 0 4px #FFF, 0 0 7px #08e5c8, 0 0 18px #08e5c8, 0 0 40px #08e5c8, 0 0 65px #08e5c8;">

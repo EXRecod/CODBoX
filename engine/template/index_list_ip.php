@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 $nb_pages = 30;
 $ip = 'unknown';
 $reloadpages = 0;
@@ -10,16 +11,13 @@ echo '
 
 <h1>IP '.$menu_banlist.'</h1> &nbsp;&nbsp;&nbsp; 
 &nbsp;&nbsp;&nbsp;
-<a href="'.$domain.'/list_ip_ban.php?sort_unbanned=s"><b style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;background-color:black;color:#013602">Свододные&nbsp;</b></a>
+<a href="'.$domain.'/list_ip_ban.php?sort_unbanned=s" style ="width:50px; padding:2px 50px;"><b class="tags" glose="'.$ilisttipunbanned.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;background-color:black;color:#013602" >&nbsp;'.$listtipunbanned.'&nbsp;</b></a>
 
 &nbsp;&nbsp;
-<a href="'.$domain.'/list_ip_ban.php?sort_banned=s"><b style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#5c0707;background-color:black;">&nbsp;В Бане.&nbsp;</b> </a>   
+<a href="'.$domain.'/list_ip_ban.php?sort_banned=s" style ="width:50px;padding:2px 70px;"><b class="tags" glose="'.$ilisttipbanned.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#5c0707;background-color:black;">&nbsp;'.$listtipbanned.'&nbsp;</b> </a>   
 
 &nbsp;&nbsp;
-<a href="'.$domain.'/list_ip_ban.php?sort_fakeip=s"><b style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#07405c;background-color:black;">&nbsp;Список новых игроков с подозрительными ип.&nbsp;</b> </a> 
-
-&nbsp;&nbsp;
-<a href="'.$domain.'/list_ip_ban.php?dub=del" onClick="return window.confirm(\'Delete all dublicates?  Удаляем все дубли? OK?\');" title="Удалить все дубли."><b style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#783400;background-color:black;">&nbsp;❌&nbsp;</b> </a>
+<a href="'.$domain.'/list_ip_ban.php?sort_fakeip=s" style ="width:50px;padding:2px 90px;"><b class="tags" glose="'.$ilisttipproxy.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#07405c;background-color:black;">&nbsp;'.$listtipproxy.'&nbsp;</b> </a> 
 
 </div>';
 
@@ -40,9 +38,9 @@ $xpnickname = $dannye['playername'];
 $xpnickname = $dannye['playername'];	 
 
 if(!empty($dannye['patch']))
-$serverx = $dannye['patch']; 
+$zaxodil = $dannye['patch']; 
 else
-	$serverx ='';
+	$zaxodil ='';
 
 
 if(!empty($dannye['s_port']))
@@ -145,8 +143,10 @@ $days =  strtotime(trim($tmb)) - strtotime($today);
 if($days < 0)
 {
 $re = "UPDATE banip SET reason='0' WHERE ip = '".$ip."'";
-dbSelectALL('', $re);
+$y = dbSelectALL('', $re);
 
+if($y)
+{
 $re = "DELETE FROM banip WHERE NOT EXISTS (
  SELECT * FROM (
     SELECT MIN(id) minID FROM banip    
@@ -157,6 +157,8 @@ $re = "DELETE FROM banip WHERE NOT EXISTS (
 dbSelectALL('', $re);
 
 $reloadpages = 1;
+}
+
 }
 }
  }
@@ -248,54 +250,11 @@ margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($time.$i)
 <div style="float:left;color:#fff;padding:5 3px;font-size:10px;line-height:14px;width:34px;text-align:center;">'.$tm.'</div>
 <div style="float:left;color:#fff;padding:2px;line-height:15px;text-align:left;width:130px;font-size:13px;">
 
-<a href="'.$domain.'/list_ip_ban.php?nicknameSearch='.trim($guidxx).'" class="tags" glose="'.$cntz.'">
+<a href="'.$domain.'/list_ip_ban.php?listguid='.trim($guidxx).'" class="tags" glose="'.$hj.'">
  <div style="color:#fff;">'.$serverx.'</div>
 </a>
 </div>';
  
-
-echo '<div style="float:left;color:yellow;padding:9 9px;padding:9px;">	
-<a href="'.$domain.'/stats.php?brofile='.$guidxx.'" 
-target="_blank" style="float:left;color:#854699;line-height:13px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="'.$menu_stats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[S]</b> </a>
-</div>';
-
-if(((!empty($reasonx))&&(strpos($reasonx, 'VPN') !== false))||((!empty($reasonx))&&(strpos($reasonx, 'PROXY') !== false))||((!empty($reasonx))&&(strpos($reasonx, 'TOR') !== false)))
-{
-echo '
-<div style="float:left;color:#fff;padding:9 9px;padding:9px;">	
-<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
-target="_blank" style="float:left;color:#998546;line-height:13px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="💣'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'💣"> <b>[R]</b> </a>	
-</div>';	
-echo '
-<div style="float:left;color:#fff;padding:9 9px;padding:9px;">	
-<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
-target="_blank" style="float:left;color:#998546;line-height:13px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="💣'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'💣"> <b>[IB]</b> </a>		
-</div>';	
-}
-else if(!empty($reasonx))
-echo '
-<div style="float:left;color:#fff;padding:9 9px;padding:9px;">	
-<a href="'.$domain.'/list_ip_ban.php?unbanip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
-target="_blank" style="float:left;color:lime;line-height:13px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="'.$i_unban.':&nbsp;'.$xpnickname.'"> ['.$i_unban.']&nbsp;&nbsp;&nbsp; </a>	
-</div>';
-else if(substr_count($ip, '.') == 1)
-echo '
-<div style="float:left;color:#fff;padding:9 9px;padding:9px;">	
-<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
-target="_blank" style="float:left;color:#998546;line-height:13px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="💣'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'💣"> <b>[R]</b> </a>	
-</div>';	
-else if(substr_count($ip, '.') > 1)
-echo '
-<div style="float:left;color:#fff;padding:9 9px;padding:9px;">	
-<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
-target="_blank" style="float:left;color:#998546;line-height:13px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="💣'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'💣"> <b>[IB]</b> </a>		
-</div>';		
 
 
 
@@ -318,7 +277,7 @@ echo '
 	
 <div style="color:#fff;padding:2px;line-height:19px;text-align:center;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
 	
-<a href="'.$domain.'/list_ip_ban.php?poisknickname='.trim($guidxx).'" style="color:#888;" class="tags" glose="'.$guidxx.'">
+<a href="'.$domain.'/list_ip_ban.php?poisknickname='.trim($xpnickname).'" style="color:#888;" class="tags" glose="'.$hj.'">
 <div style="color:#ddd;font-size:13px;display:inline-block;float:left;TEXT-ALIGN:LEFT;">
 <b style="color:#fff;">'.colorize($xpnickname).'</b> &nbsp;&nbsp; ['.$whooo.']</a>
 </div>';
@@ -332,20 +291,27 @@ echo '
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
  
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list_ip_ban.php?listip='.trim($ip).'" style="color:#fff;" class="tags" glose="'.$hj.'">'.$ip.'  </a></div> 
+<a href="'.$domain.'/list.php?listip='.trim($ip).'" style="color:#fff;" target="_blank" class="tags" glose="'.$hj.'">'.$ip.'  </a></div> 
 	 
 	</div>
 	
 
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list_ip_ban.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="Значение ип адреса."> ['.$reasonx.'] </a></div> 
+<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$iparddrrean.'"> ['.$reasonx.'] </a></div> 
 </div>
 	
 	
-<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:95px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list_ip_ban.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$i_lefttime.'"> ['.$timeFormat.'] </a></div> 
+<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$i_lefttime.'"> ['.$timeFormat.'] </a></div> 
+</div>';
+
+
+echo '
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:60px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
+<a href="'.$domain.'/list_ip_ban.php?listvisits=X" style="color:#00b6b2;" class="tags" glose="'.$tvisited.':['.$zaxodil.']"> ['.$zaxodil.'] </a></div> 
 </div>';
 	 
 
@@ -358,7 +324,8 @@ echo '
 
 <form action="'.$domain.'/list_ip_ban.php" onsubmit="return window.confirm(\'Add days? Добавить дней? OK?\');">
   <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="timeban" name="timeban" value="'.$bantime.'">
-  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="iptimeban" name="iptimeban" value="'.$ip.'">  
+  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="iptimeban" name="iptimeban" value="'.$ip.'">
+  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="visited" name="visited" value="'.$zaxodil.'">   
   <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="text" id="updatetimeban" name="updatetimeban" placeholder="- / + Day">
   <input style= "font-size:11px;height: 18px;width: 70px;padding: 1px 2px;box-sizing:border-box;" type="submit" value="Submit">
 </form>	
@@ -379,10 +346,83 @@ echo '
 <div style="line-height:13px;display:inline-block;width:20px;float:right;text-align:right;">&#9660;</div>
 	
 	
-<div id="match_sub'.md5($time.$i).'" style="display:none;width:calc(100% - 10px);font-size:10px;border-top: 1px solid #222;overflow:auto;margin-top:5px;padding:5px;background:#222;">
+<div id="match_sub'.md5($time.$i).'" style="display:none;width:calc(100% - 10px);font-size:10px;border-top: 1px solid #222;overflow:auto;margin-top:5px;padding:5px;background:#222;">';
+	
+
+
+echo '	
+<div class="match_stats_adv" style="min-width:300px;">
+<div style="color:#fff;width:210px;">';
+
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/img.php?nicknameSearch='.$guidxx.'" 
+target="_blank" style="float:left;color:#609946;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;width:30px;" 
+class="tags" glose="[Sc]&nbsp;'.$menu_screens.':&nbsp;'.$xpnickname.'"> <b>[Sc]</b> </a>	
+</div>';
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/stats.php?brofile='.$guidxx.'" 
+target="_blank" style="float:left;color:#854699;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[St]&nbsp;'.$menu_stats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[St]</b> </a>	
+</div>';
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/chat.php?search='.$guidxx.'" 
+target="_blank" style="float:left;color:#3f7689;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[C]&nbsp;'.$menu_chats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[C]</b> </a>
+</div>';
+
+
+if(((!empty($reasonx))&&(strpos($reasonx, 'VPN') !== false))||((!empty($reasonx))&&(strpos($reasonx, 'PROXY') !== false))||((!empty($reasonx))&&(strpos($reasonx, 'TOR') !== false)))
+{
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$iprange.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
+class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
+</div>';	
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
+class="tags" glose="[IB]&nbsp;'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'"> <b>[IB]</b> </a>		
+</div>';	
+}
+else if(!empty($reasonx))
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/list_ip_ban.php?unbanip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+target="_blank" style="float:left;color:lime;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
+class="tags" glose="'.$i_unban.':&nbsp;'.$xpnickname.'"> ['.$i_unban.']&nbsp;&nbsp;&nbsp; </a>	
+</div>';
+else if(substr_count($ip, '.') == 1)
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$iprange.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
+class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
+</div>';	
+else if(substr_count($ip, '.') > 1)
+{
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
+class="tags" glose="[IB]&nbsp;'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'"> <b>[IB]</b> </a>		
+</div>';
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
+class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
+</div>';		
+}
+
+echo '</div></div>';
+
+
+
 	
 	
-<div class="match_stats_adv" style="min-width:190px;">Time 
+	
+echo '<div class="match_stats_adv" style="min-width:190px;">Time 
 <div style="color:#fff;min-width:190px;">'.$time.'</div></div>
 	 
 
@@ -390,12 +430,8 @@ echo '
 <div style="color:#fff;width:180px;">'.$tmb.'</div></div>	
 
 
-<div class="match_stats_adv" style="min-width:100px;">Guid
-<div style="color:#fff;width:210px;">'.$guidxx.'</div></div>
 
 
-<div class="match_stats_adv" style="min-width:100px;">IP
-<div style="color:#fff;width:180px;">'.$xplayerip.'</div></div>
 
 <div class="match_stats_adv" style="min-width:100px;">DELETE PLAYER
 <div style="color:#fff;width:180px;"><a href="'.$domain.'/list_ip_ban.php?deleteid='.trim($idnumm).'" onClick="return window.confirm(\'DELETE PLAYER? OK?\');"> ❌ </a>

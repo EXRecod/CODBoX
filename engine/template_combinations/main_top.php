@@ -1,4 +1,6 @@
 <?php
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
 /*
 select s_kills,s_deaths,s_pg, ROUND(s_kills/s_deaths, 2) AS kdratio
 FROM db_stats_1 where s_kills > 1000

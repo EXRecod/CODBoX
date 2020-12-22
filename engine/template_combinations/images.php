@@ -1,4 +1,6 @@
 <?php
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
 createscreenDB();
 
 include $cpath . "/engine/template/header.php";

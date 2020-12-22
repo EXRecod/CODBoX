@@ -1,4 +1,22 @@
-<?php
+<?php 
+if(!empty($_GET['guid'])){
+	$guidn = $_GET['guid'];
+
+if (empty($cpath)) { 
+  $cpath = dirname(__FILE__);
+}
+
+$cpath = str_replace("engine", "", $cpath);
+$cpath = str_replace("template", "", $cpath);
+$cpath = str_replace("//", "/", $cpath);
+
+include($cpath. '/engine/ajax_data/cache-top.php');
+sleep(3);
+include($cpath ."/engine/functions/langctrl.php");
+ 
+$baseurlz = basename(__FILE__); 
+
+include($cpath ."/engine/functions/main.php");
 
 echo '<div class="content_block">
 <a href="https://localhost/profile/zzzztest/weapons">
@@ -6,7 +24,7 @@ echo '<div class="content_block">
 <img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;float:left;margin:1 3 0 3px;"></div></a>
 
 <div style="overflow:auto;" class="wrapper">';
-      	$pkli = '';
+      	$pkli = array();
      $total = 0;	
 	 $wps = array_chunk($wp, 23, true);
 	 $wpnames = array();
@@ -137,8 +155,7 @@ echo '
 	
 }}
 	
-	
-	
-	
 echo '</div></div>';
+include($cpath. '/engine/ajax_data/cache-bottom.php');
+}
 ?>

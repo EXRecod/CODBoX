@@ -1,4 +1,7 @@
 <?php
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
+
 if (isLoginUser()) {
  $top_main_total = 100;
 
@@ -13,10 +16,14 @@ $nicknameSearch  = $nicknameSearchguid;
 $nicknameSearchguid = '';
 }	
  
+ if(!empty($_GET['byadmin']))
+ $byadmin = $_GET['byadmin'];
+ else
+	$byadmin = 'unknown'; 
  
  
  if (!empty($nicknameSearch))	
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername LIKE :keyword DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
+$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername LIKE :keyword ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 
 else if (!empty($_GET['unbanip']))
 {
@@ -30,7 +37,7 @@ dbSelectALL('', $re);
 
 sleep(1);
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
- echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
+echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 }
 else if (!empty($_GET['banip']))
 {
@@ -38,27 +45,29 @@ else if (!empty($_GET['banip']))
 				$tmk = str_replace("-", ".", $tmk);	
 	
 $re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
-VALUES ('".$_GET['nickname']."','".$_GET['ip']."','".$_GET['ip']."','".$_GET['banip']."','IP BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$_GET['byadmin'] . "','cod4 1.8')";
+VALUES ('".$_GET['nickname']."','".$_GET['ip']."','".$_GET['ip']."','".$_GET['banip']."','IP BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','" .$_GET['visited'] . "') 
+ON DUPLICATE KEY UPDATE ip='" . $_GET['ip'] . "', playername='".$_GET['nickname']."', patch='" .$_GET['visited'] . "', reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
 $r = dbSelectALL('', $re);
 
 sleep(1);
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime, days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
- echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
+echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 }	
 else if (!empty($_GET['baniprange']))
 {
 			  list($onem, $twom, $threem, $fourm) = explode(".", $_GET['ip']);
               $rangeip = $onem.'.'.$twom;
 				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +1 day'));
-				$tmk = str_replace("-", ".", $tmk);				  
+				$tmk = str_replace("-", ".", $tmk);			
 			  
 $re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
-VALUES ('".$_GET['nickname']."','".$rangeip."','".$_GET['ip']."','".$_GET['baniprange']."','IP RANGE BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$_GET['byadmin'] . "','cod4 1.8')";
+VALUES ('".$_GET['nickname']."','".$rangeip."','".$_GET['ip']."','".$_GET['baniprange']."','IP RANGE BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','" .$_GET['visited'] . "') 
+ON DUPLICATE KEY UPDATE ip='" . $_GET['ip'] . "', playername='".$_GET['nickname']."', patch='" .$_GET['visited'] . "', reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
 $r = dbSelectALL('', $re);
 
 sleep(1);
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
- echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
+echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 }
 //////////////////////////////////////////////// EDIT
 else if (!empty($_GET['updatetimeban']))
@@ -114,21 +123,21 @@ else if (!empty($_GET['iptimeban']))
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;	  	
 }  
 else if (!empty($nicknameSearchguid))
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid LIKE :keyword DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
-	   
+$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid LIKE :keyword ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
+
 else if (!empty($_GET['listguid']))
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid = '.$_GET['listguid'].' ORDER BY playername DESC LIMIT 500';	   
+$reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid = '".$_GET['listguid']."' ORDER BY playername DESC LIMIT 500";	   
+	   
+else if (!empty($_GET['listvisits']))
+$reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where patch ORDER BY time,patch DESC LIMIT " . $premierMessageAafficher . ", " . $top_main_total;
 	
 else if (!empty($_GET['listip']))
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where ip = '.urldecode($_GET['listip']).' ORDER BY playername DESC LIMIT 500';	   
+$reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where ip LIKE :keyword ORDER BY playername DESC LIMIT 500";	   
 	
 	
 else if (!empty($_GET['poisknickname']))
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid = '.$_GET['poisknickname'].' ORDER BY playername DESC LIMIT 50';	   
+$reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername = '".$_GET['poisknickname']."' ORDER BY playername DESC LIMIT 50";	   
    
-else if (!empty($nicknameSearch))	
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid LIKE :keyword ORDER BY time desc, playername DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
-
 else if (!empty($_GET['sort_banned']))
 $reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where reason = 'IP BAN' or reason = 'IP RANGE BAN' ORDER BY time DESC LIMIT " . $premierMessageAafficher . ', ' . $top_main_total;	   
 
@@ -148,11 +157,15 @@ $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,
 	  $xz = dbSelectALLbyKey('', $reponse, trim($nicknameSearchguid));
   else if (!empty($_GET['sort_fakeip'])) 
 	  $xz = dbSelectALLbyKey('', $reponse, 'FRAUD');
+  else if (!empty($_GET['listip'])) 
+	  $xz = dbSelectALLbyKey('', $reponse, $_GET['listip']);
   else 
 	  $xz = dbSelectALL('', $reponse);
   
   if(empty($xz))
 	  $xz = array();
+  
+
  
 include $cpath . "/engine/template/header.php";
 include $cpath . "/engine/template/servermenu.php";

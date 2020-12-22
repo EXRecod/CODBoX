@@ -1,5 +1,6 @@
 <?php
-  
+   if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo '<script type=\'text/javascript\'>
  function screenshot(){
    html2canvas(document.getElementById(\'screeen\')).then(function(canvas) {

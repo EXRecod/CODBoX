@@ -1,11 +1,32 @@
 <?php
-
+ $tvisited = 'Заходил(количество)';  
+  $iparddrrean = 'Значение&nbsp;ип&nbsp;адреса.';  
  $i_chatn_forver = 'На всегда!';
  $i_chat_ban  = '[Чат Блок]';
  $i_chat_exp   = '[Ч.Б. срок истек]';
  $i_chat_censored = '[Цензура]';
+ $itwentyhours = 'За сутки.';
 
- $i_lefttime = 'До конца бана';
+ $ispeed = 'Скорость вашего подключения:';
+ $ispeedslow = 'JavaScript отключен или ваш браузер работает очень медленно'; 
+ $ispeederr = 'Неверное изображение или ошибка загрузки';
+ 
+ $listtipproxy = 'Прокси игроки.';  
+ $ilisttipproxy = 'Список&nbsp;новых&nbsp;игроков&nbsp;с&nbsp;подозрительными&nbsp;ип.';
+  
+ $listtipbanned = 'Игроки в бане.';    
+ $ilisttipbanned = 'Список&nbsp;игроков&nbsp;с&nbsp;запретом&nbsp;для&nbsp;входа&nbsp;на&nbsp;сервер.';
+
+ $listtipunbanned = 'Бан истек.';    
+ $ilisttipunbanned = 'Список&nbsp;игроков&nbsp;с&nbsp;истекшим&nbsp;сроком&nbsp;бана.';
+ 
+ $chatrcon = 'Чат с игроком';
+ $chatrconwithall = 'Чат с игроками';
+ 
+ $i_online = 'Кто онлайн';
+ $llefttime = 'Прошло';
+
+ $i_lefttime = 'До&nbsp;конца&nbsp;бана';
  $i_search = 'Поиск';
  $i_searchG = 'Поиск по гуйду';
  $i_searchn = 'Поиск по никнейму';
@@ -141,6 +162,8 @@
  $x_medals['medal_or_ak'] = 'АК-47 Мастер';
  $x_medals[''] = '';
  $x_medals[''] = '';  
+ 
+ $x_specialz[''] = '';
   
   
 $shotz = '[Выстрелы]';   

@@ -1,4 +1,7 @@
 <?php
+
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
  
   $reponse = 'SELECT s_port,name,gametype,kills,deaths from maps ORDER BY kills DESC LIMIT 20';
 

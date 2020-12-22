@@ -1,5 +1,7 @@
 <?php
 ini_set('max_execution_time', 180); //180 seconds = 3 minutes
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 $i = 0;$a = 0;$rx = 0;$f = 1;$skolko = 0;
 if(strpos($urlmd, "img.php?nicknameSearch") !== false)$f = 0;
 else if(strpos($urlmd, "&page=") !== false)$f = 0;
@@ -154,7 +156,7 @@ foreach ($xz as $key => $val) {
 		$ereason = $val['reason'];
 		$esize = $val['size'];
 		$etime = $val['time'];
-	    $srvxx = $val['nameserver'];
+	    $servernamet = $val['nameserver'];
 		$esserver = $val['server'];
 		++$u;
 		
@@ -171,17 +173,43 @@ foreach ($xz as $key => $val) {
 		$rrr = 'color:#fff; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;';
 		
 
-echo '<div class="'.$fv.'" id="screeen">  '.$nv.'
-	    <a href="' . $image . '" class=\'fresco\' data-fresco-group="example" data-fresco-caption="' . clean($eplayer) . ' ✔ ' . $eguid . ' ✔ ' . $etime . ' ✔ ' . clean($srvxx) . '">
+echo '
+<div class="'.$fv.'" id="screeen">  '.$nv.'
+	    <a href="' . $image . '" class=\'fresco\' data-fresco-group="example" data-fresco-caption="' . clean($eplayer) . ' ✔ ' . $eguid . ' ✔ ' . $etime . ' ✔ ' . clean($servernamet) . '">
         
-		<span class="gallery-icon lazy'.$hv.'" style="display:inline-block;background-size: 100% 100%; background-repeat: no-repeat; background-image: url(' . $image . ');"></span></a>		
-		<div class="caption" id="galerry_' . md5($srvxx) . '">
+<div class="box-crew"><span class="gallery-icon lazy'.$hv.'" style="display:inline-block;background-size: 100% 100%; background-repeat: no-repeat; background-image: url(' . $image . ');"></span></a>		
+		<div class="caption" id="galerry_' . md5($servernamet) . '">
 		
-		<span class="name"><a href="' . $domain . '/img.php?nicknameSearchguid=' . trim($eplayer) . '" style="'.$rrr.'">' . colorize($eplayer) . '</a></span>
 		
-		<span class="guid"> | <a href="' . $domain . '/img.php?nicknameSearch=' . $eguid . '" style="font-size:15px;'.$rrr.'display:inline-block;" class="tags" glose=" '.$i_searchG.' ' . clean($eplayer) . '"><b style="font-size:11px;padding:5 3px;">' . $eguid . '</b></a></span> 
-<p class="name"><a href="' . $domain . '/img.php?server=' . urlencode($srvxx) . '">' . colorize($srvxx) . '</a></p>';
-		echo '<div style="position:absolute;float:left;">';
+		
+		
+		
+		
+		
+		
+		
+<div style="float:center;font-size:15px;'.$rrr.'">	
+
+</br>
+<a href="' . $domain . '/img.php?server=' . urlencode($servernamet) . '">' . colorize($servernamet) . '</a>	</br>
+<span class="name"><a href="' . $domain . '/img.php?nicknameSearchguid=' . trim($eplayer) . '" style="'.$rrr.'">' . colorize($eplayer) . '</a></span> |
+<span style="float:center;font-size:13px;color:#888888;text-shadow:-1px -1px 0 #222,-1px 1px 0 #111,1px -1px 0 #222,1px 1px 0 #111;">' . $etime . '</span> | 
+<a href="' . $domain . '/img.php?nicknameSearch=' . $eguid . '">
+<span style="float:center;font-size:14px;color:#eee; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;">' . $eguid . '</span></a>
+
+
+ <div style="left:4px;height:12px;text-align:right;color:orange;">' . $u . '</div>
+
+
+</div>';
+
+
+
+
+
+
+
+		echo '<dt>';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if (isLoginUser()){
 if(!empty($_SESSION['codbxpasssteam']))
@@ -199,33 +227,43 @@ else
 
 if (isLoginUser()){
 if($ereason == 1)
-echo '<a href="' . $domain . '/redirect.php?unban=' . $eguid . '&guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($srvxx) .$byWho. '" class="name" target="_blank"> 
-	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
+echo '<a href="' . $domain . '/redirect.php?unban=' . $eguid . '&guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($servernamet) .$byWho. '" class="name" target="_blank"> 
+	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 else	  
-echo '<a href="' . $domain . '/redirect.php?guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($srvxx) .$byWho. '" class="name" target="_blank"> 
-	  &emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	  
+echo '<a href="' . $domain . '/redirect.php?guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($servernamet) .$byWho. '" class="name" target="_blank"> 
+	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+echo '<a href="' . $domain . '/list.php?listguid=' . $eguid . '" class="name" target="_blank"> 
+	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="LIST"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/status/online.png"></b></a>';	  
+
+echo '<a href="' . $domain . '/chat.php?search=' . $eguid . '" class="name" target="_blank"> 
+	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="'.$i_chat.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/flags-mini/AQ.png"></b>&emsp;</a>';		  	  
 }
+
+/*
 else
 {
 if($ereason == 1)
 echo '<a href="' . $domain . '/admin/login.php" class="name" target="_blank"> 
-	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
+	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 else	  
 echo '<a href="' . $domain . '/admin/login.php" class="name" target="_blank"> 
-	  &emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;margin-top:-30px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	  	
-	
+	  &emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	  		
 }
+*/
 
-echo '<span style="padding: 0px 15px;">&nbsp;</span><a href="' . $domain . '/stats.php?brofile=' . $eguid . '&s=' . urlencode($srvxx) . '" class="name" target="_blank"> 
-	  <b class="tags" glose="'.$i_stats.'"><img style="width:40px;height:40px;margin-top:-25px;" src="' . $domain . '/inc/images/statics.png"></b></a>	  
-<span style="padding: 0px 15px;">&nbsp;</span><div style="position:relative;left:14px;top:-15px;height:2px;text-align:right;color:orange;">' . $u . '</div> </div>';
-		echo '<p class="date">' . $etime . '</p>';      
- 
-////////////////////////////////////////////////////////  
+
+echo '
+
+<span style="padding: 0px 15px;">&nbsp;</span>
+<a href="' . $domain . '/stats.php?brofile=' . $eguid . '&s=' . urlencode($servernamet) . '" class="name" target="_blank"> 
+<b class="tags" glose="'.$i_stats.'"><img src="' . $domain . '/inc/images/statics.png"></b> <span>&nbsp;</span>     </a>';
+
+ ////////////////////////////////////////////////////////  
  $x = 0; $ht = '';
  foreach ($screenshots as $w => $r) {
   if (($x % 2) == 0) $weburl = $screenshots[$x]['web_url']; else  $folder = $screenshots[$x]['folder'];    
@@ -233,16 +271,43 @@ echo '<span style="padding: 0px 15px;">&nbsp;</span><a href="' . $domain . '/sta
 ////////////////////////////////////////////////////////
 
  	
-echo '<a href="' . $domain . '/download.php?f=' .base64_encode($ht).'" target="_blank" style="float:right;margin-top:-45px;">';
+echo '<a href="' . $domain . '/download.php?f=' .base64_encode($ht).'" target="_blank" style="float:right;">';
 //if (empty($_GET['datesearch'])) 
-echo '<button id="button1"><img style="width:15px;height:15px;margin-top:-19px;" src="' . $domain . '/inc/images/downl.png"></button>';
+echo '<button id="button1"><img style="width:15px;height:15px;margin-top:3px;" src="' . $domain . '/inc/images/downl.png"></button>';
 //else   
 //echo '<button style="background:green;" id="button1"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/camera.png"></button>';	
 echo '&emsp;</a>';
+
+
+echo '</dt>';
+
+ 
+
+
+
+ 
+
  
 
 echo '</div>';
-echo '</div>';
+echo '</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+';
 }
 	
 if(!empty($eguid))

@@ -1,4 +1,7 @@
 <?php
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
+
 include $cpath . "/engine/template/header.php";
 include $cpath . "/engine/template/servermenu.php";
 include $cpath . "/engine/template/search.php";
@@ -15,7 +18,7 @@ SELECT `servername`, COUNT(*) AS `calls` FROM (
 GROUP BY `servername`
 */
 
-
+$ysum = array();
 
 $reponse = 'SELECT x_db_guid, COUNT(x_db_guid) as allplayers FROM x_db_players where x_db_guid > 0';
   $xz = dbSelectALL('', $reponse);

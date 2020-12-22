@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 	$reponse = 'SELECT w_geo, count(*) as c from db_stats_2 GROUP BY w_geo ORDER BY c desc';
     $geos = dbSelectALL('', $reponse);
 	 

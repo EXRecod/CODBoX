@@ -1,5 +1,8 @@
 <?php
 
+if(empty($templ))
+	die("PERMISSIONS DENIED!");
+
 
 //if(!isLoginUser())
 //die('</br></br></br><h1><center>ТУТ РЕМОНТ!</center><h1>');
@@ -203,7 +206,7 @@ FROM   db_stats_0 t0
 foreach ($reponse as $nr => $rp)
 {
   
-  usleep(1100000);
+  usleep(100000);
 
 //echo '</br>'.$rp.'</br>';
   $xz = dbSelect('', $rp);
@@ -322,119 +325,36 @@ include $cpath . "/engine/template/search.php";
 include $cpath . "/engine/template/menu.php";
 if(!empty($kills)){
 include $cpath . "/engine/template/stats_level.php";
-
 include $cpath . "/engine/template/stats_profile.php";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-sleep(2);
-include $cpath . "/engine/template/stats_weapon.php";
+ 
+ 
+ 
+ 
+///////////////// ajax
+include $cpath . "/engine/ajax_data/local_parser_db_set.php";
+echo get_local_source_db($domain.'/engine/template/stats_specials.php?guid='.$guidn.'&statsmedal=sevrtststst','160000'); 
+ 
+///////////////// ajax
+//include $cpath . "/engine/ajax_data/local_parser_db_set.php";
+echo get_local_source_db($domain.'/engine/template/stats_weapon.php?guid='.$guidn,'160000');
+ 
+///////////////// ajax
+//include $cpath . "/engine/ajax_data/local_parser_db_set.php";
+echo get_local_source_db($domain.'/engine/template/stats_hit_zones.php?guid='.$guidn,'160000');
+  
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
-sleep(2);
-  $reponse = 'SELECT s_pg,head,torso_lower,torso_upper,right_arm_lower,
-	left_leg_upper,neck,right_arm_upper,left_hand,
-left_arm_lower,none,right_leg_upper,left_arm_upper,right_leg_lower,left_foot,right_foot,
-right_hand,left_leg_lower FROM db_stats_hits where s_pg = "' . $guidn . '" limit 1';
-  //ZAPROS NR - 4
-  $xz = dbSelect('', $reponse);
-  $maxforanimate = 35;
-  if(!is_array($xz))
-  foreach ($xz as $keym => $value) {
-	//hit zones +css styles
-     if ($keym == 'head') {$head = $value; if((($value/$kills)*100)>$maxforanimate) $zanim1 = "hint-dot"; else $zanim1 = "nothings"; }
-	else if ($keym == 'torso_lower') {$torso_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim2 = "hint-dot"; else $zanim2 = "nothings"; }
-	else if ($keym == 'torso_upper') {$torso_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim3 = "hint-dot"; else $zanim3 = "nothings"; }
-	else if ($keym == 'right_arm_lower') {$right_arm_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim4 = "hint-dot"; else $zanim4 = "nothings"; }
-	else if ($keym == 'left_leg_upper') {$left_leg_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim5 = "hint-dot"; else $zanim5 = "nothings"; }
-	else if ($keym == 'neck') {$neck = $value; if((($value/$kills)*100)>$maxforanimate) $zanim6 = "hint-dot"; else $zanim6 = "nothings"; }
-	else if ($keym == 'right_arm_upper') {$right_arm_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim7 = "hint-dot"; else $zanim7 = "nothings"; }
-	else if ($keym == 'left_hand') {$left_hand = $value; if((($value/$kills)*100)>$maxforanimate) $zanim8 = "hint-dot"; else $zanim8 = "nothings"; }
-	else if ($keym == 'left_arm_lower') {$left_arm_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim9 = "hint-dot"; else $zanim9 = "nothings"; }
-	else if ($keym == 'none') {$none = $value; if((($value/$kills)*100)>$maxforanimate) $zanim10 = "hint-dot"; else $zanim10 = "nothings"; }
-	else if ($keym == 'right_leg_upper') {$right_leg_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim11 = "hint-dot"; else $zanim11 = "nothings"; }
-	else if ($keym == 'left_arm_upper') {$left_arm_upper = $value; if((($value/$kills)*100)>$maxforanimate) $zanim12 = "hint-dot"; else $zanim12 = "nothings"; }
-	else if ($keym == 'right_leg_lower') {$right_leg_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim13 = "hint-dot"; else $zanim13 = "nothings"; }
-	else if ($keym == 'left_foot') {$left_foot = $value; if((($value/$kills)*100)>$maxforanimate) $zanim14 = "hint-dot"; else $zanim14 = "nothings"; }
-	else if ($keym == 'right_foot') {$right_foot = $value; if((($value/$kills)*100)>$maxforanimate) $zanim15 = "hint-dot"; else $zanim15 = "nothings"; }
-	else if ($keym == 'right_hand') {$right_hand = $value; if((($value/$kills)*100)>$maxforanimate) $zanim16 = "hint-dot"; else $zanim16 = "nothings"; }
-	else if ($keym == 'left_leg_lower') {$left_leg_lower = $value; if((($value/$kills)*100)>$maxforanimate) $zanim17 = "hint-dot"; else $zanim17 = "nothings"; }
-	 
-  }
-
-////////////////////////////////////////////////////////////////////////////// 
-// SPECIALS.PHP
-
- usleep(1100000);
-
-//echo '</br>'.$rp.'</br>';
-  $xz = dbSelect('', $rp);
  
-  if(is_object($xz))
-  foreach ($xz as $keym => $value) {
-    if ($keym == 'n_kills') $nkills = $value;
-    else if ($keym == 'n_deaths') $ndeaths = $value;
-    else if ($keym == 'n_heads') $nheadshots = $value;
-    else if ($keym == 's_player') $nickname = $value;
-    else if ($keym == 'servername') $servername = $value;
-    else if ($keym == 's_time') $timeregistered = $value;
-    else if ($keym == 's_lasttime') $lasttime = $value;
-    else if ($keym == 'w_skill') $skill = $value;
-    else if ($keym == 's_kills') $kills = $value;
-    else if ($keym == 's_deaths') $deaths = $value;
-    else if ($keym == 's_heads') $headshots = $value;
-    else if ($keym == 's_dmg') $damages = $value;
-    else if ($keym == 's_guid') $guid = $value;
-    else if ($keym == 'skillrank') $skillPlace = $value;
-    else if ($keym == 'headshotsrank') $HeadshotsRank = $value;
-    else if ($keym == 'killsrank') $sKillsRank = $value;
-    else if ($keym == 'headshotsseriesrank') $HeadshotsSeriesRank = $value;
-    else if ($keym == 'w_prestige') $prestige = $value;
-    else if ($keym == 'w_geo') $geo = $value;
-    else if ($keym == 'kdratio') $kdratio = $value;
-    else if ($keym == 'kdratiosort') $kdratiosort = $value;
-    else if ($keym == 'daterank') $DateRank = $value;
-    else if ($keym == 'totalpl') $total_players_ondatabase = $value;
-	else if ($keym == 'totalHeaders') $totalHeaders = $value;
-	else if ($keym == 'KillsSeriesRank') $KillsSeriesRank = $value;
-	else if ($keym == 'totalactiveplayers') $totalactiveplayers = $value;
-	 
-  } 
- 
- 
- 
- 
- 
- 
- 
- 
-//include $cpath ."/engine/template/stats_records.php";
 //include $cpath ."/engine/template/stats_leaderboards.php";
-//include $cpath ."/engine/template/stats_specials.php";
-include $cpath ."/engine/template/stats_hit_zones.php";
+//include $cpath ."/engine/template/stats_records.php";
 //include $cpath ."/engine/template/stats_dynamics.php";
 //include $cpath ."/engine/template/stats_matches.php";
  
 
 }
+
+
 
 include $cpath . "/engine/template/footer.php";
 ?>

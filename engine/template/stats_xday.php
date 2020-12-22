@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo '<script src="' . $domain . '/data/graph/dynamics2.js"></script>';
 
 if(strpos($urlmd, "stats_day.php?heads=top") !== false)

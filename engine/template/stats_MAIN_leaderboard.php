@@ -273,23 +273,78 @@ foreach ($prestige_images as $numimgjj => $preimagej){
  
     list($timegistered,$lasttimeseen) = explode(';', timelife($timeregistered,$lasttime));	
 	
-	if(empty($brofile))
-	ECHO '<a href="'.$domain.'/stats.php?brofile='.$guid.'" class="white">';
-    else
-	ECHO '<a href="'.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'" class="white">';	
+  
 	
 	
 	ECHO '<div style="width:auto;overflow:auto;padding:5px;background: #121212cc;margin:0px;font-size:13px;
 	cursor:pointer;cursor:hand;line-height:30px;border-top: 1px solid #252525;">
 	<div style="width:calc(100% - 14px);" class="wrapper">
 	
-	<div style="    display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap;max-width:65%;">
+	<div style="    display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap;max-width:65%;">';
 	
-	<div style="float:left;min-width:30px;text-align:center;font-weight:bold;font-size:16px;max-width:100px;width:calc(20%);">'.($premierMessageAafficher+$i).'</div>
 	
-	<div style="width:10%;float:left;max-width:40px;min-width:25px;" class="tags" glose="' .  geosorting($geo) . '">
-	<img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png"  style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;">
+	
+echo '<div style="float:left;min-width:30px;text-align:center;font-weight:bold;font-size:16px;max-width:80px;width:calc(20%);">'.($premierMessageAafficher+$i).'';
+
+
+
+
+	
+
+
+
+
+
+echo '</div>';
+
+
+
+
+
+ if (isLoginUser()){	
+echo '<div style="min-width:320px;width:320px;">';
+
+echo '<div style="float:left;color:#fff;padding:8 8px;text-align:center;width:13px;">		
+<a href="'.$domain.'/img.php?nicknameSearch='.$guid.'" 
+target="_blank" style="float:left;color:#609946;padding:1px;line-height:11px;text-align:left;FONT-SIZE:15PX;width:30px;" 
+class="tags" glose="[Sc]&nbsp;'.$menu_screens.':&nbsp;'.$nickname.'"> <b>[Sc]</b> </a>	
+</div>';
+
+echo '<div style="float:left;color:#fff;padding:8 8px;text-align:center;width:27px;">	
+<a href="'.$domain.'/list.php?nicknameSearch='.$guid.'" 
+target="_blank" style="float:left;color:#912323;padding:1px;line-height:11px;text-align:left;FONT-SIZE:15PX;" 
+class="tags" glose="[L]&nbsp;List&nbsp;&nbsp;'.$nickname.'"> <b>[L]</b> </a>	
+</div>';
+
+echo '<div style="float:left;color:#fff;padding:8 8px;text-align:center;width:8px;">	
+<a href="'.$domain.'/chat.php?search='.$guid.'" 
+target="_blank" style="width:30px;float:left;color:#3f7689;padding:1px;line-height:11px;text-align:left;FONT-SIZE:15PX;" 
+class="tags" glose="[C]&nbsp;'.$menu_chats.'&nbsp;&nbsp;'.$nickname.'"> <b>[C] &nbsp;&nbsp;&nbsp;&nbsp;</b></a>
+</div>';
+
+echo '<div style="float:left;color:#fff;padding:1 5px;text-align:center;width:20px;">	
+&nbsp;&nbsp;&nbsp;&nbsp;
+</div>';
+
+
+echo '</div>';
+}
+
+
+
+	if(empty($brofile))
+	ECHO '<a href="'.$domain.'/stats.php?brofile='.$guid.'" class="white">';
+    else
+	ECHO '<a href="'.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'" class="white">';	
+
+
+echo '<div style="width:10%;float:left;max-width:40px;min-width:25px;">
+	<img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png"
+	style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;" title="' .  geosorting($geo) . '">
 	</div>';
+
+	
+
 	
 		
 echo '<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(65%);overflow:hidden;">
@@ -299,6 +354,9 @@ echo '<div style=" float:left;display:inline-block;text-align:left;min-width:100
 
 	
 echo '</div></div></div>';
+
+
+
 
 echo '<div style="min-width:50px;max-width:190px;">
 	 <div style="display:inline-block;text-align:left;float:left;">';

@@ -1,12 +1,13 @@
 <?php
- 
- 
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 if(strpos($url, "img.php") === false)
  $w = 1200;
 else
  $w = 2400;  
  
-echo '<div style="width:100%;overflow:auto;">
+echo '
+<div style="width:100%;overflow:auto;padding:18 0px;">
 <div style="min-height:20px;background2:red;display:inline-block;
     position:fixed;
 width:calc((100% - '.$w.'px)/2);z-index:1;
@@ -34,14 +35,14 @@ background:url('.$domain.'/inc/images/but_bg.png);" class="wrapper">
  ?>
 
  
-
+  <label class="search_block_button" for="dialog_state"><?php echo $i_search;?></label>
 
 <?php
 echo '
-<div style="margin:0px;width:calc(100% - 220px);max-width:100%;min-width:300px;padding-bottom: 40px;" class="flexer wrapper" >
+<div style="width:calc(100% - 220px);max-width:100%;min-width:300px;" class="flexer wrapper" >
 <div class="search_block">
 
- <div style="position:absolute;display:inline-block;padding:9px;">
+ <div style="margin: 0 auto;left: 20%;position:absolute;display:inline-block;padding:9px;">
   
  ';
  
@@ -64,7 +65,7 @@ echo '
 ?> 
  
 
-  <label class="search_block_button" for="dialog_state"><?php echo $i_search;?></label>
+
   
   
   
@@ -78,7 +79,7 @@ echo '
          
 		
 
-<div style="overflow:auto;width:100%;padding:5 10px;">
+<div style="overflow:auto;display:absolute; width:100%;padding:5 10px;">
 <h1><?php echo $i_search;?></h1>
 </div>	
 		
@@ -105,7 +106,20 @@ echo '
   <input type="submit" class="search_block_button" >
 </form>
 
-	 
+	
+<?php
+if(isLoginUser()){
+echo '<form autocomplete="off" action="'.$domain.'/'.$baseurlz.'" style="margin:0px;display: inline-block;">
+<div style="display:inline-block;position: relative;top:8px;"> 
+  <div class="autocomplete">
+    <input id="myInput" type="text" name="listip" placeholder="Search IP" style="height:24px;background:#fff;border:0px;float:left;">
+  </div>
+</div>  
+  <input type="submit" class="search_block_button" >
+</form>';
+}
+?>
+	
 		 
 		 
 		 

@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo ' 
 
  
@@ -67,6 +68,25 @@ echo '
 <noscript><div><img src="https://mc.yandex.ru/watch/'.$metrikaID.'" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter --> 
  ';
+echo '<script type="text/javascript">
+  $(function() {
+  $(window).scroll(function() {
+  if($(this).scrollTop() != 0) {
+  $(\'#topcodbx\').fadeIn();
+  } else {
+  $(\'#topcodbx\').fadeOut();
+  }
+  });
+  $(\'#topcodbx\').click(function() {
+  $(\'body,html\').animate({scrollTop:0},700);
+  });
+  });
+  </script>
+   
+   <div id="topcodbx">
+   <img src="'.$domain.'/inc/images/icons/20xNx40.png.pagespeed.ic.eah0H26eCi.png" 
+   width="32px" height="32px" style="filter: invert(100%) drop-shadow(8px 8px 10px blue);"/></div> 
+'; 
  
  echo '
 </body></html>

@@ -1,5 +1,6 @@
 <?php
- 	
+  if(empty($templ))
+	die("PERMISSIONS DENIED!");	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +27,7 @@ else if((isLoginUser())&&(!empty($_SESSION['codbxuserexec'])))
     if(!file_exists($n))
 	mkdir($n, 0777, true);
  	$fpl = fopen($n.'exec.log', 'a+');
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP());
     fclose($fpl);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  echo "<head>
@@ -37,8 +38,89 @@ exit;
 }
 else if(isLoginUser())
 {
-echo '<center></br><b class="rainbowQ">В разработке! </b>
-</br></br></br> - Все эти игроки были забанены админом - </center>';	
+
+echo '<center></br><b class="rainbowQ">'.$i_online.'</b>
+</br>';
+///////////////// ajax
+include $cpath . "/engine/ajax_data/local_parser_db_set.php";
+echo get_local_source_db($domain.'/engine/template/users/logins.php?guid=x','2000');  
+
+
+echo '</br></br></br>
+<script>
+//JUST AN EXAMPLE, PLEASE USE YOUR OWN PICTURE!
+var imageAddr = "'.$domain.'/inc/images/bg.jpeg"; 
+var downloadSize = 122663; //bytes
+
+function ShowProgressMessage(msg) {
+    if (console) {
+        if (typeof msg == "string") {
+            console.log(msg);
+        } else {
+            for (var i = 0; i < msg.length; i++) {
+                console.log(msg[i]);
+            }
+        }
+    }
+    
+    var oProgress = document.getElementById("progress");
+    if (oProgress) {
+        var actualHTML = (typeof msg == "string") ? msg : msg.join("<br />");
+        oProgress.innerHTML = actualHTML;
+    }
+}
+
+function InitiateSpeedDetection() {
+    ShowProgressMessage("Loading the image, please wait...");
+    window.setTimeout(MeasureConnectionSpeed, 1);
+};    
+
+if (window.addEventListener) {
+    window.addEventListener(\'load\', InitiateSpeedDetection, false);
+} else if (window.attachEvent) {
+    window.attachEvent(\'onload\', InitiateSpeedDetection);
+}
+
+function MeasureConnectionSpeed() {
+    var startTime, endTime;
+    var download = new Image();
+    download.onload = function () {
+        endTime = (new Date()).getTime();
+        showResults();
+    }
+    
+    download.onerror = function (err, msg) {
+        ShowProgressMessage("'.$ispeederr.'");
+    }
+    
+    startTime = (new Date()).getTime();
+    var cacheBuster = "?nnn=" + startTime;
+    download.src = imageAddr + cacheBuster;
+    
+    function showResults() {
+        var duration = (endTime - startTime) / 1000;
+        var bitsLoaded = downloadSize * 8;
+        var speedBps = (bitsLoaded / duration).toFixed(2);
+        var speedKbps = (speedBps / 1024).toFixed(2);
+        var speedMbps = (speedKbps / 1024).toFixed(2);
+        ShowProgressMessage([ 
+            speedBps + " bps", 
+            speedKbps + " kbps", 
+            speedMbps + " Mbps"
+        ]);
+    }
+}
+</script>
+<center>
+<div style="overflow:auto;width:100%;padding:150 10px;"></div>
+<b class="rainbowQ">'.$ispeed.'</b></br>
+<b id="progress">'.$ispeedslow.'</b>
+</center>
+';
+
+/////////////////////////////////////////////////////////
+ 
+echo '</center>';	
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

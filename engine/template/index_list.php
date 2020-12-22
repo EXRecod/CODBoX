@@ -1,12 +1,20 @@
 <?php
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 if (isLoginUser()) {
 $nb_pages = 30;
 $ip = 'unknown';
  
 echo ' 
 <script src="'.$domain.'/data/graph/dynamics2.js"></script>
-<div class="content_block">
-<div style="overflow:auto;width:100%;padding:5 10px;">
+<div class="content_block">';
+
+echo '<div style="height:auto;overflow:auto;" class="content_block">
+<a href="' . $domain . '/list.php?collect=w" 
+style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 30px #fff, 0 0 4px #FFF, 
+0 0 7px #08e5c8, 0 0 18px #08e5c8, 0 0 40px #08e5c8, 0 0 65px #08e5c8;"><b> > '.$menu_detected.'... </b></a></div>';
+
+echo '<div style="overflow:auto;width:100%;padding:5 10px;">
 <h1>PLAYERLIST</h1> </div>';
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,62 +168,12 @@ margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($time.$i)
  <div style="color:#fff;">'.$serverx.'</div>
 </a>
 
-</div>
-
-
-
-<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:10px;">	
-<a href="'.$domain.'/stats.php?brofile='.$guidxx.'" 
-target="_blank" style="float:left;color:#854699;padding:4px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
-class="tags" glose="'.$menu_stats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[S]</b> </a>	
-</div>
-
-<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:10px;">	
-<a href="'.$domain.'/chat.php?search='.$guidxx.'" 
-target="_blank" style="float:left;color:#3f7689;padding:4px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
-class="tags" glose="'.$menu_chats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[C]</b> </a>
 </div>';
 
 
-if (isLoginUser()){
-if(!empty($_SESSION['codbxpasssteam']))
-$byWhois = isLoginUserWHO($_SESSION['codbxpasssteam']);
-else if(!empty($_COOKIE['user_online_login']))
-$byWhois = isLoginUserWHO($_COOKIE['user_online_login']);
-else if(!empty($_COOKIE['user_online_key']))
-$byWhois = isLoginUserWHO($_COOKIE['user_online_key']);
-else
-$byWhois = 'Who';
-$byWho = "&byadmin=".$byWhois;
-}
-else
-	$byWho = "&byadmin=null";
+ 
 
-$byWho = str_replace(" ", "_", $byWho);
-
-
-echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:10px;">		
-<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.$byWho.'" 
-target="_blank" style="float:left;color:#998546;padding:4px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
-class="tags" glose="💣'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'💣"> <b>[R]</b> </a>	
-</div>';
-
-
-echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:10px;">		
-<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.$byWho.'" 
-target="_blank" style="float:left;color:#998546;padding:4px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
-class="tags" glose="💣'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'💣"> <b>[IB]</b> </a>	
-</div>
-
-
-<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:12px;">		
-<a href="'.$domain.'/redirect.php?guid='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
-target="_blank" style="float:left;color:#995b46;padding:4px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
-class="tags" glose="'.$i_ban.'&nbsp;GUID:&nbsp;&nbsp;'.$xpnickname.'"> <b>[B]</b> </a>	
-</div>
-
-
-<div style="float:left;color:#fff;padding:9 5px;font-size:10px;line-height:8px;width:3px;text-align:center;">	
+echo '<div style="float:left;color:#fff;padding:9 5px;font-size:10px;line-height:8px;width:3px;text-align:center;">	
 </div>
 
 <div style="float:left;color:#fff;padding:12px;line-height:30px;text-align:left;width:90px;FONT-SIZE:18PX;min-width:60px;">
@@ -243,16 +201,36 @@ class="tags" glose="'.$i_ban.'&nbsp;GUID:&nbsp;&nbsp;'.$xpnickname.'"> <b>[B]</b
  
 echo '
 	</div>
+
+
 	
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:24px;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
  
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
 <a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$hj.'">	'.$ip.'</a></div> 
 	 
-	</div>
+	</div>';
+
+
+
+ 
+echo '	
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:24px;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
+<div class="rainbowQ" style="font-size:15px" id="contentcod_'.md5($guidxx).'"></div></div> 
+</div>';	
+	
+if(empty($countsc))
+	$countsc = 0; ++$countsc;
+
+
+	
+///////////////// ajax
+include $cpath . "/engine/ajax_data/url_parser_db_set.php";	
 	
 	
 	
+echo '	
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:24px;width:3px;overflow:auto;display:inline-block;flex-grow: 1;"> 
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;width:3px;">&nbsp  </div> 
 </div>	
@@ -261,21 +239,90 @@ echo '
 	
 </div>
 	
-<div style="line-height:30px;display:inline-block;width:20px;float:right;text-align:right;">&#9660;</div>
-	
-	
-<div id="match_sub'.md5($time.$i).'" style="display:none;width:calc(100% - 10px);font-size:10px;border-top: 1px solid #222;overflow:auto;margin-top:5px;padding:5px;background:#222;">
-	
-	
+<div style="line-height:30px;display:inline-block;width:20px;float:right;text-align:right;">&#9660;</div>	
+<div id="match_sub'.md5($time.$i).'" style="display:none;width:calc(100% - 10px);font-size:14px;border-top: 1px solid #222;overflow:auto;margin-top:5px;padding:5px;background:#222;">
+';
+
+
+
+
+echo '<div class="match_stats_adv" style="min-width:280px;">';
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/img.php?nicknameSearch='.$guidxx.'" 
+target="_blank" style="float:left;color:#609946;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;width:30px;" 
+class="tags" glose="[Sc]&nbsp;'.$menu_screens.':&nbsp;'.$xpnickname.'"> <b>[Sc]</b> </a>	
+</div>';
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/stats.php?brofile='.$guidxx.'" 
+target="_blank" style="float:left;color:#854699;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[St]&nbsp;'.$menu_stats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[St]</b> </a>	
+</div>';
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
+<a href="'.$domain.'/chat.php?search='.$guidxx.'" 
+target="_blank" style="float:left;color:#3f7689;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[C]&nbsp;'.$menu_chats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[C]</b> </a>
+</div>';
+
+
+if (isLoginUser()){
+if(!empty($_SESSION['codbxpasssteam']))
+$byWhois = isLoginUserWHO($_SESSION['codbxpasssteam']);
+else if(!empty($_COOKIE['user_online_login']))
+$byWhois = isLoginUserWHO($_COOKIE['user_online_login']);
+else if(!empty($_COOKIE['user_online_key']))
+$byWhois = isLoginUserWHO($_COOKIE['user_online_key']);
+else
+$byWhois = 'Who';
+$byWho = "&byadmin=".$byWhois;
+}
+else
+	$byWho = "&byadmin=null";
+
+$byWho = str_replace(" ", "_", $byWho);
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.$byWho.'" 
+target="_blank" style="float:left;color:#998546;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
+</div>';
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
+<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.$byWho.'" 
+target="_blank" style="float:left;color:#998546;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[IB]&nbsp;'.$i_ban.'&nbsp;IP:&nbsp;'.$xpnickname.'"> <b>[IB]</b> </a>	
+</div>';
+
+
+echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:22px;">		
+<a href="'.$domain.'/redirect.php?guid='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
+target="_blank" style="float:left;color:#995b46;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
+class="tags" glose="[B]&nbsp;'.$i_ban.'&nbsp;GUID:&nbsp;'.$xpnickname.'"> <b>[B]</b> </a>	
+</div>';
+
+
+echo '</div>';
+
+
+
+
+
+echo '		
 <div class="match_stats_adv" style="min-width:190px;">Time 
 <div style="color:#fff;min-width:190px;">'.$time.'</div></div>
 	 
 	
 <div class="match_stats_adv" style="min-width:100px;">Guid
-<div style="color:#fff;width:100px;">'.$guidxx.'</div></div>
+<div style="color:#fff;width:100px;">'.$guidxx.'</div></div>';
 
+echo '
 </div>
-	
 </div>';
 	
 }

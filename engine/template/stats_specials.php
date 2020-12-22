@@ -2,10 +2,11 @@
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
- if(empty($templ))
-	die("PERMISSIONS DENIED!");
 if(!empty($_GET['statsmedal']))
 {
+	
+if(!empty($_GET['guid']))
+	$guidn = $_GET['guid'];	
 	
 if (empty($cpath)) { 
   $cpath = dirname(__FILE__);
@@ -15,8 +16,8 @@ $cpath = str_replace("engine", "", $cpath);
 $cpath = str_replace("template", "", $cpath);
 $cpath = str_replace("//", "/", $cpath);
 
-//include($cpath. '/engine/ajax_data/cache-top.php');
-sleep(1);
+include($cpath. '/engine/ajax_data/cache-top.php');
+sleep(3);
 include($cpath ."/engine/functions/langctrl.php");
  
 $baseurlz = basename(__FILE__); 
@@ -24,73 +25,34 @@ $baseurlz = basename(__FILE__);
 include($cpath ."/engine/functions/main.php");
  
 ///////////////////////////////////////////
- $reponse = 'SELECT 
-       t1.s_guid,
-	   t1.s_pg,
-       t2.kdguidx,
-       t2.kdratio,
-       t3.headpercentguidx,
-       t3.headpercent, 
-       t4.s_killsguidx,
-       t4.medal_pro_killer,
-       t5.s_deathsguidx,
-       t5.deathstotal,
-	   t6.headsguidx,
-	   t6.medal_pro_headshot,
-	   t7.skillguidx,
-	   t7.skill,
-	   t8.medal_or_ak, 
-	   t8.medalakgui
-  
-      
-FROM   db_stats_0 t0 
-JOIN 
-       ( 
-              SELECT s_pg,s_guid 
-              FROM   db_stats_0) t1 
- 
-JOIN 
-       ( select s_kills as kdkills,s_deaths,s_pg as kdguidx, ROUND(s_kills/s_deaths, 2) AS kdratio
-FROM db_stats_1 where s_kills >= 1000 
-ORDER BY kdratio DESC LIMIT 1) t2
-
- 
-JOIN  ( select s_kills,s_deaths,s_pg as headpercentguidx, round((s_heads) * 100.0 / s_kills, 2) AS headpercent
-FROM db_stats_1 where s_kills >= 1000
-ORDER BY headpercent DESC LIMIT 1)  t3 
-
-
-JOIN  ( select s_kills,s_deaths,s_pg as s_killsguidx, s_kills AS medal_pro_killer
-FROM db_stats_1 where s_kills >= 1000
-ORDER BY medal_pro_killer DESC LIMIT 1)  t4  
-
-JOIN  ( select s_kills,s_deaths,s_pg as s_deathsguidx, s_deaths AS deathstotal
-FROM db_stats_1 where s_kills >= 1000
-ORDER BY deathstotal DESC LIMIT 1)  t5 
-
-JOIN  ( select s_heads,s_pg as headsguidx, s_heads AS medal_pro_headshot
-FROM db_stats_1 where s_kills >= 1000
-ORDER BY medal_pro_headshot DESC LIMIT 1)  t6
-
-JOIN  ( select s_pg as skillguidx, w_skill AS skill
-FROM db_stats_2 where w_skill >= 1000
-ORDER BY skill DESC LIMIT 1)  t7
-
-JOIN  ( select ak47_mp as medal_or_ak,s_pg as medalakgui
-FROM db_weapons_2 ORDER BY ak47_mp DESC LIMIT 1)  t8 
-
-LIMIT 1';
+ $reponse = 'SELECT `id`, `s_pg`, `claymore`, `c4`, `grenade`, `maps`, `heli`, `bombs`, `avia`, `artillery`, `camp`, `flags`, `saveflags`, `bonus`, `series`, 
+ `bomb_plant`, `bomb_defused`, `juggernaut_kill`, `destroyed_helicopter`, `rcxd_destroyed`, `turret_destroyed`, `sam_kill` FROM db_stats_3 WHERE s_pg = '.$_GET['guid'].' LIMIT 1';
 
 
 $xz = dbSelectALL('', $reponse);
 
-
+if(!empty($xz))
 foreach ($xz as $keym => $value) {
- $chk['skill'][$value['skill']] = $value['skillguidx'] ;
- //$chk['headpercent'][$value['headpercent']] = $value['headpercentguidx'];
- $chk['medal_pro_killer'][$value['medal_pro_killer']]  = $value['s_killsguidx'];
- $chk['medal_pro_headshot'][$value['medal_pro_headshot']] = $value['headsguidx']; 
- $chk['medal_or_ak'][$value['medal_or_ak']] = $value['medalakgui'];  
+ //$chk['claymore'][$value['claymore']] = $value['claymore'] ;
+ //$chk['c4'][$value['c4']] = $value['c4'];
+ //$chk['grenade'][$value['grenade']]  = $value['grenade'];
+ //$chk['maps'][$value['maps']] = $value['maps']; 
+ //$chk['heli'][$value['heli']] = $value['heli'];
+ $chk['bombs'][$value['bombs']] = $value['bombs'];
+ $chk['avia'][$value['avia']] = $value['avia'];  
+ $chk['artillery'][$value['artillery']] = $value['artillery']; 
+ $chk['camp'][$value['camp']] = $value['camp']; 
+ $chk['flags'][$value['flags']] = $value['flags']; 
+ $chk['saveflags'][$value['saveflags']] = $value['saveflags']; 
+ $chk['bonus'][$value['bonus']] = $value['bonus'];
+ $chk['series'][$value['series']] = $value['series'];  
+ $chk['bomb_plant'][$value['bomb_plant']] = $value['bomb_plant'];  
+ $chk['bomb_defused'][$value['bomb_defused']] = $value['bomb_defused'];  
+ $chk['juggernaut_kill'][$value['juggernaut_kill']] = $value['juggernaut_kill']; 
+ $chk['destroyed_helicopter'][$value['destroyed_helicopter']] = $value['destroyed_helicopter']; 
+ $chk['rcxd_destroyed'][$value['rcxd_destroyed']] = $value['rcxd_destroyed']; 
+ $chk['turret_destroyed'][$value['turret_destroyed']] = $value['turret_destroyed'];
+ $chk['sam_kill'][$value['sam_kill']] = $value['sam_kill'];   
 }
 	
 	
@@ -99,12 +61,11 @@ foreach ($xz as $keym => $value) {
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
-
+if(!empty($chk)){
 
 echo '<div class="content_block"> 
 <div style="overflow:auto;width:100%;padding:5 10px;">
-<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 30px #fff, 0 0 4px #FFF, 0 0 7px #08e5c8, 0 0 18px #08e5c8, 0 0 40px #08e5c8, 0 0 65px #08e5c8;">
-&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&nbsp;&nbsp;&nbsp;'.$menu_medals.'&nbsp;&nbsp;&nbsp;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;</b></div> 
+<h1>&nbsp;SPECIALS&nbsp;&nbsp;</h1></div> 
 
 <div style="    display: -webkit-flex;
     display: flex;
@@ -141,7 +102,7 @@ background-color:#000000aa;
 	 
 <div style="font-size:16px;padding:10px;background:#00000022;border:1px solid #090909;text-align:center;">
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 10px #fff, 0 0 4px #FFF, 0 0 3px #08e5c8, 0 0 6px #08e5c8, 0 0 4px #08e5c8, 0 0 3px #08e5c8;">
-'.$x_medals[$keym].'</b></div>
+'.$x_specialz[$keym].'</b></div>
 
 
 <div style="overflow:auto;">
@@ -151,8 +112,8 @@ background-color:#000000aa;
 
  
 
-if(file_exists($cpath .'/inc/images/medals/'.$keym.'.png'))
-echo '<img src="' . $domain . '/inc/images/medals/' . $keym . '.png" style="width:100%;max-width:150px;display: block;margin-left: auto;margin-right: auto;" >';
+if(file_exists($cpath .'/inc/images/specials/'.$keym.'.png'))
+echo '<img src="' . $domain . '/inc/images/specials/' . $keym . '.png" style="width:100%;max-width:150px;display: block;margin-left: auto;margin-right: auto;" >';
     
 	
 	
@@ -191,4 +152,6 @@ echo '<img src="' . $domain . '/inc/images/medals/' . $keym . '.png" style="widt
 
 }}
  echo '</div></div></div>';
+ include($cpath. '/engine/ajax_data/cache-bottom.php');
+ }
 ?>

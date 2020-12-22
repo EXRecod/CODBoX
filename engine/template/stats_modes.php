@@ -1,5 +1,6 @@
 <?php
-
+ if(empty($templ))
+	die("PERMISSIONS DENIED!");
 echo '<div class="content_block">
 	<a href="https://localhost/profile/ps4/drnachoo/modes">
 
