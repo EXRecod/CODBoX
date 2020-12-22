@@ -1168,12 +1168,17 @@ if(empty($openiduser))
 
 function isLoginUser()
 { 
-global $dbupw,$dbusss,$codbx_users,$openiduser;
+global $dbupw,$dbusss,$codbx_users,$steam_users_id,$openiduser,$dbupwopen;
  if((!empty($dbusss))&&(!empty($dbupw)))
  {
 if((isset($dbusss))&&(passwordfindcodxUser($dbupw,$codbx_users)))
  return true;
  }
+//else if(!empty($dbupwopen))
+// {
+//if((isset($dbupwopen))&&(passwordfindcodxUser($dbupwopen,$steam_users_id)))
+// return true;
+// }
 else if(!empty($openiduser))
  {
  return true;
@@ -1237,15 +1242,43 @@ function errorspd($s) {
   fwrite($fp, $s . "\n");
   fclose($fp);
 }
- /*
-if((!empty($_COOKIE["codbx_u"]))&&(empty($_SESSION['codbxuser'])))
-	$_SESSION['codbxuser'] = $_COOKIE["codbx_u"];
-if((!empty($_COOKIE["codbx_p"]))&&(empty($_SESSION['codbxpass'])))
-	$_SESSION['codbxpass'] = $_COOKIE["codbx_p"];
 
-if((empty($_COOKIE["codbx_u"]))&&(!empty($_SESSION['codbxuser'])))
-setcookie("codbx_u", $_SESSION['codbxuser'], time()+259200);
-if((empty($_COOKIE["codbx_p"]))&&(!empty($_SESSION['codbxpass'])))
-setcookie("codbx_p", $_SESSION['codbxpass'], time()+259200);
-*/	
+
+function getUserIP()
+{
+    // Get real visitor IP behind CloudFlare network
+    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+              $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+              $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote  = $_SERVER['REMOTE_ADDR'];
+
+    if(filter_var($client, FILTER_VALIDATE_IP))
+    {
+        $ip = $client;
+    }
+    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+    {
+        $ip = $forward;
+    }
+    else
+    {
+        $ip = $remote;
+    }
+
+    return $ip;
+}
+
+
+if((!empty($_COOKIE["user_online_key"]))&&(empty($_SESSION['codbxpasssteam'])))
+$_SESSION['codbxpasssteam'] = $_COOKIE["user_online_key"];
+if((!empty($_COOKIE["user_online_login"]))&&(empty($_SESSION['codbxpasssteam'])))
+$_SESSION['codbxpasssteam'] = $_COOKIE["user_online_login"];
+
+if((empty($_COOKIE["user_online_login"]))&&(!empty($_SESSION['codbxpasssteam'])))
+setcookie("codbxpasssteam", $_SESSION['codbxpasssteam'], time()+259200);
+if((empty($_COOKIE["user_online_key"]))&&(!empty($_SESSION['codbxpasssteam'])))
+setcookie("codbxpasssteam", $_SESSION['codbxpasssteam'], time()+259200); 
 ?>

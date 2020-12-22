@@ -11,7 +11,7 @@ if (empty($cpath)) {
 include($cpath ."/inc/data.php");
 include($xcpath ."/core/functions.php");
 include($xcpath ."/core/class.simpleSQLinjectionDetect.php");
-
+$templ = 1;
 
 $c = '';
 
@@ -19,9 +19,11 @@ if(((strpos($_SERVER['REQUEST_URI'], 'openid.signed')) !== false)&&((strpos($_SE
 $_POST['loginsteam']='OK';
 
 
-if(isLoginUser())
- {
-    header("Location:index.php"); 
+if(isLoginUser()){
+if((strpos($_SERVER['REQUEST_URI'], 'img.php')) !== false) 
+	header($_SERVER['REQUEST_URI']); 
+else 
+	header("Location:index.php");
  }
 else if((isLoginUser() == false)&&(isset($_POST['loginsteam'])))
  {
@@ -64,9 +66,11 @@ if (!isset($_COOKIE['user_online_login']))
 {
 $parsehost = parse_url($domain);
 $gamehost = $parsehost['host'];
-setcookie("user_online_login", trim($md5plpsw), time()+459200, "/~cookie_".$md5plpsw."/", $gamehost, 1);
-setcookie('user_online_key', $md5passw, time()+459200);
 $_SESSION['codbxpasssteam'] = $md5passw;
+//setcookie("user_online_login", trim($md5plpsw), time()+459200, "/~cookie_".$md5plpsw."/", $gamehost, 1);
+//setcookie('user_online_key', $md5passw, time()+459200);
+          setcookie("user_online_login", $_SESSION['codbxpasssteam'], time()+259200);
+          setcookie("user_online_key", $_SESSION['codbxpasssteam'], time()+259200);
 $c = "<script language = 'javascript'>
   var delay = 5000;
   setTimeout(\"document.location.href='".$domain."/admin/index.php'\", delay);</script>
@@ -80,7 +84,7 @@ if(!file_exists($n))
 
 $guid = '';
 $reponse = 'SELECT x_db_ip,x_db_name,x_db_guid,s_port,x_db_conn,x_db_date,x_date_reg 
-FROM x_db_players where x_db_ip='.$_SERVER['REMOTE_ADDR'].' DESC LIMIT 1';
+FROM x_db_players where x_db_ip='.getUserIP().' DESC LIMIT 1';
 	  $xz = dbSelectALLADMIN('', $reponse);
 	  if(is_array($xz))
 	  {
@@ -92,9 +96,9 @@ $guid = $dannye['x_db_guid']; $namr = $dannye['x_db_name']; $guid = $dannye['x_d
 
  	$fpl = fopen($n.'steams.log', 'a+');
 	if(!empty($guid))
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']."  GUID: ".$guid." NICK: ".$namr);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP()."  GUID: ".$guid." NICK: ".$namr);
       else
-	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".$_SERVER['REMOTE_ADDR']);
+	fwrite($fpl, "\n Date: ".date("Y.m.d H:i:s")." IP: ".getUserIP());
     fclose($fpl);		
 
 
@@ -111,7 +115,6 @@ $guid = $dannye['x_db_guid']; $namr = $dannye['x_db_name']; $guid = $dannye['x_d
 } catch(ErrorException $e) {
  echo $e->getMessage();
 }
- 
 }
 else if(isset($_POST['loginbx']))
 {

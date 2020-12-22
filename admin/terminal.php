@@ -3,7 +3,7 @@ if (empty($cpath)) {
   $cpath = dirname(__FILE__);
   $xcpath = $cpath;
 }
-
+$templ = 1;
 include($cpath ."/inc/data.php"); 
  function passwordfindcodxUser($passsession,$codbx_users)
 {
