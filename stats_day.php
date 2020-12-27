@@ -16,6 +16,9 @@ $baseurlz = basename(__FILE__);
 
 include($cpath ."/engine/functions/main.php");
 
+if (!isLoginUser())
+FloodDetection();
+
 include('cache-top.php');
  
 include($cpath ."/engine/template_combinations/st_day.php");

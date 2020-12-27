@@ -12,6 +12,9 @@ include($cpath ."/engine/functions/langctrl.php");
 $baseurlz = basename(__FILE__); 
 include($cpath ."/engine/functions/main.php");
 
+if (!isLoginUser())
+FloodDetection();
+
 if(isLoginUser())
 {
 include('cache-top.php');	

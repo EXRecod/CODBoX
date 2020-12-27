@@ -1,0 +1,20 @@
+[26-Dec-2020 19:18:03 UTC] PHP Warning:  Division by zero in C:\wamp\www\codbx\engine\template\stats_xday.php on line 125
+[26-Dec-2020 19:18:03 UTC] PHP Stack trace:
+[26-Dec-2020 19:18:03 UTC] PHP   1. {main}() C:\wamp\www\codbx\stats_day.php:0
+[26-Dec-2020 19:18:03 UTC] PHP   2. include() C:\wamp\www\codbx\stats_day.php:24
+[26-Dec-2020 19:18:03 UTC] PHP   3. include() C:\wamp\www\codbx\engine\template_combinations\st_day.php:12
+[27-Dec-2020 13:22:04 UTC] PHP Warning:  Division by zero in C:\wamp\www\codbx\engine\template\stats_xday.php on line 125
+[27-Dec-2020 13:22:04 UTC] PHP Stack trace:
+[27-Dec-2020 13:22:04 UTC] PHP   1. {main}() C:\wamp\www\codbx\stats_day.php:0
+[27-Dec-2020 13:22:04 UTC] PHP   2. include() C:\wamp\www\codbx\stats_day.php:24
+[27-Dec-2020 13:22:04 UTC] PHP   3. include() C:\wamp\www\codbx\engine\template_combinations\st_day.php:12
+[27-Dec-2020 13:22:06 UTC] PHP Warning:  Division by zero in C:\wamp\www\codbx\engine\template\stats_xday.php on line 125
+[27-Dec-2020 13:22:06 UTC] PHP Stack trace:
+[27-Dec-2020 13:22:06 UTC] PHP   1. {main}() C:\wamp\www\codbx\stats_day.php:0
+[27-Dec-2020 13:22:06 UTC] PHP   2. include() C:\wamp\www\codbx\stats_day.php:24
+[27-Dec-2020 13:22:06 UTC] PHP   3. include() C:\wamp\www\codbx\engine\template_combinations\st_day.php:12
+[27-Dec-2020 13:22:08 UTC] PHP Warning:  Division by zero in C:\wamp\www\codbx\engine\template\stats_xday.php on line 125
+[27-Dec-2020 13:22:08 UTC] PHP Stack trace:
+[27-Dec-2020 13:22:08 UTC] PHP   1. {main}() C:\wamp\www\codbx\stats_day.php:0
+[27-Dec-2020 13:22:08 UTC] PHP   2. include() C:\wamp\www\codbx\stats_day.php:24
+[27-Dec-2020 13:22:08 UTC] PHP   3. include() C:\wamp\www\codbx\engine\template_combinations\st_day.php:12
