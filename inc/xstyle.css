@@ -1,0 +1,35 @@
+.server_menu_image
+{
+    background-image: url(../inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;	
+    height:14px;
+	width:14px;
+    margin:3 3 3 3px;
+}
+
+.server_menu_selected
+{
+align-content:center;
+filter: contrast(200%);
+}
+
+.server_menu_noselected
+{
+align-content:center;
+filter: drop-shadow(36px 56px 20px white) grayscale(90%) invert(95%);
+}
+
+.server_foot_paginator
+{
+position:relative;
+left:0px;
+top:0px;
+width:100%;
+height:30px;
+text-align:center;
+font-size:16px;
+font-weight:900;
+padding: 17 5px;
+}
