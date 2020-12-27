@@ -479,7 +479,7 @@ echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 echo '<br/>
 
 <div style="height:auto;overflow:auto;align-content:center;display: flex;flex-wrap: wrap;box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;" class="content_block">
-<div style="position:relative;left:0px;top:0px;width:100%;height:50px;text-align:center;font-weight:900;">';
+<div class="server_foot_paginator">';
 
  
 $pageskey = '<a href="'.$domain.'/list_ip_ban.php?server=' . $server .'&search=' . $search .

@@ -49,18 +49,14 @@ foreach ($multi_servers_array as $arx => $f) {
 			 
 			 if((strpos(trim(clean($p)), trim(clean($srvlist))) !== false)||(strpos(trim(clean($srvlist)), trim(clean($p))) !== false))
 			 {
-			 echo '<div style="align-content:center;filter: contrast(200%);">
-		<a href="'.$domain.'/'.$baseurlz.'?server='.urlencode($p).'">  
-		<img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;margin:1 3 0 3px;"><b>',colorize($f),'</b>
-		</a></div>';				 
+			 echo '<div class="server_menu_selected">
+	 <a href="'.$domain.'/'.$baseurlz.'?server='.urlencode($p).'" class="server_menu_image"><b>',colorize($f),'</b></a></div>';				 
 			 //echo $value['s_port']; 
 			 }
 			 else
 			 { 
-		 echo '<div style="align-content:center;filter: grayscale(85%);">
-	 <a href="'.$domain.'/'.$baseurlz.'?server='.urlencode($p).'">
-		 <img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;margin:1 3 0 3px;">
-		 ',colorize($f),'</a></div>';
+		 echo '<div class="server_menu_noselected">
+	 <a href="'.$domain.'/'.$baseurlz.'?server='.urlencode($p).'" class="server_menu_image"><b>',colorize($f),'</b></a></div>';
 			 }
 			  
             }

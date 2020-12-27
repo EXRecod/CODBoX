@@ -171,23 +171,39 @@ foreach ($xz as $key => $val) {
 		if($ereason == 1){ if(!empty($esserver))$nv = 'by '.$esserver.''; else $nv = 'by Unknown'; }else $nv = '';
 		
 		$rrr = 'color:#fff; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;';
-		
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (isLoginUser())
+{
+	
+if($ereason == 1)
+$real = ' ';
+else	  
+$real = ' ';
+
+	
+    $specialssyst = $real;
+}
+else
+	$specialssyst = "";
+
+
+
+
 
 echo '
 <div class="'.$fv.'" id="screeen">  '.$nv.'
-	    <a href="' . $image . '" class=\'fresco\' data-fresco-group="example" data-fresco-caption="' . clean($eplayer) . ' ✔ ' . $eguid . ' ✔ ' . $etime . ' ✔ ' . clean($servernamet) . '">
+<div class="box-crew"><a href="' . $image . '" class=\'fresco\' data-fresco-group="zxzx" 
+data-fresco-caption="'.$specialssyst.' ' . clean($eplayer) . ' ✔ ' . $eguid . ' ✔ ' . $etime . ' ✔ ' . clean($servernamet) . '">
         
-<div class="box-crew"><span class="gallery-icon lazy'.$hv.'" style="display:inline-block;background-size: 100% 100%; background-repeat: no-repeat; background-image: url(' . $image . ');"></span></a>		
-		<div class="caption" id="galerry_' . md5($servernamet) . '">
-		
-		
-		
-		
-		
-		
-		
-		
-		
+<span class="gallery-icon lazy'.$hv.'" style="display:inline-block;
+background-size: 100% 100%; background-repeat: no-repeat; 
+background-image: url(' . $image . ');" oncontextmenu="return false"></span></a>		
+<div class="caption" id="galerry_' . md5($servernamet) . '">
+
 <div style="float:center;font-size:15px;'.$rrr.'">	
 
 </br>
@@ -197,19 +213,14 @@ echo '
 <a href="' . $domain . '/img.php?nicknameSearch=' . $eguid . '">
 <span style="float:center;font-size:14px;color:#eee; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;">' . $eguid . '</span></a>
 
+<div style="left:4px;height:12px;text-align:right;color:orange;">' . $u . '</div>
 
- <div style="left:4px;height:12px;text-align:right;color:orange;">' . $u . '</div>
-
-
-</div>';
+ ';
 
 
 
+echo '<dt>';
 
-
-
-
-		echo '<dt>';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if (isLoginUser()){
 if(!empty($_SESSION['codbxpasssteam']))
@@ -228,15 +239,18 @@ else
 if (isLoginUser()){
 if($ereason == 1)
 echo '<a href="' . $domain . '/redirect.php?unban=' . $eguid . '&guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($servernamet) .$byWho. '" class="name" target="_blank"> 
-	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
+	  &emsp;<b class="tags" glose="'.$i_unban.'">
+	  <img style="width:40px;height:40px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 else	  
 echo '<a href="' . $domain . '/redirect.php?guid=' . $eguid . '&ip=0&nickname=' . $eplayer . '&url=' . urlencode($image) . '&qserver=' . urlencode($servernamet) .$byWho. '" class="name" target="_blank"> 
-	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="'.$i_ban.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
+	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="'.$i_ban.'">
+	  <img style="width:40px;height:40px;" src="' . $domain . '/inc/images/ban.png"></b></a>';	 		  
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 echo '<a href="' . $domain . '/list.php?listguid=' . $eguid . '" class="name" target="_blank"> 
-	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="LIST"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/status/online.png"></b></a>';	  
+	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="LIST">
+	  <img style="width:40px;height:40px;" src="' . $domain . '/inc/images/status/online.png"></b></a>';	  
 
 echo '<a href="' . $domain . '/chat.php?search=' . $eguid . '" class="name" target="_blank"> 
 	  &emsp;&emsp;&emsp;&emsp;<b class="tags" glose="'.$i_chat.'"><img style="width:40px;height:40px;" src="' . $domain . '/inc/images/flags-mini/AQ.png"></b>&emsp;</a>';		  	  
@@ -257,17 +271,22 @@ echo '<a href="' . $domain . '/admin/login.php" class="name" target="_blank">
 */
 
 
-echo '
-
-<span style="padding: 0px 15px;">&nbsp;</span>
+echo '<span style="padding: 0px 15px;">&nbsp;</span>
 <a href="' . $domain . '/stats.php?brofile=' . $eguid . '&s=' . urlencode($servernamet) . '" class="name" target="_blank"> 
 <b class="tags" glose="'.$i_stats.'"><img src="' . $domain . '/inc/images/statics.png"></b> <span>&nbsp;</span>     </a>';
 
+
  ////////////////////////////////////////////////////////  
  $x = 0; $ht = '';
- foreach ($screenshots as $w => $r) {
-  if (($x % 2) == 0) $weburl = $screenshots[$x]['web_url']; else  $folder = $screenshots[$x]['folder'];    
-     if(strpos($image, $weburl) !== false){ if(!empty($folder))$ht = $folder.basename($image);} ++$x;}
+ foreach ($screenshots as $w => $r) 
+ {
+  if (($x % 2) == 0) 
+	  $weburl = $screenshots[$x]['web_url']; 
+  else  
+	  $folder = $screenshots[$x]['folder'];  
+     if(strpos($image, $weburl) !== false){ if(!empty($folder))
+		 $ht = $folder.basename($image);} ++$x;
+ }
 ////////////////////////////////////////////////////////
 
  	
@@ -279,35 +298,8 @@ echo '<button id="button1"><img style="width:15px;height:15px;margin-top:3px;" s
 echo '&emsp;</a>';
 
 
-echo '</dt>';
 
- 
-
-
-
- 
-
- 
-
-echo '</div>';
-echo '</div>
-
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-';
+echo '</dt></div></div></div></div>';
 }
 	
 if(!empty($eguid))
@@ -322,13 +314,11 @@ echo '<script type=\'text/javascript\'>
 
 if(!empty($bannedscrx)) $jkl = '&bannedscr='.md5($sbff); else $jkl = '';
 echo '</div></div> 
-<script type="text/javascript" src="' . $domain . '/inc/inc_screenshots/jquery-2.1.0.min.js">
+<script type="text/javascript" src="' . $domain . '/inc/inc_screenshots/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="' . $domain . '/inc/inc_screenshots/lazyload.min.js"></script>';
 
-
-
-</script><script type="text/javascript" src="' . $domain . '/inc/inc_screenshots/lazyload.min.js"></script>';
 echo '<br/><div style="height:auto;overflow:auto;align-content:center;display: flex;flex-wrap:wrap;box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;" class="content_block">
-<div style="position:relative;left:0px;top:0px;width:100%;height:50px;text-align:center;font-weight:900;">';
+<div class="server_foot_paginator">';
 $pageskey = '<a href="' . $domain . '/img.php?server=' . $server.$jkl.'&search=' . $search .'&nicknameSearchguid=' . $nicknameSearchguid .'&nicknameSearch=' . $nicknameSearch . '&page=';
 // Проверяем нужны ли стрелки назад
 if ($page != 1) $pervpage = $pageskey . '1" class="paginator">' . $t_page_first . '</a> | ' . $pageskey . ($page - 1) . '" class="paginator">' . $t_page_pre . '</a> | ';

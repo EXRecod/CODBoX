@@ -11,7 +11,8 @@ $urlty = str_replace('/codbx/chat.php?', '', $urlREQUEST);
   
 ///////////////// ajax
 include $cpath . "/engine/ajax_data/local_parser_db_set.php";
-echo get_local_source_db($domain.'/engine/template/chat.php?timer='.base64_encode($urlREQUEST).'&'.$urlty,'30000');   
+$xcontent = get_local_source_db($domain.'/engine/template/chat.php?timer='.base64_encode($urlREQUEST).'&'.$urlty,'30000'); 
+echo $xcontent;
 
 include $cpath . "/engine/template/footer.php";
 ?>

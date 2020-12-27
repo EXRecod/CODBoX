@@ -1,6 +1,8 @@
 <?php session_start();
 if(!empty($_GET['timer'])){
  
+if (strpos($_SERVER["HTTP_REFERER"], 'chat.php') !== false)
+{	
 
 $guidn  = $_GET['timer'];
 $chattimer =  base64_decode($guidn);
@@ -306,7 +308,7 @@ if (empty($brofile)) {
 		echo '<br/>
 
 <div style="height:auto;overflow:auto;align-content:center;display: flex;flex-wrap: wrap;box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;" class="content_block">
-<div style="position:relative;left:0px;top:0px;width:100%;height:50px;text-align:center;font-weight:900;">';
+<div class="server_foot_paginator">';
 		$pageskey = '<a href="' . $domain . '/chat.php?server=' . $server . '&search=' . $search . '&geo=' . $geosearch . '&timeq=' . $timeq . '&page=';
 		// Проверяем нужны ли стрелки назад
 		if ($page != 1) $pervpage = $pageskey . '1" class="paginator">' . $t_page_first . '</a> | ' . $pageskey . ($page - 1) . '" class="paginator">' . $t_page_pre . '</a> | ';
@@ -338,5 +340,6 @@ if (empty($brofile)) {
 }
 
 include($cpath. '/engine/ajax_data/cache-bottom.php');
+}
 }
 ?>

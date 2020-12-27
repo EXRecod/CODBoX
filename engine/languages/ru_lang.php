@@ -10,6 +10,8 @@
  $ispeed = 'Скорость вашего подключения:';
  $ispeedslow = 'JavaScript отключен или ваш браузер работает очень медленно'; 
  $ispeederr = 'Неверное изображение или ошибка загрузки';
+
+ $downloadx = 'Загрузка';
  
  $listtipproxy = 'Прокси игроки.';  
  $ilisttipproxy = 'Список&nbsp;новых&nbsp;игроков&nbsp;с&nbsp;подозрительными&nbsp;ип.';
@@ -58,7 +60,9 @@
   $menu_screens    = 'Скриншоты';  
   $menu_detected   = 'Подозрительные';
   
-
+  $makescreens    = 'Сделать&nbsp;снимок';
+  $makescreenserrr    = 'Игрок&nbsp;вышел.';
+  $makescreen    = 'Снимок&nbsp;создан.';
   $take_screen = "Забрать скриншот! Жди 5 сек.";
   $t_players = "Игроки";
   
@@ -117,7 +121,16 @@
   $t_total_players_w = 'За неделю играло игроков';   
   $t_total_players_y = 'Вчера играло игроков';
   $t_total_players_m = 'За месяц играло игроков'; 
-  $t_total_players_v = 'Посетило за месяц игроков';   
+  $t_total_players_v = 'Посетило за месяц игроков';
+
+
+  $t_total_players_tt = 'Всего сегодня игроков';
+  $t_total_players_ww = 'Всего за неделю игроков';   
+  $t_total_players_yy = 'Всего вчера игроков';
+  $t_total_players_mm = 'Всего за месяц игроков'; 
+  $t_total_players_vv = 'Всего за месяц игроков';  
+  
+  
   $t_killx2 = ' количество фрагов в таблице лидеров'; //kills on top
   $t_tsek = 'сек.';
   $t_cachedw = 'Сохранено в '; //Cached with
@@ -160,10 +173,24 @@
  $x_medals['medal_pro_killer'] = 'Киллер';
  $x_medals['medal_pro_headshot'] = 'Хедшотер';
  $x_medals['medal_or_ak'] = 'АК-47 Мастер';
- $x_medals[''] = '';
- $x_medals[''] = '';  
+ $x_medals['headpercent'] = 'В голову %';
+ $x_medals['kdratio'] = 'K/D';
  
- $x_specialz[''] = '';
+$x_specialz['bombs'] = 'Бомбы';
+$x_specialz['avia'] = 'Авиоудары';  
+$x_specialz['artillery'] = 'Артиллерия'; 
+$x_specialz['camp'] = 'Сидящий на месте'; 
+$x_specialz['flags'] = 'Установил флагов'; 
+$x_specialz['saveflags'] = 'Защита флагов'; 
+$x_specialz['bonus'] = 'Бонусы';
+$x_specialz['series'] = 'Серии';  
+$x_specialz['bomb_plant'] = 'Установка бомб';  
+$x_specialz['bomb_defused'] = 'Снято бомб';  
+$x_specialz['juggernaut_kill'] = 'Джагер'; 
+$x_specialz['destroyed_helicopter'] = 'Уничтожил вертолетов'; 
+$x_specialz['rcxd_destroyed'] = 'Уничтожил rcxd'; 
+$x_specialz['turret_destroyed'] = 'Уничтожил turret';
+$x_specialz['sam_kill'] = 'Уничтожил sam'; 
   
   
 $shotz = '[Выстрелы]';   

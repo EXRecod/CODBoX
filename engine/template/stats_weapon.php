@@ -1,7 +1,8 @@
 <?php 
 if(!empty($_GET['guid'])){
 	$guidn = $_GET['guid'];
-
+if (strpos($_SERVER["HTTP_REFERER"], 'stats.php') !== false)
+{	
 if (empty($cpath)) { 
   $cpath = dirname(__FILE__);
 }
@@ -157,5 +158,6 @@ echo '
 	
 echo '</div></div>';
 include($cpath. '/engine/ajax_data/cache-bottom.php');
+}
 }
 ?>

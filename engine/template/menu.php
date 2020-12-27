@@ -130,33 +130,16 @@ if(strpos($arxx, "login.php") !== false)
  $rc = 	'';
 
 if((trim($baseurlz))==(trim(basename($arxx))))
-   echo '<div class="profile_menu_active">
-
-<a href="'.$arxx.'" 
-style="color:#000;
-text-shadow: 
-0 0 1px #fff, 
-0 0 2px #fff, 
-0 0 30px #fff, 
-0 0 4px #FFF, 
-0 0 7px #068399, 
-0 0 18px #068399, 
-0 0 40px #068399, 
-0 0 65px #068399;" '.$rc.'>'.$namessylka.'</a>';   
+{
+echo '<div class="profile_menu_active">
+<a href="'.$arxx.'" class="menu_head" '.$rc.'>'.$namessylka.'</a>';
+}   
 else
+{
    echo '<div class="profile_menu">
-<a href="'.$arxx.'" style="color:#000;
-text-shadow: 
-0 0 1px #fff, 
-0 0 2px #fff, 
-0 0 30px #fff, 
-0 0 4px #FFF, 
-0 0 7px #068399, 
-0 0 18px #068399, 
-0 0 40px #068399, 
-0 0 65px #068399;" '.$rc.'>'.$namessylka.'</a>';   
-	
+<a href="'.$arxx.'" class="menu_head" '.$rc.'>'.$namessylka.'</a>';   
 
+}
 echo '</div>';
 }
 

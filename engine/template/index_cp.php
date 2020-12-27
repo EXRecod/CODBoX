@@ -43,7 +43,8 @@ echo '<center></br><b class="rainbowQ">'.$i_online.'</b>
 </br>';
 ///////////////// ajax
 include $cpath . "/engine/ajax_data/local_parser_db_set.php";
-echo get_local_source_db($domain.'/engine/template/users/logins.php?guid=x','2000');  
+$xcontent = get_local_source_db($domain.'/engine/template/users/logins.php?guid=x','2000');
+echo $xcontent;
 
 
 echo '</br></br></br>

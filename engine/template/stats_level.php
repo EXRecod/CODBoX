@@ -23,7 +23,7 @@ echo '<div style="height:auto;overflow:auto;-webkit-justify-content: space-betwe
   border-radius: 50%;border:1px solid #333;
   position:relative;padding:10px;">
   
-<div style="position:absolute;left:0px;top:0px;width:100%;height:45px;text-align:center;font-weight:900;">
+<div style="position:absolute;left:0px;top:0px;width:100%;height:45px;text-align:center;font-weight:900;"></br>
   
 <div style="line-height:50px;font-size:24px;">'.$rankxx.'</div>
   </div>

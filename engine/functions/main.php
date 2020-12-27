@@ -619,6 +619,57 @@ $db = new PDO('sqlite:'. $cpath . '/data/db/users/'.$SqlDataBase);
 
 
 
+function DataSqlLiteDB($SqlDataBase,$query,$wherefile) {
+  $result = '';
+  $rt = '';
+  global $cpath, $msqlconnect, $host_adress, $db_name, $db_user, $db_pass;
+  try { 
+$db = new PDO('sqlite:'. $wherefile);
+ $rt = $db->query($query);
+ if ($rt) {
+     $result=$rt->fetchAll();
+ }
+ else {
+      // Handle errors
+	  errorspdo("[" .date("Y.m.d H:i:s")."]  " . __FILE__ . "
+       \n # SqlDataBase : $SqlDataBase, msqlconnect: $msqlconnect, host_adress: $host_adress, db_name: $db_name
+	   \n # $query \n\n");
+        }	
+    $db = null;
+  }
+  catch(PDOException $e) 
+  {
+    errorspdo("[" .date("Y.m.d H:i:s")."] 496 " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+  }
+  if(empty($result))
+  return $rt;
+   else
+	 return $result; 
+}
+
+
+function DataSqlLitecreateDB($wherefile,$data) { 
+global $cpath;
+ if(file_exists($wherefile)){
+if((filesize($wherefile))< 2)
+unlink($wherefile);
+ }
+ if(!file_exists($wherefile)){
+try
+  {
+    $admins = new PDO('sqlite:'. $wherefile);
+    $admins->exec($data); 
+    $admins = NULL;
+  }
+  catch(PDOException $e)
+  {
+    errorspdo('FILE:  ' . __FILE__ . '  Exception : ' . $e->getMessage());
+  } 
+ if(!file_exists($wherefile)){
+echo "</br></br></br></br></br></br></br><h1> Can't write database in folder $wherefile</h1>";
+}}}
+
+
 function badwordslisting($player_msg) {
 	  global $cpath;
 	  $stolwlp = 0;
@@ -1864,11 +1915,11 @@ createscreeninsertadmins('online.rcm', $sql);
 
 $yy = "SELECT * FROM users ORDER BY time desc LIMIT 20";
 $uxz = createscreeninsertadmins('online.rcm', $yy);
-echo '<b style="position:absolute;color:lime;padding: 20 18px;font-size:18px;"> &emsp;'.$i_online.'.</b>';
+//echo '<b style="position:absolute;color:lime;padding: 20 18px;font-size:18px;"> &emsp;'.$i_online.'.</b>';
 if(is_array($uxz))
 {
 $h = 0;
-echo '<div style="position:absolute;color:white;padding:20 40px;font-size:15px;">';	 
+//echo '<div style="position:absolute;color:white;padding:20 40px;font-size:15px;">';	 
 foreach ($uxz as $p => $sd) {
 	    ++$h;	
 	    $uip = $sd['ip'];
@@ -1877,16 +1928,31 @@ foreach ($uxz as $p => $sd) {
 		$secondx = $ddater-$utime;
 
 if((!empty($uuser))&&($secondx<300)){
-echo '<b style="color:white;font-size:17px;"></br>['.$h.']</b> <b style="color:orange;font-size:17px;">'.$uuser.'</b> 
-	: <b style="color:yellow;font-size:17px;">'.$secondx.'(sec.)</b>';
+//echo '<b style="color:white;font-size:17px;"></br>['.$h.']</b> <b style="color:orange;font-size:17px;">'.$uuser.'</b> : <b style="color:yellow;font-size:17px;">'.$secondx.'(sec.)</b>';
 }		
 }
-echo '</div>';
+//echo '</div>';
 }
 }
 }
 }
 }
 }
+}
+function FloodDetection(){
+	/*
+if (!isset($_SESSION)) {
+	session_start();
+}
+if(!empty($_SESSION['last_session_request']))
+{
+if($_SESSION['last_session_request'] > time() - 3){
+    // users will be redirected to this page if it makes requests faster than 2 seconds
+    header("location: https://youtu.be/j9V78UbdzWI?t=38");
+    exit;
+}
+}
+$_SESSION['last_session_request'] = time();
+*/
 }
 ?>

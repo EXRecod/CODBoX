@@ -44,19 +44,19 @@ echo '
 
 <a href="'.$domain.'/stats_maps.php" target="_blank"> &nbsp;&nbsp;&nbsp;&nbsp;
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
-0 0 5px #08e5c8;"> > '.$x_top_maps.'</b></a> 
+0 0 5px #08e5c8;"> '.$x_top_maps.'</b></a> 
 
 <a href="'.$domain.'/stats_day.php" target="_blank"> &nbsp;&nbsp;&nbsp;&nbsp; 
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
-0 0 5px #08e5c8;"> > '.$x_top_day.'</b></a> 
+0 0 5px #08e5c8;"> '.$x_top_day.'</b></a> 
 
 <a href="'.$domain.'/stats_week.php" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
-0 0 5px #08e5c8;"> > '.$x_top_week.'</b></a> 
+0 0 5px #08e5c8;"> '.$x_top_week.'</b></a> 
 
 <a href="'.$domain.'/stats_medals.php" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;
 <b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 3px #fff, 0 0 4px #FFF, 0 0 7px #fff, 0 0 1px #08e5c8, 0 0 10px #08e5c8, 
-0 0 5px #08e5c8;"> > '.mb_strtoupper($menu_medals).'</b></a> 
+0 0 5px #08e5c8;"> '.mb_strtoupper($menu_medals).'</b></a> 
 
  
  </div></div>  
@@ -452,7 +452,7 @@ for ($i = 1 ; $i <= $nb_pages ; $i++)
 echo '<br/>
 
 <div style="height:auto;overflow:auto;align-content:center;display: flex;flex-wrap: wrap;box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;" class="content_block">
-<div style="position:relative;left:0px;top:0px;width:100%;height:50px;text-align:center;font-weight:900;">';
+<div class="server_foot_paginator">';
 
  
 $pageskey = '<a href="'.$domain.'/stats.php?server=' . $server .'&search=' . $search .

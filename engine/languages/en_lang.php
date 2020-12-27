@@ -23,6 +23,8 @@
   $ispeed = 'Your connection speed is:';
  $ispeedslow = 'JavaScript is turned off, or your browser is realllllly slow'; 
  $ispeederr = 'Invalid image, or error downloading';
+ 
+ $downloadx = 'Loading';
   
  $menu_enter      = 'Admin';
  $menu_out      = 'Exit';
@@ -61,6 +63,9 @@
  $i_searchdd = 'Search in DB-2';
  $i_searchddf = 'Search in DB-2'; 
 
+  $makescreens    = 'Get&nbsp;Screenshot';
+  $makescreenserrr    = 'Player&nbsp;offline.';
+  $makescreen    = 'Screen&nbsp;maked.';  
   $take_screen = "Take Screenshot! Wait 5 sec.";
   $t_players = "Players";
   
@@ -115,12 +120,23 @@
   $t_search = 'Search';
   $t_gen = 'Generation time:';
   $t_top = 'Top';
+  
   $t_total_players = 'Total players on all servers'; //Total players on all servers
   $t_total_players_t = 'Today players played';
   $t_total_players_y = 'Yesterday players played';
   $t_total_players_w = 'Week players played';  
   $t_total_players_m = 'Month players played'; 
-  $t_total_players_v = 'Visited players total';  
+  $t_total_players_v = 'Visited players total';
+  
+  
+
+  $t_total_players_tt = 'All today players';
+  $t_total_players_ww = 'All week players';   
+  $t_total_players_yy = 'All yesterday players';
+  $t_total_players_mm = 'All months players'; 
+  $t_total_players_vv = 'All visited players';   
+
+  
   $t_killx2 = ' kills on top'; //kills on top
   $t_tsek = ' sec.';
   $t_cachedw = 'Cached with '; //Cached with
@@ -162,12 +178,24 @@
  $x_medals['medal_pro_killer'] = 'Killer';
  $x_medals['medal_pro_headshot'] = 'HeadShot master';
  $x_medals['medal_or_ak'] = 'АК-47 Pro';
- $x_medals[''] = '';
- $x_medals[''] = '';
- 
- 
- $x_specialz[''] = '';
-  
+ $x_medals['headpercent'] = 'HeadShot %';
+ $x_medals['kdratio'] = 'K/D'; 
+
+$x_specialz['bombs'] = 'Bombs';
+$x_specialz['avia'] = 'Avia';  
+$x_specialz['artillery'] = 'Artillery'; 
+$x_specialz['camp'] = 'Camp'; 
+$x_specialz['flags'] = 'Flags'; 
+$x_specialz['saveflags'] = 'Save flags'; 
+$x_specialz['bonus'] = 'Bonus';
+$x_specialz['series'] = 'Series';  
+$x_specialz['bomb_plant'] = 'Bomb plant';  
+$x_specialz['bomb_defused'] = 'Bomb defused';  
+$x_specialz['juggernaut_kill'] = 'Juggernaut kill'; 
+$x_specialz['destroyed_helicopter'] = 'Destroyed helicopter'; 
+$x_specialz['rcxd_destroyed'] = 'Rcxd destroyed'; 
+$x_specialz['turret_destroyed'] = 'Turret destroyed';
+$x_specialz['sam_kill'] = 'Sam kill';  
 
 $shotz = 'Shots'; 
 $hit_zones = "Hit zones";

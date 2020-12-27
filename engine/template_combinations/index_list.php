@@ -86,8 +86,8 @@ else if (!empty($_GET['collect']))
                                $iplayersx[] = $iplgetDirContents.$imv;
 	                            }}  }}									
 							unset($iplayers);
-							
-								
+					if(!empty($iplayersx)){	
+					if(is_array($iplayersx)){			
              array_multisort(array_map('filemtime', ($iplayersx)), SORT_DESC, $iplayersx);
 
 								foreach ($iplayersx as $wpl => $imv){
@@ -107,8 +107,10 @@ else if (!empty($_GET['collect']))
 								 );
 								}
 								 }
+								}
 							  }
 							}
+						}
 }	   	   
 else
 /*

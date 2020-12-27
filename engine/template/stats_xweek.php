@@ -9,7 +9,7 @@ if(strpos($urlmd, "stats_week.php?heads=top") !== false)
 	$reponse = 'SELECT servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_week ORDER BY s_heads DESC LIMIT 20';
     $stats_week_kills = dbSelectALL('', $reponse);
 	
-	$ghb = '<a href="'.$domain.'/stats_week.php?heads=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_heads).' </a>';
+	$ghb = '<a href="'.$domain.'/stats_week.php?heads=top" style="color:#f7b794;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_heads).' </a>';
 	
 	$ghz = '<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 10px #fff, 0 0 4px #000, 0 0 7px #08e5c8, 0 0 10px #08e5c8, 0 0 8px #08e5c8, 0 0 15px #08e5c8;">
 '.$ghb.' </b>        
@@ -24,7 +24,7 @@ else if(strpos($urlmd, "stats_week.php?deaths=top") !== false)
 	$reponse = 'SELECT servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_week ORDER BY s_deaths DESC LIMIT 20';
     $stats_week_kills = dbSelectALL('', $reponse);
 	
-	$ghb = '<a href="'.$domain.'/stats_week.php?deaths=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_deaths).'</a>';
+	$ghb = '<a href="'.$domain.'/stats_week.php?deaths=top" style="color:#f7e794;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_deaths).'</a>';
 	
 $ghz = '<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 10px #fff, 0 0 4px #000, 0 0 7px #08e5c8, 0 0 10px #08e5c8, 0 0 8px #08e5c8, 0 0 15px #08e5c8;">'.$ghb.'</b>        
 &nbsp;&nbsp;&nbsp;&nbsp;    <a href="'.$domain.'/stats_week.php?heads=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_heads).' </a>    
@@ -40,7 +40,7 @@ else if(strpos($urlmd, "stats_week.php?kd=top") !== false)
 ';
     $stats_week_kills = dbSelectALL('', $reponse);
 	
-	$ghb = '<a href="'.$domain.'/stats_week.php?kills=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_kd).'</a>';
+	$ghb = '<a href="'.$domain.'/stats_week.php?kills=top" style="color:#d43939;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_kd).'</a>';
 	
 $ghz = '<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 10px #fff, 0 0 4px #000, 0 0 7px #08e5c8, 0 0 10px #08e5c8, 0 0 8px #08e5c8, 0 0 15px #08e5c8;">'.$ghb.'</b>        
 &nbsp;&nbsp;&nbsp;&nbsp;    <a href="'.$domain.'/stats_week.php?heads=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_heads).' </a>    
@@ -54,7 +54,7 @@ else
 	$reponse = 'SELECT servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_week ORDER BY s_kills DESC LIMIT 20';
     $stats_week_kills = dbSelectALL('', $reponse);
 	
-	$ghb = '<a href="'.$domain.'/stats_week.php?kills=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($medals_killer).'</a>';
+	$ghb = '<a href="'.$domain.'/stats_week.php?kills=top" style="color:#9496f7;" target="_self">'.$x_top_week.' / '. mb_strtoupper($medals_killer).'</a>';
 	
 $ghz = '<b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 10px #fff, 0 0 4px #000, 0 0 7px #08e5c8, 0 0 10px #08e5c8, 0 0 8px #08e5c8, 0 0 15px #08e5c8;">'.$ghb.'</b>        
 &nbsp;&nbsp;&nbsp;&nbsp;    <a href="'.$domain.'/stats_week.php?heads=top" style="color:#fff;" target="_self">'.$x_top_week.' / '. mb_strtoupper($t_heads).' </a>    

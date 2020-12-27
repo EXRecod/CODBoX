@@ -87,10 +87,11 @@ $xz = dbSelectALL('', $reponse);
 
 foreach ($xz as $keym => $value) {
  $chk['skill'][$value['skill']] = $value['skillguidx'] ;
- //$chk['headpercent'][$value['headpercent']] = $value['headpercentguidx'];
+ $chk['headpercent'][$value['headpercent']] = $value['headpercentguidx'];
  $chk['medal_pro_killer'][$value['medal_pro_killer']]  = $value['s_killsguidx'];
  $chk['medal_pro_headshot'][$value['medal_pro_headshot']] = $value['headsguidx']; 
  $chk['medal_or_ak'][$value['medal_or_ak']] = $value['medalakgui'];  
+ $chk['kdratio'][$value['kdratio']] = $value['kdratio'];  
 }
 	
 	

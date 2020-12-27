@@ -248,16 +248,11 @@ foreach ($reponse as $nr => $rp)
   } 
   
 } 
-  
-
 
 ////
 //var_dump($xz);
 //die('TEST');
 
-
-
-  
 }
 
  if(empty($KillsSeriesRank))
@@ -292,9 +287,7 @@ if (empty($rankxx)) $rankxx = '0';
 $sefes = rand(42, 69);
 $sefesf = rand(74, 99);
 $nextprolvl = get_percentage($sefes, $sefesf);
- 
- 
- 
+
 //$percent_of_skillPositions_circle = abs(get_percentage_circle($total_players_ondatabase - $skillPlace, $total_players_ondatabase));
 //$percent_of_skillPositions = abs(($total_players_ondatabase-$skillPlace-$skillPlace)/$total_players_ondatabase)*100;
 $percent_of_skillPositions = (($totalactiveplayers-$skillPlace+1)/$totalactiveplayers) * 100;
@@ -306,55 +299,39 @@ $percent_of_KillsSeriesRank = abs(($totalHeaders/$KillsSeriesRank)/$totalHeaders
 $percent_of_DateRankPositions = abs(get_percentage($total_players_ondatabase - $DateRank, $total_players_ondatabase));
 $percent_of_kdratiosortRankseriesPositions = abs(get_percentage($totalactiveplayers - $KillsSeriesRank, $totalactiveplayers));
  
- 
 $positionOnAll_OF = ($percent_of_skillPositions+$percent_of_kdratiosortRankPositions)/2;
 
 $percent_of_skillPositions_circle = ($positionOnAll_OF*3)+60; 
   
-
 list($timegistered, $lasttimeseen) = explode(';', timelife($timeregistered, $lasttime));
-
 }
-
-
-
+ 
 include $cpath . "/engine/template/header.php";
 include $cpath . "/engine/template/servermenu.php";
 include $cpath . "/engine/template/search.php";
-
 include $cpath . "/engine/template/menu.php";
+
+// NEW
+//function DataSqlLiteDB($SqlDataBase,$query,$wherefile)
+//function DataSqlLitecreateDB($wherefile,$dataCREATE)
+
 if(!empty($kills)){
+////////////////////////////////////////////////////////////////	
 include $cpath . "/engine/template/stats_level.php";
 include $cpath . "/engine/template/stats_profile.php";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
- 
- 
- 
- 
-///////////////// ajax
+//////////////////////////////////////////////////////////////// ajax 
 include $cpath . "/engine/ajax_data/local_parser_db_set.php";
-echo get_local_source_db($domain.'/engine/template/stats_specials.php?guid='.$guidn.'&statsmedal=sevrtststst','160000'); 
- 
-///////////////// ajax
-//include $cpath . "/engine/ajax_data/local_parser_db_set.php";
 echo get_local_source_db($domain.'/engine/template/stats_weapon.php?guid='.$guidn,'160000');
- 
-///////////////// ajax
-//include $cpath . "/engine/ajax_data/local_parser_db_set.php";
 echo get_local_source_db($domain.'/engine/template/stats_hit_zones.php?guid='.$guidn,'160000');
-  
-
-
- 
+echo get_local_source_db($domain.'/engine/template/stats_specials.php?guid='.$guidn.'&statsmedal=sevrtststst','160000'); 
+//////////////////////////////////////////////////////////////// new info
 //include $cpath ."/engine/template/stats_leaderboards.php";
 //include $cpath ."/engine/template/stats_records.php";
 //include $cpath ."/engine/template/stats_dynamics.php";
 //include $cpath ."/engine/template/stats_matches.php";
- 
-
 }
-
-
-
 include $cpath . "/engine/template/footer.php";
+
+
+
 ?>

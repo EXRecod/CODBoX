@@ -74,23 +74,9 @@ echo '<div class="content_block">
     flex-flow: row wrap;">';
 //echo $cnts =  count($xz);
  
-
 foreach ($chk as $keym => $v) {
 foreach ($v as $ke => $uid) {	
-	
-  
-  
-$r = "SELECT s_pg,s_guid,s_player,servername FROM db_stats_0 where s_pg='$uid' LIMIT 1";
-$vi = dbSelectALL('', $r);
- foreach ($vi as $k => $via) {
-$guid =  $via['s_guid'];
-$player =  $via['s_player'];
-$server =  $via['servername'];
- } 
-  
-  if(empty($player))
-	  $player = '?';
-
+if(!empty($ke)){
 echo '<div style="padding:10px;margin:5px;width:170px;display:inline-block;min-width:20%;
 flex-grow: 1;
 background: -moz-linear-gradient(-45deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 99%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
@@ -119,17 +105,6 @@ echo '<img src="' . $domain . '/inc/images/specials/' . $keym . '.png" style="wi
 	
  echo '
 	</div></div></div>
-
-  
-<div style="overflow:auto;">
- 
-<div style="font-size:14px;width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-<center><a href="' . $domain . '/stats.php?brofile=' . $guid . '&s=' . urlencode($server) . '" style="color:#fff; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;" target="_blank">'.$player.'</a></center>
-</div>
-	
-</div>
- 
- 
 	
 <div style="font-size: 11px;    border-top: 1px solid #222;margin-top:5px;padding-top:5px;
     color: #fff;margin:10px;
@@ -137,10 +112,6 @@ echo '<img src="' . $domain . '/inc/images/specials/' . $keym . '.png" style="wi
 	
 <div class="weap_stats" style="text-align:left;">'.$stats_info_value.' </br> '.$ke.'
  </div>
-	
- <div class="weap_stats" style="text-align:right;">Guid </br> '.$guid.'
- </div>
-	
 
 	
 	</div>
@@ -149,7 +120,7 @@ echo '<img src="' . $domain . '/inc/images/specials/' . $keym . '.png" style="wi
 
 ';
 
-
+}
 }}
  echo '</div></div></div>';
  include($cpath. '/engine/ajax_data/cache-bottom.php');
