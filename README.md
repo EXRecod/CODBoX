@@ -2,7 +2,7 @@
 
 COD1, COD2, COD4, COD5 WEB admintool & stats charts and top.
 
-Support only with RCM-Admintool-V9
+Support only with RCM-Admintool-V9 -> https://github.com/EXRecod/RCM-Admintool-V9
 
 - Multi Languages support
 - Player analize, all players database, time, guid, geo, ip adress, connection time, quit time, play times and more....
