@@ -14,11 +14,17 @@ Support only with RCM-Admintool-V9
 - /codbx/data/settings.php  change to your settings
 
 
+![alt text](https://youtu.be/DKQ_L65ZgTk)
+
+
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/1.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/2.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/3.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/4.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/5.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/6.jpg)
+![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/7.jpg)
+![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/8.jpg)
+
 
 
