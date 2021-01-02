@@ -102,14 +102,19 @@ echo '<div style="height:auto;overflow:auto;text-align:center;padding:0px;backgr
  "$domain/list.php" => " ✔ List ✔ ",
  "$domain/list_ip_ban.php" => " ✔ IP $menu_banlist ✔ ",
  "https://zona-ato-game.ru/sourcebans/index.php?p=banlist" => " ✔ Sourcebans $menu_banlist ✔ "
- //"$domain/admin/mamba.php" => " | MBM| ",
  //"$domain/admin/settings.php" => " | SET | ",
  );    
     
 $Menu_Main = array_merge($Menu_Main,$cMenu_Main,$Menu_Main_admin);
 	}
 	else
-		$Menu_Main = array_merge($Menu_Main,$Menu_Main_admin);
+	{
+//#########   MENU  #########//   
+ $cMenu_Main = array( 
+ "$domain/help.php" => " Help "
+ ); 
+		$Menu_Main = array_merge($Menu_Main,$cMenu_Main,$Menu_Main_admin);
+	}
 	
 foreach ($Menu_Main as $arxx => $namessylka) {
  

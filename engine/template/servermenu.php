@@ -1,6 +1,8 @@
 <?php
  if(empty($templ))
 	die("PERMISSIONS DENIED!");
+if(strpos($_SERVER['REQUEST_URI'],'iinfo=') === false)
+{
 if(strpos($url, "img.php") === false)
  $w = 1200;
 else
@@ -76,7 +78,6 @@ echo '
 </div>
 </div>
 </div>
-
- 
 ';
+}
 ?>

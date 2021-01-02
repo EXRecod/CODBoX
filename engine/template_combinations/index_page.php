@@ -10,6 +10,18 @@ include $cpath . "/engine/template/menu.php";
 $urlREQUEST = $_SERVER["REQUEST_URI"];
 $urlty = str_replace('/codbx/index?', '', $urlREQUEST);
   
+  
+if(!empty($_GET['sort'])){	
+$urlREQUEST = $_SERVER["REQUEST_URI"];
+$urlty = str_replace('/codbx/index_servers_one.php?', '', $urlREQUEST);	
+///////////////// ajax   1000 / 1 секунда
+$sort = $_GET['sort'];
+include $cpath . "/engine/ajax_data/local_parser_db_set.php";
+$xcontent = get_local_source_db($domain.'/engine/template/index_servers_three.php?sort='.$sort.'&timer='.base64_encode($urlREQUEST).'&'.$urlty,'3600000'); 
+die ($xcontent);
+}  
+  
+  
 ///////////////// ajax   1000 / 1 секунда
 include $cpath . "/engine/ajax_data/local_parser_db_set.php";
 $xcontent = get_local_source_db($domain.'/engine/template/index_servers_one.php?timer='.base64_encode($urlREQUEST).'&'.$urlty,'3600000'); 

@@ -43,8 +43,8 @@ echo '
 }
  
 if($baseurlz=='geo.php')
-echo '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
-</head>
+echo '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>'; 
+echo '</head>
 <body>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans%7CRoboto:400,600,700,900&amp;display=swap" rel="stylesheet">
 <script src="'.$domain.'/inc/script2.js"></script>';

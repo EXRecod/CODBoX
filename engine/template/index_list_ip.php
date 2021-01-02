@@ -298,7 +298,7 @@ echo '
 
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$iparddrrean.'"> ['.$reasonx.'] </a></div> 
+<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$lang['ipinformation'].'"> ['.$reasonx.'] </a></div> 
 </div>
 	
 	
@@ -311,7 +311,7 @@ echo '
 echo '
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:60px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list_ip_ban.php?listvisits=X" style="color:#00b6b2;" class="tags" glose="'.$tvisited.':['.$zaxodil.']"> ['.$zaxodil.'] </a></div> 
+<a href="'.$domain.'/list_ip_ban.php?listvisits=X" style="color:#00b6b2;" class="tags" glose="'.$lang['visits'].':['.$zaxodil.']"> ['.$zaxodil.'] </a></div> 
 </div>';
 	 
 

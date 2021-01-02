@@ -106,8 +106,8 @@ if(!filter_var($xplayerip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4))
 		
 		$chatbanstatus = IsChatBanned($guidxx);
 		$txtemptycnt = substr_count($txt, ' ');
-		if ((strlen($txt) > 70) && ($txtemptycnt < 3)) $txt = strlen($txt) > 35 ? substr($txt, 0, 35) . "...." : $txt;
-		$txt = wordwrap($txt, 50, "</br>&emsp;", 1);
+		if ((strlen($txt) > 70) && ($txtemptycnt < 3)) $txt = strlen($txt) > 55 ? substr($txt, 0, 55) . "...." : $txt;
+		$txt = wordwrap($txt, 80, "</br>&emsp;", 1);
 		if ($chatbanstatus == "0%0%0") $txta = ' <b style="color: #fff;
 text-shadow: 3px 3px 10px #17f612,
     -2px 1px 20px #17f612;">' . $i_chat_exp . '</b>';
@@ -123,7 +123,8 @@ text-shadow: 3px 3px 10px #f61212,
 		//ANTIMAT
 		$txt = antimat($txt);
 		if (strpos($txt, "%CENSORED%") !== false) {
-				if (isLoginUser()) $txt = '<b class="rainbowQ">' . $txttitle . '</b> ' . $txt;
+				if (isLoginUser()) $txt = '<b class="rainbowQ" style="font-size:22px;">' . $txttitle . '</b> ';
+				$txta = '';
 		}
 		if (!empty($xplayerip)) {
 				$record = $db->lookup($xplayerip, \IP2Location\Database::ALL);
@@ -263,15 +264,15 @@ return false;\" style=\"color:#fefefe;\"> ".$txt."</a>";
 		
 		
 	echo '
-	</div>
 	
-<div style="color:#fff;padding:2px;line-height:24px;text-align:center;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
- 
+<div style="min-width:27%;color:#fff;font-size:13px;display:inline-block;float:left;TEXT-ALIGN:LEFT;">&nbsp &nbsp  </div> 
+
 <div style="color:#fff;font-size:13px;display:inline-block;float:left;TEXT-ALIGN:LEFT;">&nbsp <a href="' . $domain . '/chat.php?#" style="color:#fff;" title="' . clean($txttitle) . '"> ' .$txt . $txta . ' </a></div> 
 	</div>
 	
 	
-	</div>
+</div>
+
 	
 	</div>
 <div style="line-height:30px;display:inline-block;width:20px;float:right;text-align:right;">&#9660;</div>

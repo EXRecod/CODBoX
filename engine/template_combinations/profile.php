@@ -206,7 +206,7 @@ FROM   db_stats_0 t0
 foreach ($reponse as $nr => $rp)
 {
   
-  usleep(100000);
+  usleep(300000);
 
 //echo '</br>'.$rp.'</br>';
   $xz = dbSelect('', $rp);

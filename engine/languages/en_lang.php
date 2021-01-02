@@ -2,7 +2,7 @@
 ////////// MENU
   $i_lefttime = 'Ban&nbsp;left';
   $llefttime = 'Left';
-  $iparddrrean = 'IP&nbsp;adress&nbsp;reason.';  
+  $lang['ipinformation'] = 'IP&nbsp;adress&nbsp;reason.';  
   
  $listtipproxy = 'Proxy List.';  
  $ilisttipproxy = 'New&nbsp;player&nbsp;list&nbsp;with&nbsp;proxy&nbsp;ip.';
@@ -41,11 +41,13 @@
  $menu_screens    = 'Screenshots';
  $menu_mamba      = 'Mamba';
  $menu_detected   = 'Detected';
+ $menu_guids   = 'Guid';
+
  
-   $tvisited = 'Visited';  
+   $lang['visits'] = 'Visited';  
 
    $t_currentt = 'Current';
- $i_chatn_forver = 'For ever!';
+ $lang['ban_for_ever'] = 'For ever!';
  $i_chat_ban  = '[Chat Ban]';
  $i_chat_exp   = '[C.B. was Expired]';
  $i_chat_censored = '[Censored]';
@@ -134,7 +136,11 @@
   $t_total_players_ww = 'All week players';   
   $t_total_players_yy = 'All yesterday players';
   $t_total_players_mm = 'All months players'; 
-  $t_total_players_vv = 'All visited players';   
+  $t_total_players_vv = 'All visited players';  
+
+ 
+  $t_total_players_tti = 'Today in game';  
+  $t_total_players_yyi = 'Yesterday played';   
 
   
   $t_killx2 = ' kills on top'; //kills on top
@@ -268,4 +274,48 @@ $bonus_slot_vbtxt  = "Your ip address is not in the server database, you need yo
  $x_top_day = 'TOP 20 OF DAY';
  $x_top_week = 'TOP 20 OF WEEK';
  $x_soon = 'Technical work before 7.11.2020...';
+ 
+ 
+ $menu_rcon = 'RCON console'; 
+ $menu_admin = 'ADMINS';
+ $menu_activity = 'ACTIVITY'; 
+ $menu_rcon_get = 'No server selected from the menu list!';  
+ $menu_rcon_error = 'Server is offline, or not correct settings!!!';  
+ 
+$lang = array();
+$lang['confirm'] = 'OK';
+$lang['command'] = 'Command';
+$lang['result'] = 'Result';
+$lang['game_type'] = 'Game type:';
+$lang['map'] = 'Map';
+$lang['settings'] = 'Settings';
+$lang['turn_off'] = 'Off';
+$lang['turn_on'] = 'On';
+
+$lang['kick'] = 'Kick';
+$lang['say'] = 'Say';
+$lang['whisper'] = 'Whisper';
+$lang['colorized_output'] = 'colorized output';
+$lang['apply_after_map'] = 'Apply after map';
+$lang['apply_now'] = 'Apply now';
+$lang['enter_message'] = 'Please enter message for';
+
+$lang['weap_snipers'] = 'Sniper rifles';
+$lang['weap_shotgun'] = 'Shotgun';
+$lang['weap_smoke_grenades'] = 'Smoke grenades';
+
+$lang['login_logged_as'] = 'Logged as';
+$lang['login_logout'] = 'logout';
+$lang['login_name'] = 'Name';
+$lang['login_password'] = 'Password';
+$lang['login_please_enter'] = 'Please enter your login ID'; 
+
+
+$admin_logins = 'If this does not happen, then go yourself:';
+$admin_logins_re = 'In 5 seconds you will be redirected.';
+$admin_logins_reten = 'In 10 seconds you will be redirected.';
+
+$menu_kick_reason = 'reason';
+
+$menu_anticheat_codx4 = 'Anticheat';
 ?>

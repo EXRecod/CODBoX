@@ -218,6 +218,15 @@ background-image: url(' . $image . ');" oncontextmenu="return false"></span></a>
  ';
 
 
+/*
+if($ereason != 1)
+{
+echo '<a href="' . $domain . '/admin/login.php" style="style=width:40px;height:40px;padding-left:33%;position:absolute;" target="_blank"> 
+	  &emsp;<b class="tags" glose="'.$i_unban.'"><img style="width:40px;height:40px;margin-top:-65px;" src="' . $domain . '/inc/images/unban.png"></b></a>';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+*/
+
 
 echo '<dt>';
 

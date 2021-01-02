@@ -1,7 +1,9 @@
 <?php
- $tvisited = 'Заходил(количество)';  
-  $iparddrrean = 'Значение&nbsp;ип&nbsp;адреса.';  
- $i_chatn_forver = 'На всегда!';
+$lang = array();
+
+ $lang['visits'] = 'Заходил(количество)';  
+ $lang['ipinformation'] = 'Значение&nbsp;ип&nbsp;адреса.';  
+ $lang['ban_for_ever'] = 'На всегда!';
  $i_chat_ban  = '[Чат Блок]';
  $i_chat_exp   = '[Ч.Б. срок истек]';
  $i_chat_censored = '[Цензура]';
@@ -78,6 +80,7 @@
   
   $moreinfo_more = "Больше информации...";
   $moreinfo_here = "Жми здесь!";
+  $menu_guids   = 'Гуид';
  
 ///////////////////////////////////////////////////////////
   $Global_Elo_rating = "Глобальный рейтинг Эло (навык)"; 
@@ -128,8 +131,10 @@
   $t_total_players_ww = 'Всего за неделю игроков';   
   $t_total_players_yy = 'Всего вчера игроков';
   $t_total_players_mm = 'Всего за месяц игроков'; 
-  $t_total_players_vv = 'Всего за месяц игроков';  
-  
+  $t_total_players_vv = 'Всего за месяц игроков'; 
+
+  $t_total_players_tti = 'Сегодня в игре';  
+  $t_total_players_yyi = 'Вчера в игре';  
   
   $t_killx2 = ' количество фрагов в таблице лидеров'; //kills on top
   $t_tsek = 'сек.';
@@ -268,5 +273,46 @@ $bonus_slot_vbtxt  = "Ваш ип адрес отсутствует в базе 
  $x_top_week = 'ТОП 20 НЕДЕЛИ';
  $x_soon = 'Технические работы до 7.11.2020...';
  
+ $menu_rcon = 'Ркон консоль'; 
+ $menu_admin = 'Админы';
+ $menu_activity = 'Активность';  
+ 
+ $menu_rcon_get = 'Не выбран сервер из списка меню!';   
+ $menu_rcon_error = 'Сервер не доступен или не верные настройки игрового сервера.';  
+ 
 
+$lang['confirm'] = 'OK';
+$lang['command'] = 'Команда';
+$lang['result'] = 'Результат';
+$lang['game_type'] = 'Тип игры:';
+$lang['map'] = 'Карта';
+$lang['settings'] = 'Настройки';
+$lang['turn_off'] = 'Быкл';
+$lang['turn_on'] = 'Вкл';
+
+$lang['kick'] = 'Выкинуть';
+$lang['say'] = 'Сказать';
+$lang['whisper'] = 'Шепнуть';
+$lang['colorized_output'] = 'colorized output';
+$lang['apply_after_map'] = 'Apply after map';
+$lang['apply_now'] = 'Подтвердить';
+$lang['enter_message'] = 'Введите текст для';
+
+$lang['weap_snipers'] = 'Sniper rifles';
+$lang['weap_shotgun'] = 'Shotgun';
+$lang['weap_smoke_grenades'] = 'Smoke grenades';
+
+$lang['login_logged_as'] = 'Logged as';
+$lang['login_logout'] = 'logout';
+$lang['login_name'] = 'Name';
+$lang['login_password'] = 'Password';
+$lang['login_please_enter'] = 'Please enter your login ID'; 
+
+$admin_logins = 'Если этого не происходит, то перейдите самостоятельно:';
+$admin_logins_re = 'Через 5 секунд Вы будете перенаправлены.';
+$admin_logins_reten = 'Через 10 секунд Вы будете перенаправлены.';
+
+$menu_kick_reason = 'Причина';
+
+$menu_anticheat_codx4 = 'Античит';
 ?>

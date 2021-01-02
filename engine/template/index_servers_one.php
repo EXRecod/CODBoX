@@ -15,9 +15,8 @@ $baseurlz = basename(__FILE__);
 include($cpath ."/engine/functions/main.php");
 include($cpath. '/engine/ajax_data/cache-top.php');
 
+
 sleep(1);
-
-
 $ysum = array();
 $reponse = 'SELECT COUNT(distinct s_guid) as allplayers FROM db_stats_0 where s_guid > 0';
   $xz = dbSelectALL('', $reponse);
