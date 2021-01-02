@@ -13,9 +13,8 @@ Support only with RCM-Admintool-V9
 - /codbx/engine/geoip_bases/IP2LOCATION-LITE-DB3.rar  unarchive file to current folder
 - /codbx/data/settings.php  change to your settings
 
-
-![alt text](https://youtu.be/DKQ_L65ZgTk)
-
+ 
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/DKQ_L65ZgTk)
 
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/1.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/2.jpg)
@@ -23,8 +22,8 @@ Support only with RCM-Admintool-V9
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/4.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/5.jpg)
 ![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/6.jpg)
-![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/7.jpg)
-![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/8.jpg)
+![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/7.png)
+![alt text](https://github.com/EXRecod/CODBoX/blob/main/info/8.png)
 
 
 
