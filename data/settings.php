@@ -1,20 +1,7 @@
 <?php
 
 
-$domain = 'http://localhost/codbx';
-$top_main_total=100; //количество строк на страницу
-$game_server_list_parser = 'https://zona-ato-game.ru/sourcebans/index.php?p=servers';
- 
-
-
-//#########   MENU 1   #########//   
- $Menu_Main = array( 
- "http://localhost/codbx/index.php" => "$menu_main",
- "http://localhost/codbx/stats.php" => "$menu_stats",
- "http://localhost/codbx/chat.php" => "$menu_chats",
- "http://localhost/codbx/img.php" => "$menu_screens",
- "http://localhost/codbx/geo.php" => "$menu_geo",
- );    
+$domain = 'http://localhost/codbx';  //adress where codbx was placed
 
 
 //DATABASE SETTINGS
@@ -29,20 +16,36 @@ $sourcebans_db_user      =  'root';
 $sourcebans_db_pass      =  '260386';
 $sourcebans_charset_db   =  'utf8';
 
-//DATABASE PLAYER STATS DAYS LIMIT
-$StatsDaysLimit = 90;
+
+
+$top_main_total = 100;               //total stats, chat, list, playlist count on front page
+$game_server_list_parser = 'https://zona-ato-game.ru/sourcebans/index.php?p=servers';
  
 
+
+//#########   MENU 1   #########//   
+ $Menu_Main = array( 
+ "http://localhost/codbx/index.php" => "$menu_main",  //main page
+ "http://localhost/codbx/stats.php" => "$menu_stats", //main stats
+ "http://localhost/codbx/chat.php" => "$menu_chats",  //main chat log
+ "http://localhost/codbx/img.php" => "$menu_screens", //main screen shots
+ "http://localhost/codbx/geo.php" => "$menu_geo",     //main players geo log
+ );    
+
+
+
+//DATABASE PLAYER STATS DAYS LIMIT
+$StatsDaysLimit = 7;
+ 
 
 
 /*#########   SERVER MENU   #########*/
 /// НАЗВАНИЕ СЕРВЕРА ТАКОЙ ЖЕ КАК НА ИГРОВОМ СЕРВЕРЕ 1 В 1 ДОЛЖЕН БЫТЬ
 $multi_servers_array = array(
  "ip:46.174.54.24 port:28968 rcon:123 server_md5:28961" => "^3|^1ZONA ATO^3|^5TDM ^2SOFT",
- "ip:91.240.86.167 port:28962 rcon:123 server_md5:28962" => "^3|^1ZA^3|^5SAB-MIX ^1PRIVAT",
- "ip:91.240.86.167 port:28963 rcon:123 server_md5:28963" => "^3|^1ZA^3|^5KILLHOUSE ^2SOFT",
- "ip:91.240.86.167 port:28964 rcon:123 server_md5:28964" => "^3|^1ZA^3|^5CRASH + SHOWDOWN",
- "ip:91.240.86.167 port:28965 rcon:123 server_md5:28965" => "New Weapon",
+ "ip:91.240.86.167 port:28962 rcon:123 server_md5:28969" => "^3|^1ZA^3|^5SAB-MIX ^1PRIVAT",
+ "ip:127.0.0.1 port:28963 rcon:1234567890 server_md5:28963" => "^1TEST^3TEST^2TEST",
+ "ip:127.0.0.1 port:28962 rcon:1234567890 server_md5:28962" => "^7TEST^2TEST^3TEST",
  "ip:91.240.86.167 port:28966 rcon:123 server_md5:28966" => "Crossfire",
  "ip:91.240.86.167 port:28967 rcon:123 server_md5:28967" => "Gun Games",
  "ip:91.240.86.167 port:28968 rcon:123 server_md5:28968" => "Killhouse",
@@ -51,8 +54,6 @@ $multi_servers_array = array(
  );
   
  
-
-
 
 //#####  SCREENSHOTS  #####//
 $screenshotsZ_page = 60; //количество картинок на страницу
@@ -115,6 +116,8 @@ $metrikaID = 67922815;
    
  
 
+// Управление ркон консолью  ......./codbx/admin/index.php?iinfo=rcons
+// Для доступа - Напротив никнейма админа ставим значок ~, например ~Admin
 /*#########   STEAM   #########*/
  $steamkey = 'Ваш Steam Key'; 
  
@@ -142,6 +145,9 @@ $metrikaID = 67922815;
 //   $codbx_users[] = "LOGIN;PASSWORD";
 //№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№  
 
+//For Super Admin control use ~ , example: ~adminName
+
+$codbx_users[] = "~admin;~admin";
 $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
@@ -175,4 +181,12 @@ $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";   
+
+//RCON SETTINGS
+$server_timeout = 10; //10			// enter a number of seconds before connection to server times out; default=5 (try lower for increased performance, higher for troubleshooting)
+$server_buffer = 1200;	//1200		// enter a number of bytes; decrease if you receive only a part of playerlist, increase to speed up
+$server_buffer_results = 1800;     //1800	// enter a number of bytes; decrease if you receive only a part of returned results, increase to speed up
+$server_extra_wait = true;		// true | false; if problems with receiving playerlist occur, enable
+$server_extra_footer = true;	// true | false; if problems with receiving playerlist occur, enable
+
+?>
