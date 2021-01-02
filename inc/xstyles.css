@@ -1054,6 +1054,19 @@ text-shadow:
 0 0 18px #068399, 
 0 0 40px #068399, 
 0 0 65px #068399;
+}
+
+.menu_head_cp{
+ color:#fff;
+text-shadow: 
+0 0 1px #000, 
+0 0 2px #fff, 
+0 0 3px #fff, 
+0 0 4px #fff, 
+0 0 7px #fff, 
+0 0 18px #fff, 
+0 0 40px #fff, 
+0 0 65px #068399;
 }	
 
 body{

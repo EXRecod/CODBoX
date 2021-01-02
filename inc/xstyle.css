@@ -18,7 +18,24 @@ filter: contrast(200%);
 .server_menu_noselected
 {
 align-content:center;
-filter: drop-shadow(36px 56px 20px white) grayscale(90%) invert(95%);
+filter: invert(70%) grayscale(100%) contrast(200%);
+}
+
+
+.serverrconmenu_selected
+{
+align-content:center;
+filter: contrast(200%);
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.serverrconmenu_noselected
+{
+align-content:center;
+filter: invert(50%) contrast(200%) grayscale(100%);
+  color: white;
+  text-shadow: 2px 2px 4px #fff;
 }
 
 .server_foot_paginator
@@ -33,3 +50,84 @@ font-size:16px;
 font-weight:900;
 padding: 17 5px;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: green;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 1px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 90%;
+    left: 1%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+.tooltipx {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltipx .tooltiptextx {
+    visibility: hidden;
+    width: 300px;
+    background-color: green;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 1px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 90%;
+    right: 1%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltipx .tooltiptextx::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltipx:hover .tooltiptextx {
+    visibility: visible;
+    opacity: 1;
+}
+
