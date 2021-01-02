@@ -74,7 +74,8 @@ $_SESSION['codbxpasssteam'] = $md5passw;
 $c = "<script language = 'javascript'>
   var delay = 5000;
   setTimeout(\"document.location.href='".$domain."/admin/index.php'\", delay);</script>
-</br><center><p><h1 style=\"color:green;\"></br>Через 5 секунд Вы будете перенаправлены. </br> Если этого не происходит, то перейдите самостоятельно: <a href='".$domain."/admin/index.php'>".$domain."/admin/</h1></a>
+</br><center><p><h1 style=\"color:green;\"></br>$admin_logins_re 
+</br> $admin_logins <a href='".$domain."/admin/index.php'>".$domain."/admin/</h1></a>
 </p></center>";
 
 

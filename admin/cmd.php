@@ -17,7 +17,28 @@ include($cpath ."/engine/functions/main.php");
 if((empty($_COOKIE["codbx_uexec"]))&&(!empty($_SESSION['codbxuserexec'])))
     setcookie("codbx_uexec", $_SESSION['codbxuserexec'], time()+259200);
 if(isLoginUser())
-{	
+{
+ 
+if(!empty($_SESSION['codbxpasssteam']))
+$byWhois = isLoginUserWHO($_SESSION['codbxpasssteam']);
+else if(!empty($_COOKIE['user_online_login']))
+$byWhois = isLoginUserWHO($_COOKIE['user_online_login']);
+else if(!empty($_COOKIE['user_online_key']))
+$byWhois = isLoginUserWHO($_COOKIE['user_online_key']);
+else
+$byWhois = '';
+
+if(!empty($_SESSION['codbxuser']))
+ $codbxuser = $_SESSION['codbxuser'];
+
+if(!empty($byWhois))
+$xz = $byWhois;
+else if(!empty($codbxuser))
+$xz = $codbxuser;
+
+if (strpos($xz, '~') !== false)
+{
+	
   
 if (!empty($_GET['rc'])) 
    $rc = $_GET['rc']; 
@@ -69,14 +90,14 @@ $xz = $codbxuser;
 		<meta name="robots" content="noindex,nofollow" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<title><?php echo '🅲🅷🅰🆃 ',$plyr,' 💭 ' ?></title>
+		<title><?php echo 'RCON Command ',$plyr,' 💭 ' ?></title>
  <!-- JQUERY FROM GOOGLE API -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 		<!--[if IE]>
   		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->		
 <script>
-var newTxt="<?php echo '🅲🅷🅰🆃 💭 '.$plyr.' '; ?>";
+var newTxt="<?php echo 'RCON Command 💭 '.$plyr.' '; ?>";
 var oldTxt=document.title;
  
 function migalka(){
@@ -126,48 +147,6 @@ $server_addr = "udp://" . $server_ip;
 @$connect = fsockopen($server_addr, $server_port, $re, $errstr, 30);
 if (!$connect) { die('Can\'t connect to COD gameserver.'); }
 
-
-////  Проверка игрока на отсуствие  /////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-if (!empty($_GET['all'])){
-stream_set_timeout($connect, 0, 76000); //1e5
-$send = "\xff\xff\xff\xff" . 'rcon "' . $server_rconpass . '" status';
-fwrite($connect, $send);
-$output = fread($connect, 1);
-
-if (!empty($output))
-	{
-	do
-		{
-		$status_pre = socket_get_status($connect);
-		$output = $output . fread($connect, 1024); //1024
-		$status_post = socket_get_status($connect);
-		}
-
-	while ($status_pre['unread_bytes'] != $status_post['unread_bytes']);
-	};
-$output = explode("\xff\xff\xff\xffprint\n", $output);
-$output = implode('!', $output);
-$output = explode("\n", $output);
-
-if (preg_grep('/CoD4 X 1.8/', $output)) 
-	$output = preg_grep('/[0-9]{1,8}[[:space:]][0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(\b)/', $output);
-
-foreach($output as $value)
-	{
-
-	if (strpos($value, $guid) !== false)
-	  $keey = 1;
-	}
-
-if(empty($keey))
-die ('</br><center>Мы его потеряли.</center>');
-
-}
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
 	//$rc = iconv("utf-8", "windows-1251",$rc);	
 	//$xz = iconv("utf-8", "windows-1251",$xz);	
 
@@ -183,9 +162,9 @@ $xz = '^1'.$xz;
 	$xzo = @iconv("utf-8", "windows-1251",$xz);
 
 if (empty($_GET['all']))	
-    echo rcon('say ^1'.$xzo.': '.$rco, '', $connect, $server_rconpass);	
+    echo rcon($rco, '', $connect, $server_rconpass);	
 else
-	echo rcon('screentell '.$guid.' ^1'.$xzo.': '.$rco, '', $connect, $server_rconpass);
+	echo rcon($rco, '', $connect, $server_rconpass);
 
 $reponse = "INSERT INTO `chat` (`servername`, `s_port`, `guid`, `nickname`, `time`, `timeh`, `text`, `st1`, `st1days`, `st2`, `st2days`, `ip`, `geo`, `z`, `t`, `x`, `c`) 
 VALUES ('" . $svrnm . "', '" . $server . "', '" .$guid. "', '" . $xzo . "', '" . $datetime . "', '" . $dthx . "', 
@@ -200,20 +179,9 @@ $xz = dbSelectALL('', $reponse);
 </strong>
 </center>
 </br></br></br>
-<center>
- <?php echo $chatrcon; ?> <?php echo '=> <b>'.$plyr.'</b>';?>.
-   <form>
- <input name="all" type="hidden" value="all">   
- <input name="plyr" type="hidden" value="<?php echo $plyr; ?>"> 
- <input name="svrnm" type="hidden" value="<?php echo $svrnm; ?>">
- <input name="md5" type="hidden" value="<?php echo $server; ?>">
- <input name="gd" type="hidden" value="<?php echo $guid; ?>">
- <input style="background:#333; width:295px; height: 28px; font-family: Titillium Web; color: #ccc; font-size:15px;" type="search" name="rc">
-  </form>
-</center>
 
 <center>
-<?php echo $chatrconwithall; ?>
+<?php echo $lang['command']; ?>
    <form> 
  <input name="plyr" type="hidden" value="<?php echo $plyr; ?>"> 
  <input name="svrnm" type="hidden" value="<?php echo $svrnm; ?>">
@@ -225,5 +193,5 @@ $xz = dbSelectALL('', $reponse);
 </body>
 </html>	
 <?php
- } 
+} }
 ?>	

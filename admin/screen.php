@@ -44,6 +44,7 @@ if (empty($_GET['plyr']))
 else
  $plyr = $_GET['plyr'];
 
+
 if (empty($_GET['plyrid']))
  $plyrid = '';
 else
@@ -223,7 +224,7 @@ $xz = '^1'.$xz;
 	$rco = @iconv("utf-8", "windows-1251",$rc);	
 	$xzo = @iconv("utf-8", "windows-1251",$xz);
 
-rcon('getss ' .trim($plyr), '', $connect, $server_rconpass); 
+echo rcon('getss ' .trim($plyr), '', $connect, $server_rconpass); 
 
 $reponse = "INSERT INTO `chat` (`servername`, `s_port`, `guid`, `nickname`, `time`, `timeh`, `text`, `st1`, `st1days`, `st2`, `st2days`, `ip`, `geo`, `z`, `t`, `x`, `c`) 
 VALUES ('Screenshot', '" . $server . "', '" .$guid. "', '" . $xzo . "', '" . $datetime . "', '" . $dthx . "', 
@@ -241,9 +242,16 @@ $xz = dbSelectALL('', $reponse);
 <center>
  </br> </br>
    <form>
- <input name="all" type="hidden" value="all">   
+ <input name="all" type="hidden" value="all"> 
+ 
+<?php if (empty($_GET['playernumber'])){ ?>
  <input name="plyr" type="hidden" value="<?php echo $plyr; ?>">
  <input name="plyrid" type="hidden" value="<?php echo $plyr; ?>"> 
+<?php } else {?> 
+ <input name="plyr" type="hidden" value="<?php echo $_GET['playernumber']; ?>">
+ <input name="plyrid" type="hidden" value="<?php echo $_GET['playernumber']; ?>"> 
+<?php } ?> 
+ 
  <input name="svrnm" type="hidden" value="<?php echo $svrnm; ?>">
  <input name="md5" type="hidden" value="<?php echo $server; ?>">
  <input name="gd" type="hidden" value="<?php echo $guid; ?>">
