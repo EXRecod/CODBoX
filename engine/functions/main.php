@@ -48,6 +48,102 @@ require_once $cpath . '/engine/arrays/weapons_cod.php';
 require_once $cpath . '/engine/arrays/ranks.php';
 require_once $cpath . '/engine/arrays/geo.php';
 
+
+$server_buffer_cur = $server_buffer;
+
+
+function ColorizeName($s) {
+	$pattern[0]="^0";	$replacement[0]='</font><font color="#555">';
+	$pattern[1]="^1";	$replacement[1]='</font><font color="red">';
+	$pattern[2]="^2";	$replacement[2]='</font><font color="lime">';
+	$pattern[3]="^3";	$replacement[3]='</font><font color="yellow">';
+	$pattern[4]="^4";	$replacement[4]='</font><font color="blue">';
+	$pattern[5]="^5";	$replacement[5]='</font><font color="aqua">';
+	$pattern[6]="^6";	$replacement[6]='</font><font color="#FF00FF">';
+	$pattern[7]="^7";	$replacement[7]='</font><font color="white">';
+	$pattern[8]="^8";	$replacement[8]='</font><font color="white">';
+	$pattern[9]="^9";	$replacement[9]='</font><font color="gray">';
+	$pattern[10]="👀";	$replacement[10]='';
+
+	$s = str_replace($pattern, $replacement, htmlspecialchars($s));
+	$i = strpos($s, '</font>');
+	if ($i !== false)
+		{return substr($s, 0, $i) . substr($s, $i+7, strlen($s)) . '</font>';}
+	else
+		{return $s;}
+}
+
+
+function connectToGame()
+	{
+global $server_ip, $server_port, $server_timeout, $server_buffer_results;		
+$server_addr = "udp://" . $server_ip;
+@$connect = fsockopen($server_addr, $server_port, $re, $errstr, $server_timeout);
+if (! $connect) { die('Can\'t connect to COD gameserver.'); }
+socket_set_timeout ($connect, $server_timeout);
+$server_buffer_cur = $server_buffer_results;
+return $connect;
+	}
+
+
+function RequestToGame($cmd)
+	{
+		if($cmd == 'status')
+	$retries = 2; else $retries = 1;
+	global $server_rconpass, $server_buffer_results, $connect, $server_extra_wait, $server_buffer_cur, $server_extra_footer;
+	$server_buffer_cur = $server_buffer_results;	
+	$send = "\xFF\xFF\xFF\xFF" . 'rcon "' . $server_rconpass . '" '.$cmd.(($server_extra_footer)?"\n":'');
+	fwrite($connect, $send);
+	$output = (($server_extra_wait)?(fread ($connect, 1200)):'');
+		do {
+			
+		$status_pre = stream_get_meta_data ($connect);
+		if ((($server_extra_wait) && ($output != '')) || (! $server_extra_wait))
+			$output .= fread ($connect, 1024);
+	 
+		$status_post = stream_get_meta_data ($connect);
+		} while (--$retries >= 0);
+fclose($connect);
+	return $output;
+}
+
+function uncolorize($string) {	
+for ($x = 0; $x <= 10; $x++) {
+    $string = str_replace("^^".$x."".$x, "", $string);
+}
+for ($x = 0; $x <= 10; $x++) {
+    $string = str_replace("^^".$x, "", $string);
+}
+for ($x = 0; $x <= 10; $x++) {
+    $string = str_replace("^".$x, "", $string);
+}	
+  $string = str_replace("^", "", $string);
+  return $string;
+}
+
+function allclearsymb($string) {
+  $string = preg_replace('/[(^)][+\d{1}]/', '', $string);
+  $string = preg_replace('/[(^)][+\d{1}]/', '', $string);
+  //delete all symbols
+  $string = preg_replace('/[^\p{L}\p{N}\s]/u', '', $string);
+  $string = str_replace(array(
+    "\r\n",
+    "\n",
+    "\r"
+  ) , "", $string);
+  return $string;
+}
+
+function fakeguid($string) {
+    $shid = trim($string);
+	$shid = trim(allclearsymb(uncolorize($string)));
+    $shid = abs(hexdec(crc32($shid)));
+    if (strlen($shid) < 10) $shid = $shid . (abs(hexdec(crc32($shid))));
+    $string = '231034661' . $shid;
+    $string = substr($string, 0, 19);
+    return $string;
+}
+
 function newdigistHash($s) {
 $digistHash = strtr(md5($s), [
     'a' => 0,
@@ -324,7 +420,7 @@ echo "<td style=\"background:" . ($i % 2 ? $colortdzzero : $colortdzone) . ";opa
 if(!empty($chat_ban_days))
 {	
   if($chat_ban_dayscccv == 1970621897)
-	  $chat_ban_days = $i_chatn_forver;
+	  $chat_ban_days = $lang['ban_for_ever'];
  
  $txt = "&emsp;&emsp;";	
  $txt = "<div class=\"flascensortwo\"> &emsp; $i_chat_ban [ $chat_ban_days ] &emsp; ".$txt." &emsp; </div>"; 
@@ -1162,6 +1258,7 @@ $string = str_replace("^9", "</font><font color=\"silver\">", $string);
 $string = str_replace("^", "", $string);
 return $string . "</font>";
 }
+
 
 function check_meta($image){
 $filecontent=file_get_contents($image);

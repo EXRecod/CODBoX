@@ -19,7 +19,15 @@ $url = $guid;
 $guidn = $guid;
 }}
  
-if(!empty($chattimer)) 
+if(!empty($rcon_cached))
+ {
+	$count = 1;
+    $urlmd5 = $server_ip.'_'.$server_port;
+    $urlmd5 = preg_replace('/[0-9]{6,12}/', '', $urlmd5);
+	$urlmd5 = md5($urlmd5);
+    $cachetime = 30; 
+ }  
+else if(!empty($chattimer)) 
   {
 	$count = 1;
     $urlmd5 = $chattimer;
