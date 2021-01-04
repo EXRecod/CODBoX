@@ -233,6 +233,7 @@ foreach ($reponse as $nr => $rp)
     else if ($keym == 'headshotsseriesrank') $HeadshotsSeriesRank = $value;
     else if ($keym == 'w_prestige') $prestige = $value;  //w_prestige
     else if ($keym == 'w_geo') $geo = $value;
+	else if ($keym == 'w_ip') $xplayerip = $value;
     else if ($keym == 'kdratio') $kdratio = $value;
     else if ($keym == 'kdratiosort') $kdratiosort = $value;
     else if ($keym == 'daterank') $DateRank = $value;

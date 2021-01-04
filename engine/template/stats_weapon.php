@@ -19,10 +19,7 @@ $baseurlz = basename(__FILE__);
 
 include($cpath ."/engine/functions/main.php");
 
-echo '<div class="content_block">
-<a href="https://localhost/profile/zzzztest/weapons">
-<div style="overflow:auto;width:100%;padding:5 10px;"><h1>'.$weapon_innf.'</h1>
-<img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;float:left;margin:1 3 0 3px;"></div></a>
+echo '<div class="content_block"><div style="overflow:auto;width:100%;padding:5 10px;"><h1>'.$weapon_innf.'</h1></div>
 
 <div style="overflow:auto;" class="wrapper">';
       	$pkli = array();
@@ -101,6 +98,10 @@ $key = str_replace("_acog_", "_", $key);
 $key = str_replace("_grip_", "_", $key);
 $key = str_replace("_silencer_", "_", $key);	
 $key = str_replace("_reflex_", "_", $key); 
+
+$key = str_replace("rgd_33russianfrag_mp", "frag_grenade_russian_mp", $key);
+$key = str_replace("stielhandgranate_mp", "frag_grenade_german_mp", $key);
+$key = str_replace("mk1britishfrag_mp", "frag_grenade_british_mp", $key);
 
 if($r == 1)
 	$no = '<div style="position: absolute;top: 20%;left: 87%;transform: translate(-50%, -50%);"><b style="font-size: 22px;color: #cfc547;text-shadow: 3px 0px 7px rgba(81,67,21,0.8), -3px 0px 7px rgba(81,67,21,0.8), 0px 4px 7px rgba(81,67,21,0.8);"> TOP </b></div>';

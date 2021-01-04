@@ -310,7 +310,20 @@ if (empty($brofile)) {
 
 <div style="height:auto;overflow:auto;align-content:center;display: flex;flex-wrap: wrap;box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;" class="content_block">
 <div class="server_foot_paginator">';
-		$pageskey = '<a href="' . $domain . '/chat.php?server=' . $server . '&search=' . $search . '&geo=' . $geosearch . '&timeq=' . $timeq . '&page=';
+
+if(!empty($_GET['nicknameSearchguid']))
+	$nicknameSearchguid = '&nicknameSearchguid='.$_GET['nicknameSearchguid']; else $nicknameSearchguid = '';
+
+if(!empty($search))
+	$search = '&search=' . $search; else $search = '';
+
+if(!empty($geosearch))
+	$geosearch = '&geo=' . $geosearch; else $geosearch = '';
+
+if(!empty($timeq))
+	$timeq = '&timeq=' . $timeq; else $timeq = '';
+
+		$pageskey = '<a href="' . $domain . '/chat.php?server='.$server.$search.$geosearch.$timeq.$nicknameSearchguid.'&page=';
 		// Проверяем нужны ли стрелки назад
 		if ($page != 1) $pervpage = $pageskey . '1" class="paginator">' . $t_page_first . '</a> | ' . $pageskey . ($page - 1) . '" class="paginator">' . $t_page_pre . '</a> | ';
 		// Проверяем нужны ли стрелки вперед

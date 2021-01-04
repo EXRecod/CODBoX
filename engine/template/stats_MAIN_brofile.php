@@ -103,7 +103,10 @@ echo '
 	
 	
 	
-	
+$geoinff = '';
+require $cpath.'/engine/geoip_bases/class.iptolocation.php';
+$db = new \IP2Location\Database($cpath.'/engine/geoip_bases/IP2LOCATION-LITE-DB3.BIN', \IP2Location\Database::FILE_IO);
+		
 	
 	
 $i = 0;	
@@ -154,7 +157,54 @@ if(!empty($value['s_lasttime']))
              $total_players_ondatabase = $value['totalpl'];	
 		 if(!empty($value['headpercent']))		 
 			 $headpercents = $value['headpercent'];
-			 
+		 if(!empty($value['w_ip']))		 
+			 $xplayerip = $value['w_ip'];
+ 
+
+		if (!empty($xplayerip)) {
+				$record = $db->lookup($xplayerip, \IP2Location\Database::ALL);
+				if (!empty($record)) {
+					
+					
+				if (isLoginUser()) {	
+					
+						$flg = $record['countryCode'];
+						$flag = $flg;
+						$cn_nm = $record['countryName'];
+						$geoinff = "🅲🅾🆄🅽🆃🆁🆈:".$record['countryName']." \n\n  🆁🅴🅶🅸🅾🅽:".$record['regionName']." \n\n  🅲🅸🆃🆈:".$record['cityName'];
+						
+				}
+				else
+				{
+					
+						$flg = $record['countryCode'];
+						$flag = $flg;
+						$cn_nm = $record['countryName'];
+						$geoinff = geosorting($flag);
+					
+				}
+				
+						
+						
+				}
+				else {
+						$flag = '';
+						$cn_nm = '';
+				}
+		}
+		else if (!empty($geo)) {
+				$flag = $geo;
+				$cn_nm = '';
+		}
+		else {
+				$flag = '';
+				$cn_nm = '';
+		}
+
+
+
+
+		 
 if (strpos(trim(urldecode($sss)), trim($servername)) !== false) { 
 
 ?>
@@ -254,14 +304,14 @@ foreach ($prestige_images as $numimgjj => $preimagej){
 	
 	<div style="float:left;min-width:30px;text-align:center;font-weight:bold;font-size:16px;max-width:100px;width:calc(20%);">'.($premierMessageAafficher+$i).'</div>
 	
-	<div style="width:10%;float:left;max-width:40px;min-width:25px;" class="tags" glose="' .  geosorting($geo) . '">
-	<img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png"  style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;">
+	<div style="width:10%;float:left;max-width:40px;min-width:25px;" class="tags" glose="' .  $geoinff . '">
+	<img src="'.$domain.'/inc/images/flags-mini/'.$flag.'.png"  style="height:15px;padding-top:7px;float:left;padding-right:5px;opacity:0.8;">
 	</div>
 	
 	
 	
 	<div style=" float:left;display:inline-block;text-align:left;min-width:100px;max-width:calc(65%);overflow:hidden;">
-	<div style="max-width:1500px;font-size:15px;letter-spacing:.1em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.$nickname.' 
+	<div style="max-width:1500px;font-size:15px;letter-spacing:.1em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '.colorize($nickname).' 
 	';
 	
 	if(!empty($brofile))

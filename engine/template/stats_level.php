@@ -2,6 +2,52 @@
 
 
 
+$geoinff = '';
+require $cpath.'/engine/geoip_bases/class.iptolocation.php';
+$db = new \IP2Location\Database($cpath.'/engine/geoip_bases/IP2LOCATION-LITE-DB3.BIN', \IP2Location\Database::FILE_IO);
+	
+
+		if (!empty($xplayerip)) {
+				$record = $db->lookup($xplayerip, \IP2Location\Database::ALL);
+				if (!empty($record)) {
+					
+					
+				if (isLoginUser()) {	
+					
+						$flg = $record['countryCode'];
+						$flag = $flg;
+						$cn_nm = $record['countryName'];
+						$geoinff = "🅲🅾🆄🅽🆃🆁🆈:".$record['countryName']." \n\n  🆁🅴🅶🅸🅾🅽:".$record['regionName']." \n\n  🅲🅸🆃🆈:".$record['cityName'];
+						
+				}
+				else
+				{
+					
+						$flg = $record['countryCode'];
+						$flag = $flg;
+						$cn_nm = $record['countryName'];
+						$geoinff = geosorting($flag);
+					
+				}
+				
+						
+						
+				}
+				else {
+						$flag = '';
+						$cn_nm = '';
+				}
+		}
+		else if (!empty($geo)) {
+				$flag = $geo;
+				$cn_nm = '';
+		}
+		else {
+				$flag = '';
+				$cn_nm = '';
+		}
+		
+
 if(empty($_GET['server']))
 	$srvlist = 111;
 else
@@ -53,7 +99,7 @@ echo '<div style="height:auto;overflow:auto;-webkit-justify-content: space-betwe
  
 <div style="text-align:left;">
 
-<div style="display:inline-block;"> '.colorize($nickname).'  <img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png" alt="'.$geo.'" title="'.$geo.'" style="height:18px;"></div>
+<div style="display:inline-block;"> '.colorize($nickname).'  <img src="'.$domain.'/inc/images/flags-mini/'.$flag.'.png" alt="'.$geoinff.'" title="'.$geoinff.'" style="height:18px;"></div>
 <div style="font-size:12px;color:#aaa;">'.$guid.'</div>'; 
 
  
