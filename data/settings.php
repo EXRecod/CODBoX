@@ -35,7 +35,7 @@ $game_server_list_parser = 'https://zona-ato-game.ru/sourcebans/index.php?p=serv
 
 
 //DATABASE PLAYER STATS DAYS LIMIT
-$StatsDaysLimit = 7;
+$StatsDaysLimit = 14;
  
 
 
@@ -160,27 +160,7 @@ $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
 $codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
-$codbx_users[] = "admin;admin";
+
 
 //RCON SETTINGS
 $server_timeout = 10; //10			// enter a number of seconds before connection to server times out; default=5 (try lower for increased performance, higher for troubleshooting)
