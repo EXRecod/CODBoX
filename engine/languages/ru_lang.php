@@ -113,7 +113,7 @@ $lang = array();
   $t_heads = "В голову";
   $t_kd = "Ф/П(k/d)";
   $t_deaths = "Потери";
-  $t_kills = "Фраги";
+  $t_kills = "Убил";
   $t_soul = "Сам";
   $t_general_stats = "Лидеры всех серверов";
   $t_search = 'Поиск';
@@ -136,7 +136,7 @@ $lang = array();
   $t_total_players_tti = 'Сегодня в игре';  
   $t_total_players_yyi = 'Вчера в игре';  
   
-  $t_killx2 = ' количество фрагов в таблице лидеров'; //kills on top
+  $t_killx2 = ' количество убийств в таблице лидеров'; //kills on top
   $t_tsek = 'сек.';
   $t_cachedw = 'Сохранено в '; //Cached with
   
@@ -155,7 +155,7 @@ $lang = array();
     $t_player_place = 'Позиция среди игроков сервера'; 
     $t_player_place_all = 'Позиция среди игроков всех серверов'; 	
     $t_player_place_skill = 'По навыку';
-    $t_player_place_kills = 'По фрагам';	
+    $t_player_place_kills = 'По убийствам';	
     $t_player_place_heads = 'По попаданию в голову';
 	
   $medals = 'Медали';
@@ -164,7 +164,7 @@ $lang = array();
   $medals_anti = 'Анти медали';	
   
  
-  $medals_killer  = 'По фрагам';
+  $medals_killer  = 'Мясник';
   $medals_headshots  = 'В голову';
   $medals_suicides = 'Суицид'; 
   $medals_knife = 'Мясник';
