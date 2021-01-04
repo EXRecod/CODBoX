@@ -288,6 +288,9 @@ $sefes = rand(42, 69);
 $sefesf = rand(74, 99);
 $nextprolvl = get_percentage($sefes, $sefesf);
 
+if (empty($totalactiveplayers)) $totalactiveplayers = 500;
+ 
+
 //$percent_of_skillPositions_circle = abs(get_percentage_circle($total_players_ondatabase - $skillPlace, $total_players_ondatabase));
 //$percent_of_skillPositions = abs(($total_players_ondatabase-$skillPlace-$skillPlace)/$total_players_ondatabase)*100;
 $percent_of_skillPositions = (($totalactiveplayers-$skillPlace+1)/$totalactiveplayers) * 100;

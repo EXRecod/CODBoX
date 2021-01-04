@@ -53,7 +53,7 @@ echo '<div style="height:auto;overflow:auto;-webkit-justify-content: space-betwe
  
 <div style="text-align:left;">
 
-<div style="display:inline-block;"> '.$nickname.'  <img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png" alt="'.$geo.'" title="'.$geo.'" style="height:18px;"></div>
+<div style="display:inline-block;"> '.colorize($nickname).'  <img src="'.$domain.'/inc/images/flags-mini/'.$geo.'.png" alt="'.$geo.'" title="'.$geo.'" style="height:18px;"></div>
 <div style="font-size:12px;color:#aaa;">'.$guid.'</div>'; 
 
  

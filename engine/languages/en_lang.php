@@ -1,5 +1,7 @@
 <?php
 ////////// MENU
+$lang = array();
+
   $i_lefttime = 'Ban&nbsp;left';
   $llefttime = 'Left';
   $lang['ipinformation'] = 'IP&nbsp;adress&nbsp;reason.';  
@@ -282,7 +284,6 @@ $bonus_slot_vbtxt  = "Your ip address is not in the server database, you need yo
  $menu_rcon_get = 'No server selected from the menu list!';  
  $menu_rcon_error = 'Server is offline, or not correct settings!!!';  
  
-$lang = array();
 $lang['confirm'] = 'OK';
 $lang['command'] = 'Command';
 $lang['result'] = 'Result';

@@ -106,7 +106,7 @@ cursor:hand;" id="match'.md5($i).'" onclick="show_match(\''.md5($i).'\')">
 	
 
 <div style="float:left;color:#fff;padding:2px;line-height:15px;text-align:left;width:100px;font-size:14px;min-width:40%;">	
-<div style="color:#777;font-size:14px;">Nick &nbsp;&nbsp;&nbsp;&nbsp;<b> <a href="'.$domain.'/stats.php?profile='.$s_pg.'" style="color:#fff;" class="tags" glose="' . $w_guid . '" target="_self"> '.$s_player.'</a></b></div></div>
+<div style="color:#777;font-size:14px;">Nick &nbsp;&nbsp;&nbsp;&nbsp;<b> <a href="'.$domain.'/stats.php?profile='.$s_pg.'" style="color:#fff;" class="tags" glose="' . $w_guid . '" target="_self"> '.colorize($s_player).'</a></b></div></div>
 <div style="float:left;color:#fff;padding:2px;line-height:15px;text-align:left;width:200px;font-size:14px;">
 <div style="color:#777;">Server &nbsp;&nbsp;&nbsp;&nbsp;'.colorize($servername).'</div></div>
 </div>

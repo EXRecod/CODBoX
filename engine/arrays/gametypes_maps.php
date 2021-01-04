@@ -12,7 +12,7 @@ $typesall = array(
 );
 
 $mapsall = array(
-
+    'mp_harbor' => 'Harbor',
 	'mp_carentan' => 'China Town',
 	'mp_convoy' => 'Ambush',
 	'mp_backlot' => 'Backlot',

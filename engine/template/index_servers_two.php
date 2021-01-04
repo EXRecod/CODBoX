@@ -62,7 +62,8 @@ if ((empty($gtimes))||(!file_exists($gtplayer_list))) {
             $status = null;
         }
     }
-	
+if(!empty($respm))
+{	
 	$rpm = json_encode($respm);
 	
  	if(empty($respm))
@@ -82,7 +83,7 @@ echo '<script type="text/javascript">location.reload(true);</script>';
                 fclose($fp);
 		}
     }				
-	
+}
 }
 
 
@@ -164,7 +165,7 @@ echo '<div class="match_stats_adv" style="min-width:180px;">Players
  ';
             foreach ($players as $pl => $e) {
                 foreach ($e as $r => $j) {
-                    echo '<div style="color:#fff;width:257px;">' . $j . '</div>';
+                    echo '<div style="color:#fff;width:257px;">' . colorize($j) . '</div>';
                 }
             }
             echo '

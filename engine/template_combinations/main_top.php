@@ -381,7 +381,7 @@ WHERE ' . $serverssqLdata . ' DESC LIMIT ' . $premierMessageAafficher . ', ' . $
 }
 
 $nickname = '';
-
+$ids = 1;
 if(!empty($xz))
 foreach ($xz as $keym => $value) {
   $ids = $value['totalpl'];

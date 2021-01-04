@@ -1,6 +1,11 @@
 <?php
  if(empty($templ))
 	die("PERMISSIONS DENIED!");
+
+
+$geoarr = '';
+
+
 	$reponse = 'SELECT w_geo, count(*) as c from db_stats_2 GROUP BY w_geo ORDER BY c desc';
     $geos = dbSelectALL('', $reponse);
 	 
@@ -18,7 +23,7 @@ if(!empty($xgeo)){
 }
 }
 
- 
+if(!empty($geoarr)){ 
 if(is_array($geoarr))
 {
 //foreach ($geoarr as $geo => $tot)
@@ -62,3 +67,4 @@ if(is_array($geoarr))
   
     <div id="regions_div" style="width: 100%; height:100%;"></div>
  
+<?php } ?>

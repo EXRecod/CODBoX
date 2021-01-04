@@ -39,7 +39,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=" endcolorstr=
 </div>
   
 <div class="flexer" style="    width: calc(100% - 90px);display:block;z-index:1;">
-  <b>'.$nickname.'</b> 
+  <b>'.colorize($nickname).'</b> 
   '.$bestfdxgcyjuhk.' <b>'.round($positionOnAll_OF,2).'%</b> 
   '.$bestfdxgcyjuhkijlo.'</div>
   
