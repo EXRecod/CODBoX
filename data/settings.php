@@ -1,8 +1,11 @@
 <?php
 
 
+
 $domain = 'http://localhost/codbx';  //adress where codbx was placed
 
+//https://discord.com/
+$discord_channel_id = "548990073694322695"; // OFF 0
 
 //DATABASE SETTINGS
 $host_adress = 'localhost:3306'; 
