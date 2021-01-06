@@ -28,5 +28,14 @@ $xcontent = get_local_source_db($domain.'/engine/template/index_servers_one.php?
 echo $xcontent;
 
 include $cpath . "/engine/template/index_servers_two.php";
+
+if(!empty($discord_channel_id))
+echo '
+<iframe src="https://discord.com/widget?id='.$discord_channel_id.'&theme=dark" 
+width="100%" height="500" allowtransparency="true" frameborder="0" 
+sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin 
+allow-scripts"></iframe>
+';
+
 include $cpath . "/engine/template/footer.php";
 ?>
