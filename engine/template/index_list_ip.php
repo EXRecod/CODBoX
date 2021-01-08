@@ -379,37 +379,37 @@ class="tags" glose="[C]&nbsp;'.$menu_chats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[C]
 if(((!empty($reasonx))&&(strpos($reasonx, 'VPN') !== false))||((!empty($reasonx))&&(strpos($reasonx, 'PROXY') !== false))||((!empty($reasonx))&&(strpos($reasonx, 'TOR') !== false)))
 {
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
-<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$iprange.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$iprange.'&nickname='.$xpnickname.'&visited='.$zaxodil.'" 
 target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
 class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
 </div>';	
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
-<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&visited='.$zaxodil.'" 
 target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
 class="tags" glose="[IB]&nbsp;'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'"> <b>[IB]</b> </a>		
 </div>';	
 }
 else if(!empty($reasonx))
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
-<a href="'.$domain.'/list_ip_ban.php?unbanip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+<a href="'.$domain.'/list_ip_ban.php?unbanip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&visited='.$zaxodil.'" 
 target="_blank" style="float:left;color:lime;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
 class="tags" glose="'.$i_unban.':&nbsp;'.$xpnickname.'"> ['.$i_unban.']&nbsp;&nbsp;&nbsp; </a>	
 </div>';
 else if(substr_count($ip, '.') == 1)
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
-<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$iprange.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$iprange.'&nickname='.$xpnickname.'&visited='.$zaxodil.'" 
 target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
 class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
 </div>';	
 else if(substr_count($ip, '.') > 1)
 {
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
-<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+<a href="'.$domain.'/list_ip_ban.php?banip='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&visited='.$zaxodil.'" 
 target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
 class="tags" glose="[IB]&nbsp;'.$i_ban.'&nbsp;IP:&nbsp;&nbsp;'.$xpnickname.'"> <b>[IB]</b> </a>		
 </div>';
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">		
-<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'&visited='.$zaxodil.'" 
+<a href="'.$domain.'/list_ip_ban.php?baniprange='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&visited='.$zaxodil.'" 
 target="_blank" style="float:left;color:#998546;line-height:19px;text-align:left;width:2px;FONT-SIZE:18PX;" 
 class="tags" glose="[R]&nbsp;'.$i_ban.'&nbsp;IP&nbsp;'.$i_iprange.':&nbsp;'.$xpnickname.'"> <b>[R]</b> </a>	
 </div>';		

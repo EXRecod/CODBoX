@@ -301,7 +301,7 @@ class="tags" glose="[IB]&nbsp;'.$i_ban.'&nbsp;IP:&nbsp;'.$xpnickname.'"> <b>[IB]
 
 
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:22px;">		
-<a href="'.$domain.'/redirect.php?guid='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'&geo='.$cn_nm.'" 
+<a href="'.$domain.'/redirect.php?guid='.$guidxx.'&ip='.$ip.'&nickname='.$xpnickname.'" 
 target="_blank" style="float:left;color:#995b46;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
 class="tags" glose="[B]&nbsp;'.$i_ban.'&nbsp;GUID:&nbsp;'.$xpnickname.'"> <b>[B]</b> </a>	
 </div>';

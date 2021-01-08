@@ -20,11 +20,31 @@ $nicknameSearchguid = '';
  $byadmin = $_GET['byadmin'];
  else
 	$byadmin = 'unknown'; 
- 
- 
- if (!empty($nicknameSearch))	
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername LIKE :keyword ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 
+
+ 
+ if(!empty($_GET['visited']))
+ $visited = $_GET['visited'];
+ else
+	$visited = '1'; 
+
+ 
+if (!empty($_GET['banip']))
+{
+				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +1 day'));
+				$tmk = str_replace("-", ".", $tmk);	
+	
+$re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
+VALUES ('".$_GET['nickname']."','".$_GET['ip']."','".$_GET['ip']."','".$_GET['banip']."','IP BAN','".date("Y.m.d H:i:s")."', 
+'".$tmk."', '1','" .$byadmin . "','" .$visited . "') 
+ON DUPLICATE KEY UPDATE ip='" . $_GET['ip'] . "', playername='".$_GET['nickname']."', patch='" .$visited . "', 
+reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
+$r = dbSelectALL('', $re);
+
+sleep(1);
+$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime, days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
+echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
+} 
 else if (!empty($_GET['unbanip']))
 {
 if(substr_count($_GET['ip'], '.') == 1)
@@ -39,20 +59,10 @@ sleep(1);
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 }
-else if (!empty($_GET['banip']))
-{
-				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +1 day'));
-				$tmk = str_replace("-", ".", $tmk);	
-	
-$re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
-VALUES ('".$_GET['nickname']."','".$_GET['ip']."','".$_GET['ip']."','".$_GET['banip']."','IP BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','" .$_GET['visited'] . "') 
-ON DUPLICATE KEY UPDATE ip='" . $_GET['ip'] . "', playername='".$_GET['nickname']."', patch='" .$_GET['visited'] . "', reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
-$r = dbSelectALL('', $re);
-
-sleep(1);
-$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime, days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
-echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
-}	
+else 
+ if (!empty($nicknameSearch))	
+$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername LIKE :keyword ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
+ 	
 else if (!empty($_GET['baniprange']))
 {
 			  list($onem, $twom, $threem, $fourm) = explode(".", $_GET['ip']);
@@ -61,8 +71,8 @@ else if (!empty($_GET['baniprange']))
 				$tmk = str_replace("-", ".", $tmk);			
 			  
 $re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
-VALUES ('".$_GET['nickname']."','".$rangeip."','".$_GET['ip']."','".$_GET['baniprange']."','IP RANGE BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','" .$_GET['visited'] . "') 
-ON DUPLICATE KEY UPDATE ip='" . $_GET['ip'] . "', playername='".$_GET['nickname']."', patch='" .$_GET['visited'] . "', reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
+VALUES ('".$_GET['nickname']."','".$rangeip."','".$_GET['ip']."','".$_GET['baniprange']."','IP RANGE BAN','".date("Y.m.d H:i:s")."', '".$tmk."', '1','" .$byadmin . "','" .$visited . "') 
+ON DUPLICATE KEY UPDATE ip='" . $_GET['ip'] . "', playername='".$_GET['nickname']."', patch='" .$visited . "', reason='IP BAN', time='".date("Y.m.d H:i:s")."', bantime = '".$tmk."', whooo='" .$byadmin . "'";
 $r = dbSelectALL('', $re);
 
 sleep(1);
