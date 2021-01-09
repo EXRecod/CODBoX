@@ -347,6 +347,7 @@ if(!empty($timeq))
 
 
 $pageskey = '<a href="' . $domain . '/img.php?server=' . $server.$jkl.$search.$nicknameSearchguid.$nicknameSearch . '&page=';
+
 // Проверяем нужны ли стрелки назад
 if ($page != 1) $pervpage = $pageskey . '1" class="paginator">' . $t_page_first . '</a> | ' . $pageskey . ($page - 1) . '" class="paginator">' . $t_page_pre . '</a> | ';
 // Проверяем нужны ли стрелки вперед

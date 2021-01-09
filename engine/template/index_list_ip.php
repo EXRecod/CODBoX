@@ -481,11 +481,34 @@ echo '<br/>
 <div style="height:auto;overflow:auto;align-content:center;display: flex;flex-wrap: wrap;box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;" class="content_block">
 <div class="server_foot_paginator">';
 
+if(!empty($_GET['sort_unbanned']))
+	$sort_unbanned = '&sort_unbanned='.$_GET['sort_unbanned']; else $sort_unbanned = ''; 
+
+if(!empty($_GET['sort_banned']))
+	$sort_banned = '&sort_banned='.$_GET['sort_banned']; else $sort_banned = '';
+
+if(!empty($_GET['sort_fakeip']))
+	$sort_fakeip = '&sort_fakeip='.$_GET['sort_fakeip']; else $sort_fakeip = '';
  
-$pageskey = '<a href="'.$domain.'/list_ip_ban.php?server=' . $server .'&search=' . $search .
-'&geo=' . $geosearch .
-'&timeq=' . $timeq .
-'&page=';
+
+if(!empty($_GET['nicknameSearch']))
+	$nicknameSearch = '&nicknameSearch='.$_GET['nicknameSearch']; else $nicknameSearch = '';
+
+if(!empty($_GET['nicknameSearchguid']))
+	$nicknameSearchguid = '&nicknameSearchguid='.$_GET['nicknameSearchguid']; else $nicknameSearchguid = '';
+
+if(!empty($search))
+	$search = '&search=' . $search; else $search = '';
+
+if(!empty($geosearch))
+	$geosearch = '&geo=' . $geosearch; else $geosearch = '';
+
+if(!empty($timeq))
+	$timeq = '&timeq=' . $timeq; else $timeq = '';
+ 
+ 
+$pageskey = '<a href="' . $domain . '/list_ip_ban.php?server=' . $server.$sort_banned.$sort_fakeip.$sort_unbanned.$search.$nicknameSearchguid.$nicknameSearch.$geosearch.$timeq.'&page=';
+
 
 
 // Проверяем нужны ли стрелки назад
