@@ -4,8 +4,7 @@
 /////////////////////////////////////////////////////////////////////
  if(empty($templ))
 	die("PERMISSIONS DENIED!");
-if(!empty($_GET['statsmedal']))
-{
+ 
 	
 if (empty($cpath)) { 
   $cpath = dirname(__FILE__);
@@ -20,12 +19,13 @@ sleep(1);
 include($cpath ."/engine/functions/langctrl.php");
  
 $baseurlz = basename(__FILE__); 
-
-include($cpath ."/engine/functions/main.php");
+ 
  
 ///////////////////////////////////////////
- $reponse = 'SELECT 
+  $reponse = 'SELECT 
+       t0.s_lasttime,
        t1.s_guid,
+       t0.s_pg,
 	   t1.s_pg,
        t2.kdguidx,
        t2.kdratio,
@@ -39,6 +39,7 @@ include($cpath ."/engine/functions/main.php");
 	   t6.medal_pro_headshot,
 	   t7.skillguidx,
 	   t7.skill,
+	   t8.medal_or_ak, 
 	   t8.medal_or_ak, 
 	   t8.medalakgui
   
@@ -76,30 +77,26 @@ JOIN  ( select s_pg as skillguidx, w_skill AS skill
 FROM db_stats_2 where w_skill >= 1000
 ORDER BY skill DESC LIMIT 1)  t7
 
+
 JOIN  ( select ak47_mp as medal_or_ak,s_pg as medalakgui
-FROM db_weapons_2 ORDER BY ak47_mp DESC LIMIT 1)  t8 
+FROM db_weapons_2 ORDER BY ak47_mp DESC LIMIT 1)  t8 ON 
+ t0.s_pg = t8.medalakgui where DATE_SUB(CURDATE(),INTERVAL '.($StatsDaysLimit*2).' DAY) <= t0.s_lasttime LIMIT 1';
+	
+	
 
-LIMIT 1';
-
-
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 $xz = dbSelectALL('', $reponse);
-
 
 foreach ($xz as $keym => $value) {
  $chk['skill'][$value['skill']] = $value['skillguidx'] ;
  $chk['headpercent'][$value['headpercent']] = $value['headpercentguidx'];
  $chk['medal_pro_killer'][$value['medal_pro_killer']]  = $value['s_killsguidx'];
  $chk['medal_pro_headshot'][$value['medal_pro_headshot']] = $value['headsguidx']; 
- $chk['medal_or_ak'][$value['medal_or_ak']] = $value['medalakgui'];  
+ $chk['medal_or_ak'][$value['medal_or_ak']] = $value['medalakgui'];
  $chk['kdratio'][$value['kdratio']] = $value['kdratio'];  
 }
-	
-	
-}
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
 
 
 echo '<div class="content_block"> 

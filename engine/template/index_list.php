@@ -150,12 +150,13 @@ $txttitle = $ip;
     //$tm = getDateString($unix_db_date);
 	
 
-   
+    $color_array = array('#0f1014', '#0f0e0e');
+    $class = $color_array[$i%2];
 
 
 echo '
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
-margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($time.$i).'" onclick="show_match(\''.md5($time.$i).'\')">	
+<div style="width:auto;overflow:auto;padding:5px;background: '.$class.';
+margin:4px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($time.$i).'" onclick="show_match(\''.md5($time.$i).'\')">	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">	
 <div style="overflow:auto;display:inline-block;flex-grow: 1; display: flex; min-width:30%; 
 /* &#1101;&#1083;&#1077;&#1084;&#1077;&#1085;&#1090; &#1086;&#1090;&#1086;&#1073;&#1088;&#1072;&#1078;&#1072;&#1077;&#1090;&#1089;&#1103; &#1082;&#1072;&#1082; &#1073;&#1083;&#1086;&#1095;&#1085;&#1099;&#1081; flex-&#1082;&#1086;&#1085;&#1090;&#1077;&#1081;&#1085;&#1077;&#1088; */

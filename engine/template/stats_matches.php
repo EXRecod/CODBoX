@@ -9,7 +9,7 @@ echo '<div class="content_block">
 <div style="overflow:auto;width:100%;padding:5 10px;">
 <h1>Matches Played</h1><img src="'.$domain.'/inc/images/link.png.pagespeed.ce.4Px-TY_BxN.png" style="height:14px;float:left;margin:1 3 0 3px;"></div></a>
 
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595360448" onclick="show_match(\'1595360448\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595360448" onclick="show_match(\'1595360448\')">
 	
 	
 	
@@ -109,7 +109,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595359843" onclick="show_match(\'1595359843\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595359843" onclick="show_match(\'1595359843\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -198,7 +198,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595359331" onclick="show_match(\'1595359331\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595359331" onclick="show_match(\'1595359331\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -287,7 +287,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595358460" onclick="show_match(\'1595358460\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1595358460" onclick="show_match(\'1595358460\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -376,7 +376,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594935647" onclick="show_match(\'1594935647\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594935647" onclick="show_match(\'1594935647\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -465,7 +465,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594934908" onclick="show_match(\'1594934908\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594934908" onclick="show_match(\'1594934908\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -554,7 +554,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594934228" onclick="show_match(\'1594934228\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594934228" onclick="show_match(\'1594934228\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -643,7 +643,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594929539" onclick="show_match(\'1594929539\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594929539" onclick="show_match(\'1594929539\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -732,7 +732,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594928144" onclick="show_match(\'1594928144\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594928144" onclick="show_match(\'1594928144\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -821,7 +821,7 @@ echo '<div class="content_block">
 	</div>
 	
 	</div>
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594927639" onclick="show_match(\'1594927639\')">
+<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:5px;font-size:13px;cursor:pointer;cursor:hand;" id="match1594927639" onclick="show_match(\'1594927639\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">

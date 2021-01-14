@@ -147,7 +147,8 @@ include $cpath . "/engine/template/servermenu.php";
 
 include $cpath . "/engine/template/search.php";
 include $cpath . "/engine/template/menu.php";
-  
+  if (empty($xz))
+	echo '<center>'.$lang['nothing_search'].'</br></center>';
 include $cpath . "/engine/template/index_list.php";
 
 include $cpath . "/engine/template/footer.php";

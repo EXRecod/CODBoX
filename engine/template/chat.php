@@ -85,9 +85,11 @@ $geoinff = '';
 require $cpath.'/engine/geoip_bases/class.iptolocation.php';
 $db = new \IP2Location\Database($cpath.'/engine/geoip_bases/IP2LOCATION-LITE-DB3.BIN', \IP2Location\Database::FILE_IO);
 
-
+if (empty($xz))
+	echo '<center>'.$lang['nothing_search'].'</br></center>';
 
 $i = 0;
+if (!empty($xz))
 foreach ($xz as $keym => $dannye) {
 		++$i;
 		$xplayerip = $dannye['ip'];
@@ -114,16 +116,20 @@ text-shadow: 3px 3px 10px #17f612,
 		else if (strpos($chatbanstatus, "-") !== false) {
 				$txt = '';
 				$Py = explode("%", $chatbanstatus);
-				$txta = ' <b style="color: #fff;
 
-text-shadow: 3px 3px 10px #f61212,
-    -2px 1px 20px #f61212;">' . $i_chat_ban . ' ' . $Py[1] . '</b> ';
+	
+if (isLoginUser()) 
+$txta = ' <b style="color: #fff;text-shadow: 3px 3px 10px #f61212,-2px 1px 20px #f61212;">' . $i_chat_ban . ' ' . $Py[1] . '</b> </br> ' . $txttitle . ' ';	
+else
+$txta = ' <b style="color: #fff;text-shadow: 3px 3px 10px #f61212,-2px 1px 20px #f61212;">' . $i_chat_ban . ' ' . $Py[1] . '</b> ';	
+	
+	
 		}
 		else $txta = '';
 		//ANTIMAT
 		$txt = antimat($txt);
 		if (strpos($txt, "%CENSORED%") !== false) {
-				if (isLoginUser()) $txt = '<b class="rainbowQ" style="font-size:22px;">' . $txttitle . '</b> ';
+				if (isLoginUser()) $txt = '<b class="rainbowQ" style="font-size:18px;">' . $txttitle . '</b> ';
 				$txta = '';
 		}
 		if (!empty($xplayerip)) {
@@ -175,9 +181,13 @@ text-shadow: 3px 3px 10px #f61212,
 		//$db_date = new DateTime($xxtime);
 		//$unix_db_date = $db_date->getTimestamp();
 		//$tm = getDateString($unix_db_date);
+		
+    $color_array = array('#0f1014', '#0f0e0e');
+    $class = $color_array[$i%2];		
+		
 		echo '
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;
-margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match' . md5($time . $i) . '" onclick="show_match(\'' . md5($time . $i) . '\')">
+<div style="width:auto;overflow:auto;padding:5px;background: '.$class.';
+margin:4px;font-size:13px;cursor:pointer;cursor:hand;" id="match' . md5($time . $i) . '" onclick="show_match(\'' . md5($time . $i) . '\')">
 	
 	
 <div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">
@@ -186,7 +196,7 @@ margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match' . md5($time .
   flex-wrap: wrap; " class="wrapper">
 	
 <div style="float:left;color:#fff;padding:5 3px;font-size:10px;line-height:14px;width:34px;text-align:center;">' . $tm . '</div>
-<div style="float:left;color:#fff;padding:2px;line-height:12px;text-align:left;width:200px;font-size:13px;">
+<div style="float:left;color:#fff;padding:2px;line-height:25px;text-align:left;width:200px;font-size:13px;">
 
 <a href="' . $domain . '/chat.php?server=' . $cntz . '" class="tags" glose="' . clean($serverx) . '">
 ' . colorize($serverx) . '
@@ -209,7 +219,7 @@ class="tags" glose="✅List"> [L] </a>
 </div>
 ';
 		}
-		echo '<div style="float:left;color:#fff;padding:12px;text-align:left;width:90px;FONT-SIZE:18PX;min-width:60px;">
+		echo '<div style="float:left;color:#fff;padding:8 8px;text-align:left;width:90px;FONT-SIZE:18PX;min-width:60px;">
 	
  
 

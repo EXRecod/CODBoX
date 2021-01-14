@@ -7,6 +7,9 @@ if(empty($templ))
 //if(!isLoginUser())
 //die('</br></br></br><h1><center>ТУТ РЕМОНТ!</center><h1>');
  
+ 
+$skillPlace = 11231; 
+$HeadshotsSeriesRank = 2346;
 
 $maxforanimate = 35;
  
@@ -74,6 +77,7 @@ join
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   $reponse[] = 'SELECT t0.s_pg, 
        t0.s_guid,
+	   t0.s_lasttime,
        tj.skillrank,  
        tf.headshotsseriesrank
 FROM   db_stats_0 t0 
@@ -97,7 +101,7 @@ WHERE q.w_skill > b.w_skill or
       (q.w_skill = b.w_skill and q.s_pg <= "' . $guidn . '")) 
    tj ON 
  t0.s_pg = "' . $guidn . '"  
- where t0.s_pg = "' . $guidn . '" LIMIT 1';
+ where t0.s_pg = "' . $guidn . '" and DATE_SUB(CURDATE(),INTERVAL '.$StatsDaysLimit.' DAY) <= t0.s_lasttime LIMIT 1';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $reponse[] = 'SELECT t0.s_pg, 

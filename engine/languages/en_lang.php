@@ -1,6 +1,14 @@
 <?php
-////////// MENU
 $lang = array();
+
+//##################################################################
+//10.01.2021
+ 
+ $lang['from_yesterday']     = 'yesterday'; 
+ $lang['from_total']         = 'from all time';
+ $lang['ban_forever']        = 'Tban';
+ $lang['nothing_search']     = 'Search nothing find!';
+//##################################################################
 
   $i_lefttime = 'Ban&nbsp;left';
   $llefttime = 'Left';

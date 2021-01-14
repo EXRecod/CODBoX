@@ -2,6 +2,10 @@
 if(empty($templ))
 	die("PERMISSIONS DENIED!");
 
+
+//sort_banned
+
+
 if (isLoginUser()) {
  $top_main_total = 100;
 
@@ -59,15 +63,35 @@ sleep(1);
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 }
-else 
- if (!empty($nicknameSearch))	
+else if (!empty($nicknameSearch))	
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername LIKE :keyword ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
- 	
+ 
+
+
+
+else if (!empty($_GET['forever']))
+{
+	    $timeban = urldecode($_GET['timeban']);
+     	$iptimeban = urldecode($_GET['iptimeban']);
+ 		
+				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +10 year'));
+				$tmk = str_replace("-", ".", $tmk);	
+
+$re = "UPDATE banip SET bantime='".$tmk."' WHERE ip = '".$iptimeban."' and  bantime = '".$timeban."'";
+$r = dbSelectALL('', $re);
+echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
+	 
+$reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;	  	
+}
+
+
+
+	
 else if (!empty($_GET['baniprange']))
 {
 			  list($onem, $twom, $threem, $fourm) = explode(".", $_GET['ip']);
               $rangeip = $onem.'.'.$twom;
-				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +1 day'));
+				$tmk = date('Y-m-d H:i:s', strtotime((date('Y-m-d H:i:s')) . ' +30 day'));
 				$tmk = str_replace("-", ".", $tmk);			
 			  
 $re = "INSERT INTO banip (playername, ip, iprange, guid, reason, time, bantime, days, whooo, patch) 
@@ -79,10 +103,15 @@ sleep(1);
 $reponse = 'SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where guid ORDER BY time DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 echo "<script> window.location.href = '$domain/list_ip_ban.php'; </script>";
 }
+
+
+
+
+
 //////////////////////////////////////////////// EDIT
 else if (!empty($_GET['updatetimeban']))
 {
-	echo $updatetimeban = $_GET['updatetimeban']; 
+	$updatetimeban = $_GET['updatetimeban']; 
 	$timeban = urldecode($_GET['timeban']);
 	$iptimeban = urldecode($_GET['iptimeban']);
 	
@@ -147,7 +176,11 @@ $reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,
 	
 else if (!empty($_GET['poisknickname']))
 $reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where playername = '".$_GET['poisknickname']."' ORDER BY playername DESC LIMIT 50";	   
-   
+ 
+else if ((empty($_GET['sort_banned']))&&(strpos($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], '=') === false))
+$reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where reason = 'IP BAN' or reason = 'IP RANGE BAN' ORDER BY time DESC LIMIT " . $premierMessageAafficher . ', ' . $top_main_total;	   
+
+ 
 else if (!empty($_GET['sort_banned']))
 $reponse = "SELECT id,playername,ip,iprange,guid,reason,time,bantime,days,whooo,patch FROM banip where reason = 'IP BAN' or reason = 'IP RANGE BAN' ORDER BY time DESC LIMIT " . $premierMessageAafficher . ', ' . $top_main_total;	   
 
@@ -182,6 +215,9 @@ include $cpath . "/engine/template/servermenu.php";
 
 include $cpath . "/engine/template/search.php";
 include $cpath . "/engine/template/menu.php";
+  
+if (empty($xz))
+	echo '<center>'.$lang['nothing_search'].'</br></center>';  
   
 include $cpath . "/engine/template/index_list_ip.php";
 

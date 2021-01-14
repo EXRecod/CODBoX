@@ -12,7 +12,13 @@ else
  
 
 if(!empty($totalkills))
-$infr = $t_kills;	
+$infr = $t_kills;
+//
+else if(!empty($_GET['from_yesterday']))
+$infr = $Elo_rating.' '.$lang['from_yesterday'];	
+else if(!empty($_GET['from_total']))
+$infr = $Elo_rating.' '.$lang['from_total'];
+//	
 else if(!empty($totaldeaths))
 $infr = $t_deaths;	
 else if(!empty($totalheadshots))
@@ -33,9 +39,10 @@ $infr = $Elo_rating;
 //else if(!empty($totaltotalknife))
 //$infr = $Elo_rating;
 /////////////////////////////////////
+else if(empty($server))
+$infr = $Global_Elo_rating;
 else
-$infr = '';
-
+$infr = $Elo_rating;
 
 
 echo ' 
@@ -66,7 +73,7 @@ echo '
 <div style="line-height:40px;">
 <h1 class="rainbow-text">  '.$infr.' '.$t_top.'</h1>
 
-<div style="height:;background:#;float:right;padding:0px;overflow:hidden;line-height:20px;display:none;">
+<div style="background:#;float:right;padding:0px;overflow:hidden;line-height:20px;display:none;">
  </div>
 </div>';
 
@@ -84,37 +91,77 @@ margin-top:10px;width:calc(100% - 4px);" onchange="document.location=&#39;/'.$z.
    
    
    if(empty($server))
-   echo  '<option value="nothing">'.$LeaderBoardsortingmenu.'</option><option value="globaleloratings">'.$Global_Elo_rating.'</option>';
+   {
+   echo  '<option value="nothing">'.$infr.'</option>';
+   if(empty($globaleloratings))
+   {
+	   if($Global_Elo_rating != $infr)
+   {
+   echo  '<option value="globaleloratings">'.$Global_Elo_rating.'</option>';
+   
+   }
+   
+   
+   }
+   }
 else
-   echo  '<option value="nothing">'.$LeaderBoardsortingmenu.'</option><option value="eloratings">'.$Elo_rating.'</option>';
-   
-   
-   echo  '
-   
-   <option value="totalkills">'.$t_kills.'</option>	
-   
-   <option value="totaldeaths">'.$t_deaths.'</option> 
-   
-   <option value="totalkdRatio">'.$t_kd.'</option>
-   
-   <option value="totalheadshots">'.$t_heads.'</option> 
-   
-   <option value="totalheadshotspercents">'.$t_heads.' %</option>
+{
+   echo  '<option value="nothing">'.$infr.'</option>';
+   if(empty($eloratings))
+   echo  '<option value="eloratings">'.$Elo_rating.'</option>';
 
-   <option value="totalsuicides">'.$medals_suicides.'</option>
+
+}
+
+
+
+   if(empty($server))
+   {
+   if($_GET['from_yesterday'] != $infr)
+   {	   
+    if(empty($from_yesterday))
+   echo  '<option value="from_yesterday">'.$Global_Elo_rating.' '.$lang['from_yesterday'].'</option>';
+  }
+   if(empty($from_total))
+   echo  '<option value="from_total">'.$Global_Elo_rating.' '.$lang['from_total'].'</option>';	
+   }
+   else
+   {
+	   
+   if(empty($from_yesterday))
+   echo  '<option value="from_yesterday">'.$Elo_rating.' '.$lang['from_yesterday'].'</option>';
+   if(empty($from_total))
+   echo  '<option value="from_total">'.$Elo_rating.' '.$lang['from_total'].'</option>';		   
+	   
+   }
    
-   <option value="totallastvisit">'.$t_lasttime.'</option>
-	</select>
+   if(empty($totalkills))
+   echo  '<option value="totalkills">'.$t_kills.'</option>';
+
+   if(empty($totaldeaths))
+   echo  '<option value="totaldeaths">'.$t_deaths.'</option>'; 
+   if(empty($totalkdRatio))
+   echo  '<option value="totalkdRatio">'.$t_kd.'</option>';
+   if(empty($totalheadshots))
+   echo  '<option value="totalheadshots">'.$t_heads.'</option>'; 
+   if(empty($totalheadshotspercents))
+   echo  '<option value="totalheadshotspercents">'.$t_heads.' %</option>';
+   if(empty($totalsuicides))
+   echo  '<option value="totalsuicides">'.$medals_suicides.'</option>';
+   if(empty($totallastvisit))
+   echo  '<option value="totallastvisit">'.$t_lasttime.'</option>';
+    
+	echo  '</select>
 	
 	 
 	
 	<div style="padding:5px;color:#aaa;font-size:12px;">
-	'.$bestplmaininfo.'</div>
+	 <b> '.$menu_activity.' : '.$StatsDaysLimit.' ('.$bonus_slot_days.')</b> </div>
 	
 	
 	
 	
-	<div style="width:auto;overflow:auto;padding:5px;background: ;margin:0px;font-size:12px;
+	<div style="width:auto;overflow:auto;padding:5px;margin:0px;font-size:12px;
 	cursor:pointer;cursor:hand;line-height:30px;">
 	<div style="width:calc(100% - 14px);" class="wrapper">
 	
@@ -240,7 +287,7 @@ if (strpos(trim(urldecode($sss)), trim($servername)) !== false) {
 
 ?>
 <script type="text/javascript">
-    window.location.href = <?php echo '"';echo ''.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'';echo '"';?>;
+    window.location.href = <?php echo '"';echo ''.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.''; echo '"';?>;
 </script>
 <?php
 ECHO '<a href="'.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'" class="white">';
@@ -328,7 +375,7 @@ foreach ($prestige_images as $numimgjj => $preimagej){
 	cursor:pointer;cursor:hand;line-height:30px;border-top: 1px solid #252525;">
 	<div style="width:calc(100% - 14px);" class="wrapper">
 	
-	<div style="    display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap;max-width:65%;">';
+	<div style="display: flex;overflow:auto;display:inline-block;flex-grow: 1; flex-wrap: wrap;max-width:65%;">';
 	
 	
 	

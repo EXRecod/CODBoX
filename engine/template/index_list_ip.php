@@ -19,7 +19,7 @@ echo '
 &nbsp;&nbsp;
 <a href="'.$domain.'/list_ip_ban.php?sort_fakeip=s" style ="width:50px;padding:2px 90px;"><b class="tags" glose="'.$ilisttipproxy.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#07405c;background-color:black;">&nbsp;'.$listtipproxy.'&nbsp;</b> </a> 
 
-</div>';
+</div></br>';
 
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -229,21 +229,34 @@ $txttitle = $ip;
 	
 
 if(empty($reasonx))
+{
   $rv = '#013602';
+  $rvt = '#062b06';
+}
 else if(((!empty($reasonx))&&(strpos($reasonx, 'VPN') !== false))
 	||((!empty($reasonx))&&(strpos($reasonx, 'FRAUD') !== false))
 ||((!empty($reasonx))&&(strpos($reasonx, 'PROXY') !== false))
 ||((!empty($reasonx))&&(strpos($reasonx, 'TOR') !== false)))
-  $rv = '#07405c';	
+{
+  $rv = '#07405c';
+  $rvt = '#07364d';  
+}
 else
+{
   $rv = '#5c0707';
+  $rvt = '#420606';
+}
 
+
+
+    $color_array = array($rv, $rvt);
+    $class = $color_array[$i%2];
 
 
 echo '
-<div style="width:auto;overflow:auto;padding:5px;background: '.$rv.';
-margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($time.$i).'" onclick="show_match(\''.md5($time.$i).'\')">	
-<div class="wrapper" style="width:calc(100% - 20px);flex-grow: 1; display: flex; float:left;">	
+<div style="width:auto;overflow:auto;padding:5px;background: '.$class.';
+margin:4px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($time.$i).'" onclick="show_match(\''.md5($time.$i).'\')">	
+<div class="wrapper" style="width:calc(100% - 30px);flex-grow: 1; display: flex; float:left;">	
 <div style="overflow:auto;display:inline-block;flex-grow: 1; display: flex; min-width:30%; /* &#1101;&#1083;&#1077;&#1084;&#1077;&#1085;&#1090; &#1086;&#1090;&#1086;&#1073;&#1088;&#1072;&#1078;&#1072;&#1077;&#1090;&#1089;&#1103; &#1082;&#1072;&#1082; &#1073;&#1083;&#1086;&#1095;&#1085;&#1099;&#1081; flex-&#1082;&#1086;&#1085;&#1090;&#1077;&#1081;&#1085;&#1077;&#1088; */
   flex-wrap: wrap; " class="wrapper">
 	
@@ -279,7 +292,7 @@ echo '
 	
 <a href="'.$domain.'/list_ip_ban.php?poisknickname='.trim($xpnickname).'" style="color:#888;" class="tags" glose="'.$hj.'">
 <div style="color:#ddd;font-size:13px;display:inline-block;float:left;TEXT-ALIGN:LEFT;">
-<b style="color:#fff;">'.colorize($xpnickname).'</b> &nbsp;&nbsp; ['.$whooo.']</a>
+<b style="color:#fff;">'.colorize($xpnickname).'</b> &nbsp;&nbsp;  </a>
 </div>';
 
 	if (!empty($geosearch))
@@ -288,48 +301,63 @@ echo '
 echo '
 	</div>
 	
-<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:100px;overflow:auto;display:inline-block;flex-grow: 1;">
  
-<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list.php?listip='.trim($ip).'" style="color:#fff;" target="_blank" class="tags" glose="'.$hj.'">'.$ip.'  </a></div> 
+<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">
+<a href="'.$domain.'/list.php?listip='.trim($ip).'" style="color:#fff;" target="_blank" class="tags" glose="'.$hj.'">'.$ip.'&nbsp;</a></div> 
 	 
 	</div>
 	
 
-<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
-<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$lang['ipinformation'].'"> ['.$reasonx.'] </a></div> 
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:11px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
+<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$lang['ipinformation'].'">['.$reasonx.']</a></div> 
 </div>
 	
 	
-<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:95px;overflow:auto;display:inline-block;flex-grow: 1;">
-<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:95px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp; 
 <a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$i_lefttime.'"> ['.$timeFormat.'] </a></div> 
 </div>';
 
 
 echo '
-<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:19px;min-width:60px;overflow:auto;display:inline-block;flex-grow: 1;">
-<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
-<a href="'.$domain.'/list_ip_ban.php?listvisits=X" style="color:#00b6b2;" class="tags" glose="'.$lang['visits'].':['.$zaxodil.']"> ['.$zaxodil.'] </a></div> 
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:60px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:11px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp; 
+<a href="'.$domain.'/list_ip_ban.php?listvisits=X" style="color:#00b6b2;" class="tags" glose="'.$lang['visits'].':['.$zaxodil.']">&nbsp;&nbsp;&nbsp;['.$zaxodil.'] &nbsp;&nbsp;</a></div> 
 </div>';
 	 
 
 
 
 if((!empty($reasonx))&&($rv != '#07405c'))	
+{
 echo '	
-<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:1px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 3px;line-height:1px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:12px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
 
 <form action="'.$domain.'/list_ip_ban.php" onsubmit="return window.confirm(\'Add days? Добавить дней? OK?\');">
-  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="timeban" name="timeban" value="'.$bantime.'">
-  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="iptimeban" name="iptimeban" value="'.$ip.'">
-  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="visited" name="visited" value="'.$zaxodil.'">   
-  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="text" id="updatetimeban" name="updatetimeban" placeholder="- / + Day">
-  <input style= "font-size:11px;height: 18px;width: 70px;padding: 1px 2px;box-sizing:border-box;" type="submit" value="Submit">
+  <input style= "font-size:11px;height: 16px;width: 10px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="timeban" name="timeban" value="'.$bantime.'">
+  <input style= "font-size:11px;height: 16px;width: 10px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="iptimeban" name="iptimeban" value="'.$ip.'">
+  <input style= "font-size:11px;height: 16px;width: 10px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="visited" name="visited" value="'.$zaxodil.'">   
+  <input style= "font-size:11px;height: 16px;width: 10px;padding: 1px 2px;box-sizing:border-box;" type="text" id="updatetimeban" name="updatetimeban" placeholder="- / + Day">
+  <input style= "font-size:11px;height: 18px;width: 60px;padding: 1px 2px;box-sizing:border-box;" type="submit" value="Submit">
 </form>	
-</div></div>';		
+</div></div>';
+
+		
+echo '	
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 3px;line-height:1px;min-width:10px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:12px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
+<form action="'.$domain.'/list_ip_ban.php" onsubmit="return window.confirm(\'BAN FOREVER? Бан на всегда? OK?\');">
+  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="forever" name="forever" value="forever">
+  <input style= "font-size:11px;height: 16px;width: 10px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="timeban" name="timeban" value="'.$bantime.'">  
+  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="iptimeban" name="iptimeban" value="'.$ip.'">
+  <input style= "font-size:11px;height: 16px;width: 30px;padding: 1px 2px;box-sizing:border-box;" type="hidden" id="visited" name="visited" value="'.$zaxodil.'">
+  <input style= "font-size:11px;height: 18px;width: 30px;padding: 1px 2px;box-sizing:border-box;color:background: #ff3b3b;" class="special" type="submit" value="'.$lang['ban_forever'].'">
+</form>	
+</div></div>';	
+}		
 
 
 
@@ -429,8 +457,9 @@ echo '<div class="match_stats_adv" style="min-width:190px;">Time
 <div class="match_stats_adv" style="min-width:100px;">Left
 <div style="color:#fff;width:180px;">'.$tmb.'</div></div>	
 
-
-
+<div class="match_stats_adv" style="min-width:100px;">Admin
+<div style="color:#fff;width:180px;">['.$whooo.']</div></div>	
+ 
 
 
 <div class="match_stats_adv" style="min-width:100px;">DELETE PLAYER

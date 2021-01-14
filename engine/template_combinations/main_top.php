@@ -394,6 +394,9 @@ include $cpath . "/engine/template/servermenu.php";
 include $cpath . "/engine/template/search.php";
 include $cpath . "/engine/template/menu.php";
 
+if (empty($xz))
+	echo '<center>'.$lang['nothing_search'].'</br></center>';
+
 if(!empty($checker))
 include $cpath . "/engine/template/stats_MAIN_leaderboard.php";
 //if(!empty($_GET['server']))
