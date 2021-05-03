@@ -1,6 +1,55 @@
 <?php
 $lang = array();
 
+$typesall = array(
+	'dm' => 'Deathmatch',
+	'tdm' => 'Team Deathmatch',
+	'war' => 'Team Deathmatch',
+	'sab' => 'Sabotage',
+	'dom' => 'Domination',
+	'koth' => 'Headquarters',
+	'gg' => 'Gun Game',
+	'ctf' => 'Capture The Flag',
+	'ch' => 'Cage Match',
+	'sd' => 'Search &amp; Destroy'
+);
+
+$mapsall = array(
+    'mp_harbor' => 'Harbor',
+	'mp_carentan' => 'China Town',
+	'mp_convoy' => 'Ambush',
+	'mp_backlot' => 'Backlot',
+	'mp_bloc' => 'Bloc',
+	'mp_bog' => 'Bog',
+	'mp_broadcast' => 'Broadcast',
+	'mp_countdown' => 'Countdown',
+	'mp_crash' => 'Crash',
+	'mp_crash_snow' => 'Crash Snow',
+	'mp_creek' => 'Creek',
+	'mp_crossfire' => 'Crossfire',
+	'mp_citystreets' => 'Citystreets',
+	'mp_farm' => 'Downpour',
+	'mp_killhouse' => 'Killhouse',
+	'mp_overgrown' => 'Overgrown',
+	'mp_pipeline' => 'Pipleline',
+	'mp_shipment' => 'Shipment',
+	'mp_showdown' => 'Showdown',
+	'mp_strike' => 'Strike',
+	'mp_vacant' => 'Vacant',
+	'mp_cargoship' => 'Wetworks'
+
+);
+
+$lang['guid_2_guid_replace']      = 'Replace&nbsp;guid&nbsp;in&nbsp;stats.';
+$lang['guid_2_guid_to']           = 'Enter new player guid.';
+
+$lang['ip_adress_control']      = 'IP adress control'; 
+$lang['ss_without']             = 'Without screenshots'; 
+
+$lang['demo_auto_record']       = 'Demos'; 
+$lang['demo_auto_record_y']     = 'Demo&nbsp;record'; 
+$lang['demo_auto_record_t']     = 'Demo&nbsp;recording';
+
 //##################################################################
 //10.01.2021
  
@@ -18,7 +67,12 @@ $lang = array();
  $ilisttipproxy = 'New&nbsp;player&nbsp;list&nbsp;with&nbsp;proxy&nbsp;ip.';
   
  $listtipbanned = 'Ban List.';    
- $ilisttipbanned = 'Players&nbsp;list&nbsp;of&nbsp;banned&nbsp;players&nbsp;.';
+ $ilisttipbanned = 'Players&nbsp;list&nbsp;of&nbsp;banned&nbsp;.';
+ 
+ 
+ $listtipbannedvisited  = 'Ban List Visited.';    
+ $ilisttipbannedvisited = 'Visited&nbsp;list&nbsp;of&nbsp;banned&nbsp;players&nbsp;.';
+ 
 
  $listtipunbanned = 'Left bans.';    
  $ilisttipunbanned = 'End&nbsp;time&nbsp;of&nbsp;player&nbsp;ban&nbsp;.';  
@@ -197,8 +251,10 @@ $lang = array();
  $x_medals['headpercent'] = 'HeadShot %';
  $x_medals['kdratio'] = 'K/D'; 
 
+ $x_specialz['claymore'] = 'Help carepackage';
+ $x_specialz['c4'] = 'Destroyed carepackage';
 $x_specialz['bombs'] = 'Bombs';
-$x_specialz['avia'] = 'Avia';  
+$x_specialz['avia'] = 'Death from blow box';  
 $x_specialz['artillery'] = 'Artillery'; 
 $x_specialz['camp'] = 'Camp'; 
 $x_specialz['flags'] = 'Flags'; 
@@ -279,6 +335,7 @@ $bonus_slot_vbtxt  = "Your ip address is not in the server database, you need yo
  
 
 //top
+ $x_top_maps10 = 'TOP 10 MAPS';
  $x_top_maps = 'TOP 20 MAPS';
  $x_top_medals = 'TOP 20 MEDALS';
  $x_top_day = 'TOP 20 OF DAY';

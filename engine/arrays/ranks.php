@@ -62,60 +62,77 @@ $ranked = array(
  
  /* PRESTIGE COD4*/
 $prestige_prestiges[$prestige_0] = 0;
-$prestige_prestiges[$prestige_2] = 1;
-$prestige_prestiges[$prestige_3] = 2;
-$prestige_prestiges[$prestige_4] = 3;
-$prestige_prestiges[$prestige_7] = 4;
-$prestige_prestiges[$prestige_8] = 5;
-$prestige_prestiges[$prestige_9] = 6;
-$prestige_prestiges[$prestige_10] = 7;  
+//$prestige_prestiges[$prestige_2] = 1;
+//$prestige_prestiges[$prestige_3] = 2;
+//$prestige_prestiges[$prestige_4] = 3;
+//$prestige_prestiges[$prestige_5] = 4;
+$prestige_prestiges[$prestige_6] = 1;
+$prestige_prestiges[$prestige_7] = 2;
+$prestige_prestiges[$prestige_8] = 3;
+$prestige_prestiges[$prestige_9] = 4;
+$prestige_prestiges[$prestige_10] = 5;  
+
 
 $pr_im_prestiges[-1] = $prestige_0;
+//$pr_im_prestiges[0] = $prestige_0;
+//$pr_im_prestiges[1] = $prestige_2;
+//$pr_im_prestiges[2] = $prestige_3;
+//$pr_im_prestiges[3] = $prestige_4;
+//$pr_im_prestiges[4] = $prestige_5;
 $pr_im_prestiges[0] = $prestige_0;
-$pr_im_prestiges[1] = $prestige_2;
-$pr_im_prestiges[2] = $prestige_3;
-$pr_im_prestiges[3] = $prestige_4;
-$pr_im_prestiges[4] = $prestige_7;
-$pr_im_prestiges[5] = $prestige_8;
-$pr_im_prestiges[6] = $prestige_9;
-$pr_im_prestiges[7] = $prestige_10;
-$pr_im_prestiges[8] = $prestige_10;
+$pr_im_prestiges[1] = $prestige_6;
+$pr_im_prestiges[2] = $prestige_7;
+$pr_im_prestiges[3] = $prestige_8;
+$pr_im_prestiges[4] = $prestige_9;
+$pr_im_prestiges[5] = $prestige_10;
+$pr_im_prestiges[6] = $prestige_0;
 
 
- 
+
+
 $prestige_images["/inc/images/prestige/null.png"] = 0;
-$prestige_images["/inc/images/prestige/Rank_Prestige_2_CoD4.png"] = 1;
-$prestige_images["/inc/images/prestige/Rank_Prestige_3_CoD4.png"] = 2;
-$prestige_images["/inc/images/prestige/Rank_Prestige_4_CoD4.png"] = 3;
-$prestige_images["/inc/images/prestige/Rank_Prestige_7_CoD4.png"] = 4;
-$prestige_images["/inc/images/prestige/Rank_Prestige_8_CoD4.png"] = 5;
-$prestige_images["/inc/images/prestige/Rank_Prestige_9_CoD4.png"] = 6;
-$prestige_images["/inc/images/prestige/Rank_Prestige_10_CoD4.png"] = 7; 
+$prestige_images["/inc/images/prestige/Rank_Prestige_6_CoD4.png"] = 1;
+$prestige_images["/inc/images/prestige/Rank_Prestige_7_CoD4.png"] = 2;
+$prestige_images["/inc/images/prestige/Rank_Prestige_8_CoD4.png"] = 3;
+$prestige_images["/inc/images/prestige/Rank_Prestige_9_CoD4.png"] = 4;
+$prestige_images["/inc/images/prestige/Rank_Prestige_10_CoD4.png"] = 5;
+//$prestige_images["/inc/images/prestige/null.png"] = 6;
+//$prestige_images["/inc/images/prestige/Rank_Prestige_9_CoD4.png"] = 6;
+//$prestige_images["/inc/images/prestige/Rank_Prestige_10_CoD4.png"] = 7; 
+ 
+ 
+ 
  
 $pr_im[-1] = "/inc/images/prestige/null.png";
 $pr_im[0] = "/inc/images/prestige/null.png";
+/*
 $pr_im[1] = "/inc/images/prestige/Rank_Prestige_2_CoD4.png";
 $pr_im[2] = "/inc/images/prestige/Rank_Prestige_3_CoD4.png";
 $pr_im[3] = "/inc/images/prestige/Rank_Prestige_4_CoD4.png";
-$pr_im[4] = "/inc/images/prestige/Rank_Prestige_7_CoD4.png";
-$pr_im[5] = "/inc/images/prestige/Rank_Prestige_8_CoD4.png";
-$pr_im[6] = "/inc/images/prestige/Rank_Prestige_9_CoD4.png";
-$pr_im[7] = "/inc/images/prestige/Rank_Prestige_10_CoD4.png"; 
-$pr_im[8] = "/inc/images/prestige/Rank_Prestige_10_CoD4.png";
+$pr_im[4] = "/inc/images/prestige/Rank_Prestige_5_CoD4.png";
+*/
+$pr_im[1] = "/inc/images/prestige/Rank_Prestige_6_CoD4.png";
+$pr_im[2] = "/inc/images/prestige/Rank_Prestige_7_CoD4.png";
+$pr_im[3] = "/inc/images/prestige/Rank_Prestige_8_CoD4.png";
+$pr_im[4] = "/inc/images/prestige/Rank_Prestige_9_CoD4.png";
+$pr_im[5] = "/inc/images/prestige/Rank_Prestige_10_CoD4.png"; 
+$pr_im[6] = "/inc/images/but_bg.png";
  
  function prestige_image($prestige) 
  {  
-if( $prestige < 11 && $prestige >= 1 ){
+if( $prestige <= 10 && $prestige > 0 ){
 $image = "/inc/images/prestige/Rank_Prestige_10_CoD4.png";
 return $image;
-}else if( $prestige < 26 && $prestige >= 11 ){
+/*
+}else if( $prestige < 50 && $prestige >= 10 ){
 $image = "/inc/images/prestige/Rank_Prestige_9_CoD4.png";	 
 return $image;
 }else if( $prestige < 41 && $prestige >= 26 ){
 $image = "/inc/images/prestige/Rank_Prestige_8_CoD4.png";	
 return $image;
-}else if( $prestige < 61 && $prestige >= 41 ){
-$image = "/inc/images/prestige/Rank_Prestige_7_CoD4.png";	
+*/
+}else if( $prestige <= 10 && $prestige > 50 ){
+$image = "/inc/images/prestige/Rank_Prestige_9_CoD4.png";	
 return $image;
 }
 /*
@@ -128,11 +145,11 @@ $image = "/inc/images/prestige/Rank_Prestige_5_CoD4.png";
 return $image;
 }
 */
-else if( $prestige < 101 && $prestige >= 61 ){
-$image = "/inc/images/prestige/Rank_Prestige_4_CoD4.png";	
+else if( $prestige <=  100 && $prestige > 50 ){
+$image = "/inc/images/prestige/Rank_Prestige_8_CoD4.png";	
 return $image;
-}else if( $prestige < 201 && $prestige >= 101 ){
-$image = "/inc/images/prestige/Rank_Prestige_3_CoD4.png";	
+}else if( $prestige <= 200 && $prestige > 100 ){
+$image = "/inc/images/prestige/Rank_Prestige_7_CoD4.png";	
 return $image;
 }
 /*
@@ -140,8 +157,8 @@ else if( $prestige < 200 && $prestige >= 80 ){
 $image = "/inc/images/prestige/Rank_Prestige_2_CoD4.png";	
 return $image;
 }*/
-else if( $prestige < 501 && $prestige >= 201 ){
-$image = "/inc/images/prestige/Rank_Prestige_2_CoD4.png";	
+else if( $prestige <= 501 && $prestige > 200 ){
+$image = "/inc/images/prestige/Rank_Prestige_6_CoD4.png";	
 return $image;
 } else {
 $image = "/inc/images/prestige/null.png"; 
@@ -159,21 +176,21 @@ global $t_player_place_skill,$prestige_0,$prestige_1,$prestige_2,
 $prestige_3,$prestige_4,$prestige_5,$prestige_6,
 $prestige_7,$prestige_8,$prestige_9,$prestige_10;
 
-if( $prestige < 11 && $prestige >= 1 ){
+if( $prestige <= 10 && $prestige > 0 ){
 $image = $prestige_10." / ".$prestige." ";
 return $image;
-}else if( $prestige < 26 && $prestige >= 11 ){
+}else if( $prestige <= 50 && $prestige > 10 ){
 $image = $prestige_9." / ".$prestige." ";
 return $image;
-
-}else if( $prestige < 41 && $prestige >= 26 ){
+/*
+}else if( $prestige <= 41 && $prestige >= 26 ){
 $image = $prestige_8." / ".$prestige." ";
 return $image;
 
-}else if( $prestige < 61 && $prestige >= 41 ){
+}else if( $prestige <= 61 && $prestige >= 41 ){
 $image = $prestige_7." / ".$prestige." ";
 return $image;
-/*
+
 }else if( $prestige < 40 && $prestige >= 30 ){
 $image = $prestige_6." / ".$prestige." ";
 return $image;
@@ -182,16 +199,16 @@ return $image;
 $image = $prestige_5." / ".$prestige." ";
 return $image;
 */
-}else if( $prestige < 101 && $prestige >= 61 ){
-$image = $prestige_4." / ".$prestige." ";
+}else if( $prestige <= 100 && $prestige > 50 ){
+$image = $prestige_8." / ".$prestige." ";
 return $image;
 
-}else if( $prestige < 201 && $prestige >= 101 ){
-$image = $prestige_3." / ".$prestige." ";
+}else if( $prestige <= 200 && $prestige > 100 ){
+$image = $prestige_7." / ".$prestige." ";
 return $image;
 
-}else if( $prestige < 501 && $prestige >= 201 ){
-$image = $prestige_2." / ".$prestige." ";
+}else if( $prestige <= 500 && $prestige > 200 ){
+$image = $prestige_6." / ".$prestige." ";
 return $image;
 /*
 }else if( $prestige < 500 && $prestige >= 200 ){
@@ -211,21 +228,21 @@ global $t_player_place_skill,$prestige_0,$prestige_1,$prestige_2,
 $prestige_3,$prestige_4,$prestige_5,$prestige_6,
 $prestige_7,$prestige_8,$prestige_9,$prestige_10;
 
-if( $prestige < 11 && $prestige >= 1 ){
+if( $prestige <= 10 && $prestige > 0 ){
 $image = $prestige_10;
 return $image;
-}else if( $prestige < 26 && $prestige >= 11 ){
+}else if( $prestige <= 50 && $prestige > 10 ){
 $image = $prestige_9;
 return $image;
-
-}else if( $prestige < 41 && $prestige >= 26 ){
+/*
+}else if( $prestige < 41 && $prestige > 26 ){
 $image = $prestige_8;
 return $image;
 
-}else if( $prestige < 61 && $prestige >= 41 ){
+}else if( $prestige < 61 && $prestige > 41 ){
 $image = $prestige_7;
 return $image;
-/*
+
 }else if( $prestige < 40 && $prestige >= 30 ){
 $image = $prestige_6;
 return $image;
@@ -234,16 +251,16 @@ return $image;
 $image = $prestige_5;
 return $image;
 */
-}else if( $prestige < 101 && $prestige >= 61 ){
-$image = $prestige_4;
+}else if( $prestige <= 100 && $prestige > 50 ){
+$image = $prestige_8;
 return $image;
 
-}else if( $prestige < 201 && $prestige >= 101 ){
-$image = $prestige_3;
+}else if( $prestige <= 200 && $prestige > 100 ){
+$image = $prestige_7;
 return $image;
 
-}else if( $prestige < 501 && $prestige >= 201 ){
-$image = $prestige_2;
+}else if( $prestige <= 500 && $prestige > 200 ){
+$image = $prestige_6;
 return $image;
 /*
 }else if( $prestige < 500 && $prestige >= 200 ){

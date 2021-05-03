@@ -1,6 +1,56 @@
 <?php
 $lang = array();
 
+
+$typesall = array(
+	'dm' => 'Свободная игра',
+	'tdm' => 'Командный бой',
+	'war' => 'Командный бой',
+	'sab' => 'Саботаж',
+	'dom' => 'Первенство',
+	'koth' => 'Штаб',
+	'gg' => 'Оружейная игра',
+	'ctf' => 'Захват флага',
+	'ch' => 'В клетке',
+	'sd' => 'Найти и уничтожить'
+);
+
+$mapsall = array(
+    'mp_harbor' => 'Harbor',
+	'mp_carentan' => 'Чайнатаун',
+	'mp_convoy' => 'Засада',
+	'mp_backlot' => 'Площадка',
+	'mp_bloc' => 'Блок',
+	'mp_bog' => 'Болото',
+	'mp_broadcast' => 'Станция',
+	'mp_countdown' => 'Отсчет',
+	'mp_crash' => 'Крушение',
+	'mp_crash_snow' => 'Крушение зима',
+	'mp_creek' => 'Бухта (Ручей)',
+	'mp_crossfire' => 'Перестрелка',
+	'mp_citystreets' => 'Район',
+	'mp_farm' => 'Downpour',
+	'mp_killhouse' => 'Мясорубка',
+	'mp_overgrown' => 'Дебри',
+	'mp_pipeline' => 'Трубопровод',
+	'mp_shipment' => 'Отправление',
+	'mp_showdown' => 'Занавес',
+	'mp_strike' => 'Удар',
+	'mp_vacant' => 'Офис',
+	'mp_cargoship' => 'Мокрое дело'
+
+);
+
+
+ $lang['guid_2_guid_replace']      = 'Замена&nbsp;гуида&nbsp;в&nbsp;статистике.';
+ $lang['guid_2_guid_to']           = 'Введите новый гуид игрока.';
+
+ $lang['ip_adress_control']      = 'Управление ИП адресами'; 
+ $lang['ss_without']             = 'Игроки без скриншота'; 
+ 
+ $lang['demo_auto_record']      = 'Записи (demo)'; 
+ $lang['demo_auto_record_y']    = 'Записать&nbsp;демку.'; 
+ $lang['demo_auto_record_t']     = 'Запись&nbsp;демок.';
 //##################################################################
 //10.01.2021
  
@@ -29,6 +79,10 @@ $lang = array();
   
  $listtipbanned = 'Игроки в бане.';    
  $ilisttipbanned = 'Список&nbsp;игроков&nbsp;с&nbsp;запретом&nbsp;для&nbsp;входа&nbsp;на&nbsp;сервер.';
+ 
+ 
+ $listtipbannedvisited = 'Визит в бане.';    
+ $ilisttipbannedvisited = 'Список&nbsp;игроков&nbsp;с&nbsp;запретом&nbsp;для&nbsp;входа&nbsp;на&nbsp;сервер.';
 
  $listtipunbanned = 'Бан истек.';    
  $ilisttipunbanned = 'Список&nbsp;игроков&nbsp;с&nbsp;истекшим&nbsp;сроком&nbsp;бана.';
@@ -194,8 +248,10 @@ $lang = array();
  $x_medals['headpercent'] = 'В голову %';
  $x_medals['kdratio'] = 'K/D';
  
+ $x_specialz['claymore'] = 'Посылки игроку своей команды';
+ $x_specialz['c4'] = 'Уничтожил посылок';
 $x_specialz['bombs'] = 'Бомбы';
-$x_specialz['avia'] = 'Авиоудары';  
+$x_specialz['avia'] = 'Гибель от заминированного ящика';  
 $x_specialz['artillery'] = 'Артиллерия'; 
 $x_specialz['camp'] = 'Сидящий на месте'; 
 $x_specialz['flags'] = 'Установил флагов'; 
@@ -206,9 +262,9 @@ $x_specialz['bomb_plant'] = 'Установка бомб';
 $x_specialz['bomb_defused'] = 'Снято бомб';  
 $x_specialz['juggernaut_kill'] = 'Уничтожил Джагеров'; 
 $x_specialz['destroyed_helicopter'] = 'Уничтожил вертолетов'; 
-$x_specialz['rcxd_destroyed'] = 'Уничтожил rcxd'; 
-$x_specialz['turret_destroyed'] = 'Уничтожил turret';
-$x_specialz['sam_kill'] = 'Уничтожил sam'; 
+$x_specialz['rcxd_destroyed'] = 'Уничтожил р/у машинку'; 
+$x_specialz['turret_destroyed'] = 'Уничтожил туррелей';
+$x_specialz['sam_kill'] = 'Уничтожил Анти пво'; 
   
   
 $shotz = '[Выстрелы]';   
@@ -280,6 +336,8 @@ $bonus_slot_vbtxt  = "Ваш ип адрес отсутствует в базе 
 
 
 //топ
+ $x_top_maps10 = 'ТОП 10 КАРТ';
+
  $x_top_maps = 'ТОП 20 КАРТ';
  $x_top_medals = 'ТОП 20 МЕДАЛЕЙ';
  $x_top_day = 'ТОП 20 ДНЯ';

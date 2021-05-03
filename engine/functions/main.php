@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 ini_set('memory_limit', '256M'); 
 //settings
 include $cpath .'/data/settings.php';
@@ -43,7 +43,6 @@ $domainname = str_replace("http://", "", $bodytag);
 $domainname = dirname($domainname);
 
 
-require_once $cpath . '/engine/arrays/gametypes_maps.php';
 require_once $cpath . '/engine/arrays/weapons_cod.php';
 require_once $cpath . '/engine/arrays/ranks.php';
 require_once $cpath . '/engine/arrays/geo.php';
@@ -447,6 +446,24 @@ $n = $cpath."/data/cache/";
 if(!file_exists($n))
 	mkdir($n, 0777, true);
 
+$n = $cpath."/data/cache/html_data";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$n = $cpath."/data/cache/ajax_data";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$n = $cpath."/data/cache/stats_graph";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+$n = $cpath."/data/cache/iframe_data";	
+if(!file_exists($n))
+	mkdir($n, 0777, true);
+
+
+
 $n = $cpath."/data/errors/";	
 if(!file_exists($n))
 	mkdir($n, 0777, true);
@@ -483,7 +500,6 @@ if(!file_exists($i))
 $i = $cpath . '/data/db/users/';
 if(!file_exists($i))
 	mkdir($i, 0777, true);
-
 
 $i = $cpath . '/data/db/screenshots/cache_im/';
 if(!file_exists($i))
@@ -933,7 +949,8 @@ function dbSelect($SQLiteDatabase, $query) {
   }
   catch(PDOException $e) 
   {
-    errorspdo("[" .date("Y.m.d H:i:s")."] 464  " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
+    print_r($query);
+	errorspdo("[" .date("Y.m.d H:i:s")."] 464  " . __FILE__ . "  Exception / function db Select / : \n = $query \n = ". $e->getMessage());
   }
   return $result;
 }
@@ -1183,6 +1200,76 @@ function get_percentage_circle($percentage, $of)
 	return  number_format( $percent * 360, 2 );
 }
 
+function convertSecToTime($sec){
+	
+global $languagefor;
+
+if($languagefor == 'ru')
+{
+    $string = array(
+        'Y.' => 'год',
+        'm.' => 'месяц',
+        'd.' => 'день',
+        'hr.' => 'час',
+        'min.' => 'мин',
+        'sec.' => 'сек',
+    );
+}
+else
+{
+    $string = array(
+        'Y.' => 'Year',
+        'm.' => 'month',
+        'd.' => 'day',
+        'hr.' => 'hour',
+        'min.' => 'min',
+        'sec.' => 'sec',
+    );
+}
+
+
+foreach ($string as $g => $r){
+$wordsOne[] = $g;
+$wordsTwo[] = $r;	
+}
+ 
+	
+	$date1 = new DateTime("@0"); //starting seconds
+	$date2 = new DateTime("@$sec"); // ending seconds
+	$interval =  date_diff($date1, $date2); //the time difference
+	
+	if($sec > 31535590)
+	{
+	$onlyconsonants[] = str_replace($wordsOne, $wordsTwo, $interval->format('%y Y. %m m. %d d. %h hr. %i min. %s sec.'));	
+    $comma_separated = implode(" ", $onlyconsonants);	
+	return $comma_separated;	
+	}
+	elseif($sec > 2419199)
+	{
+	$onlyconsonants[] = str_replace($wordsOne, $wordsTwo, $interval->format('%m m. %d d. %h hr. %i min. %s sec.'));	
+    $comma_separated = implode(" ", $onlyconsonants);	
+	return $comma_separated;		
+	}
+	elseif(($sec < 2419199)&&($sec > 86400))
+	{
+	$onlyconsonants[] = str_replace($wordsOne, $wordsTwo, $interval->format('%d d. %h hr. %i min. %s sec.'));	
+    $comma_separated = implode(" ", $onlyconsonants);	
+	return $comma_separated;
+	}
+	elseif(($sec < 86400)&&($sec > 3599))
+	{
+	$onlyconsonants[] = str_replace($wordsOne, $wordsTwo, $interval->format('%h hr. %i min. %s sec.'));	
+    $comma_separated = implode(" ", $onlyconsonants);	
+	return $comma_separated;
+	}
+	else
+	{
+	$onlyconsonants[] = str_replace($wordsOne, $wordsTwo, $interval->format('%i min. %s sec.'));	
+    $comma_separated = implode(" ", $onlyconsonants);	
+	return $comma_separated;
+	}
+	
+}
 
  function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
@@ -1693,15 +1780,15 @@ else
 $sss = $_GET['s'];
 
 
-if (empty($_GET['brofile']))
+if (empty($_GET['player']))
  $brofile = 0;
 else
-$brofile = $_GET['brofile'];
+$brofile = $_GET['player'];
 
-if (empty($_GET['profile']))
+if (empty($_GET['id']))
  $profile = 0; 
 else
-$profile = $_GET['profile'];
+$profile = $_GET['id'];
 
 if (empty($_GET['geo']))
 $geosearch = 0; 
@@ -1853,7 +1940,7 @@ if(empty(dbcheck()))
 	die('<H1> Possible CODBX not instaled or..! </br>Database ['.$db_name.'] does not exist or you do not have access to it! </br>( look in </br> //DATABASE SETTINGS </br> data/settings.php </br> file)</H1>');
  
  
-$r = 'SELECT id FROM db_stats_day GROUP BY servername ORDER BY id DESC limit 2';
+$r = 'SELECT id FROM db_stats_history GROUP BY kills ORDER BY id DESC limit 1';
 
 //ZAPROS NR - 1
 $ssss = dbSelectALL('', $r);	
@@ -2036,10 +2123,91 @@ if((!empty($uuser))&&($secondx<300)){
 }
 }
 }
+
+
+function datafromsqlsumm($old_stat,$new_stat)
+{
+	if((!empty($old_stat))&&(!empty($new_stat)))
+	{
+		
+	if(!empty($keyarrr))
+	   unset($keyarrr);
+	if(!empty($valarrr))
+       unset($valarrr);		
+		
+foreach ($old_stat as $key => $v) {
+	foreach ($new_stat as $keys => $vs) {
+		     if (strpos($key, "_pg") !== false) $v = '~%~';
+		else if (strpos($key, "guid") !== false) $v = '~%~';
+		else if (strpos($key, "mapname") !== false) $v = '~%~';	
+		else if (strpos($key, "place") !== false) $v = '~%~';	
+		else if (strpos($key, "gametype") !== false) $v = '~%~';
+		else if (strpos($key, "gt_map") !== false) $v = '~%~';		
+		else if (strpos($key, "_geo") !== false) $v = '~%~';
+		else if (strpos($key, "port") !== false) $v = '~%~';
+		else if (strpos($key, "_player") !== false) $v = '~%~';
+		else if (strpos($key, "_time") !== false) $v = '~%~';		
+		else if (strpos($key, "_lasttime") !== false) $v = '~%~';		
+		else if (strpos($key, "_ratio") !== false) $v = '~%~';
+		else if (strpos($key, "_skill") !== false) $v = '~%~';	
+		else if (strpos($key, "_fps") !== false) $v = '~%~';
+		else if (strpos($key, "_ip") !== false) $v = '~%~';
+		else if (strpos($key, "_ping") !== false) $v = '~%~';
+		else if (strpos($key, "n_") !== false) $v = '~%~';		
+		else if (strpos($key, "_prestige") !== false) $v = '~%~';		
+		else if (strpos($key, "server") !== false) $v = '~%~';		
+		else if ($key == 'queryString') $v = '~%~';
+		else if ($key == 'pg') $v = '~%~';
+		else if ($key == 'id') $v = '~%~';
+
+		     if (strpos($keys, "_pg") !== false) $vs = '~%~';
+		else if (strpos($keys, "guid") !== false) $vs = '~%~';
+		else if (strpos($keys, "mapname") !== false) $vs = '~%~';
+        else if (strpos($keys, "place") !== false) $v = '~%~';		
+		else if (strpos($keys, "gametype") !== false) $vs = '~%~';
+		else if (strpos($keys, "gt_map") !== false) $vs = '~%~';		
+		else if (strpos($keys, "_geo") !== false) $vs = '~%~';
+		else if (strpos($keys, "port") !== false) $vs = '~%~';
+		else if (strpos($keys, "_player") !== false) $vs = '~%~';
+		else if (strpos($keys, "_time") !== false) $vs = '~%~';		
+		else if (strpos($keys, "_lasttime") !== false) $vs = '~%~';		
+		else if (strpos($keys, "_ratio") !== false) $vs = '~%~';
+		else if (strpos($keys, "_skill") !== false) $vs = '~%~';	
+		else if (strpos($keys, "_fps") !== false) $vs = '~%~';
+		else if (strpos($keys, "_ip") !== false) $vs = '~%~';
+		else if (strpos($keys, "_ping") !== false) $vs = '~%~';
+		else if (strpos($keys, "n_") !== false) $vs = '~%~';		
+		else if (strpos($keys, "_prestige") !== false) $vs = '~%~';		
+		else if (strpos($keys, "server") !== false) $vs = '~%~';		
+		else if ($keys == 'queryString') $vs = '~%~';
+		else if ($keys == 'pg') $v = '~%~';
+		else if ($keys == 'id') $vs = '~%~';
+		
+		 if (($v != '~%~') && ($vs != '~%~')) {
+			if ($key == $keys) {
+			if(($v + $vs) > 0)
+			{				
+				$keyarrr[] = $key;
+				$valarrr[] = $v + $vs;
+				$updatevalarrr[] = '`'.$key.'` = '.($v + $vs).'';
+			}
+			}
+		}
+	}
+	}
+	 if((!empty($valarrr))&&(!empty($valarrr)))
+	 return array($keyarrr, $valarrr, $updatevalarrr);
+     else
+		return array(array(), array(), array()); 
+ 
+}
+}
+
+
 function FloodDetection(){
 	/*
 if (!isset($_SESSION)) {
-	session_start();
+	
 }
 if(!empty($_SESSION['last_session_request']))
 {
@@ -2052,4 +2220,159 @@ if($_SESSION['last_session_request'] > time() - 3){
 $_SESSION['last_session_request'] = time();
 */
 }
+
+function securitySql($string, $t = false)
+{
+    $string = str_replace("\'", "", $string);
+    if ($t != "m") {$string = htmlspecialchars($string, ENT_QUOTES);}
+    $string = str_replace("--", "", $string);
+    if ($t != "u") {$string = str_replace("/", "", $string);}
+    $string = str_replace("=", "", $string);
+    //$string=str_replace(";","",$string);
+    $string = str_replace("+", "", $string);
+    $string = str_replace(" like ", " ", $string);
+    $string = str_replace(" union ", " ", $string);
+    $string = str_replace("%", "", $string);
+    return $string;
+}
+
+
+
+
+function returnGeoData($ipAdress)
+{
+
+global $cpath;	
+	
+$db = new \IP2Location\Database($cpath.'/engine/geoip_bases/IP2LOCATION-LITE-DB3.BIN', \IP2Location\Database::FILE_IO);
+
+		if (!empty($ipAdress)) {
+				$record = $db->lookup($ipAdress, \IP2Location\Database::ALL);
+				if (!empty($record)) {
+					
+					
+				if (isLoginUser()) {	
+					
+						$flg = $record['countryCode'];
+						$flag = $flg;
+						$cn_nm = $record['countryName'];
+						$geoinff = "🅲🅾🆄🅽🆃🆁🆈:".$record['countryName']." \n\n  🆁🅴🅶🅸🅾🅽:".$record['regionName']." \n\n  🅲🅸🆃🆈:".$record['cityName'];
+				}
+				else
+				{
+						$flg = $record['countryCode'];
+						$flag = $flg;
+						$cn_nm = $record['countryName'];
+						$geoinff = geosorting($flag);
+				}
+					
+						
+				}
+				else {
+						$flag = '0';
+						$cn_nm = '';
+				}
+		}
+		else if (!empty($geo)) {
+				$flag = $geo;
+				$cn_nm = '';
+		}
+		else {
+				$flag = '0';
+				$cn_nm = '';
+		}
+		
+		return $flag;
+}
+
+
+function updateIpAdressData($ipAdress, $guid, $sguid)
+{
+
+global $cpath;	
+		 if(empty($ipAdress))		 
+		 {
+			 
+            //проверка и запись ип адреса
+              $result = dbSelect('', "SELECT x_db_ip FROM x_db_players where x_db_guid='$guid' and x_db_ip !='' and x_db_ip !='0' LIMIT 1");
+                  if (!empty($result)) {
+                    foreach ($result as $keys => $val) {
+                      if (!empty($keys)) {
+                        if ($keys === 'x_db_ip') 
+						{
+			$ipAdress = $val;				
+			$querySQL = "UPDATE db_stats_2  SET w_ip='" . $val . "' 
+			where s_pg='" . $sguid . "'";
+
+                    $gt = dbSelectALL('', $querySQL);							
+							
+						}
+				  }}}
+			 
+		 }	
+		 
+		 return $ipAdress;
+}
+
+
+function encodeOpenSSLData($text, $key)
+{
+  $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
+  $iv = openssl_random_pseudo_bytes($ivlen);
+  $ciphertext_raw = openssl_encrypt($text, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+  $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+  $encodedData = base64_encode($iv . $hmac . $ciphertext_raw);
+  return $encodedData;
+}
+
+function decodeOpenSSLData($text, $key)
+{
+  $c = base64_decode($text);
+  $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
+  $iv = substr($c, 0, $ivlen);
+  $hmac = substr($c, $ivlen, $sha2len = 32);
+  $ciphertext_raw = substr($c, $ivlen + $sha2len);
+  $decodedData = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+  $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+  if (hash_equals($hmac, $calcmac)) {
+    return $decodedData;
+  }
+}
+
+
+
+
+function returnWhat($what, $table, $where, $debug)
+{
+	$getsteam = '';
+            $rp = "SELECT $what FROM $table where ".$where;
+			
+			if($debug)
+			{
+				echo $rp;
+			}
+
+            $xl = dbSelectALL('', $rp);
+            if (!empty($xl)) {
+				 
+                foreach ($xl as $keym => $dannye) {
+						
+                   return $getsteam = $dannye[$what];
+         }
+     }
+	 
+	if(empty($getsteam))
+	{
+		return false;
+	}		
+	 
+}	
+	
+	
+
+
+
+
+
+
 ?>

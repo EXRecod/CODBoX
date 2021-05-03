@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 
 error_reporting(E_ALL);
@@ -9,6 +9,14 @@ $url = $_SERVER["SCRIPT_NAME"];
 if (empty($cpathr)) { 
   $cpathr = dirname(__FILE__);
 }
+ 
+
+$cpathr = str_replace("engine/", "", $cpathr);
+$cpathr = str_replace("ajax_data/", "",$cpathr);
+$cpathr = str_replace("engine\\", "", $cpathr);
+$cpathr = str_replace("ajax_data\\", "",$cpathr); 
+$cpathr = str_replace("\\ajax_data", "",$cpathr);
+$cpathr = str_replace("/ajax_data", "",$cpathr);
  
 if(empty($guidn)){
 if(!empty($guid)){
@@ -39,17 +47,17 @@ else if(!empty($_GET['count']))
  {
 	$count = $_GET['count'];
 	$urlmd5 = md5($guidn);	
-    $cachetime = 604800; 
+    $cachetime = 900; 
  }
 else 
 { 
-$cachetime = 3600; $count = 100; $urlmd5 = md5($guidn);
+$cachetime = 600; $count = 100; $urlmd5 = md5($guidn);
 }
 
 $break = Explode('/', $url);
 $file = $break[count($break) - 1];
 $cachefile = substr_replace($file ,"",-4).'_'.$urlmd5.'.html';
-$fl = $cpathr .'/data/cache/';
+$fl = $cpathr .'/data/cache/ajax_data/';
 $cachefile = $fl.$cachefile;
 
 
