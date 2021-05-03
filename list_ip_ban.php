@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
 if (empty($cpath)) { 
   $cpath = dirname(__FILE__);
   $xcpath = $cpath;

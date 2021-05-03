@@ -73,7 +73,7 @@ $cachetime = 30;     // 30 секунд
 $break = Explode('/', $url);
 $file = $break[count($break) - 1];
 $cachefile = substr_replace($file ,"",-4).'_'.$urlmd5.'_'.$languagefor.'.codboxcache';
-$fl = $cpath .'/data/cache/';
+$fl = $cpath .'/data/cache/html_data/';
 if (!file_exists($fl))
 mkdir($fl, 0777, true);
 	

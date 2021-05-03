@@ -1,0 +1,18 @@
+.content_block{background:#090909cc;margin:10 0px;padding:5px;border:1px solid #252525;border-top:1px solid #222;background-color: #090909de;background:url(../inc/images/but_bg.png);}
+.content_block .title{font-size:15px;overflow:auto;padding:5 0 5 5px;margin:0 5 0 5px;text-transform:uppercase;border-bottom:0px solid #222;}
+.content_block .title .text{padding:0 0 0 0px;background1:#888;display:inline-block;color: #52bafe;font-weight:bold;float:left;}
+.match_stats_adv{width:100px;display:inline-block;color:#777;padding:5px;}
+.wrapper{	display: -webkit-flex;  /* для поддержки ранних версий браузеров */
+    display: flex;  /* элемент отображается как блочный flex-контейнер */
+    -webkit-justify-content: space-between;  /* для поддержки ранних версий браузеров */
+    justify-content: space-between;  /* флекс элементы равномерно распределяются по всей строке, при этом первый флекс элемент позиционируются в начале контейнера, а последний флекс элемент позиционируется в конце контейнера */
+flex-flow: row wrap;}
+
+.shad{
+	    text-shadow: #000 1px 0px, #000 1px 1px, #000 0px 1px, #000 -1px 1px
+}
+.shad0{
+	    text-shadow: #000 1px 0px, #000 1px 1px, #000 0px 1px, #000 -1px 1px, #000 -1px 0px, #000 -1px -1px, #000 0px -1px, #000 1px -1px, #000 0 0 3px, #000 0 0 3px, #000 0 0 3px;
+}
+a{text-decoration:none;color:#222;}
+
