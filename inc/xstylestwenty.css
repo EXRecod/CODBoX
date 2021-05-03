@@ -177,7 +177,7 @@ background-size: cover;min-width:320px; overflow-y: scroll;  height: 100%;}
 	    color:#008510; text-shadow: #222 1px 0px, #222 1px 1px, #222 0px 1px, #222 -1px 1px, #222 -1px 0px, #222 -1px -1px, #222 0px -1px;
 }
 
-a{text-decoration:none;color:#222;}
+a{text-decoration:none;}
 .white{color:#fff;}
 
 .title_block{margin:5 5 5 5px;colo2r:#00dcff;font-size:17px;width:100%;z-index:1;text-align:left;}
