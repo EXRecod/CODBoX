@@ -144,10 +144,15 @@ echo '
 	
 <div class="weap_stats" style="text-align:left;">'.$t_kills.'
 <div>'.$value.'</div></div>
-<div class="weap_stats" style="text-align:right;">'.$t_damages.'
-<div>'.round($damages/$value).'</div></div>	
+';
+
+if(!empty($damages))
+{
+echo '<div class="weap_stats" style="text-align:right;">'.$t_damages.'
+<div>'.round($damages/$value).'</div></div>';
+}
 	
- 
+ echo '
 </div>
 </div>
 </div>';	

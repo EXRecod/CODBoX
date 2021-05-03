@@ -29,6 +29,8 @@ if(!empty($_GET['n']))
 
 if((empty($server)) && (!empty($brofile))) {
   $serverssqLdata = 't0.s_guid="' . $brofile . '" and t2.w_skill != 1000 ORDER BY (t2.w_skill+0) DESC limit 15';
+} else if((!empty($server)) && (!empty($brofile))) {
+  $serverssqLdata = 't0.s_guid="' . $brofile . '" and t0.s_port = '.$server. ' limit 1';
 }
 else if(!empty($ns)) {
   $serverssqLdata = 't0.s_player LIKE :keyword ORDER BY t0.s_player DESC limit 700';
@@ -37,6 +39,9 @@ else if(!empty($ns)) {
   
   
 if (empty($skilllevels)) {
+	
+	
+	
   $reponse = 'SELECT t0.s_pg, t0.s_guid, t0.s_port, t0.servername, t0.s_player, t0.s_time, 
   t0.s_lasttime, t2.s_pg, t2.w_place, t2.w_skill, t2.w_ratio, t2.w_geo, t2.w_prestige, t2.w_fps, 
   t2.w_ip, t2.w_ping, t2.n_kills, t2.n_deaths, t2.n_heads, t2.n_kills_min, t2.n_deaths_min FROM db_stats_0 t0 

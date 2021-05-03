@@ -5,11 +5,14 @@ $nb_pages = 30;
 $ip = 'unknown';
 $reloadpages = 0;
 echo ' 
-<script src="'.$domain.'/data/graph/dynamics2.js"></script>
+<script src="'.$domain.'/inc/spoiler.js"></script>
 <div class="content_block">
-<div style="overflow:auto;width:100%;padding:5 10px;">
+<div style="overflow:auto;width:100%;padding:5 10px;">';
 
-<h1>IP '.$menu_banlist.'</h1> &nbsp;&nbsp;&nbsp; 
+if(empty($iixnfo))
+{
+echo '
+<h1>'.$lang['ip_adress_control'].'</h1> &nbsp;&nbsp;&nbsp; 
 &nbsp;&nbsp;&nbsp;
 <a href="'.$domain.'/list_ip_ban.php?sort_unbanned=s" style ="width:50px; padding:2px 50px;"><b class="tags" glose="'.$ilisttipunbanned.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;background-color:black;color:#013602" >&nbsp;'.$listtipunbanned.'&nbsp;</b></a>
 
@@ -19,7 +22,19 @@ echo '
 &nbsp;&nbsp;
 <a href="'.$domain.'/list_ip_ban.php?sort_fakeip=s" style ="width:50px;padding:2px 90px;"><b class="tags" glose="'.$ilisttipproxy.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:#07405c;background-color:black;">&nbsp;'.$listtipproxy.'&nbsp;</b> </a> 
 
-</div></br>';
+
+&nbsp;&nbsp;
+<a href="'.$domain.'/list_ip_ban.php?sort_banned_visited=s" style ="width:50px;padding:2px 90px;"><b class="tags" glose="'.$ilisttipbannedvisited.'" style ="padding:2px;border: solid; border-radius: 15px;font-size:16px;color:orange;background-color:black;">&nbsp;'.$listtipbannedvisited.'&nbsp;</b> </a> 
+';
+}
+else
+{
+echo '
+<h1> '.$lang['demo_auto_record'].'</h1> &nbsp;&nbsp;&nbsp; 
+&nbsp;&nbsp;&nbsp;';	
+}
+
+echo '</div></br>';
 
  
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,6 +160,12 @@ if($days < 0)
 $re = "UPDATE banip SET reason='0' WHERE ip = '".$ip."'";
 $y = dbSelectALL('', $re);
 
+if (!empty($iixnfo)){
+$re = "UPDATE demos SET reason='0' WHERE ip = '".$ip."'";
+$y = dbSelectALL('', $re);
+}
+
+
 if($y)
 {
 $re = "DELETE FROM banip WHERE NOT EXISTS (
@@ -164,10 +185,17 @@ $reloadpages = 1;
  }
 }
  } }
+
+ 
+
+$xplayerip = rtrim($xplayerip,'.');
+$xplayerip = rtrim($xplayerip,'-');
+
+$ip = rtrim($ip,'.');
+$ip = rtrim($ip,'-');
 $txttitle = $ip;
- 
- 
- 
+
+
       if (!empty($xplayerip))
 	  {
       $record = $db->lookup($xplayerip, \IP2Location\Database::ALL);
@@ -241,6 +269,22 @@ else if(((!empty($reasonx))&&(strpos($reasonx, 'VPN') !== false))
   $rv = '#07405c';
   $rvt = '#07364d';  
 }
+else if(!empty($_GET['sort_banned_visited']))
+{
+  $rv = '#B27300';
+  $rvt = '#B27300';  				
+}
+else if(!empty($_GET['sort_screenfakers']))
+{
+  $rv = '#63016e';
+  $rvt = '#43004a';  				
+}
+else if(!empty($iixnfo))
+{
+  $rv = '#1b3342';
+  $rvt = '#152936';  		
+		
+}
 else
 {
   $rv = '#5c0707';
@@ -312,13 +356,27 @@ echo '
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:11px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp 
 <a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$lang['ipinformation'].'">['.$reasonx.']</a></div> 
-</div>
+</div>';
 	
 	
+	
+if(empty($iixnfo))	
+echo '	
 <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:95px;overflow:auto;display:inline-block;flex-grow: 1;">
 <div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp; 
-<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$i_lefttime.'"> ['.$timeFormat.'] </a></div> 
+<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$i_lefttime.'"> ['.$timeFormat.'] </a>
+</div> 
 </div>';
+else
+echo '	
+<div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2 10px;line-height:19px;min-width:95px;overflow:auto;display:inline-block;flex-grow: 1;">
+<div style="color:#fff;font-size:13px;display:inline-block;float:RIGHT;TEXT-ALIGN:RIGHT;">&nbsp; 
+<a href="'.$domain.'/list.php?listguid='.trim($guidxx).'" style="color:#fff;" class="tags" glose="'.$lang['demo_auto_record_t'].'"> ['.$timeFormat.'] </a>
+</div> 
+</div>';
+
+
+
 
 
 echo '
@@ -329,7 +387,7 @@ echo '
 	 
 
 
-
+if (empty($iixnfo)){
 if((!empty($reasonx))&&($rv != '#07405c'))	
 {
 echo '	
@@ -357,7 +415,7 @@ echo '
   <input style= "font-size:11px;height: 18px;width: 30px;padding: 1px 2px;box-sizing:border-box;color:background: #ff3b3b;" class="special" type="submit" value="'.$lang['ban_forever'].'">
 </form>	
 </div></div>';	
-}		
+}}		
 
 
 
@@ -392,7 +450,7 @@ class="tags" glose="[Sc]&nbsp;'.$menu_screens.':&nbsp;'.$xpnickname.'"> <b>[Sc]<
 
 
 echo '<div style="float:left;color:#fff;padding:9 9px;text-align:center;width:20px;">	
-<a href="'.$domain.'/stats.php?brofile='.$guidxx.'" 
+<a href="'.$domain.'/stats.php?player='.$guidxx.'" 
 target="_blank" style="float:left;color:#854699;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;" 
 class="tags" glose="[St]&nbsp;'.$menu_stats.'&nbsp;&nbsp;'.$xpnickname.'"> <b>[St]</b> </a>	
 </div>';
@@ -459,11 +517,18 @@ echo '<div class="match_stats_adv" style="min-width:190px;">Time
 
 <div class="match_stats_adv" style="min-width:100px;">Admin
 <div style="color:#fff;width:180px;">['.$whooo.']</div></div>	
- 
+'; 
 
 
+if (!empty($iixnfo))
+	$deltt = 'deleteidiinfo';
+else
+	$deltt = 'deleteid';
+
+
+echo '
 <div class="match_stats_adv" style="min-width:100px;">DELETE PLAYER
-<div style="color:#fff;width:180px;"><a href="'.$domain.'/list_ip_ban.php?deleteid='.trim($idnumm).'" onClick="return window.confirm(\'DELETE PLAYER? OK?\');"> ❌ </a>
+<div style="color:#fff;width:180px;"><a href="'.$domain.'/list_ip_ban.php?'.$deltt.'='.trim($idnumm).'" onClick="return window.confirm(\'DELETE PLAYER? OK?\');"> ❌ </a>
   </div></div>
 
 </div>
@@ -516,9 +581,17 @@ if(!empty($_GET['sort_unbanned']))
 if(!empty($_GET['sort_banned']))
 	$sort_banned = '&sort_banned='.$_GET['sort_banned']; else $sort_banned = '';
 
+if(!empty($_GET['sort_banned_visited']))
+	$sort_banned_visited = '&sort_banned_visited='.$_GET['sort_banned_visited']; else $sort_banned_visited = '';
+
+
 if(!empty($_GET['sort_fakeip']))
 	$sort_fakeip = '&sort_fakeip='.$_GET['sort_fakeip']; else $sort_fakeip = '';
  
+
+if(!empty($_GET['sort_screenfakers']))
+	$sort_screenfakers = '&sort_screenfakers='.$_GET['sort_screenfakers']; else $sort_screenfakers = '';
+
 
 if(!empty($_GET['nicknameSearch']))
 	$nicknameSearch = '&nicknameSearch='.$_GET['nicknameSearch']; else $nicknameSearch = '';
@@ -536,7 +609,7 @@ if(!empty($timeq))
 	$timeq = '&timeq=' . $timeq; else $timeq = '';
  
  
-$pageskey = '<a href="' . $domain . '/list_ip_ban.php?server=' . $server.$sort_banned.$sort_fakeip.$sort_unbanned.$search.$nicknameSearchguid.$nicknameSearch.$geosearch.$timeq.'&page=';
+$pageskey = '<a href="' . $domain . '/list_ip_ban.php?server=' . $server.$sort_banned.$sort_screenfakers.$sort_banned_visited.$sort_fakeip.$sort_unbanned.$search.$nicknameSearchguid.$nicknameSearch.$geosearch.$timeq.'&page=';
 
 
 

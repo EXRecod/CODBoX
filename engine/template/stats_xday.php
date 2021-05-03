@@ -1,12 +1,21 @@
 <?php
  if(empty($templ))
 	die("PERMISSIONS DENIED!");
-echo '<script src="' . $domain . '/data/graph/dynamics2.js"></script>';
+echo '<script src="' . $domain . '/inc/spoiler.js"></script>';
 
 if(strpos($urlmd, "stats_day.php?heads=top") !== false)
 {
-	
-	$reponse = 'SELECT servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_day ORDER BY s_heads DESC LIMIT 20';
+$backgr = '#444444aa';	
+$reponse = 'SELECT A.s_pg, A.s_guid, A.s_time, A.s_lasttime, A.servername,A.s_player,A.s_port,
+B.pg,B.skill,B.kills,B.deaths,B.heads,B.date,C.w_ip,C.w_geo   
+from db_stats_0  A
+LEFT JOIN db_stats_history B 
+ON A.s_pg = B.pg
+LEFT JOIN db_stats_2 C 
+ON B.pg = C.s_pg
+WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= B.date and B.kills >= 100
+ORDER BY heads DESC LIMIT 20'; 
+
     $stats_day_kills = dbSelectALL('', $reponse);
 	
 	$ghb = '<a href="'.$domain.'/stats_day.php?heads=top" style="color:#f7b794;" target="_self">'.$x_top_day.' / '. mb_strtoupper($t_heads).' </a>';
@@ -20,8 +29,18 @@ if(strpos($urlmd, "stats_day.php?heads=top") !== false)
 }
 else if(strpos($urlmd, "stats_day.php?deaths=top") !== false)
 {
-	
-	$reponse = 'SELECT servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_day ORDER BY s_deaths DESC LIMIT 20';
+$backgr = '#222222aa';		
+$reponse = 'SELECT A.s_pg, A.s_guid, A.s_time, A.s_lasttime, A.servername,A.s_player,A.s_port,
+B.pg,B.skill,B.kills,B.deaths,B.heads,B.date,C.w_ip,C.w_geo   
+from db_stats_0  A
+LEFT JOIN db_stats_history B 
+ON A.s_pg = B.pg
+LEFT JOIN db_stats_2 C 
+ON B.pg = C.s_pg
+WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= B.date and B.kills >= 100
+ORDER BY deaths DESC LIMIT 20'; 
+
+
     $stats_day_kills = dbSelectALL('', $reponse);
 	
 	$ghb = '<a href="'.$domain.'/stats_day.php?deaths=top" style="color:#f7e794;" target="_self">'.$x_top_day.' / '. mb_strtoupper($t_deaths).'</a>';
@@ -34,10 +53,17 @@ $ghz = '<b style="color:#000;text-shadow: 0 0 1px #7fcf08, 0 0 2px #000, 0 0 10p
 }
 else if(strpos($urlmd, "stats_day.php?kd=top") !== false)
 {
-	
-	$reponse = 'SELECT Round(s_kills/s_deaths, 2) AS kdratio,servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_day where s_kills >= 100 ORDER BY kdratio DESC LIMIT 20
-	
-';
+$backgr = '#111111aa';		
+$reponse = 'SELECT Round(B.kills/B.deaths, 2) AS kdratio, A.s_pg, A.s_guid, A.s_time, A.s_lasttime, A.servername,A.s_player,A.s_port,
+B.pg,B.skill,B.kills,B.deaths,B.heads,B.date,C.w_ip,C.w_geo   
+from db_stats_0  A
+LEFT JOIN db_stats_history B 
+ON A.s_pg = B.pg
+LEFT JOIN db_stats_2 C 
+ON B.pg = C.s_pg
+WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= B.date and B.kills >= 100
+ORDER BY kdratio DESC LIMIT 20';
+
     $stats_day_kills = dbSelectALL('', $reponse);
 	
 	$ghb = '<a href="'.$domain.'/stats_day.php?kills=top" style="color:#d43939;" target="_self">'.$x_top_day.' / '. mb_strtoupper($t_kd).'</a>';
@@ -50,8 +76,17 @@ $ghz = '<b style="color:#000;text-shadow: 0 0 1px #088dcf, 0 0 2px #000, 0 0 10p
 }
 else
 {
-	
-	$reponse = 'SELECT servername,s_pg,w_guid,w_port,s_player,s_kills,s_deaths,s_heads,s_time,s_lasttime from db_stats_day ORDER BY s_kills DESC LIMIT 20';
+$backgr = '#000000aa';	 
+$reponse = 'SELECT A.s_pg, A.s_guid, A.s_time, A.s_lasttime, A.servername,A.s_player,A.s_port,
+B.pg,B.skill,B.kills,B.deaths,B.heads,B.date,C.w_ip,C.w_geo   
+from db_stats_0  A
+LEFT JOIN db_stats_history B 
+ON A.s_pg = B.pg
+LEFT JOIN db_stats_2 C 
+ON B.pg = C.s_pg
+WHERE DATE_SUB(CURDATE(),INTERVAL 1 DAY) <= B.date and B.kills >= 100
+ORDER BY kills DESC LIMIT 20';
+ 
     $stats_day_kills = dbSelectALL('', $reponse);
 	
 	$ghb = '<a href="'.$domain.'/stats_day.php?kills=top" style="color:#9496f7;" target="_self">'.$x_top_day.' / '. mb_strtoupper($medals_killer).'</a>';
@@ -73,14 +108,14 @@ echo '<div class="content_block">
 <div style="display: -webkit-flex;display:flex; -webkit-justify-content: space-between;justify-content: space-between;flex-flow: row wrap;">';
 $i = 0;
 foreach ($stats_day_kills as $keym => $value) {
- $port          = $value['w_port'];
+ $port          = $value['s_port'];
  $servername    = $value['servername'];
  $s_pg          = $value['s_pg'];
- $w_guid        = $value['w_guid'];
+ $w_guid        = $value['s_guid'];
  $s_player      = $value['s_player'];
- $s_kills       = $value['s_kills'];
- $s_deaths      = $value['s_deaths']; 
- $s_heads       = $value['s_heads'];
+ $s_kills       = $value['kills'];
+ $s_deaths      = $value['deaths']; 
+ $s_heads       = $value['heads'];
  $s_time        = $value['s_time'];
  $s_lasttime    = $value['s_lasttime'];  
 ++$i;
@@ -96,7 +131,7 @@ $persdeaths = Persentages($s_deaths, $summ);
  
 echo ' 
 <div style="overflow:auto;width:100%;">
-<div style="width:auto;overflow:auto;padding:5px;background: #000000aa;margin:10px;font-size:13px;cursor:pointer;
+<div style="width:auto;overflow:auto;padding:5px;background: '.$backgr.';margin:10px;font-size:13px;cursor:pointer;
 cursor:hand;" id="match'.md5($i).'" onclick="show_match(\''.md5($i).'\')">
 	
 	
@@ -106,7 +141,7 @@ cursor:hand;" id="match'.md5($i).'" onclick="show_match(\''.md5($i).'\')">
 	
 
 <div style="float:left;color:#fff;padding:2px;line-height:15px;text-align:left;width:100px;font-size:14px;min-width:40%;">	
-<div style="color:#777;font-size:14px;">Nick &nbsp;&nbsp;&nbsp;&nbsp;<b> <a href="'.$domain.'/stats.php?profile='.$s_pg.'" style="color:#fff;" class="tags" glose="' . $w_guid . '" target="_self"> '.colorize($s_player).'</a></b></div></div>
+<div style="color:#777;font-size:14px;">Nick &nbsp;&nbsp;&nbsp;&nbsp;<b> <a href="'.$domain.'/stats.php?id='.$s_pg.'" style="color:#fff;" class="tags" glose="' . $w_guid . '" target="_self"> '.colorize($s_player).'</a></b></div></div>
 <div style="float:left;color:#fff;padding:2px;line-height:15px;text-align:left;width:200px;font-size:14px;">
 <div style="color:#777;">Server &nbsp;&nbsp;&nbsp;&nbsp;'.colorize($servername).'</div></div>
 </div>

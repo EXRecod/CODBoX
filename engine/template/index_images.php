@@ -135,9 +135,17 @@ $rvx = '? / '.count($yu); else $rvx = '? / 0';
 
 if(empty($bannedscrx))
  echo '<div style="height:auto;overflow:auto;" class="content_block">
-<a href="' . $domain . '/img.php?server=' . $server . '&bannedscr=' . md5($sbff) .'" style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #000, 0 0 30px #fff, 0 0 4px #FFF, 0 0 7px #08e5c8, 0 0 18px #08e5c8, 0 0 40px #08e5c8, 0 0 65px #08e5c8;"><b> > '.$i_ban.' '.$menu_screens.'</b></a></div>';
+<a href="' . $domain . '/img.php?server=' . $server . '&bannedscr=' . md5($sbff) .'" style="color:#383838;text-shadow: 0 0 1px #000, 0 0 2px #FFF, 0 0 30px #fff, 0 0 4px #000, 0 0 7px #08e5c8, 0 0 18px #08e5c8, 0 0 40px #08e5c8, 0 0 65px #08e5c8;">
+<b> > '.$i_ban.' '.$menu_screens.'</b></a>
+
+<b>&nbsp;&nbsp;&nbsp;</b>
+
+<a href="'.$domain.'/list_ip_ban.php?sort_screenfakers=s" style="color:#555;text-shadow: 0 0 1px #666, 0 0 2px #000, 0 0 30px #000, 0 0 4px #000, 0 0 7px #ae00b3, 0 0 18px #ae00b3, 0 0 40px #ae00b3, 0 0 65px #ae00b3;">
+<b> >  '.$menu_anticheat_codx4.'  '. $lang['ss_without'].'</b></a>
+
+</div>';
 else
- echo '<div style="height:auto;overflow:auto;" class="content_block"><b style="color:#000;text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 30px #fff, 0 0 4px #FFF, 0 0 7px red, 0 0 18px red, 0 0 40px red, 0 0 65px red;">'.$i_ban.' '.$menu_screens.'</b></div>';	
+ echo '<div style="height:auto;overflow:auto;" class="content_block"><b style="color:#383838;text-shadow: 0 0 1px #000, 0 0 2px #FFF, 0 0 30px #000, 0 0 4px #000, 0 0 7px red, 0 0 18px red, 0 0 40px red, 0 0 65px red;">'.$i_ban.' '.$menu_screens.'</b></div>';	
 
 echo '<div class="content_block" style="margin-top:0px;"><div class="title">
 <div class="text">'.$menu_screens.' [' . $rvx . ']  </div></div><div class="image-grid">';
@@ -281,7 +289,7 @@ echo '<a href="' . $domain . '/admin/login.php" class="name" target="_blank">
 
 
 echo '<span style="padding: 0px 15px;">&nbsp;</span>
-<a href="' . $domain . '/stats.php?brofile=' . $eguid . '&s=' . urlencode($servernamet) . '" class="name" target="_blank"> 
+<a href="' . $domain . '/stats.php?player=' . $eguid . '&s=' . urlencode($servernamet) . '" class="name" target="_blank"> 
 <b class="tags" glose="'.$i_stats.'"><img src="' . $domain . '/inc/images/statics.png"></b> <span>&nbsp;</span>     </a>';
 
 

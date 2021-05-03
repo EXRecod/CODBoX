@@ -82,7 +82,7 @@ margin:10px;font-size:13px;cursor:pointer;cursor:hand;" id="match'.md5($lasttime
 <div style="float:left;color:#fff;padding:5 3px;font-size:10px;line-height:14px;width:34px;text-align:center;">'.$tm.'</div>
 <div style="float:left;color:#fff;padding:2px;line-height:15px;text-align:left;width:130px;font-size:13px;">
 
-<a href="'.$domain.'/stats.php?brofile='.trim($playerguid).'" target="_blank" class="tags" glose="'.$serverport.'">
+<a href="'.$domain.'/stats.php?player='.trim($playerguid).'" target="_blank" class="tags" glose="'.$serverport.'">
  <div style="color:#fff;">'.colorize($servername).'</div>
 </a>
 
@@ -104,7 +104,7 @@ echo '<div style="float:left;color:#fff;padding:9 5px;font-size:10px;line-height
 	
 <div style="color:#fff;padding:2px;line-height:24px;text-align:center;min-width:90px;overflow:auto;display:inline-block;flex-grow: 1;">
 	
-<a href="'.$domain.'/stats.php?brofile='.trim($playerguid).'" style="color:#999;" target="_blank" class="tags" glose="'.$playerguid.'">
+<a href="'.$domain.'/stats.php?player='.trim($playerguid).'" style="color:#999;" target="_blank" class="tags" glose="'.$playerguid.'">
 <div style="color:#ddd;font-size:13px;display:inline-block;float:left;TEXT-ALIGN:LEFT;">
 '.colorize($playername).'</a>
 </div>';

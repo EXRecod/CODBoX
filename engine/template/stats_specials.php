@@ -33,17 +33,17 @@ $xz = dbSelectALL('', $reponse);
 
 if(!empty($xz))
 foreach ($xz as $keym => $value) {
- //$chk['claymore'][$value['claymore']] = $value['claymore'] ;
- //$chk['c4'][$value['c4']] = $value['c4'];
- //$chk['grenade'][$value['grenade']]  = $value['grenade'];
- //$chk['maps'][$value['maps']] = $value['maps']; 
- //$chk['heli'][$value['heli']] = $value['heli'];
+ $chk['claymore'][$value['claymore']] = $value['claymore'] ;
+ $chk['c4'][$value['c4']] = $value['c4'];
+ $chk['grenade'][$value['grenade']]  = $value['grenade'];
+ $chk['maps'][$value['maps']] = $value['maps']; 
+ $chk['heli'][$value['heli']] = $value['heli'];
  $chk['bombs'][$value['bombs']] = $value['bombs'];
  $chk['avia'][$value['avia']] = $value['avia'];  
  $chk['artillery'][$value['artillery']] = $value['artillery']; 
  $chk['camp'][$value['camp']] = $value['camp']; 
  $chk['flags'][$value['flags']] = $value['flags']; 
- $chk['saveflags'][$value['saveflags']] = $value['saveflags']; 
+ $chk['saveflags'][$value['saveflags']] = $value['saveflags'];  
  $chk['bonus'][$value['bonus']] = $value['bonus'];
  $chk['series'][$value['series']] = $value['series'];  
  $chk['bomb_plant'][$value['bomb_plant']] = $value['bomb_plant'];  

@@ -159,6 +159,28 @@ if(!empty($value['s_lasttime']))
 			 $headpercents = $value['headpercent'];
 		 if(!empty($value['w_ip']))		 
 			 $xplayerip = $value['w_ip'];
+		 
+		 
+		 if(empty($xplayerip))		 
+		 {
+			 
+            //проверка и запись ип адреса
+              $result = dbSelect('', "SELECT x_db_ip FROM x_db_players where x_db_guid='$guid' and x_db_ip !='' and x_db_ip !='0' LIMIT 1");
+                  if (!empty($result)) {
+                    foreach ($result as $keys => $val) {
+                      if (!empty($keys)) {
+                        if ($keys === 'x_db_ip') 
+						{
+			$xplayerip = $val;				
+			$querySQL = "UPDATE db_stats_2  SET w_ip='" . $val . "' 
+			where s_pg='" . $plservguid . "'";
+
+                    $gt = dbSelectALL('', $querySQL);							
+							
+						}
+				  }}}
+			 
+		 }		 
  
 
 		if (!empty($xplayerip)) {
@@ -209,10 +231,10 @@ if (strpos(trim(urldecode($sss)), trim($servername)) !== false) {
 
 ?>
 <script type="text/javascript">
-    window.location.href = <?php echo '"';echo ''.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'';echo '"';?>;
+    window.location.href = <?php echo '"';echo ''.$domain.'/stats.php?id='.$plservguid.'&server='.$serverport.'';echo '"';?>;
 </script>
 <?php
-ECHO '<a href="'.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'" class="white">';
+ECHO '<a href="'.$domain.'/stats.php?id='.$plservguid.'&server='.$serverport.'" class="white">';
 }			 
 			 
           
@@ -291,9 +313,9 @@ foreach ($prestige_images as $numimgjj => $preimagej){
     list($timegistered,$lasttimeseen) = explode(';', timelife($timeregistered,$lasttime));	
 	
 	if(empty($brofile))
-	ECHO '<a href="'.$domain.'/stats.php?brofile='.$guid.'" class="white">';
+	ECHO '<a href="'.$domain.'/stats.php?player='.$guid.'" class="white">';
     else
-	ECHO '<a href="'.$domain.'/stats.php?profile='.$plservguid.'&server='.$serverport.'" class="white">';	
+	ECHO '<a href="'.$domain.'/stats.php?id='.$plservguid.'&server='.$serverport.'" class="white">';	
 	
 	
 	ECHO '<div style="width:auto;overflow:auto;padding:5px;background: #121212cc;margin:0px;font-size:13px;

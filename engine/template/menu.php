@@ -91,6 +91,15 @@ if (typeof(Storage) !== "undefined") {
 
 
 }
+else
+	echo '<div style="padding:0px;background:#000000aa;	font-size:15px;" class="content_block wrapper">
+<div style="height:26px;overflow:auto;float:left;text-align:left;padding: 2px 15px;display:inline-block;flex-grow: 1;min-width:190px;">
+ <div style="float:RIGHT;TEXT-ALIGN:RIGHT;color:#fff;padding:2px;line-height:20px;min-width:290px;overflow:auto;display:inline-block;flex-grow: 1;">
+ </div></div></div>'; 
+
+
+
+
 
 
 echo '<div style="height:auto;overflow:auto;text-align:center;padding:0px;background:#000000aa;	font-size:12px;" class="content_block wrapper">';

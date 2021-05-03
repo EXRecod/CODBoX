@@ -161,7 +161,7 @@ echo '<img src="' . $domain . '/inc/images/medals/' . $keym . '.png" style="widt
 <div style="overflow:auto;">
  
 <div style="font-size:14px;width:calc(100% - 20px);padding:5 10px;text-transform:uppercase;">
-<center><a href="' . $domain . '/stats.php?brofile=' . $guid . '&s=' . urlencode($server) . '" style="color:#fff; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;" target="_blank">'.$player.'</a></center>
+<center><a href="' . $domain . '/stats.php?player=' . $guid . '&s=' . urlencode($server) . '" style="color:#fff; text-shadow:-1px -1px 0 #000,-1px 1px 0 #000,1px -1px 0 #000,1px 1px 0 #000;" target="_blank">'.$player.'</a></center>
 </div>
 	
 </div>

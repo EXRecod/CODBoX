@@ -1,6 +1,14 @@
 <?php
-   if(empty($templ))
+   if(empty($templ)){
 	die("PERMISSIONS DENIED!");
+   }
+   
+$rtx = trim(round($positionOnAll_OF));
+ if(!ctype_digit($rtx))
+ {
+	$positionOnAll_OF = '0'; 
+ }	 
+   
 echo '<script type=\'text/javascript\'>
  function screenshot(){
    html2canvas(document.getElementById(\'screeen\')).then(function(canvas) {
@@ -84,8 +92,7 @@ if((empty($deaths))||(empty($kills)))
 echo '<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">0</div>';
 else
 echo '<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.round($kills/$deaths,2).'</div>';
-
-		
+ 
 echo '<div style="width:100%;line-height:20px;overflow:auto;">
 		
 <div style="width:calc(100% - 55px);background:#242424;float:left;margin:10 0px;">
@@ -142,7 +149,7 @@ background-color:#000000aa;
 
 <div style="color:#fff;font-size:18px;float:left;">'.$playeed.'</div>
 
-<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.$lasttimeseen.'</div>
+<div style="color:#52bafe;font-size:20px;float:right;font-weight:bold;" class="shad">'.$total_played_time.'</div>
 
 		
 <div style="width:100%;line-height:20px;overflow:auto;">

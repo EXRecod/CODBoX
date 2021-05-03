@@ -1,6 +1,9 @@
 <?php
 
-echo '<div class="content_block">
+echo '
+ 
+
+<div class="content_block">
 <div style="overflow:auto;width:100%;padding:5 10px;">
 <h1>' . $index_server . '</h1> </div>
 ';

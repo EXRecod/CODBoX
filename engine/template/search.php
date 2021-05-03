@@ -2,6 +2,9 @@
  if(empty($templ))
 	die("PERMISSIONS DENIED!");
 
+
+
+
 echo '
 <div style="width:100%;overflow:auto;padding:18 0px;">
 <div class="search_width_div">
@@ -12,7 +15,22 @@ echo '
 <div style="background:#111;width:auto;margin:10 0px;background:#111111aa;padding:6 10 5 10px;text-transform:uppercase;overflow:auto;max-height:300px;
 background:url('.$domain.'/inc/images/but_bg.png);" class="wrapper">
 <h1 style="color:#fff;font-weight:600;display:inline-block;width:220px;line-height:31px;float2:left;displa2y:none;margin-top:4px;" class="flexer">
-<a href="'.$domain.'/'.$baseurlz.'" style="color:white;text-shadow: rgba(192,192,192,0.5) 0px 3px 3px;">CodBox Stats</a>
+<a href="'.$domain.'/'.$baseurlz.'" style="color:white;text-shadow: rgba(192,192,192,0.5) 0px 3px 3px;">';
+
+if(@file($logo['logo_image']))
+echo '<div style="padding-bottom:50px;position:absolute;overflow: hidden;width: 270px;height: 50px;">
+
+<img src="'.$logo['logo_image'].'" width="'.$logo['logo_width'].'" height="'.$logo['logo_height']. '" 
+style="opacity: 1.1; border-radius: 5px;vertical-align: middle;width: 250px;height: 73px;
+ filter: saturate(60%);
+-webkit-filter: saturate(60%);
+-moz-filter: saturate(60%);
+-o-filter: saturate(60%);
+-ms-filter: saturate(60%);"></div>';
+else
+	echo 'CODBOX STATS';
+
+echo '</a>
 </h1>';
  ?>
 <label class="search_block_button" for="dialog_state"><?php echo $i_search;?></label>
@@ -21,7 +39,7 @@ echo '<div style="width:calc(100% - 220px);max-width:100%;min-width:300px;" clas
 <div class="search_block">
 <div style="margin: 0 auto;left: 20%;position:absolute;display:inline-block;padding:9px;">';
  if(strpos($url, "stats.php") !== false)
-	$searchzguid = 'brofile';	 
+	$searchzguid = 'player';	 
  else
     $searchzguid = 'nicknameSearch';
 
@@ -31,7 +49,7 @@ echo '<div style="width:calc(100% - 220px);max-width:100%;min-width:300px;" clas
     $searchznick = 'nicknameSearchguid';
 
  
- if(empty($_GET['brofile'])) 
+ if(empty($_GET['player'])) 
  {
 	 if(strpos($url, "stats_medals.php") === false)
 	 {

@@ -92,10 +92,22 @@ $sql='SELECT servername, s_guid, s_player, s_lasttime FROM db_stats_0 where s_la
 $xz_yesterday = dbSelectALLbyKey('', $sql, ''.$date.'');
 */
 
+echo '<div class="content_block" 
+style="margin:0 auto;">
+<iframe src="'.$domain.'/modules/top/index2.php" width="100%" height="350" frameBorder="0" scrolling="no" 
+style="
+width: 88%; height: 300px; 
+        -ms-zoom: 1.15;
+        -moz-transform: scale(1.15);
+        -moz-transform-origin: 0 0;
+        -o-transform: scale(1.15);
+        -o-transform-origin: 0 0;
+        -webkit-transform: scale(1.15);
+        -webkit-transform-origin: 0 0;"></iframe>
+</div>';
 
 
-
-echo ' <script src="' . $domain . '/data/graph/dynamics2.js"></script>';
+echo ' <script src="' . $domain . '/inc/spoiler.js"></script>';
 echo '<div style="height:auto;overflow:auto;padding:5 10px;" class="content_block">';
 echo '<h1>' . $i_stats . '</h1>';
 echo '<div style="overflow:auto;width:95%;padding:5 1px;">

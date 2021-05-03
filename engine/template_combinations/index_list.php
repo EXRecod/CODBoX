@@ -23,27 +23,28 @@ $nicknameSearchguid = '';
  
  if (!empty($nicknameSearch))	
 $reponse = 'SELECT 
-       t0.x_db_ip,t0.x_db_name,t0.x_db_guid,t0.s_port,t0.x_db_conn,t0.x_db_date,t0.x_date_reg, 
-	   t1.ip, t1.name, t1.guid	   
+       t0.*,t1.*	   
 FROM x_db_players t0 
 JOIN 
        ( 
               SELECT ip,guid,name FROM x_up_players
        ) t1 ON  t0.x_db_guid = t1.guid where t0.x_db_name LIKE :keyword ORDER BY t1.name DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
-else if (!empty($nicknameSearchguid))
+else if(strpos($nicknameSearchguid, '765611') !== false)
+$reponse = 'SELECT * FROM x_db_players where 
+steam_id LIKE :keyword ORDER BY x_db_name DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
+	  
+else if(strpos($nicknameSearchguid, '231034') !== false)
 $reponse = 'SELECT 
-       t0.x_db_ip,t0.x_db_name,t0.x_db_guid,t0.s_port,t0.x_db_conn,t0.x_db_date,t0.x_date_reg, 
-	   t1.ip, t1.name, t1.guid	   
+       t0.*,t1.*  
 FROM x_db_players t0 
 JOIN 
        ( 
               SELECT ip,guid,name FROM x_up_players
        ) t1 ON  t0.x_db_guid = t1.guid where t1.guid LIKE :keyword GROUP BY t1.ip ORDER BY t1.name DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
-	   
+	     
 else if (!empty($_GET['listguid']))
 $reponse = 'SELECT 
-       t0.x_db_ip,t0.x_db_name,t0.x_db_guid,t0.s_port,t0.x_db_conn,t0.x_db_date,t0.x_date_reg, 
-	   t1.ip, t1.name, t1.guid	   
+       t0.*,t1.*    
 FROM x_db_players t0 
 JOIN 
        ( 
@@ -51,8 +52,7 @@ JOIN
        ) t1 ON  t0.x_db_guid = t1.guid where t1.guid = '.$_GET['listguid'].' and t1.ip != 0 and t1.ip != 1 GROUP BY t1.ip ORDER BY t1.name DESC LIMIT 500';	   
 else if (!empty($_GET['listip']))
 $reponse = "SELECT 
-       t0.x_db_ip,t0.x_db_name,t0.x_db_guid,t0.s_port,t0.x_db_conn,t0.x_db_date,t0.x_date_reg, 
-	   t1.ip, t1.name, t1.guid	   
+       t0.*,t1.*  
 FROM x_db_players t0 
 JOIN 
        ( 
@@ -61,8 +61,7 @@ JOIN
 	 	 
 else if (!empty($_GET['poisknickname']))
 $reponse = 'SELECT 
-       t0.x_db_ip,t0.x_db_name,t0.x_db_guid,t0.s_port,t0.x_db_conn,t0.x_db_date,t0.x_date_reg, 
-	   t1.ip, t1.name, t1.guid	   
+       t0.*,t1.*  
 FROM x_db_players t0 
 JOIN 
        ( 
@@ -71,7 +70,7 @@ JOIN
 else if (!empty($_GET['collect']))
 {
                            $reponse = array();
-                           $iplgetDirContents = $cpath .'/engine/ajax_data/data/cache/';
+                           $iplgetDirContents = $cpath .'/data/cache/ajax_data/';
 				           $iplayers = getDirContents($iplgetDirContents);
 							if(is_array($iplayers))
 							{
@@ -125,7 +124,7 @@ JOIN
 	   where t1.ip != 0 and t0.x_db_guid GROUP BY t1.guid ORDER BY (x_db_date+0) DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 */
 
-$reponse = 'SELECT x_db_ip,x_db_name,x_db_guid,s_port,x_db_conn,x_db_date,x_date_reg 
+$reponse = 'SELECT *
 FROM x_db_players where x_db_guid GROUP BY x_db_guid ORDER BY (x_db_date+0) DESC LIMIT ' . $premierMessageAafficher . ', ' . $top_main_total;
 	   
 	   

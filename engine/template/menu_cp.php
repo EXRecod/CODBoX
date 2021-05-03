@@ -7,7 +7,7 @@ echo '<div style="height:auto;overflow:auto;text-align:center;padding:0px;backgr
 
  $cMenu_Main = array( 
  "$domain/admin/index.php?iinfo=rcons" => " $menu_rcon ",
- "$domain/admin/index.php?iinfo=admin" => " $menu_anticheat_codx4 ",
+ "$domain/admin/index.php?iinfo=demos" => " ".$lang['demo_auto_record']." ",
  "$domain/admin/index.php?iinfo=activ" => " $menu_activity "
  );
 

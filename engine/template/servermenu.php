@@ -26,7 +26,6 @@ if(empty($_GET['server']))
 else
 	$srvlist = $_GET['server'];
 
-
 foreach ($multi_servers_array as $arx => $f) {
 	 
 	 

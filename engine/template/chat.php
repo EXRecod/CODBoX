@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
 if(!empty($_GET['timer'])){
  
 if (strpos($_SERVER["HTTP_REFERER"], 'chat.php') !== false)
@@ -76,7 +76,7 @@ $nb_pages = 100;
 
 
 echo ' 
-<script src="' . $domain . '/data/graph/dynamics2.js"></script>
+<script src="' . $domain . '/inc/spoiler.js"></script>
 <div class="content_block">
 <div style="overflow:auto;width:100%;padding:5 10px;">
 <h1>' . $i_chat . '</h1> </div>';
@@ -103,8 +103,8 @@ foreach ($xz as $keym => $dannye) {
 		$txttitle = $txt;
 		//CHAT BANS
 		
-if(!filter_var($xplayerip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4))
-	$xplayerip = '1.101.101.101';
+//if(!filter_var($xplayerip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4))
+//	$xplayerip = '1.101.101.101';
 		
 		$chatbanstatus = IsChatBanned($guidxx);
 		$txtemptycnt = substr_count($txt, ' ');
@@ -203,22 +203,7 @@ margin:4px;font-size:13px;cursor:pointer;cursor:hand;" id="match' . md5($time . 
 </a>
 
 </div>';
-		if (isLoginUser()) {
-echo '<div style="float:left;color:#fff;padding:5 9px;font-size:10px;line-height:12px;width:7px;text-align:center;">	
-<a href="' . $domain . '/redirect.php?chatban=' . $guidxx . '&guid=' . $guidxx . '&ip=' . $xplayerip . '&nickname=' . $xpnickname . '&geo=' . $flag . '" 
-target="_blank" 
-style="float:left;color:#fff;padding:8 9px;line-height:12px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="'.$i_chat.'_'.$i_ban.'❌' . $xpnickname . '"> [CB] </a>
-</div>
 
-<div style="float:left;color:#fff;padding:5 9px;font-size:15px;line-height:12px;width:7px;text-align:center;">	
-<a href="' . $domain . '/list.php?nicknameSearch=' . trim($guidxx) . '" 
-target="_blank" 
-style="float:left;color:#fff;padding:14px;line-height:1px;text-align:left;width:2px;FONT-SIZE:15PX;" 
-class="tags" glose="✅List"> [L] </a>
-</div>
-';
-		}
 		echo '<div style="float:left;color:#fff;padding:8 8px;text-align:left;width:90px;FONT-SIZE:18PX;min-width:60px;">
 	
  
@@ -267,7 +252,13 @@ if (isLoginUser()){
  if($server_md5 == $cntz){	
        $txt = "<a href=\"".$domain."/admin/sent.php?server=".$server_md5."&svrnm=".$serverx."&gd=".$guidxx."&plyr=".$xpnickname."\" 
 onclick=\"window.open(this.href, '', 'scrollbars=1,height='+Math.min(350, screen.availHeight)+',width='+Math.min(590, screen.availWidth)); 
-return false;\" style=\"color:#fefefe;\"> ".$txt."</a>";
+return false;\" style=\"color:#fefefe;padding-left:1 19px;width:30px;\" class=\"tags\" glose=\"📢&nbsp".$t_messages."\"> 📢 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$txt;
+
+       $txti = "<a href=\"".$domain."/admin/sent.php?server=".$server_md5."&svrnm=".$serverx."&gd=".$guidxx."&plyr=".$xpnickname."\" 
+onclick=\"window.open(this.href, '', 'scrollbars=1,height='+Math.min(350, screen.availHeight)+',width='+Math.min(590, screen.availWidth)); 
+return false;\" style=\"color:#fefefe;\">";
+
+
 }		
 }}		
 		
@@ -294,9 +285,66 @@ return false;\" style=\"color:#fefefe;\"> ".$txt."</a>";
 	 
 	
 <div class="match_stats_adv" style="min-width:100px;">Guid
-<div style="color:#fff;width:100px;">' . $guidxx . '</div></div>
+<div style="color:#fff;width:100px;">' . $guidxx . '</div></div>';
 
-	</div>
+
+
+
+
+
+
+		if (isLoginUser()) {
+			
+echo '<div style="min-width:360px;height:60px;">';			
+			
+			
+echo '
+
+<div style="float:left;color:#fff;padding:5 23px;font-size:15px;line-height:12px;width:7px;text-align:center;">	
+<a href="' . $domain . '/redirect.php?chatban=' . $guidxx . '&guid=' . $guidxx . '&ip=' . $xplayerip . '&nickname=' . $xpnickname . '&geo=' . $flag . '" 
+target="_blank" 
+style="float:left;color:orange;line-height:20px;padding:12px;text-align:left;width:2px;FONT-SIZE:15PX;" 
+class="tags" glose="'.$i_chat.'_'.$i_ban.'❌' . $xpnickname . '"> [CB] </a>
+</div>
+
+<div style="float:left;color:#fff;padding:5 23px;font-size:15px;line-height:12px;width:7px;text-align:center;">	
+<a href="' . $domain . '/list.php?nicknameSearch=' . trim($guidxx) . '" 
+target="_blank" 
+style="float:left;color:red;padding:12px;line-height:20px;text-align:left;width:2px;FONT-SIZE:15PX;" 
+class="tags" glose="✅List✅"> [L] </a>
+</div>
+';
+
+/*
+$sms = "$txti <div class=\"tooltip\" 
+style=\"float:left;color:lime;padding:1px;line-height:19px;text-align:left;FONT-SIZE:18PX;\"><b>|SMS|</b>
+<span class=\"tooltiptext\">".$t_messages.":&nbsp;".$xpnickname."</span></div></a>";
+
+echo '<div style="float:left;color:#fff;padding:9 19px;text-align:center;width:20px;>'.$sms.'</div>';
+*/
+
+
+echo '</div>';
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+echo '</div>
 	
 	</div>
  ';
