@@ -1,7 +1,7 @@
-<?php session_start();
+<?php 
 $templ = 1; 
 error_reporting(E_ALL);  
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 ini_set('log_errors', 'On');
 ini_set('error_log', 'php_errors.log');
@@ -115,6 +115,66 @@ body{
   background-color:#141e21; /* #002600 */
   color:#2eb4e9;
   margin: 0;
+}
+input[type="reset"]:active {
+	font-size:14px;
+     background-color: red;	
+    color: yellow;
+}
+
+input[type="submit"]:focus {
+	font-size:14px;
+        color: yellow;
+		animation: rainbow 1.1s linear;
+		animation-iteration-count: infinite;
+		text-shadow: #000 1px 0px, #000 1px 1px, #000 0px 1px, #000 -1px 1px;
+}
+
+
+input[type="reset"]:focus {
+	font-size:14px;
+        color: yellow;
+		animation: rainbow 1.1s linear;
+		animation-iteration-count: infinite;
+		text-shadow: #000 1px 0px, #000 1px 1px, #000 0px 1px, #000 -1px 1px;
+}
+@keyframes rainbow{
+		100%,0%{
+			background-color: rgb(255,0,0);
+		}
+		8%{
+			background-color: rgb(255,127,0);
+		}
+		16%{
+			background-color: rgb(255,255,0);
+		}
+		25%{
+			background-color: rgb(127,255,0);
+		}
+		33%{
+			background-color: rgb(0,255,0);
+		}
+		41%{
+			background-color: rgb(0,255,127);
+		}
+		50%{
+			background-color: rgb(0,255,255);
+		}
+		58%{
+			background-color: rgb(0,127,255);
+		}
+		66%{
+			background-color: rgb(0,0,255);
+		}
+		75%{
+			background-color: rgb(127,0,255);
+		}
+		83%{
+			background-color: rgb(255,0,255);
+		}
+		91%{
+			background-color: rgb(255,0,127);
+		}
 }
 </style>
 </head>

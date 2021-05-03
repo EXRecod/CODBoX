@@ -80,8 +80,7 @@ $patternx[2] = "#\s*(\d+)\s+(-?\d+)\s+(\d+)\s* (.+?)\s+(\d+) (\d+\.\d+\.\d+\.\d+
 		foreach ($patternx as $rr => $pattern) {
 			if (preg_match($pattern, $nm, $sb)) {
 				 //echo "\n".$nm;
-			if(!empty($sb[1]))
-			{		
+			// if(!empty($sb[1])){		
 		$patternrn = $pattern;
         $sbouts = str_replace(' ', '', implode(",", $output));
 
@@ -95,13 +94,20 @@ if(strpos($sbouts,'numscorepingnamelastmsgaddressqportrate') !== false)
 				if (preg_match('/[0-9]{1,2}/', $sb[1], $sbn)) {
 					
 				if($sb[6] == '127.0.0.1') $sb[6] = '111.111.111.111';	
+				
+$rangeip = '';
+if (!empty(trim($sb[6])))
+{	
+ list($onem, $twom, $threem, $fourm) = explode(".", $sb[6]);
+  $rangeip = $onem.'.'.$twom.'.'.$threem;
+}				
 
 				$rconarray[] = array(
 					"num" => trim($sb[1]),
 					"score" => trim($sb[2]),
 					"ping" => trim($sb[3]),
 					"name" => uncolorize($sb[4]),
-					"guid" => fakeguid($sb[4]),
+					"guid" => fakeguid(uncolorize($sb[4]).$rangeip),
 					"lastmsg" => $sb[5],
 					"ip" => trim($sb[6])
 				);
@@ -147,7 +153,7 @@ if(strpos($sbouts,'numscorepingplayeridsteamidnamelastmsgaddressqportrate') !== 
 	
 	}
 	
-			}
+			//}
 		}
 	}
 }

@@ -1,7 +1,7 @@
-<?php session_start();
+<?php 
 $templ = 1; 
 error_reporting(E_ALL);  
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 ini_set('log_errors', 'On');
 ini_set('error_log', 'php_errors.log');
@@ -121,7 +121,7 @@ else
 							       $server_rconpass = strtok($rcn, " ");
 							       $server_port = strtok($prt, " ");
 							       $server_ip = strtok($ipv, " ");							   
- if($server == $server_md5){                   				   
+ if(($server == $server_md5)||(trim($server) == trim($xxservername))){                   				   
 $server_addr = "udp://" . $server_ip;
 @$connect = fsockopen($server_addr, $server_port, $re, $errstr, 30);
 if (!$connect) { die('Can\'t connect to COD gameserver.'); }

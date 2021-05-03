@@ -1,7 +1,7 @@
-<?php session_start();
+<?php 
 $templ = 1; 
 error_reporting(E_ALL);  
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 ini_set('log_errors', 'On');
 ini_set('error_log', 'php_errors.log');
@@ -152,19 +152,18 @@ if (!$connect) { die('Can\'t connect to COD gameserver.'); }
 
  if((!empty($md5x)) && (!empty($rc))){
  
-$rc = '^3'.$rc;
-$xz = '^1'.$xz;
-	
-    $rco = $rc;	
+echo    $rco = $rc;	
 	$xzo = $xz;	
 	
 	$rco = @iconv("utf-8", "windows-1251",$rc);	
 	$xzo = @iconv("utf-8", "windows-1251",$xz);
 
-if (empty($_GET['all']))	
-    echo rcon($rco, '', $connect, $server_rconpass);	
-else
-	echo rcon($rco, '', $connect, $server_rconpass);
+
+$server_timeout = 1; $server_extra_wait = false; $server_extra_footer = false;
+$connect = connectToGame();
+$output = RequestToGame(''.$rc.'');
+
+
 
 $reponse = "INSERT INTO `chat` (`servername`, `s_port`, `guid`, `nickname`, `time`, `timeh`, `text`, `st1`, `st1days`, `st2`, `st2days`, `ip`, `geo`, `z`, `t`, `x`, `c`) 
 VALUES ('" . $svrnm . "', '" . $server . "', '" .$guid. "', '" . $xzo . "', '" . $datetime . "', '" . $dthx . "', 
