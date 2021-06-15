@@ -23,13 +23,12 @@ function security($string, $t = false)
 function injectionsArray()
 {
 	$injects = array("collate", "group by", ".shell", "xp_regread", "xp_cmdshell", 
-			" delay", " +", "+ ", " +", "/", " declare", "drop ", "--", 
+			" delay", " +", "+ ", " +", " declare", "drop ", "--", 
 			" union ", " union all ", "%", " like", " where ", "insert ", 
 			"select ", "update ", " update", " and 1 ", " 1=1 ", " 1=2 ", " 2=2 ", " or ");
 	return $injects;
 }
-
-
+ 
 function requestReport($getArray)
 {
     $dataArray = [];
@@ -49,7 +48,15 @@ function requestReport($getArray)
 
             foreach ($injects as $injection) {
                 if (strpos(trim(strtolower($thisRequest)), trim($injection)) !== false) {
-                    $dataArray['INJECTION'] = "Security alert! Injection detected! ".$thisRequest;
+                    $dataArray['INJECTION'] = "📛 Security alert! Injection detected! ".$thisRequest."
+					Project Administration was reported! Attack ip saved!";
+	 
+        $data = date('d-m-Y H:i:s') . ' - ';
+        $data .= $_SERVER['REMOTE_ADDR'] . ' - ';
+        $data .= 'Suspect: [' . $dataArray['INJECTION'] . '] ';
+        $data .= json_encode($_SERVER);
+        @file_put_contents('sql.injection.txt', $data . PHP_EOL, FILE_APPEND);
+    			
 					die($dataArray['INJECTION']);
                 }
             }
@@ -59,8 +66,16 @@ function requestReport($getArray)
     return $dataArray;
 }
 
+ 
+if(!empty($_GET))
+{
 requestReport($_GET);
+}
+if(!empty($_POST))
+{
 requestReport($_POST);
+}
+ 
 
 
 /**
