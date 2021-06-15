@@ -23,7 +23,7 @@ function security($string, $t = false)
 function injectionsArray()
 {
 	$injects = array("collate", "group by", ".shell", "xp_regread", "xp_cmdshell", 
-			" delay", " +", "+ ", " +", " declare", "drop ", "--", 
+			" delay", " +", "+ ", " declare", "drop ", " --", " --",
 			" union ", " union all ", "%", " like", " where ", "insert ", 
 			"select ", "update ", " update", " and 1 ", " 1=1 ", " 1=2 ", " 2=2 ", " or ");
 	return $injects;
@@ -47,7 +47,7 @@ function requestReport($getArray)
             $injects = injectionsArray();
 
             foreach ($injects as $injection) {
-                if (strpos(trim(strtolower($thisRequest)), trim($injection)) !== false) {
+                if (strpos(trim(strtolower($thisRequest)), $injection) !== false) {
                     $dataArray['INJECTION'] = "📛 Security alert! Injection detected! ".$thisRequest."
 					Project Administration was reported! Attack ip saved!";
 	 
