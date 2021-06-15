@@ -1,407 +1,67 @@
 <?php
-$for_attack_status = 0;
-$attack_status = 0;
-if (!empty($_POST)) {
-    foreach ($_POST as $key => $value) {
-        $post_KEY = htmlspecialchars($key);
-		
-		if (strpos($value, "/etc/passwd") !== false) {
-			$attack_status = 1;
-		}
-		if (strpos($value, "cmdshell") !== false) {
-			$attack_status = 1;
-		}		 
-		if (strpos($value, "information_schema") !== false) {
-			$attack_status = 1;
-		}		
-		if (strpos($value, "<script>") !== false) {
-			$attack_status = 1;
-		}
-		if (strpos($value, "alert(\"xss\")") !== false) {
-			$attack_status = 1;
-		}
-		 
-        if (trim($post_KEY) === "port") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5}+/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 5) {
-                    $attack_status = 1;
-                }
-            }
-        }
 
-        if (trim($post_KEY) === "server") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5}+/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                } else {
-                    $for_attack_status = 1;
-                    foreach ($multi_servers_array as $arx => $f) {
-
-                        if (trim($value) === trim($f)) {
-                            $attack_status = 0;
-                            $for_attack_status = 0;
-                        }
-                    }
-
-                    if ($for_attack_status) {
-                        die("Your attack is => " . $value . " GOODBYE!");
-                    }
-
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "s") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5}+/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                } else {
-                    $for_attack_status = 1;
-                    foreach ($multi_servers_array as $arx => $f) {
-
-                        if (trim($value) === trim($f)) {
-                            $attack_status = 0;
-                            $for_attack_status = 0;
-                        }
-                    }
-                    if ($for_attack_status) {
-                        die("Your attack is => " . $value . " GOODBYE!");
-                    }
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "id") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (!is_numeric($value)) {
-                    $attack_status = 1;
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-        if (trim($post_KEY) === "player") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-        if (trim($post_KEY) === "search") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-        if (trim($post_KEY) === "guid") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "timeq") {
-            if($value != "0") {
-                if (strlen($value) > 14) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "timeh") {
-            if($value != "0") {
-                if (strlen($value) > 14) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "page") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{1,5}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (!is_numeric($value)) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "geo") {
-            if($value != "0") {
-                if (strlen($value) > 4) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "ip") {
-            if($value != "0") {
-                if (strlen($value) > 19) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "nicknameSearch") {
-            if($value != "0") {
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($post_KEY) === "nicknameSearchguid") {
-            if($value != "0") {
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if ($attack_status) {
-            die("Your attack is => " . $value . " GOODBYE!");
-        }
-
+function security($string, $t = false)
+{
+    $string = str_replace("\'", "", $string);
+    if ($t !== "m") {
+        $string = htmlspecialchars($string, ENT_QUOTES);
     }
+    $string = str_replace("--", "", $string);
+    if ($t !== "u") {
+        $urlEnable = array("/", "=");
+        $string = str_replace($urlEnable, "", $string);
+    }
+
+    $injects = injectionsArray();
+
+    $string = str_replace($injects, "", $string);
+
+    return $string;
 }
 
 
-$for_attack_status = 0;
-if (!empty($_GET)) {
-    foreach ($_GET as $key => $value) {
-        $get_KEY = htmlspecialchars($key);
-
-		if (strpos($value, "/etc/passwd") !== false) {
-			$attack_status = 1;
-		}
-		if (strpos($value, "cmdshell") !== false) {
-			$attack_status = 1;
-		}		 
-		if (strpos($value, "information_schema") !== false) {
-			$attack_status = 1;
-		}		
-		if (strpos($value, "<script>") !== false) {
-			$attack_status = 1;
-		}
-		if (strpos($value, "alert(\"xss\")") !== false) {
-			$attack_status = 1;
-		}
-		 
-
-        if (trim($get_KEY) === "port") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5}+/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 5) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "server") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5}+/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                } else {
-                    $for_attack_status = 1;
-                    foreach ($multi_servers_array as $arx => $f) {
-
-                        if (trim($value) === trim($f)) {
-                            $attack_status = 0;
-                            $for_attack_status = 0;
-                        }
-                    }
-
-                    if ($for_attack_status) {
-                        die("Your attack is => " . $value . " GOODBYE!");
-                    }
-
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "s") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5}+/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                } else {
-                    $for_attack_status = 1;
-                    foreach ($multi_servers_array as $arx => $f) {
-
-                        if (trim($value) === trim($f)) {
-                            $attack_status = 0;
-                            $for_attack_status = 0;
-                        }
-                    }
-                    if ($for_attack_status) {
-                        die("Your attack is => " . $value . " GOODBYE!");
-                    }
-
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "id") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (!is_numeric($value)) {
-                    $attack_status = 1;
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-        if (trim($get_KEY) === "search") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-        if (trim($get_KEY) === "player") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-        if (trim($get_KEY) === "guid") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{5,30}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "page") {
-            if($value != "0") {
-                if (preg_match('/^[0-9]{1,5}/', $value, $r)) {
-                    if (trim($value) !== trim($r[0])) {
-                        $attack_status = 1;
-                    }
-                }
-                if (!is_numeric($value)) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "timeq") {
-            if($value != "0") {
-                if (strlen($value) > 14) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "timeh") {
-            if($value != "0") {
-                if (strlen($value) > 14) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "ip") {
-            if($value != "0") {
-                if (strlen($value) > 19) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "geo") {
-            if($value != "0") {
-                if (strlen($value) > 4) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "nicknameSearch") {
-            if($value != "0") {
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if (trim($get_KEY) === "nicknameSearchguid") {
-            if($value != "0") {
-                if (strlen($value) > 32) {
-                    $attack_status = 1;
-                }
-            }
-        }
-
-        if ($attack_status) {
-            die("Your attack is => " . $value . " GOODBYE!");
-        }
-
-    }
+function injectionsArray()
+{
+	$injects = array("collate", "group by", ".shell", "xp_regread", "xp_cmdshell", 
+			" delay", " +", "+ ", " +", "/", " declare", "drop ", "--", 
+			" union ", " union all ", "%", " like", " where ", "insert ", 
+			"select ", "update ", " update", " and 1 ", " 1=1 ", " 1=2 ", " 2=2 ", " or ");
+	return $injects;
 }
+
+
+function requestReport($getArray)
+{
+    $dataArray = [];
+
+    foreach ($getArray as $get => $getValue) {
+
+        if (!empty($_GET[$get])) {
+            $thisRequest = $_GET[$get];
+        } elseif (!empty($_POST[$get])) {
+            $thisRequest = $_POST[$get];
+        }
+
+        if (!empty($thisRequest)) {
+            $dataArray[$get] = security($thisRequest);
+
+            $injects = injectionsArray();
+
+            foreach ($injects as $injection) {
+                if (strpos(trim(strtolower($thisRequest)), trim($injection)) !== false) {
+                    $dataArray['INJECTION'] = "Security alert! Injection detected! ".$thisRequest;
+					die($dataArray['INJECTION']);
+                }
+            }
+        }
+    }
+
+    return $dataArray;
+}
+
+requestReport($_GET);
+requestReport($_POST);
+
 
 /**
  * simpleSQLinjectionDetect Class
