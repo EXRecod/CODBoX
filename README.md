@@ -10,7 +10,7 @@ Support only with RCM-Admintool-V9 -> https://github.com/EXRecod/RCM-Admintool-V
 
 
 # Install 
--  Download https://github.com/EXRecod/CODBoX/blob/main/____codbx_install_archive.rar
+-  Download https://github.com/EXRecod/CODBoX/raw/main/____codbx_install_archive.rar
 -  Extract ____codbx_install_archive.rar
 -  /codbx/data/settings.php  change to your settings
 
