@@ -10,9 +10,9 @@ Support only with RCM-Admintool-V9 -> https://github.com/EXRecod/RCM-Admintool-V
 
 
 # Install 
-- /codbx/engine/geoip_bases/IP2LOCATION-LITE-DB3.rar  unarchive file to current folder
-- make folder  /codbx/inc/images/  and extract from /codbx/inc/images.zip images there
-- /codbx/data/settings.php  change to your settings
+-  Download https://github.com/EXRecod/CODBoX/blob/main/____codbx_install_archive.rar
+-  Extract ____codbx_install_archive.rar
+-  /codbx/data/settings.php  change to your settings
 
  
 [![Watch the video](https://github.com/EXRecod/CODBoX/blob/main/info/10.jpg)](https://youtu.be/DKQ_L65ZgTk)
